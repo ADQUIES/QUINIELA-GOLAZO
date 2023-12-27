@@ -1,0 +1,33 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Sans-serif;
+}
+
+header{
+    margin: auto;
+     background-image: url("../img/cabm.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 400px;
+    height: 62px;
+}
+body {
+    max-width: 400px;
+    margin: auto;
+    background: radial-gradient(circle, rgb(8, 8, 8) 0%, rgb(4, 167, 195) 52%, rgb(7, 7, 7) 100%);
+    
+    background-repeat: repeat-y;
+    background-position: top;
+}    
+
+footer a{
+    background-color: blue;
+    color: aliceblue;
+    font-weight: bold;
+    border-radius: 5px;
+    padding: 10px;
+    text-decoration: none;
+    
+}

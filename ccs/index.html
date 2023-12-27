@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es-mx">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="descripcion" content="Registra tus quinielas-Liga mx">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>golazo</title>
+    <link rel="apple-touch-icon" href="img/iconm.png">
+    <link rel="shortcut icon" href="img/iconm.png" type="image/x-icon">
+    <link rel="icon" href="img/iconm.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="ccs/styles.css">
+    <script src="java/main.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+        
+</head>
+<header>
+    
+    
+</header>
+<div class="promocionar" id="promoci">
+            <a id="j"href="cjugar/cjugarinst.html">Como Jugar?</a>
+            <a id="r"href="reglamento/reglamento.html">Reglamento</a>
+            <a id="h"href="horarios/horarios.html">Horarios</a>
+            <a id="f"href="https://www.facebook.com/Quinielas-Estrella-103789105531451/">Facebook</a>
+
+    </div>
+<body>
+   
+   <div class="quiniela" id="quiniela" style="height: 375px;;">
+     <div class="aux">
+         <h3 style="padding: 5px 7px;" onclick="clean()">x
+
+
+         </h3>
+         
+             
+     </div>
+     <div class="partido">
+        <span id="L1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V1" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V2" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V3" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V4" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V5" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V6" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V7" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V8" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V9" onclick="selection(this)"></span>
+
+     </div>
+     <h1 id="text" style="font-size: x-large; padding: 10px;">- - - - - - - - - 
+    </h1>
+  </div>
+  <table>
+      <tbody>
+          <tr>
+              <td width="37%">
+                  <h2 class="botonenviar" onclick="send()">
+                    Enviar
+                    <span>0</span>
+                    <img src="whatsapp-logo-5.png" alt="" height="23px" style="position:absolute;">
+
+                  </h2>
+              </td>
+              <td width="14%">
+                  <h2 id="botonlisto" onclick="save()"><ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon></h2>
+
+              </td>
+              <td width="14%">
+                  <h2 id="botonborrar" onclick="deleteall"><ion-icon name="trash-outline" id="trash" role="img" class="md hydrated" aria-label="trash outline"></ion-icon></h2>
+              </td>
+              <td width="35%">
+                  <table id="nombrebox">
+                      <tbody>
+                          <tr style="height: px;">
+                            <td id="nombretext">Nombre </td>
+                        </tr>
+                        <tr style="height: 20px;">
+                          <td>
+                              <input id="nombre"type="text" placeholder maxlength="20" spellcheck="false">
+
+                          </td>
+                          <td>
+                              <label id="borrarnombre" onclick="clearame()"><ion-icon name="backspace" role="img" class="md hydrated" aria-label="backspace"></ion-icon></label>
+                          </td>
+                        </tr>
+                      </tbody>
+                  </table>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+  <table style="margin-top: 3px; width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width: 36%;">
+                <label id="random" onclick="random()">la suerte</label>
+            </td>
+            <td style="width: 50%;">
+                <label id="checkcombinaciones" onclick="allowcombination()">Dobles y Triples</label>
+
+            </td>
+            <td style="width: 30%;"></td>
+        </tr>
+    </tbody>
+
+  </table>
+  
+  <div class="suma">
+            <h4 id="costo">Costo: $0</h4><h4 id="total">Total: $0</h4><br>
+            <h4 id="numquinielas">0 Quiniela(s)</h4>
+        </div>
+      
+  </div>
+  
+<div id="divaux" translate="no">
+  
+  <div class="titulo-quinielas">Lista De Quinielas</div>
+    <table id="display"></table>
+
+</div>
+</body>
+</html>

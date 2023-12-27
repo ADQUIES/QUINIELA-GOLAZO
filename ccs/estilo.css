@@ -1,0 +1,42 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Sans-serif;
+
+}
+
+header{
+    margin: auto;
+     background-image: url("../img/cabm.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 400px;
+    height: 62px;
+}
+body {
+    
+    max-width: 400px;
+    margin: auto;
+    background: radial-gradient(circle, rgb(8, 8, 8) 0%, rgb(4, 167, 195) 52%, rgb(7, 7, 7) 100%);
+    background-repeat: repeat-y;
+    background-position: top;
+}
+
+ a{
+    
+
+    color: #0ee4eb;    
+    text-align: center;
+    background: #0b0b0bf5;
+    box-shadow: 2px 2px 2px #fdf9f9;
+    border-radius: 5px 5px 0px 0px;
+    border-left: 1px solid #f1eded;
+    border-right: 1px solid #fdf9f9;
+    border-top: 1px solid #f7f0f0;
+    margin-top: 10px;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    
+}
