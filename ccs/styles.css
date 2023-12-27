@@ -10,8 +10,7 @@
         @media only screen and (max-width: 600px)
 
 header{
-    margin: auto;
-     background-image: url("../img/cabm.png");
+    margin: auto; background-image: url("../img/cabm.png");
     background-size: 100%;
     background-repeat: no-repeat;
     max-width: 400px;
@@ -24,7 +23,7 @@ a{
     margin-top:auto;
     padding: 2px;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 8px;
     
 }
 
