@@ -5,9 +5,9 @@
     font-family: 'Roboto',sans-serif;
 }
 
-
 header{
-    margin: auto; background-image: url("../img/cabm.png");
+    margin: auto;
+     background-image: url("../img/cabm.png");
     background-size: 100%;
     background-repeat: no-repeat;
     max-width: 400px;
@@ -20,7 +20,7 @@ a{
     margin-top:auto;
     padding: 2px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     
 }
 
