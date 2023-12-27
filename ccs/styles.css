@@ -39,7 +39,7 @@ a{
 
 * Estilos responsivos */
         @media only screen and (max-width: 600px)
-    background: #0d0d0df1;
+    background: transparent;
     color: #16bedc;
     border-radius: 5px;
     box-right-shadow: 2px #f7eeee;
