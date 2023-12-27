@@ -5,10 +5,10 @@
     font-family: 'Roboto',sans-serif;
 }
 
- /* Estilos responsivos */
-        @media only screen and (max-width: 600px)
+ 
 
 header{
+
     margin: auto;
      background-image: url("../img/cabm.png");
     background-size: 100%;
