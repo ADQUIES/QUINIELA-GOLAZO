@@ -343,7 +343,7 @@ function removeLastLine(){
 }
 
 function deleteall(){
-    if(confirm("Se borrará todo"))
+    if(confirm("Se borrará todo, también se borrará las quinielas que ya capturaste, si solo quieres borrar los resultados de esta quiniela, presiona la X que está arriba."))
         {localStorage.setItem("quantity","");
         localStorage.setItem("results","");
         localStorage.setItem("alias","");
