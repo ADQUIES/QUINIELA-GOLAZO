@@ -24,7 +24,10 @@ a{
     
 }
 
+#f{
+    background-color: blue;
 
+}    
 #i{
     margin-left:5px;
 }
@@ -46,12 +49,14 @@ a{
     display: inline-flex;
     
 }
+#promoci{
+    background: #0d0d0df1;
+}
 
 body{
     max-width: 400px;
     margin: auto;
     background: radial-gradient(circle, rgb(8, 8, 8) 0%, rgb(4, 167, 195) 52%, rgb(7, 7, 7) 100%);
-    
     background-repeat: repeat-y;
     background-position: top;
 
