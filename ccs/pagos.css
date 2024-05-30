@@ -1,0 +1,273 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    
+    max-width: 400px;
+    margin: auto;
+    background: radial-gradient(circle, rgb(6, 6, 6) 20%, rgb(4, 167, 195) 52%, rgb(18, 18, 18) 100%);
+    background-repeat: repeat-y;
+    background-position: top;
+}
+
+
+
+
+.encabezado{
+     margin: auto;
+     background-image: url("../img/cabm.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 400px;
+    height: 62px;
+}
+
+
+.let{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    max-width: 400px;
+    
+}
+
+#la{
+     margin-left: auto;
+    text-align: center;
+    color: white;
+    font-size: 10px; /* Ajusta según sea necesario */
+    font-weight: bold;
+}
+h2{
+   margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px; /* Ajusta según sea necesario */
+
+
+}
+h3{ 
+    margin-top: 10px;
+    background:rgb(0, 255, 75);
+    text-align: center;
+    color:rgb(35, 0, 85);
+    padding: 12px 20px 12px 0;
+    margin-right: 6px;
+    border-radius: 6px;
+    box-shadow: 2px 2px 5px black;
+    font-size: large;
+}
+
+
+#reci{
+    text-align: center;
+    color: white;
+    font-size: 10px;
+font-weight: bold;
+}
+.logo a {
+    display: flex;
+    user-select: none;
+    padding: 20px;
+}
+.logo img {
+    height: 28px;
+    max-width: 300px;
+    transition: all 0.2s;
+}
+.logo img:hover {
+    filter: grayscale(1);
+    transition: all 0.2s;
+}
+/* End Header */
+
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.pix-container {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    margin-top: 10px;
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 306px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 17px -6px #00000026;
+    text-align: center;
+    text-align: -webkit-center;
+    padding: 46px 49px;
+}
+.payment span {
+    font-size: 15px;
+}
+.payment p {
+    font-size: 15px;
+    font-weight: 500;
+}
+.payment p b {
+    color: #549ddb;
+    font-weight: 900;
+}
+
+
+.qrcode-info {
+    display: flex;
+    align-items: center;
+    margin: 44px 0 12px 0;
+}
+.qrcode-info img {
+    user-select: none;
+    height: 18px;
+    filter: invert(41%) sepia(1%) saturate(0%) hue-rotate(182deg) brightness(91%) contrast(81%);
+    margin-right: 10px;
+}
+.qrcode-info span {
+    font-size: 14px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.qrcode img {
+    user-select: none;
+    max-width: 220px;
+    width: 100%;
+}
+
+.pix-value {
+    font-size: 17px;
+    margin: 19px 0;
+}
+.pix-value strong {
+    color: #62ca79;
+    font-weight: 800;
+}
+
+
+.pix-copy-and-past span {
+    display: block;
+    color: #666666;
+    font-size: 14px;
+    margin: 35px 0 15px 0;
+}
+.qrcode-text {
+    position: relative;
+    background-color: #FFFFD1;
+    padding: 8px;
+    border: 3px dotted #666666;
+}
+.qrcode-text:hover img {
+    display: block;
+}
+.qrcode-text img {
+    display: none;
+    height: 19px;
+    width: 19px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #ffffd1;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 2;
+    padding: 9px;
+}
+#qrcode-text {
+    font-size: 14px;
+    color: #666666;
+    word-break: break-all;
+    user-select: all;
+}
+#copy {
+    user-select: none;
+}
+#copied-code {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    font-size: 14px;
+    background-color: #363636;
+    color: #ffffff;
+    border-radius: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s;
+    user-select: none;
+    padding: 10px;
+    z-index: 2;
+}
+
+
+@media (max-width: 730px) {
+    .safe-buy-image img {
+        height: 25px;
+    }
+    .safe-buy span {
+        font-size: 11px;
+    }
+
+    .order-complete-container {
+        margin-top: 62px;
+    }
+
+    .order-complete h1 {
+        font-size: 26px;
+    }
+
+    .order-complete span {
+        font-size: 15px
+    }
+    
+    .successfully {
+        padding: 25px;
+    }
+    .successfully img {
+        height: 50px;
+        width: 50px;
+    }
+
+    .view-details-order a {
+        font-size: 15px;
+    }
+
+    .qrcode-info {
+        display: none;
+    }
+}
+
+
+.spin img {
+    max-width: 30%;
+}
+
+
+
+
+h4{
+    text-align: center;
+    font-size: 7px;
+    color: white;
+    text-align: center;
+    margin-top: 20px; /* Ajusta según sea necesario */
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+
+}
+#contacto{
+    font-size: 6px;
+    background: transparent;
+    margin-left:0px;
+}

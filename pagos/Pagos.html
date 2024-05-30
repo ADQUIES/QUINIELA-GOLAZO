@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="¡Registra aquí tus quinielas!">
+    <meta name="keywords" content="Quiniela, Liga MX, Apostar, Pronósticos">
+    <title>Quiniela Golazo Pagos</title>
+    <link rel="stylesheet" type="text/css" href="../ccs/pagos.css">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="icon" href="../img/logo.png">
+    <link rel="shortcut icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="apple-touch-icon" href="img/logo.favicon">
+    <link rel="shortcut icon" href="img/logo.favicon" type="image/x-icon">
+</head>
+<body>
+    <div class="encabezado"></div>
+    <div class="let" id="la">Quiniela 100% Confiables, Animate a participar¡</div>
+    
+    <h2 id="reci">
+        <span>
+            Envía tu Comprobante de Pago para Agregarte al grupo de Whatssap. Quiniela 
+            <font color="yellow">NO PAGADA</font> a la hora de cierre de registro 
+            <font color="yellow">NO PARTICIPA</font>
+        </span>
+    </h2>
+
+   
+
+    <div class="pix-container">
+        <div class="payment">
+            <div class="spin">
+                <img src="../img/SPIN.png" draggable="false">
+                
+            </div>
+            <p>Abra su aplicación de pago del banco SPIN OXXO, elija la opción <b>Leer código QR</b></p>
+            <div class="qrcode-info">
+                <img src="../img/cellphone-icon.svg" draggable="false">
+                <span>Escaneé con la cámara de su celular.</span>
+            </div>
+            <div class="qrcode">
+                <img src="../img/COSPIN.jpg" draggable="false">
+            </div>
+            
+            <div class="pix-copy-and-past">
+                <span>También puedes pagar eligiendo la opción <b>Número de cuenta Clave</b> en tu aplicación de pago o Banca por Internet (banca en línea). En este caso, copie el siguiente código:</span>
+                <div class="qrcode-text">
+                    <img class="copy" src="../img/copy-icon.svg" alt="Copiar" draggable="false">
+                    <div class="copied-code">Código copiado.</div>
+                    <p class="qrcode-text">646210146401707162</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div class="pix-container">
+        <div class="payment">
+            <div class="spin">
+                <img src="../img/BBVA.png" draggable="false">
+                
+            </div>
+            <p>Abra su aplicación de pago del banco BBVA, elija la opción <b>Leer código QR</b></p>
+            <div class="qrcode-info">
+                <img src="../img/cellphone-icon.svg" draggable="false">
+                <span>Escaneé con la cámara de su celular.</span>
+            </div>
+            <div class="qrcode">
+                <img src="../img/COBBVA.png" draggable="false">
+            </div>
+            
+            <div class="pix-copy-and-past">
+                <span>También puedes pagar eligiendo la opción <b>Número de cuenta Clave</b> en tu aplicación de pago o Banca por Internet (banca en línea). En este caso, copie el siguiente código:</span>
+                <div class="qrcode-text">
+                    <img class="copy" src="../img/copy-icon.svg" alt="Copiar" draggable="false">
+                    <div class="copied-code">Código copiado.</div>
+                    <p class="qrcode-text">012 180 01527475761 3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h4>
+        <span style="text-align: center;">Sitio desarrollado por Adhemo.com, Ocupas un sitio web?</span>
+        <span style="color: rgb(209, 209, 9);"></span>
+        <a id="contacto" href="https://wa.me/524776482132?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
+    </h4>   
+
+    <script>
+        document.querySelectorAll('.copy').forEach(copyButton => {
+            copyButton.addEventListener('click', function() {
+                var qrcodeText = this.nextElementSibling.nextElementSibling;
+                var copiedCodeBox = this.nextElementSibling;
+                navigator.clipboard.writeText(qrcodeText.textContent).then(function() {
+                    qrcodeText.style.filter = 'blur(1px)';
+                    copiedCodeBox.style.visibility = 'visible';
+                    copiedCodeBox.style.opacity = '0.9';
+                    copiedCodeBox.style.transition = 'all 0.3s';
+
+                    // remove style after 2s
+                    setTimeout(function() {
+                        qrcodeText.style.filter = '';
+                        copiedCodeBox.style.visibility = 'hidden';
+                        copiedCodeBox.style.opacity = '0';
+                    }, 1000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
