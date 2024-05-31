@@ -70,25 +70,69 @@ a{
     user-select: none;
     transition: opacity 0.2s;
 }
+
+.organizer-infos p {
+    font-size: 14px;
+    color: #cacaca;
+    display: flex;
+}
+.organizer-infos h4 {
+    font-size: 16px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+.organizer-tagss {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    text-decoration: none;
+    margin-top: auto;
+}
+.organizer-tagss a {
+    text-decoration: none;
+}
+.organizer-tagss img {
+    display: flex;
+    height: 17px;
+    margin-right: 5px;
+}
+.tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 14px;
+    background-color: #489f35;
+    border-radius: 15px;
+    padding: 4px 12px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    user-select: none;
+    transition: opacity 0.2s;
+}
 /* tags */
 .facebook {
-    background-color: #30a6e0;
-}
-.instrucciones {
-    background-color: #30a6e0;
-}
-.reglamento {
-    background-color: #30a6e0;
-}
-.horarios {
-    background-color:#30a6e0 ;
+    background-color: #047A9F ;
 }
 .combinaciones {
-    background-color: #333333;
+    background-color: #0b0b0bf5;
+    color: #0ee4eb;
 }
 .pagar {
-    background-color: #333333;
+    background-color: #0b0b0bf5;
+    color: #0ee4eb;
 }
+.instruciones {
+    background-color: #0b0b0bf5 ;
+    color: #0ee4eb;
+}
+.reglamento {
+    background-color: #0b0b0bf5;
+    color: #0ee4eb;
+}
+.horarios {
+    background-color:#0b0b0bf5 ;
+    color: #0ee4eb;
+}
+
 /* tags */
 .promocionar {
 
@@ -345,7 +389,7 @@ h6{
     margin-top: 10px;
     border: 1px solid rgb(241, 241, 241);
 }
-h6{
+h5{
     text-align: center;
     font-size: 7px;
     color: white;
@@ -354,7 +398,7 @@ h6{
     margin-bottom: 20px; /* Ajusta según sea necesario */
 
 }
-#contactos{
+#contacto{
     font-size: 6px;
     background: transparent;
     margin-left:0px;
