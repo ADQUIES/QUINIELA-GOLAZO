@@ -61,7 +61,7 @@ function start(){
                 break;
         }
         id = i;
-    document.getElementById("total").innerHTML = "Total: $" + quantity*15 +"\n";
+    document.getElementById("total").innerHTML = "Total: $" + quantity*20 +"\n";
 	}  
 }
 
@@ -125,7 +125,7 @@ function updatedisplay(modo){
         }
 
     }
-    document.getElementById("total").innerHTML = "Total: $" + quantity*15;
+    document.getElementById("total").innerHTML = "Total: $" + quantity*20;
 }
 
 function selection(element){ 		//Pinta la casilla y actualiza el texto de la quiniela.
@@ -297,7 +297,7 @@ function costoactual(){
         for (var i=0;i<9;i++){
              aux2*= res[i].length;
         }
-        document.getElementById("costo").innerHTML = "Costo: $" + aux2*15;
+        document.getElementById("costo").innerHTML = "Costo: $" + aux2*20;
         document.getElementById("numquinielas").innerHTML = aux2 + " Quiniela(s)"
     }
 }
