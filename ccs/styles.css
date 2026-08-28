@@ -45,6 +45,41 @@ h5{text-align:center; color:white; margin:15px 0; font-size:11px; padding:10px;}
 /* RESPONSIVO PC GRANDE */
 @media (min-width:768px){
  .container{max-width:500px;}
+ /* PARCHE FINAL BOTONES - DESAMONTONAR */
+.container{ max-width: 420px !important; margin: 0 auto !important; }
+.controls{
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 5px !important;
+  width: 100% !important;
+}
+.controls .botonenviar{
+  flex: 0 0 38% !important;
+  width: 38% !important;
+  font-size: 14px !important;
+  padding: 8px 5px !important;
+}
+#botonlisto, #botonborrar{
+  flex: 0 0 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+}
+#nombrebox{
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+.controls2{
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 6px !important;
+}
+#random{ flex: 0 0 38% !important; }
+#checkcombinaciones{ flex: 1 !important; }
+.quiniela{ height: auto !important; min-height: 375px !important; }
+#text{ font-size: 16px !important; letter-spacing: 2px !important; }
  .partido span{height:40px; font-size:20px; max-width:100px;}
   #text{font-size:26px;}
 }
