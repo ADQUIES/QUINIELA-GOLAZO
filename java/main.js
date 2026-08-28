@@ -159,21 +159,36 @@ function allowcombination(){
 }
 
 async function send(){
-  let nombreInput=document.getElementById("nombre");
-  let nombre=nombreInput? nombreInput.value.trim() : "";
-  if(!nombre){ alert("Pon tu nombre"); if(nombreInput) nombreInput.focus(); return; }
-  if(quinielas.length==0){ alert("Agrega al menos 1 quiniela con +"); return; }
-  let btn=document.querySelector(".botonenviar");
-  if(btn) btn.innerHTML="Guardando...";
-  for(let q of quinielas){
-    let datos={nombre:nombre,p1:q[0],p2:q[1],p3:q[2],p4:q[3],p5:q[4],p6:q[5],p7:q[6],p8:q[7],p9:q[8]};
-    try{ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});}catch(e){}
-  }
-  let texto="*QUINIELA GOLAZO J8*%0ANombre: "+encodeURIComponent(nombre)+"%0ATotal: $"+(quinielas.length*PRECIO)+"%0A%0A"+quinielas.map(q=>q.join(" ")).join("%0A");
-  window.open("https://wa.me/?text="+texto,"_blank");
-  alert("Guardado en BASEDEDATOS: "+quinielas.length+" quiniela(s) de "+nombre);
-  quinielas=[]; clean(); renderLista();
-  if(btn) btn.innerHTML='Enviar <span>'+quinielas.length+'</span> <img src="whatsapp-logo-5.png" alt="" height="23px" style="position:inline-flex;">';
+    // Si no ha dado +, guardamos la que está marcada
+    let quantity = quinielas.length;
+    if (!quantity || quantity < 1){
+        save();
+        quantity = quinielas.length;
+    }
+
+    if (quantity > 0){
+        let nombreInput = document.getElementById("nombre");
+        let nombre = nombreInput? nombreInput.value.trim() : "Sin nombre";
+        if(!nombre){ alert("Pon tu nombre"); return; }
+
+        // 1. GUARDAR EN GOOGLE SHEET (tu link nuevo)
+        let btn = document.querySelector(".botonenviar");
+        if(btn) btn.innerHTML = "Guardando...";
+        for(let q of quinielas){
+            let datos={nombre:nombre,p1:q[0],p2:q[1],p3:q[2],p4:q[3],p5:q[4],p6:q[5],p7:q[6],p8:q[7],p9:q[8]};
+            try{ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)}); }catch(e){}
+        }
+
+        // 2. ENVIAR A WHATSAPP con tu formato original
+        let res = quinielas.map(q=> q.join(" "));
+        localStorage.setItem("results", nombre + " - " + res.join(" * "));
+        let whatsapptext = res.join("%20%20");
+        whatsapptext = encodeURI(localStorage.getItem("results"));
+        whatsapptext = whatsapptext.split('*').join('%0D').replace(/#/g,"");
+
+        // TU NUMERO - aqui va tu numero 524498476015
+        window.location.href = "https://wa.me/524498476015?text=" + whatsapptext + "%0D%0ATotal: $" + (quantity*20);
+    }
 }
 
 document.addEventListener("DOMContentLoaded", ()=>{
