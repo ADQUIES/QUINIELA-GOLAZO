@@ -1,5 +1,3 @@
-
-// QUINIELA GOLAZO - FINAL CORREGIDO TABLA
 const URL_SHEET = "https://script.google.com/macros/s/AKfycbztSJZVua2Qj5Cfeiblsos0GOn3AGwHIQRtLjJU_kADwBqudkAA2r18Zc0tGrAjHzWy/exec";
 let modoDobles = false;
 let actual = Array(9).fill(null).map(()=>[]);
@@ -7,79 +5,58 @@ let quinielas = [];
 const PRECIO = 20;
 
 function selection(el){
-  if(!el ||!el.id) return;
-  let letra = el.id[0]; let idx = parseInt(el.id.substring(1))-1;
-  if(idx<0||idx>8) return;
+  let letra=el.id[0]; let idx=parseInt(el.id.substring(1))-1;
   if(!modoDobles){
     actual[idx]=[letra];
-    ["L","E","V"].forEach(t=>{ let e=document.getElementById(t+(idx+1)); if(e){e.innerText=""; e.classList.remove("selected");}});
+    ["L","E","V"].forEach(t=>{ let e=document.getElementById(t+(idx+1)); if(e){e.innerText=""; e.classList.remove("selected");} });
     el.innerText=letra; el.classList.add("selected");
   }else{
     if(actual[idx].includes(letra)){ actual[idx]=actual[idx].filter(x=>x!=letra); el.innerText=""; el.classList.remove("selected"); }
     else if(actual[idx].length<3){ actual[idx].push(letra); el.innerText=letra; el.classList.add("selected"); }
   }
-  actualizarTextLine();
-}
-function actualizarTextLine(){
-  let txt=document.getElementById("text"); if(!txt)return;
-  txt.innerText=actual.map(a=>a.length==0?"-":(a.length==1?a[0]:"("+a.join("")+")")).join(" ");
+  document.getElementById("text").innerText=actual.map(a=>a.length==0?"-":(a.length==1?a[0]:"("+a.join("")+")")).join(" ");
 }
 function clean(){
   actual=Array(9).fill(null).map(()=>[]);
-  for(let i=1;i<=9;i++){["L","E","V"].forEach(t=>{let e=document.getElementById(t+i); if(e){e.innerText=""; e.classList.remove("selected");}});}
-  actualizarTextLine();
+  for(let i=1;i<=9;i++){ ["L","E","V"].forEach(t=>{ let e=document.getElementById(t+i); if(e){e.innerText=""; e.classList.remove("selected");} }); }
+  document.getElementById("text").innerText="- - - - - - - - -";
 }
 function save(){
   if(actual.some(a=>a.length==0)){ alert("Llena los 9 partidos con L,E,V"); return; }
-  expandir(actual).forEach(c=>quinielas.push(c)); clean(); renderLista();
+  let res=[[]]; for(let i=0;i<9;i++){ let n=[]; for(let r of res){ for(let o of actual[i]){ n.push([...r,o]); } } res=n; }
+  res.forEach(c=>quinielas.push(c)); clean(); renderLista();
 }
-function expandir(base){ let res=[[]]; for(let i=0;i<9;i++){ let nuevo=[]; for(let r of res){ for(let op of base[i]){ nuevo.push([...r,op]);}} res=nuevo;} return res; }
-
 function renderLista(){
-  let tabla=document.getElementById("display");
-  if(!tabla) return;
-  tabla.innerHTML="";
+  let tabla=document.getElementById("display"); if(!tabla) return; tabla.innerHTML="";
   let nombre=document.getElementById("nombre")?document.getElementById("nombre").value||"Sin nombre":"Sin nombre";
   quinielas.forEach((q,idx)=>{
     let tr=document.createElement("tr");
-    tr.innerHTML=`<td style="font-family:monospace; font-size:15px; white-space:nowrap; padding:4px;">${q.join(" ")}</td><td style="padding:4px; font-size:13px;">${nombre}</td><td style="padding:4px;"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:20px;height:20px;">x</button></td>`;
+    tr.innerHTML=`<td>${q.join(" ")}</td><td>${nombre}</td><td><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:22px;height:22px;cursor:pointer">x</button></td>`;
     tabla.appendChild(tr);
   });
-  let total=quinielas.length*20;
-  document.getElementById("costo").innerText="Costo: $"+(quinielas.length>0?20:0);
+  let total=quinielas.length*PRECIO;
+  document.getElementById("costo").innerText="Costo: $"+(quinielas.length>0?PRECIO:0);
   document.getElementById("total").innerText="Total: $"+total;
   document.getElementById("numquinielas").innerText=quinielas.length+" Quiniela(s)";
   document.querySelector(".botonenviar span").innerText=quinielas.length;
 }
-  let costoEl=document.getElementById("costo"); let totalEl=document.getElementById("total");
-  let numEl=document.getElementById("numquinielas"); let btnSpan=document.querySelector(".botonenviar span");
-  let total=quinielas.length*PRECIO;
-  if(costoEl) costoEl.innerText="Costo: $"+(quinielas.length>0?PRECIO:0);
-  if(totalEl) totalEl.innerText="Total: $"+total;
-  if(numEl) numEl.innerText=quinielas.length+" Quiniela(s)";
-  if(btnSpan) btnSpan.innerText=quinielas.length;
-}
 function borrarUna(i){ quinielas.splice(i,1); renderLista(); }
-function deleteall(){ if(quinielas.length==0 && actual.every(a=>a.length==0))return; if(!confirm("¿Borrar todo?"))return; quinielas=[]; clean(); renderLista(); }
-function clearname(){ let n=document.getElementById("nombre"); if(n)n.value=""; renderLista(); }
-function random(){ const ops=["L","E","V"]; for(let i=0;i<9;i++){ let letra=ops[Math.floor(Math.random()*3)]; actual[i]=[letra]; ["L","E","V"].forEach(t=>{let e=document.getElementById(t+(i+1)); if(e){ e.innerText=(t==letra)?letra:""; if(t==letra)e.classList.add("selected"); else e.classList.remove("selected");}});} actualizarTextLine(); }
-function allowcombination(){
-  modoDobles=!modoDobles; let lbl=document.getElementById("checkcombinaciones");
-  if(lbl){ lbl.innerText=modoDobles?"Dobles y Triples: ON":"Dobles y Triples"; lbl.style.background=modoDobles?"#ffeb00":""; lbl.style.color=modoDobles?"black":""; }
-  if(!modoDobles){ for(let i=0;i<9;i++){ if(actual[i].length>1){ let keep=actual[i][0]; actual[i]=[keep]; ["L","E","V"].forEach(t=>{let e=document.getElementById(t+(i+1)); if(e){ if(t==keep){e.innerText=keep; e.classList.add("selected");} else {e.innerText=""; e.classList.remove("selected");}}});}} actualizarTextLine(); }
-}
+function deleteall(){ if(!confirm("¿Borrar todo?")) return; quinielas=[]; clean(); renderLista(); }
+function clearname(){ document.getElementById("nombre").value=""; renderLista(); }
+function random(){ const o=["L","E","V"]; for(let i=0;i<9;i++){ let l=o[Math.floor(Math.random()*3)]; actual[i]=[l]; ["L","E","V"].forEach(t=>{ let e=document.getElementById(t+(i+1)); if(e){ e.innerText=(t==l)?l:""; if(t==l) e.classList.add("selected"); else e.classList.remove("selected"); } }); } document.getElementById("text").innerText=actual.map(a=>a[0]).join(" "); }
+function allowcombination(){ modoDobles=!modoDobles; let lbl=document.getElementById("checkcombinaciones"); if(lbl){ lbl.innerText=modoDobles?"Dobles y Triples: ON":"Dobles y Triples"; lbl.style.background=modoDobles?"#ffeb00":"#1f1f1f"; lbl.style.color=modoDobles?"black":"white"; } }
 async function send(){
-    let quantity=quinielas.length; if(!quantity||quantity<1){ save(); quantity=quinielas.length; }
-    if(quantity>0){
-        let nombreInput=document.getElementById("nombre"); let nombre=nombreInput?nombreInput.value.trim():"";
-        if(!nombre){alert("Pon tu nombre"); return;}
-        let btn=document.querySelector(".botonenviar"); if(btn)btn.innerHTML="Guardando...";
-        for(let q of quinielas){ let datos={nombre:nombre,p1:q[0],p2:q[1],p3:q[2],p4:q[3],p5:q[4],p6:q[5],p7:q[6],p8:q[7],p9:q[8]}; try{await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});}catch(e){}}
-        let res=quinielas.map(q=>q.join(" ")); localStorage.setItem("results",nombre+" - "+res.join(" * "));
-        let whatsapptext=encodeURI(localStorage.getItem("results")).split('*').join('%0D').replace(/#/g,"");
-        alert("¡Tu quiniela se ha enviado correctamente! ✅\n\nGracias por jugar en Quiniela Golazo, "+nombre+".\nRecibimos "+quantity+" quiniela(s) - Total: $"+(quantity*PRECIO)+"\n¡Suerte! 🍀");
-        window.location.href="https://wa.me/524498476015?text="+whatsapptext+"%0D%0ATotal: $"+(quantity*PRECIO)+"%0D%0A*Quiniela Golazo J8*";
-        quinielas=[]; clean(); renderLista(); if(btn)btn.innerHTML='Enviar <span>0</span> <img src="whatsapp-logo-5.png" alt="" height="23px">';
-    }
+  let q=quinielas.length; if(!q||q<1){ save(); q=quinielas.length; }
+  if(q>0){
+    let nom=document.getElementById("nombre").value.trim(); if(!nom){ alert("Pon tu nombre"); return; }
+    let btn=document.querySelector(".botonenviar"); if(btn) btn.innerHTML="Guardando...";
+    for(let qq of quinielas){ let d={nombre:nom,p1:qq[0],p2:qq[1],p3:qq[2],p4:qq[3],p5:qq[4],p6:qq[5],p7:qq[6],p8:qq[7],p9:qq[8]}; try{ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(d)});}catch(e){} }
+    let res=quinielas.map(x=>x.join(" ")); localStorage.setItem("results",nom+" - "+res.join(" * "));
+    let txt=encodeURI(localStorage.getItem("results")).split('*').join('%0D').replace(/#/g,"");
+    alert("¡Tu quiniela se ha enviado correctamente! ✅\nGracias "+nom+", recibimos "+q+" quiniela(s) - Total: $"+(q*PRECIO)+"\n¡Suerte! 🍀");
+    window.location.href="https://wa.me/524498476015?text="+txt+"%0D%0ATotal: $"+(q*PRECIO)+"%0D%0A*Quiniela Golazo*";
+    quinielas=[]; clean(); renderLista(); if(btn) btn.innerHTML='Enviar <span>0</span> <img src="whatsapp-logo-5.png" height="23px">';
+  }
 }
+window.selection=selection; window.clean=clean; window.save=save; window.deleteall=deleteall; window.clearname=clearname; window.random=random; window.allowcombination=allowcombination; window.send=send; window.borrarUna=borrarUna;
 document.addEventListener("DOMContentLoaded", ()=>{ clean(); renderLista(); });
