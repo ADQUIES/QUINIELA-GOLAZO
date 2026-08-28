@@ -1,10 +1,11 @@
-// QUINIELA GOLAZO - FINAL - Link: AKfycbztSJZVua2Qj5Cfeiblsos0GOn3AGwHIQRtLjJU_kADwBqudkAA2r18Zc0tGrAjHzWy
+
+
+// QUINIELA GOLAZO - FINAL CON MENSAJE Y TABLA ARREGLADA
 const URL_SHEET = "https://script.google.com/macros/s/AKfycbztSJZVua2Qj5Cfeiblsos0GOn3AGwHIQRtLjJU_kADwBqudkAA2r18Zc0tGrAjHzWy/exec";
 let modoDobles = false;
 let actual = Array(9).fill(null).map(()=>[]);
 let quinielas = [];
 const PRECIO = 20;
-
 
 function selection(el){
   if(!el ||!el.id) return;
@@ -81,11 +82,15 @@ function renderLista(){
   if(!tabla) return;
   tabla.innerHTML="";
   let nombre = document.getElementById("nombre")? document.getElementById("nombre").value || "Sin nombre" : "Sin nombre";
+
   quinielas.forEach((q,idx)=>{
     let tr=document.createElement("tr");
-    tr.innerHTML=`<td style="font-family:monospace;padding:4px">${q.join(" ")}</td><td>${nombre}</td><td><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:20px;height:20px;cursor:pointer">x</button></td>`;
+    // ARREGLO PARA QUE NO SE AMONTONEN: cada letra en su cajita
+    let quinielaHTML = q.map(letra=> `<span style="display:inline-block; width:22px; height:20px; text-align:center; border:1px solid #999; margin:1px; background:white; font-weight:bold;">${letra}</span>`).join("");
+    tr.innerHTML=`<td style="padding:5px;">${quinielaHTML}</td><td style="padding:5px; font-size:12px;">${nombre}</td><td style="padding:5px;"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:20px;height:20px;cursor:pointer">x</button></td>`;
     tabla.appendChild(tr);
   });
+
   let costoEl=document.getElementById("costo");
   let totalEl=document.getElementById("total");
   let numEl=document.getElementById("numquinielas");
@@ -159,35 +164,40 @@ function allowcombination(){
 }
 
 async function send(){
-    // Si no ha dado +, guardamos la que está marcada
     let quantity = quinielas.length;
     if (!quantity || quantity < 1){
         save();
         quantity = quinielas.length;
     }
-
     if (quantity > 0){
         let nombreInput = document.getElementById("nombre");
-        let nombre = nombreInput? nombreInput.value.trim() : "Sin nombre";
+        let nombre = nombreInput? nombreInput.value.trim() : "";
         if(!nombre){ alert("Pon tu nombre"); return; }
 
-        // 1. GUARDAR EN GOOGLE SHEET (tu link nuevo)
         let btn = document.querySelector(".botonenviar");
         if(btn) btn.innerHTML = "Guardando...";
+
+        // Guardar en Sheets
         for(let q of quinielas){
             let datos={nombre:nombre,p1:q[0],p2:q[1],p3:q[2],p4:q[3],p5:q[4],p6:q[5],p7:q[6],p8:q[7],p9:q[8]};
-            try{ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)}); }catch(e){}
+            try{ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});}catch(e){}
         }
 
-        // 2. ENVIAR A WHATSAPP con tu formato original
+        // WhatsApp con tu formato original
         let res = quinielas.map(q=> q.join(" "));
         localStorage.setItem("results", nombre + " - " + res.join(" * "));
         let whatsapptext = res.join("%20%20");
         whatsapptext = encodeURI(localStorage.getItem("results"));
         whatsapptext = whatsapptext.split('*').join('%0D').replace(/#/g,"");
 
-        // TU NUMERO - aqui va tu numero 524498476015
-        window.location.href = "https://wa.me/524498476015?text=" + whatsapptext + "%0D%0ATotal: $" + (quantity*20);
+        // MENSAJE PARA EL CLIENTE (lo que pediste)
+        alert("¡Tu quiniela se ha enviado correctamente! ✅\n\nGracias por jugar en Quiniela Golazo, " + nombre + ".\nRecibimos " + quantity + " quiniela(s) - Total: $" + (quantity*PRECIO) + "\n\n¡Suerte! 🍀");
+
+        // Enviar a WhatsApp
+        window.location.href = "https://wa.me/524498476015?text=" + whatsapptext + "%0D%0ATotal: $" + (quantity*PRECIO) + "%0D%0A*Quiniela Golazo J8*";
+
+        quinielas=[]; clean(); renderLista();
+        if(btn) btn.innerHTML='Enviar <span>0</span> <img src="whatsapp-logo-5.png" alt="" height="23px">';
     }
 }
 
