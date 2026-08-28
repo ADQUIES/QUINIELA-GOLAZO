@@ -36,16 +36,21 @@ function save(){
 function expandir(base){ let res=[[]]; for(let i=0;i<9;i++){ let nuevo=[]; for(let r of res){ for(let op of base[i]){ nuevo.push([...r,op]);}} res=nuevo;} return res; }
 
 function renderLista(){
-  let tabla=document.getElementById("display"); if(!tabla)return;
+  let tabla=document.getElementById("display");
+  if(!tabla) return;
   tabla.innerHTML="";
   let nombre=document.getElementById("nombre")?document.getElementById("nombre").value||"Sin nombre":"Sin nombre";
   quinielas.forEach((q,idx)=>{
     let tr=document.createElement("tr");
-    // CORREGIDO: sin cajitas, solo texto separado como tu diseño original
-    let textoQuiniela = q.join(" ");
-    tr.innerHTML = `<td class="q-text">${textoQuiniela}</td><td class="q-name">${nombre}</td><td class="q-del"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:22px;height:22px;cursor:pointer">x</button></td>`;
+    tr.innerHTML=`<td style="font-family:monospace; font-size:15px; white-space:nowrap; padding:4px;">${q.join(" ")}</td><td style="padding:4px; font-size:13px;">${nombre}</td><td style="padding:4px;"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:20px;height:20px;">x</button></td>`;
     tabla.appendChild(tr);
   });
+  let total=quinielas.length*20;
+  document.getElementById("costo").innerText="Costo: $"+(quinielas.length>0?20:0);
+  document.getElementById("total").innerText="Total: $"+total;
+  document.getElementById("numquinielas").innerText=quinielas.length+" Quiniela(s)";
+  document.querySelector(".botonenviar span").innerText=quinielas.length;
+}
   let costoEl=document.getElementById("costo"); let totalEl=document.getElementById("total");
   let numEl=document.getElementById("numquinielas"); let btnSpan=document.querySelector(".botonenviar span");
   let total=quinielas.length*PRECIO;
