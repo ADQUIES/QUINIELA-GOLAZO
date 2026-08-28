@@ -1,4 +1,4 @@
-const URL_SHEET = "https://script.google.com/macros/s/AKfycbxyCWyIBASE4W4RM3u48frVfwQf5ksP34_8ZgosoGkvj-tRZJJxAa7qvDPa5UL8CjW92A/exec";
+const URL_SHEET = "https://script.google.com/macros/s/AKfycbz6Z6y5WL2EaGKmwDLx-tjTUbD8IANjCKVaeXatPKpiYVTGSdbpj0K6-jI8fCC8eoRAkA/exec";
 const PRECIO = 20;
 let picks = Array(9).fill("");
 let quinielas = JSON.parse(localStorage.getItem("quinielas_golazo")||"[]");
@@ -33,7 +33,7 @@ function renderLista(){
   let d=document.getElementById("display"); if(!d) return; d.innerHTML="";
   quinielas.forEach((it,idx)=>{
     let tr=document.createElement("tr");
-    tr.innerHTML=`<td class="q-text">${it.q.join(" ")} -</td><td class="q-name">${it.nombre}</td><td class="q-del"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:22px;height:22px;cursor:pointer">x</button></td>`;
+    tr.innerHTML=`<td class="q-text">${it.q.join(" ")}</td><td class="q-name">${it.nombre}</td><td class="q-del"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:22px;height:22px;cursor:pointer">x</button></td>`;
     d.appendChild(tr);
   }); updateTotal();
 }
@@ -48,6 +48,6 @@ window.send = function(){
   });
   let txt=`*QUINIELA GOLAZO*%0A`; quinielas.forEach((it,i)=>{ txt+=`${i+1}. ${it.q.join(" ")} - ${it.nombre}%0A`; }); txt+=`%0ACOSTO: $${costo}%0A`;
   window.open("https://wa.me/524776482132?text="+txt,"_blank");
-  alert("Guardado en BASEDEDATOS1 con COSTO $"+costo);
+  alert("Guardado en BASEDEDATOS con COSTO $"+costo);
 }
 document.addEventListener("DOMContentLoaded",()=>{ renderLista(); });
