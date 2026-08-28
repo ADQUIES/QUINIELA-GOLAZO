@@ -1,38 +1,261 @@
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-mx">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>QUINIELA GOLAZO</title>
-<style>
-body{background:#0f3d2e;margin:0;font-family:Arial;color:white;text-align:center;padding:10px}
-h1{color:#e6ff00;font-size:32px;letter-spacing:2px;text-shadow:2px 2px 0 #000}
-.contenedor{background:white;color:black;width:100%;max-width:550px;margin:0 auto;border-radius:8px;overflow:hidden}
-table{width:100%;border-collapse:collapse}
-th{background:#222;color:#e6ff00;padding:10px 5px;font-size:14px}
-td{border:1px solid #999;padding:6px 2px;font-size:13px;font-weight:bold}
-.sel{display:inline-block;width:30px;height:30px;line-height:30px;border:1.5px solid #000;cursor:pointer;background:#eee}
-.sel.active{background:#00ff66}
-#nombre{margin:15px 0;padding:12px;width:85%;max-width:400px;border:2px solid #000;border-radius:5px;font-size:16px}
-#btnEnviar{background:#e6ff00;color:black;border:3px solid #000;padding:12px 30px;font-weight:bold;font-size:18px;border-radius:8px;cursor:pointer}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descripcion" content="Registra tus quinielas-Liga mx">
+    <title>Quiniela Golazo</title>
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="img/logo.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="ccs/styles.css">
+    <script src="java/main.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script> 
+  <script>const URL_SHEET = "https://script.google.com/macros/s/AKfycbwgXtYL5IP0SDbc2mKGXau7q9tPJ7SNCLIBAosM_HhkRg1q7YhyfYygSWYmnTxOUZ5I-w/exec";</script>
 </head>
+
+
 <body>
-<h1>QUINIELA GOLAZO</h1>
-<div class="contenedor">
-<table id="tabla"><tr><th>LOCAL</th><th>L</th><th>E</th><th>V</th><th>VISITA</th></tr></table>
-</div>
-<input id="nombre" placeholder="Nombre del participante"><br>
-<button id="btnEnviar" onclick="enviar()">Enviar 0</button>
-<p id="msg" style="color:#e6ff00"></p>
-<script>
-const URL_SHEET = "https://script.google.com/macros/s/AKfycbwgXtYL5IP0SDbc2mKGXau7q9tPJ7SNCLIBAosM_HhkRg1q7YhyfYygSWYmnTxOUZ5I-w/exec";
-const partidos = [["PUEBLA","JUAREZ"],["NECAXA","MAZATLAN"],["TIJUANA","TIGRES"],["MONTERREY","SAN LUIS"],["QUERETARO","TOLUCA"],["LEON","ATLAS"],["CRUZ AZUL","PACHUCA"],["SANTOS","AMERICA"],["ATLETICO","CHIVAS"]];
-let picks = Array(9).fill("");
-function render(){let t=document.getElementById("tabla");partidos.forEach((p,i)=>{let tr=document.createElement("tr");tr.innerHTML=`<td>${p[0]}</td><td><div class="sel" id="L${i}" onclick="sel(${i},'L')">L</div></td><td><div class="sel" id="E${i}" onclick="sel(${i},'E')">E</div></td><td><div class="sel" id="V${i}" onclick="sel(${i},'V')">V</div></td><td>${p[1]}</td>`;t.appendChild(tr);});}
-function sel(i,l){picks[i]=l;document.getElementById("L"+i).classList.remove("active");document.getElementById("E"+i).classList.remove("active");document.getElementById("V"+i).classList.remove("active");document.getElementById(l+i).classList.add("active");document.getElementById("btnEnviar").innerText="Enviar "+picks.filter(x=>x!="").length;}
-async function enviar(){const nombre=document.getElementById("nombre").value.trim();if(!nombre){alert("Escribe tu nombre");return;}if(picks.includes("")){alert("Selecciona los 9 partidos");return;}document.getElementById("btnEnviar").disabled=true;document.getElementById("btnEnviar").innerText="Enviando...";const datos={nombre:nombre,p1:picks[0],p2:picks[1],p3:picks[2],p4:picks[3],p5:picks[4],p6:picks[5],p7:picks[6],p8:picks[7],p9:picks[8]};await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});document.getElementById("msg").innerText="¡Listo "+nombre+"! Guardado en BASEDEDATOS";document.getElementById("nombre").value="";picks=Array(9).fill("");document.querySelectorAll(".sel").forEach(e=>e.classList.remove("active"));document.getElementById("btnEnviar").innerText="Enviar 0";document.getElementById("btnEnviar").disabled=false;}
-render();
+  <script>
+async function guardarEnSheets(){
+ const nombre = document.getElementById('nombre')?.value || document.querySelector('input').value;
+ const picks = [...document.querySelectorAll('.active')].map(e=>e.innerText);
+ // adapta esto a tus ids p1...p9 si los tienes
+ const datos = {nombre, p1:picks[0]||"", p2:picks[1]||"", p3:picks[2]||"", p4:picks[3]||"", p5:picks[4]||"", p6:picks[5]||"", p7:picks[6]||"", p8:picks[7]||"", p9:picks[8]||""};
+ await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});
+ alert("Guardado!");
+}
+const btn = document.querySelector('button'); if(btn) btn.onclick = guardarEnSheets;
 </script>
+<header>
+</header>
+
+                    <div class="organizer-info">
+                        
+                        <div class="organizer-tags">
+                            <a href="https://www.facebook.com/GolazoJuega/" target="_self">
+
+
+                                <div class="tag facebook">
+                                    <img src="./img/facebook-icon.svg">
+                                    <span>Facebook</span>
+                                </div>
+                            </a>                                         
+                            
+                            <a href="combinaciones/combinaciones.html" target="_self">
+                                <div class="tag combinaciones">
+                                    <img src="./img/combinaciones.png">
+                                    <span>Combinaciones</span>
+                                </div>
+                            </a>
+                            <a href="pagos/Pagos.html" target="_self">
+                                <div class="tag pagar">
+                                    <img src="./img/BBVA.png">
+                                    <span>Pagar</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="organizer-infos">
+                        
+                        <div class="organizer-tagss">
+                            
+                            <a href="cjugar/cjugarinst.html" target="_self">
+                                <div class="tag instruciones">
+                                    <img src="./img/cjugarimg.png">
+                                    <span>Instrucciones</span>
+                                </div>
+                            </a>
+                            <a href="reglamento/reglamento.html" target="_self">
+                                <div class="tag reglamento">
+                                    <img src="./img/reglamento.png">
+                                    <span>Reglamento</span>
+                                </div>
+                            </a>
+                            
+                            <a href="horarios/horarios.html" target="_self">
+                                <div class="tag horarios">
+                                    <img src="./img/horarios.png">
+                                    <span>Horarios</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+<!-- <div class="promocionar" id="promoci">
+             <a id="j"href="cjugar/cjugarinst.html">Instrucciones</a>
+             <a id="r"href="reglamento/reglamento.html">Reglamento</a>
+             <a id="h"href="horarios/horarios.html">Horarios</a>
+             <a id="h"href="combinaciones/combinaciones.html">Combinaciones</a>
+            
+
+ </div> -->
+     
+   
+   <div class="quiniela" id="quiniela" style="height: 375px;;">
+     <div class="aux">
+         <h3 style="padding: 5px 7px;" onclick="clean()">x
+
+
+         </h3>
+         
+             
+     </div>
+     <div class="partido">
+        <span id="L1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V1" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V2" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V3" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V4" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V5" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V6" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V7" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V8" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V9" onclick="selection(this)"></span>
+
+     </div>
+     <h1 id="text" style="font-size: x-large; padding: 10px;">- - - - - - - - - 
+    </h1>
+  </div>
+
+ <br>
+ 
+ <table>
+      <tbody>
+          <tr>
+              <td width="37%">
+                  <h2 class="botonenviar" onclick="send()">
+                    Enviar
+                    <span>0</span>
+                    <img src="whatsapp-logo-5.png" alt="" height="23px" style="position:inline-flex;">
+
+                  </h2>
+              </td>
+              <td width="14%">
+                  <h2 id="botonlisto" onclick="save()"><ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon></h2>
+
+              </td>
+              <td width="14%">
+                 
+                  
+             
+<h2 id="botonborrar" onclick="deleteall()" title="Se borrarÃ¡ todo, incluyendo las quinielas generadas">
+  <ion-icon name="trash-outline" id="trash"></ion-icon>
+</h2> 
+
+</td>         
+     <td width="35%">
+                <table id="nombrebox">
+                <tr style="height: 9px"><td id="nombretext"> &nbsp Nombre</td><td></td></tr>
+                <tr style="height: 20px"><td><input id="nombre" type="text" placeholder="" maxlength="20" spellcheck="false"></td><td><label id="borrarnombre" onclick="clearname()"><ion-icon name="backspace"></ion-icon></label></td></tr>
+            </table>
+                  
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+  <table style="margin-top: 3px; width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width: 36%;">
+                <label id="random" onclick="random()">la suerte</label>
+            </td>
+            <td style="width: 50%;">
+                <label id="checkcombinaciones" onclick="allowcombination()">Dobles y Triples</label>
+
+            </td>
+            <td style="width: 30%;"></td>
+        </tr>
+    </tbody>
+
+  </table>
+  
+  <div class="suma">
+            <h4 id="costo">Costo: $0</h4><h4 id="total">Total: $0</h4><br>
+            <h4 id="numquinielas">0 Quiniela(s)</h4>
+        </div>
+      
+  </div>
+  
+<div id="divaux" translate="no">
+  
+  <div class="titulo-quinielas">Lista De Quinielas</div>
+    <table id="display"></table>
+
+</div>
+
+<!--<a id="f"href="https://www.facebook.com/GolazoJuega/">Facebook</a>-->
+<h5>
+        <span style="text-align: center;">Sitio desarrollado por Adhemo.com, Ocupas un sitio web?</span>
+        <span style="color: rgb(209, 209, 9);"></span>
+        <a id="contacto" href="https://wa.me/524776482132?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
+    </h5>   
+
+
 </body>
 </html>
