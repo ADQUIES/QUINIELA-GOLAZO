@@ -13,23 +13,11 @@
     <link rel="stylesheet" href="ccs/styles.css">
     <script src="java/main.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script> 
-  <script>const URL_SHEET = "https://script.google.com/macros/s/AKfycbzMJemXK7PsZDl8DIGvpSgrqm4d8JspXdaGolCfnid1iOksfEkcH94yGilYIYFKodIRNA/exec";</script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>     
 </head>
 
 
 <body>
-  <script>
-async function guardarEnSheets(){
- const nombre = document.getElementById('nombre')?.value || document.querySelector('input').value;
- const picks = [...document.querySelectorAll('.active')].map(e=>e.innerText);
- // adapta esto a tus ids p1...p9 si los tienes
- const datos = {nombre, p1:picks[0]||"", p2:picks[1]||"", p3:picks[2]||"", p4:picks[3]||"", p5:picks[4]||"", p6:picks[5]||"", p7:picks[6]||"", p8:picks[7]||"", p9:picks[8]||""};
- await fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});
- alert("Guardado!");
-}
-const btn = document.querySelector('button'); if(btn) btn.onclick = guardarEnSheets;
-</script>
 <header>
 </header>
 
@@ -253,7 +241,7 @@ const btn = document.querySelector('button'); if(btn) btn.onclick = guardarEnShe
 <h5>
         <span style="text-align: center;">Sitio desarrollado por Adhemo.com, Ocupas un sitio web?</span>
         <span style="color: rgb(209, 209, 9);"></span>
-        <a id="contacto" href="https://wa.me/524498476015?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
+        <a id="contacto" href="https://wa.me/524776482132?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
     </h5>   
 
 
