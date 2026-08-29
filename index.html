@@ -5,74 +5,71 @@
 <title>Quiniela Golazo</title>
 <link rel="icon" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial Black, Arial} body{margin:0;background:#001e2f;color:#fff}
-.header{display:flex;align-items:center;gap:15px;background:#fff;padding:10px 20px;border-bottom:5px solid #ffeb00}
-.header img{width:130px;height:130px;border-radius:50%;border:5px solid #ffeb00;object-fit:cover}
-.header h1{color:#e6f200;font-size:70px;margin:0;text-shadow:3px 3px 0 #000, -1px -1px 0 #000;letter-spacing:2px}
-.premio-bar{background:#001e2f;color:#fff;padding:8px 20px;font-family:Arial;font-weight:bold;border-bottom:2px solid #ffeb00}
-#lista-partidos{max-width:1100px;margin:15px auto;background:#0d3b4f;border:3px solid #ffeb00;border-radius:15px;overflow:hidden}
-.fila{display:grid;grid-template-columns:50px 140px 1fr 140px 160px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #ffeb00;padding:8px;gap:8px}
-.fila .num{background:#001e2f;color:#ffeb00;width:35px;height:35px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900}
-.equipo{text-align:center;font-size:12px;font-weight:900;line-height:11px}
-.equipo img{width:55px;height:55px;object-fit:contain;display:block;margin:0 auto 3px}
-.vs{text-align:center;font-weight:900;color:#0d3b4f}
-.sel span{display:inline-block;width:32px;height:32px;line-height:28px;text-align:center;border:2px solid #000;border-radius:8px;margin:2px;cursor:pointer;background:#eee;font-weight:900}
-.sel span.active{background:#00ff66;border-color:#000}
-.info{grid-column:1/-1;text-align:center;font-size:10px;background:#ffeb00;color:#000;border-radius:5px;padding:2px;font-family:Arial}
-.form{max-width:1100px;margin:10px auto;display:flex;gap:5px;flex-wrap:wrap}
-.form input{padding:8px;border:2px solid #000;font-family:Arial;font-size:13px}
-#resultado{width:300px;height:180px;font-family:monospace;font-size:12px}
-.btn{padding:8px 12px;border:2px solid #000;font-weight:900;cursor:pointer;background:#fff}
-.btn-green{background:#00ff66}.btn-whats{background:#25d366;color:#fff}.btn-blue{background:#007bff;color:#fff}
-@media(max-width:700px){.header h1{font-size:28px}.fila{grid-template-columns:35px 70px 1fr 70px 100px}.equipo img{width:40px;height:40px}.equipo{font-size:9px}}
+*{box-sizing:border-box;font-family:Arial Black,Arial}
+body{margin:0;background:#001e2f;color:#fff}
+.header{display:flex;align-items:center;gap:15px;background:#fff;padding:10px 15px;border-bottom:5px solid #ffeb00}
+.header img{width:90px;height:90px;border-radius:50%;border:4px solid #ffeb00}
+.header h1{color:#e6f200;font-size:42px;margin:0;line-height:38px;text-shadow:2px 2px 0 #000}
+.premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
+#lista-partidos{max-width:900px;margin:10px auto}
+.card-partido{background:#18465c;border:3px solid #ffeb00;border-radius:18px;overflow:hidden;margin-bottom:10px;display:grid;grid-template-columns:30px 1fr 50px 1fr 90px;align-items:center;padding:5px}
+.num{color:#fff;font-size:14px;padding-left:6px}
+.equipo{text-align:center;font-size:11px;line-height:11px}
+.equipo img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;display:block;margin:0 auto 4px}
+.vs{font-size:12px;color:#ffeb00;text-align:center}
+.sel{display:flex;flex-direction:column;gap:4px}
+.sel span{background:#fff;color:#000;border:2px solid #000;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900}
+.sel span.active{background:#00ff66}
+.info-bar{background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:4px;grid-column:1/-1;border-radius:0 0 10px 10px;margin:5px -5px}
+.form{max-width:900px;margin:0 auto;padding:10px;display:flex;gap:6px;flex-wrap:wrap}
+.form input{flex:1;min-width:140px;padding:10px;border:2px solid #000;border-radius:8px;font-family:Arial}
+#resultado{width:100%;height:150px;font-family:monospace}
+.btn{padding:10px 14px;border:2px solid #000;border-radius:10px;font-weight:900;cursor:pointer}
+@media(max-width:600px){.header h1{font-size:26px;line-height:24px}.card-partido{grid-template-columns:20px 1fr 30px 1fr 70px}.equipo img{width:40px;height:40px}}
 </style>
 </head>
 <body>
 <script>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";</script>
 
-<div class="header">
-  <img src="img/logo.png">
-  <h1>QUINIELA GOLAZO</h1>
-</div>
-<div class="premio-bar">$700 PRIMER LUGAR</div>
+<div class="header"><img src="img/logo.png"><h1>QUINIELA<br>GOLAZO</h1></div>
+<div class="premio">$700 PRIMER LUGAR</div>
 
-<div id="lista-partidos"><p style="text-align:center;padding:30px;color:#ffeb00">Cargando partidos de tu hoja ADMIN B3:K11...<br>Si tarda, implementa nueva versión de Apps Script como Cualquiera</p></div>
+<div id="lista-partidos"><p style="text-align:center;padding:20px;color:#ffeb00">Cargando...</p></div>
 
 <div class="form">
-  <input id="nombre" placeholder="Tu nombre completo" style="flex:1">
-  <input id="telefono" placeholder="Teléfono WhatsApp (10 dig)" style="flex:1">
-  <input id="numQuinielas" type="number" value="1" min="1" style="width:70px">
-  <button class="btn btn-green" onclick="generar()">GENERAR QUINIELAS</button>
+  <input id="nombre" placeholder="NOMBRE">
+  <input id="telefono" placeholder="WHATSAPP">
+  <input id="numQuinielas" type="number" value="1" min="1" style="max-width:70px">
+  <button class="btn" style="background:#ffeb00" onclick="generar()">GENERAR</button>
 </div>
-
 <div class="form">
-  <textarea id="resultado" placeholder="Aquí aparecerán tus quinielas para copiar y pegar en WhatsApp..."></textarea>
-  <div>
-    <p id="infoCosto" style="color:#ffeb00;font-family:Arial;font-size:13px"></p>
-    <p id="infoIDs" style="color:#00ff66;font-family:Arial;font-size:13px"></p>
-    <p id="statusBase" style="color:#00ff66;font-family:Arial;font-weight:bold"></p>
-    <button class="btn btn-whats" onclick="enviarWhatsApp()">📲 ENVIAR POR WHATSAPP</button>
-    <button class="btn btn-blue" onclick="guardarEnBase()">💾 GUARDAR EN BASEDEDATOS</button>
+  <textarea id="resultado"></textarea>
+  <div style="flex:1">
+    <p id="infoCosto" style="color:#ffeb00;font-family:Arial"></p>
+    <p id="infoIDs" style="color:#00ff66;font-family:Arial"></p>
+    <button class="btn" style="background:#25d366;color:#fff;width:100%;margin-top:5px" onclick="enviarWhatsApp()">WHATSAPP</button>
+    <button class="btn" style="background:#007bff;color:#fff;width:100%;margin-top:5px" onclick="guardarEnBase()">GUARDAR</button>
+    <p id="statusBase" style="color:#00ff66"></p>
   </div>
 </div>
 
 <script src="java/main.js"></script>
 <script>
-// CARGA DIRECTA SI main.js FALLA - RESPALDO
-async function cargarRespaldo(){
+async function cargarRespaldoFix(){
   try{
     let r=await fetch(SCRIPT_URL+"?action=get_admin");
     let data=await r.json();
     let cont=document.getElementById("lista-partidos"); cont.innerHTML="";
     data.forEach((p,i)=>{
       let idx=i+1;
-      cont.innerHTML+=`<div class="fila"><div class="num">${idx}</div><div class="equipo"><img src="img/ESCUDOS/${p.local}.png" onerror="this.src='img/logo.png'"><br>${p.local}</div><div class="vs">VS<br><div class="sel"><span id="L${idx}" onclick="toggleLetra(${idx},'L')">L</span><span id="E${idx}" onclick="toggleLetra(${idx},'E')">E</span><span id="V${idx}" onclick="toggleLetra(${idx},'V')">V</span></div></div><div class="equipo"><img src="img/ESCUDOS/${p.visita}.png" onerror="this.src='img/logo.png'"><br>${p.visita}</div><div class="info">${p.diaLetra} ${p.dia}/${p.mes} ${p.hora} - ${p.trans}</div></div>`;
+      let localImg = `img/ESCUDOS/${p.local.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase()}.png`;
+      let visitaImg = `img/ESCUDOS/${p.visita.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase()}.png`;
+      cont.innerHTML+=`<div class="card-partido"><div class="num">${idx}</div><div class="equipo"><img src="${localImg}" onerror="this.src='img/logo.png'"><br>${p.local}</div><div class="vs">VS</div><div class="equipo"><img src="${visitaImg}" onerror="this.src='img/logo.png'"><br>${p.visita}</div><div class="sel"><span id="L${idx}" onclick="toggleLetra(${idx},'L')">L</span><span id="E${idx}" onclick="toggleLetra(${idx},'E')">E</span><span id="V${idx}" onclick="toggleLetra(${idx},'V')">V</span></div><div class="info-bar">${p.diaLetra} ${p.dia}/${p.mes} ${p.hora} ${p.trans}</div></div>`;
     });
-  }catch(e){
-    document.getElementById("lista-partidos").innerHTML="<p style='color:red;text-align:center;padding:20px'>❌ Aún no has implementado la nueva versión de Apps Script. Ve a Apps Script > Implementar > Nueva versión > Cualquiera</p>";
-  }
+  }catch(e){console.log(e)}
 }
-if(typeof cargarPartidos==="undefined") cargarRespaldo();
+if(typeof cargarPartidos!=="function"){cargarRespaldoFix();}else{ const old=cargarPartidos; cargarPartidos=()=>{cargarRespaldoFix(); old();} }
+setTimeout(cargarRespaldoFix,1000);
 </script>
 </body>
 </html>
