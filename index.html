@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quiniela Golazo</title>
+<link rel="icon" href="img/logo.png">
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a2f3e;color:#fff}
 .wrap{max-width:640px;margin:auto;padding:8px;width:100%;overflow:hidden}
-.top-white{background:#fff;border:3px solid #d4ff00;border-radius:14px;padding:6px 10px;display:flex;align-items:center;gap:10px}
-.top-white img{width:62px;height:62px;object-fit:contain}
-.top-white h1{margin:0;color:#c7a000;font-size:26px;font-weight:900;text-shadow:2px 2px 0 #000}
+.top-banner{background:#fff;border:3px solid #d4ff00;border-radius:14px;overflow:hidden;cursor:pointer}
+.top-banner img{width:100%;height:auto;display:block;object-fit:contain;max-height:130px}
 .head{display:grid;grid-template-columns:54px 1fr 44px 44px 44px 1fr 54px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:13px}
 .match{display:grid;grid-template-columns:54px minmax(0,1fr) 44px 44px 44px minmax(0,1fr) 54px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:58px;width:100%}
 .match:nth-child(even){background:#d7e8ef}
@@ -36,7 +36,9 @@
 <body>
 <div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div>
 <div class="wrap">
-<div class="top-white"><img src="img/logo3.png"><h1>QUINIELA GOLAZO</h1></div>
+<!-- BANNER LOGO GRANDE - 5 TOQUES PARA ADMIN -->
+<div class="top-banner" id="bannerLogo"><img src="img/logo3.png" alt="Quiniela Golazo"></div>
+
 <div class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
 <div id="partidos"></div><div class="line" id="linea">---------</div>
 <input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"><input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
@@ -51,6 +53,14 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 const MI_WHATSAPP = "524498476015";
 const PARTIDOS=[["TOLUCA","PUEBLA"],["MAZATLAN","PUMAS"],["PACHUCA","CRUZ AZUL"],["TIGRES","LEON"],["ATLAS","SANTOS"],["JUAREZ","QUERETARO"],["MONTERREY","SAN LUIS"],["TIJUANA","NECAXA"],["GUADALAJARA","AMERICA"]];
 let picks=Array(9).fill(""); let quinielas=JSON.parse(localStorage.getItem("qs")||"[]");
+
+// ACCESO OCULTO ADMIN - 5 TOQUES
+let clicksLogo=0; let timerLogo;
+document.getElementById("bannerLogo").addEventListener("click",()=>{
+ clicksLogo++; clearTimeout(timerLogo);
+ timerLogo=setTimeout(()=>{clicksLogo=0},2000);
+ if(clicksLogo>=5){clicksLogo=0; window.location.href="admin.html";}
+});
 
 function render(){
  let h=""; PARTIDOS.forEach((p,i)=>{
