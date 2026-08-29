@@ -1,29 +1,42 @@
-*{box-sizing:border-box;font-family:Arial Black,Arial}
-body{margin:0;background:#001e2f;color:#fff}
-.header{display:flex;align-items:center;gap:15px;background:#fff;padding:10px 15px;border-bottom:5px solid #ffeb00}
-.header img{width:90px;height:90px;border-radius:50%;border:4px solid #ffeb00}
-.header h1{color:#e6f200;font-size:42px;margin:0;line-height:38px;text-shadow:2px 2px 0 #000}
-.premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
-#lista-partidos{max-width:900px;margin:10px auto}
-.card-partido{background:#18465c;border:3px solid #ffeb00;border-radius:18px;overflow:hidden;margin-bottom:12px;padding:8px 5px;display:grid;grid-template-columns:25px 1fr 80px 1fr;align-items:center;text-align:center}
-.num{color:#fff;font-size:16px}
-.col{display:flex;flex-direction:column;align-items:center;gap:6px}
-.col.center{justify-content:center}
-.equipo{font-size:11px;line-height:12px;text-align:center}
-.equipo img{width:52px;height:52px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;display:block;margin:0 auto 4px}
-.btn-letra{background:#fff;color:#000;border:2px solid #000;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:18px;box-shadow:2px 2px 0 #000}
-.btn-letra.active{background:#00ff66;transform:scale(1.1)}
-.vs{font-size:13px;color:#ffeb00;margin-bottom:4px}
-.info-bar{background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:4px;grid-column:1/-1;border-radius:10px;margin-top:8px}
-.num{color:#fff;font-size:16px}
-.equipo{font-size:11px;line-height:12px}
-.equipo img{width:52px;height:52px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;display:block;margin:0 auto 4px}
-.col{display:flex;flex-direction:column;align-items:center;gap:6px}
-.btn-letra{background:#fff;color:#000;border:2px solid #000;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:18px;box-shadow:2px 2px 0 #000}
-.btn-letra.active{background:#00ff66;transform:scale(1.1)}
-.vs{font-size:14px;color:#ffeb00;margin-bottom:4px}
-.info-bar{background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:4px;grid-column:1/-1;border-radius:10px;margin-top:8px}
-.form{max-width:900px;margin:0 auto;padding:10px;display:flex;gap:6px;flex-wrap:wrap}
-.form input{flex:1;min-width:140px;padding:10px;border:2px solid #000;border-radius:8px;font-family:Arial}
-#resultado{width:100%;height:150px;font-family:monospace}
-.btn{padding:10px 14px;border:2px solid #000;border-radius:10px;font-weight:900;cursor:pointer}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black, Arial}
+body{background:#001525;display:flex;justify-content:center;padding:10px}
+
+.contenedor{width:100%;max-width:750px;background:#001525;border:4px solid #d4ff00}
+
+.header{background:white;display:flex;align-items:center;gap:10px;padding:8px;border-bottom:4px solid #d4ff00}
+.header img{width:60px;height:60px;border-radius:50%;border:3px solid #d4ff00}
+.header h1{color:#b8a600;font-size:26px;line-height:24px;text-shadow:2px 2px 0 black}
+
+.premio{background:#0a344a;color:white;text-align:center;padding:8px;font-family:Arial;font-weight:bold;border-bottom:3px solid #d4ff00}
+
+.cargando{text-align:center;color:#d4ff00;padding:20px}
+
+/* ESTA ES LA TABLA QUE REEMPLAZA TU IMAGEN */
+#lista-partidos{padding:5px}
+
+.tabla-encabezado{display:grid;grid-template-columns:50px 1fr 55px 50px 55px 1fr 50px;background:#001525;color:#d4ff00;text-align:center;padding:6px 0;font-size:11px;border-bottom:2px solid #d4ff00}
+
+.fila-partido{position:relative;display:grid;grid-template-columns:50px 1fr 55px 50px 55px 1fr 50px;align-items:center;background:#d9e8f0;border:1px solid black;margin-bottom:2px;height:48px}
+
+.fila-partido:nth-child(even){background:white}
+
+.col-nombre{font-size:11px;color:black;text-align:center;line-height:11px;padding:2px;font-family:Arial Black}
+.col-escudo{background:white;width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-left:1px solid black;border-right:1px solid black}
+.col-escudo img{width:40px;height:30px;object-fit:contain}
+
+.boton{width:42px;height:32px;background:white;border:2px solid black;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:black;margin:0 auto}
+.boton.active{background:#e50000;color:white;border-color:white;box-shadow:0 0 5px black}
+
+.info-partido{grid-column:1/-1;background:#d4ff00;color:black;font-family:Arial;font-size:9px;font-weight:bold;text-align:center;padding:2px;border-top:1px solid black}
+
+/* FORMULARIO */
+.formulario{padding:10px}
+.formulario input{width:100%;padding:10px;margin-bottom:6px;border-radius:6px;border:2px solid black;font-family:Arial}
+.fila-form{display:flex;gap:6px}
+#numQuinielas{max-width:70px}
+.btn-generar{flex:1;background:#d4ff00;border:2px solid black;border-radius:6px;font-family:Arial Black;cursor:pointer}
+.btn-whats{flex:1;background:#25d366;color:white;border:2px solid black;border-radius:6px;padding:10px;font-family:Arial Black;cursor:pointer}
+.btn-guardar{flex:1;background:#007bff;color:white;border:2px solid black;border-radius:6px;padding:10px;font-family:Arial Black;cursor:pointer}
+#resultado{width:100%;height:120px;border:2px solid black;border-radius:6px;padding:8px;font-family:monospace;margin-top:6px}
+#infoCosto{color:#d4ff00;font-family:Arial;font-weight:bold}
+#infoIDs{color:#00ff88;font-family:Arial;font-weight:bold}
