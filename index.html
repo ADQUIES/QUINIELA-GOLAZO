@@ -1,75 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quiniela Golazo</title>
 <link rel="icon" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial Black,Arial}
-body{margin:0;background:#001e2f;color:#fff}
+*{box-sizing:border-box;font-family:Arial Black,Arial;margin:0;padding:0}
+body{background:#001e2f;color:#fff}
 .header{display:flex;align-items:center;gap:15px;background:#fff;padding:10px 15px;border-bottom:5px solid #ffeb00}
-.header img{width:90px;height:90px;border-radius:50%;border:4px solid #ffeb00}
-.header h1{color:#e6f200;font-size:42px;margin:0;line-height:38px;text-shadow:2px 2px 0 #000}
-.premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
-#lista-partidos{max-width:900px;margin:10px auto}
-.card-partido{background:#18465c;border:3px solid #ffeb00;border-radius:18px;overflow:hidden;margin-bottom:10px;display:grid;grid-template-columns:30px 1fr 50px 1fr 90px;align-items:center;padding:5px}
-.num{color:#fff;font-size:14px;padding-left:6px}
-.equipo{text-align:center;font-size:11px;line-height:11px}
-.equipo img{width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:3px;display:block;margin:0 auto 4px}
-.vs{font-size:12px;color:#ffeb00;text-align:center}
-.sel{display:flex;flex-direction:column;gap:4px}
-.sel span{background:#fff;color:#000;border:2px solid #000;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900}
-.sel span.active{background:#00ff66}
-.info-bar{background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:4px;grid-column:1/-1;border-radius:0 0 10px 10px;margin:5px -5px}
+.header img{width:80px;height:80px;border-radius:50%;border:4px solid #ffeb00}
+.header h1{color:#d4d400;font-size:38px;line-height:34px;text-shadow:2px 2px 0 #000}
+.premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00;color:#fff}
+
+/* --- AQUI ESTA EL CAMBIO QUE ME PEDISTE --- */
+#lista-partidos{max-width:900px;margin:10px auto;padding:0 8px}
+.card-partido{background:#1e4a5f;border:3px solid #ffeb00;border-radius:18px;margin-bottom:12px;padding:10px 5px;display:grid;grid-template-columns:1fr 90px 1fr;align-items:start}
+.num{display:none} /* NUMERO OCULTO PERO FUNCIONA PARA LOS FOLIOS */
+.col{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:flex-start}
+.equipo{text-align:center;font-size:11px;line-height:11px;color:#fff;min-height:70px}
+.equipo img{width:56px;height:56px;background:#fff;border-radius:12px;padding:4px;object-fit:contain;display:block;margin:0 auto 5px}
+.vs{color:#ffeb00;font-size:14px;margin-top:20px}
+.btn-letra{background:#fff;color:#000;border:2px solid #000;border-radius:10px;width:44px;height:36px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:18px;cursor:pointer;box-shadow:2px 2px 0 #000}
+.btn-letra.active{background:#ff1a1a;color:#fff;border-color:#fff;transform:scale(1.1)} /* rojo como tu imagen 2 */
+.info-bar{grid-column:1/-1;background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:5px;border-radius:10px;margin-top:10px}
+/* --- FIN DEL CAMBIO --- */
+
 .form{max-width:900px;margin:0 auto;padding:10px;display:flex;gap:6px;flex-wrap:wrap}
-.form input{flex:1;min-width:140px;padding:10px;border:2px solid #000;border-radius:8px;font-family:Arial}
-#resultado{width:100%;height:150px;font-family:monospace}
-.btn{padding:10px 14px;border:2px solid #000;border-radius:10px;font-weight:900;cursor:pointer}
-@media(max-width:600px){.header h1{font-size:26px;line-height:24px}.card-partido{grid-template-columns:20px 1fr 30px 1fr 70px}.equipo img{width:40px;height:40px}}
+.form input{flex:1;min-width:140px;padding:12px;border:2px solid #000;border-radius:10px;font-family:Arial;font-size:14px}
+#resultado{width:100%;height:160px;font-family:monospace;padding:10px;border-radius:10px;border:2px solid #000}
+.btn{padding:12px 14px;border:2px solid #000;border-radius:10px;font-weight:900;cursor:pointer;font-family:Arial Black}
+#infoCosto{color:#ffeb00;font-family:Arial;font-weight:bold}
+#infoIDs{color:#00ff66;font-family:Arial;font-weight:bold}
+#statusBase{color:#00ff66;font-family:Arial;font-weight:bold;margin-top:5px}
+@media(max-width:600px){.header h1{font-size:24px;line-height:22px}.equipo img{width:48px;height:48px}.btn-letra{width:38px;height:34px}}
 </style>
 </head>
 <body>
-<script>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";</script>
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";
+</script>
 
 <div class="header"><img src="img/logo.png"><h1>QUINIELA<br>GOLAZO</h1></div>
-<div class="premio">$700 PRIMER LUGAR</div>
+<div class="premio">$700 PRIMER LUGAR | $15 POR QUINIELA</div>
 
-<div id="lista-partidos"><p style="text-align:center;padding:20px;color:#ffeb00">Cargando...</p></div>
+<div id="lista-partidos"><p style="text-align:center;padding:30px;color:#ffeb00">Cargando partidos...</p></div>
 
 <div class="form">
-  <input id="nombre" placeholder="NOMBRE">
-  <input id="telefono" placeholder="WHATSAPP">
-  <input id="numQuinielas" type="number" value="1" min="1" style="max-width:70px">
+  <input id="nombre" placeholder="NOMBRE COMPLETO">
+  <input id="telefono" placeholder="WHATSAPP 10 DIGITOS">
+  <input id="numQuinielas" type="number" value="1" min="1" style="max-width:80px">
   <button class="btn" style="background:#ffeb00" onclick="generar()">GENERAR</button>
 </div>
+
 <div class="form">
-  <textarea id="resultado"></textarea>
-  <div style="flex:1">
-    <p id="infoCosto" style="color:#ffeb00;font-family:Arial"></p>
-    <p id="infoIDs" style="color:#00ff66;font-family:Arial"></p>
-    <button class="btn" style="background:#25d366;color:#fff;width:100%;margin-top:5px" onclick="enviarWhatsApp()">WHATSAPP</button>
-    <button class="btn" style="background:#007bff;color:#fff;width:100%;margin-top:5px" onclick="guardarEnBase()">GUARDAR</button>
-    <p id="statusBase" style="color:#00ff66"></p>
+  <textarea id="resultado" placeholder="Aquí aparecerán tus quinielas L E V..."></textarea>
+  <div style="flex:1;min-width:200px">
+    <p id="infoCosto"></p>
+    <p id="infoIDs"></p>
+    <button class="btn" style="background:#25d366;color:#fff;width:100%;margin-top:8px" onclick="enviarWhatsApp()">ENVIAR POR WHATSAPP</button>
+    <button class="btn" style="background:#007bff;color:#fff;width:100%;margin-top:8px" onclick="guardarEnBase()">GUARDAR EN BASE</button>
+    <p id="statusBase"></p>
   </div>
 </div>
 
 <script src="java/main.js"></script>
-<script>
-async function cargarRespaldoFix(){
-  try{
-    let r=await fetch(SCRIPT_URL+"?action=get_admin");
-    let data=await r.json();
-    let cont=document.getElementById("lista-partidos"); cont.innerHTML="";
-    data.forEach((p,i)=>{
-      let idx=i+1;
-      let localImg = `img/ESCUDOS/${p.local.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase()}.png`;
-      let visitaImg = `img/ESCUDOS/${p.visita.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase()}.png`;
-      cont.innerHTML+=`<div class="card-partido"><div class="num">${idx}</div><div class="equipo"><img src="${localImg}" onerror="this.src='img/logo.png'"><br>${p.local}</div><div class="vs">VS</div><div class="equipo"><img src="${visitaImg}" onerror="this.src='img/logo.png'"><br>${p.visita}</div><div class="sel"><span id="L${idx}" onclick="toggleLetra(${idx},'L')">L</span><span id="E${idx}" onclick="toggleLetra(${idx},'E')">E</span><span id="V${idx}" onclick="toggleLetra(${idx},'V')">V</span></div><div class="info-bar">${p.diaLetra} ${p.dia}/${p.mes} ${p.hora} ${p.trans}</div></div>`;
-    });
-  }catch(e){console.log(e)}
-}
-if(typeof cargarPartidos!=="function"){cargarRespaldoFix();}else{ const old=cargarPartidos; cargarPartidos=()=>{cargarRespaldoFix(); old();} }
-setTimeout(cargarRespaldoFix,1000);
-</script>
 </body>
 </html>
