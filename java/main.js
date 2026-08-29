@@ -29,20 +29,21 @@ function renderPartidos(){
       <div class="card-partido">
         <div class="num">${idx}</div>
 
-        <div class="col">
-          <div class="equipo"><img src="img/ESCUDOS/${localClean}.png" onerror="this.src='img/logo.png'"><span>${p.local}</span></div>
-          <span id="L${idx}" class="btn-letra" onclick="toggleLetra(${idx},'L')">L</span>
+        <span id="L${idx}" class="btn-letra" onclick="toggleLetra(${idx},'L')">L</span>
+
+        <div class="equipo">
+          <img src="img/ESCUDOS/${localClean}.png" onerror="this.src='img/logo.png'">
+          <span>${p.local}</span>
         </div>
 
-        <div class="col centro">
-          <div class="vs">VS</div>
-          <span id="E${idx}" class="btn-letra" onclick="toggleLetra(${idx},'E')">E</span>
+        <span id="E${idx}" class="btn-letra" onclick="toggleLetra(${idx},'E')">E</span>
+
+        <div class="equipo">
+          <img src="img/ESCUDOS/${visitaClean}.png" onerror="this.src='img/logo.png'">
+          <span>${p.visita}</span>
         </div>
 
-        <div class="col">
-          <div class="equipo"><img src="img/ESCUDOS/${visitaClean}.png" onerror="this.src='img/logo.png'"><span>${p.visita}</span></div>
-          <span id="V${idx}" class="btn-letra" onclick="toggleLetra(${idx},'V')">V</span>
-        </div>
+        <span id="V${idx}" class="btn-letra" onclick="toggleLetra(${idx},'V')">V</span>
 
         <div class="info-bar">${p.diaLetra} ${p.dia}/${p.mes} ${horaTxt} ${p.trans}</div>
       </div>`;
@@ -90,7 +91,7 @@ function generar(){
   backtrack(1, []);
   document.getElementById("resultado").value=texto;
   let costo = nQ*15;
-  document.getElementById("infoCosto").textContent=`Total: ${nQ} x $15 = $${costo} | Combinaciones posibles: ${totalCombinaciones}`;
+  document.getElementById("infoCosto").textContent=`Total: ${nQ} x $15 = $${costo} | Posibles: ${totalCombinaciones}`;
   document.getElementById("infoIDs").textContent=`Folios: ${nextIdGlobal} al ${nextIdGlobal+nQ-1}`;
 }
 function enviarWhatsApp(){
