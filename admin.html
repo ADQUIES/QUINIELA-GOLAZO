@@ -1,79 +1,18 @@
 <!DOCTYPE html>
-<html lang="es-mx">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Golazo</title>
-<link rel="icon" href="img/logo.png">
-<style>
-*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#001a26;color:#fff}
-.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
-.login-box{background:#fff;color:#000;border-radius:20px;padding:24px;max-width:380px;width:100%;text-align:center}
-.login-box input{width:100%;padding:13px;border:2px solid #ddd;border-radius:12px;margin:8px 0;font-size:15px}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
-.btn-blue{background:#007bff;color:#fff;font-size:16px}.hidden{display:none}
-.topbar{background:#0a2a4a;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
-.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
-table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
-td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
-</style>
-</head>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Admin Golazo</title><style>*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#001a26;color:#fff}.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}.login-box{background:#fff;color:#000;border-radius:20px;padding:24px;max-width:380px;width:100%;text-align:center}.login-box input{width:100%;padding:13px;border:2px solid #ddd;border-radius:12px;margin:8px 0}.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}.btn-blue{background:#007bff;color:#fff}.hidden{display:none}.topbar{background:#0a2a4a;padding:10px;display:flex;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0}.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}td{padding:4px;border:1px solid #ddd;text-align:center}td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase}</style></head>
 <body>
-<script> const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec"; </script>
-
-<div id="loginScreen" class="login-wrap">
-  <div class="login-box">
-    <img src="img/logo3.png" style="width:100%;max-width:280px;margin:0 auto 12px;display:block">
-    <h2>Admin Golazo</h2>
-    <input id="user" placeholder="Usuario" value="ADRIAN">
-    <input id="pass" type="password" placeholder="Contraseña">
-    <button class="btn btn-blue" onclick="login()">Ingresar</button>
-    <p id="msg" style="color:red;font-size:12px"></p>
-    <p style="font-size:11px;color:#555">Si ya entraste antes, cargará los equipos de la hoja ADMIN automáticamente</p>
-  </div>
-</div>
-
-<div id="adminScreen" class="hidden">
-  <div class="topbar">
-    <span id="who" style="color:#ffee00;font-weight:900"></span>
-    <div><a href="index.html" style="background:#ffee00;color:#000;padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px">VER QUINIELA</a> <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold">Salir</button></div>
-  </div>
-  <div class="card">
-    <b style="color:#ffee00">JORNADA - 9 PARTIDOS (Se guardan en hoja ADMIN)</b>
-    <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DIA</th><th>NUM</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
-    <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
-    <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p>
-  </div>
-</div>
-
+<script>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";</script>
+<div id="loginScreen" class="login-wrap"><div class="login-box"><img src="img/logo3.png" style="width:100%"><h2>Admin Golazo</h2><input id="user" value="ADRIAN"><input id="pass" type="password" placeholder="Contraseña"><button class="btn btn-blue" onclick="login()">Ingresar</button><p id="msg" style="color:red"></p><p style="font-size:11px">Al entrar cargará automáticamente TOLUCA vs PUEBLA etc de tu hoja ADMIN</p></div></div>
+<div id="adminScreen" class="hidden"><div class="topbar"><span id="who" style="color:#ffee00;font-weight:900"></span><div><a href="index.html" style="background:#ffee00;color:#000;padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none">VER QUINIELA</a> <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px">Salir</button></div></div><div class="card"><b style="color:#ffee00">JORNADA B3:K11 - Se guarda en hoja ADMIN</b><div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DIA</th><th>NUM</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div><button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN ADMIN B3:K11</button><p id="status" style="text-align:center;color:#00ff66;font-weight:bold"></p></div></div>
 <script>
-function mostrarAdmin(){ let s=JSON.parse(localStorage.getItem("sesion_golazo")); if(!s) return; loginScreen.classList.add("hidden"); adminScreen.classList.remove("hidden"); document.getElementById("who").textContent="Hola: "+s.u; cargarDesdeSheet(); }
-function logout(){ localStorage.removeItem("sesion_golazo"); location.reload(); }
-async function login(){ let u=user.value.trim().toUpperCase(),p=pass.value.trim(); if(u=="ADRIAN" && p=="1234"){ localStorage.setItem("sesion_golazo",JSON.stringify({u})); mostrarAdmin(); } else msg.textContent="Usuario o contraseña incorrecta"; }
-
-async function cargarDesdeSheet(){
-  document.getElementById("tablaQuiniela").innerHTML="<tr><td colspan=9>Cargando equipos de Google Sheet ADMIN...</td></tr>";
-  try{
-    let r = await fetch(SCRIPT_URL+"?action=get_admin");
-    let data = await r.json();
-    if(data && data.length>0){
-      localStorage.setItem("quiniela_nueva",JSON.stringify(data));
-      renderTabla(data);
-      document.getElementById("status").textContent="✅ Equipos cargados de la hoja ADMIN";
-      return;
-    }
-  }catch(e){}
-  renderTabla(null);
-}
-
-function renderTabla(dataExtern){
-  let tb=document.getElementById("tablaQuiniela"); tb.innerHTML="";
-  let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUAREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SABADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERETARO",visita:"MONTERREY",diaLetra:"SABADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SABADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMERICA",visita:"TIJUANA",diaLetra:"SABADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SABADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEON",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];
-  let data = dataExtern || JSON.parse(localStorage.getItem("quiniela_nueva")||"null") || def;
-  data.forEach((d,i)=>{ let idx=i+1; tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra=="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra=="SABADO"?"selected":""}>SABADO</option><option ${d.diaLetra=="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`; });
-}
-function guardarLocal(){ let arr=[]; for(let i=1;i<=9;i++){ arr.push({local:document.getElementById("local"+i).value.toUpperCase().trim(),visita:document.getElementById("visita"+i).value.toUpperCase().trim(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()}); } localStorage.setItem("quiniela_nueva",JSON.stringify(arr)); return arr; }
-async function guardarEnSheet(){ let data=guardarLocal(); let btn=document.getElementById("btnGuardar"); btn.textContent="Guardando..."; try{ await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})}); document.getElementById("status").textContent="✅ Guardado en ADMIN! Ahora index.html mostrará escudos automático"; btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN"; }catch(e){ document.getElementById("status").textContent="Error al guardar"; } }
+function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent="Hola: "+s.u;cargarDesdeSheet();}
+function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
+async function login(){let u=user.value.trim().toUpperCase(),p=pass.value.trim();if(u=="ADRIAN"&&p=="1234"){localStorage.setItem("sesion_golazo",JSON.stringify({u}));mostrarAdmin();}else msg.textContent="Incorrecta";}
+async function cargarDesdeSheet(){document.getElementById("tablaQuiniela").innerHTML="<tr><td colspan=9>Cargando de ADMIN B3:K11...</td></tr>";try{let r=await fetch(SCRIPT_URL+"?action=get_admin");let data=await r.json();if(data&&data.length>0){localStorage.setItem("quiniela_nueva",JSON.stringify(data));renderTabla(data);status.textContent="✅ Cargado de ADMIN: "+data[0].local+" vs "+data[0].visita+"...";return;}}catch(e){}renderTabla(null);}
+function renderTabla(dataExtern){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="";let def=[{local:"TOLUCA",visita:"PUEBLA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"PACHUCA",visita:"GUADALAJARA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"ATLAS",diaLetra:"SABADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"MONTERREY",visita:"QUERETARO",diaLetra:"SABADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SABADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMERICA",visita:"TIJUANA",diaLetra:"SABADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLANTE",visita:"CRUZ AZUL",diaLetra:"SABADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEON",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"SANTOS",visita:"JUAREZ",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];let data=dataExtern||JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra=="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra=="SABADO"?"selected":""}>SABADO</option><option ${d.diaLetra=="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});}
+function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase().trim(),visita:document.getElementById("visita"+i).value.toUpperCase().trim(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
+async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando en B3:K11...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})});status.textContent="✅ Guardado en ADMIN B3:K11! Index ya mostrará escudos";btn.textContent="💾 GUARDAR EN ADMIN B3:K11";}catch(e){status.textContent="Error";}}
 if(localStorage.getItem("sesion_golazo")) mostrarAdmin();
 </script>
 </body>
