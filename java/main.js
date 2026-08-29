@@ -1,34 +1,62 @@
-async function enviarQuiniela() {
-  const nombre = document.getElementById('nombre').value.trim();
-  const telefono = document.getElementById('telefono').value.trim();
-  const inputs = document.querySelectorAll('[data-partido]'); // tus 9 partidos
-  const pronosticos = Array.from(inputs).map(i => i.value);
+const URL_SHEET = "https://script.google.com/macros/s/AKfycbxYg3CKot4gItmNJO9xeRGXMru8GgDwhVcMQxdjackV7r2Z6nEu_iuXKxrSlEfvRl9E/exec";
+const PRECIO = 20;
+let picks = Array(9).fill("");
+let quinielas = JSON.parse(localStorage.getItem("quinielas_golazo")||"[]");
 
-  if(!nombre ||!telefono){
-    alert("Pon tu nombre y WhatsApp");
-    return;
-  }
-
-  // Generamos el folio aquí mismo
-  const folio = Date.now().toString().slice(-5); // ej: 48291
-
-  // Mensaje instantáneo al cliente
-  document.getElementById('resultado').innerHTML = `
-    <h2>¡Gracias ${nombre}!</h2>
-    <p>Tu folio es: <b>#${folio}</b></p>
-    <p>Te contactaremos al: ${telefono}</p>
-  `;
-
-  // Lo mandamos a tu BASEDEDATOS con TELÉFONO
-  await fetch("https://script.google.com/macros/s/AKfycbxYg3CKot4gItmNJO9xeRGXMru8GgDwhVcMQxdjackV7r2Z6nEu_iuXKxrSlEfvRl9E/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify({
-      id: folio,
-      nombre: nombre,
-      telefono: telefono,
-      pronosticos: pronosticos,
-      costo: 20
-    })
-  });
+window.selection = function(el){
+  let idx=parseInt(el.id.substring(1))-1;
+  let row=el.parentElement; row.querySelectorAll("span").forEach(s=>s.classList.remove("selected"));
+  el.classList.add("selected"); picks[idx]=el.id[0];
+  let t=document.getElementById("text"); if(t) t.textContent=picks.map(v=>v||"-").join(" ");
 }
+window.clean = function(){
+  picks=Array(9).fill(""); document.querySelectorAll(".partido span").forEach(s=>s.classList.remove("selected"));
+  let t=document.getElementById("text"); if(t) t.textContent="- - - - - - - - -";
+}
+window.save = function(){
+  if(picks.includes("")){ alert("Completa los 9 partidos"); return; }
+  let nom=document.getElementById("nombre").value.trim(); if(!nom){ alert("Pon nombre"); return; }
+  let tel=document.getElementById("telefono").value.trim(); if(!tel || tel.length < 10){ alert("Pon tu WhatsApp a 10 dígitos"); return; }
+  let folio = Date.now().toString().slice(-5);
+  quinielas.push({q:[...picks],nombre:nom,telefono:tel,id:folio});
+  localStorage.setItem("quinielas_golazo",JSON.stringify(quinielas));
+  renderLista(); clean(); updateTotal();
+}
+window.deleteall = function(){
+  if(!confirm("Borrar todo?")) return; quinielas=[]; localStorage.removeItem("quinielas_golazo"); renderLista(); updateTotal();
+  let mf=document.getElementById("mensaje-final"); if(mf) mf.style.display="none";
+}
+window.borrarUna = function(i){ quinielas.splice(i,1); localStorage.setItem("quinielas_golazo",JSON.stringify(quinielas)); renderLista(); updateTotal(); }
+window.clearname = function(){ let n=document.getElementById("nombre"); if(n) n.value=""; }
+function updateTotal(){
+  let num=quinielas.length; let costo=num*PRECIO;
+  let c=document.getElementById("costo"), tt=document.getElementById("total"), nq=document.getElementById("numquinielas"), be=document.querySelector(".botonenviar span");
+  if(c) c.textContent="Costo: $"+costo; if(tt) tt.textContent="Total: $"+costo; if(nq) nq.textContent=num+" Quiniela(s)"; if(be) be.textContent=num;
+}
+function renderLista(){
+  let d=document.getElementById("display"); if(!d) return; d.innerHTML="";
+  quinielas.forEach((it,idx)=>{
+    let tr=document.createElement("tr");
+    tr.innerHTML=`<td class="q-text">#${it.id} ${it.q.join(" ")}</td><td class="q-name">${it.nombre}<br><small>${it.telefono}</small></td><td class="q-del"><button onclick="borrarUna(${idx})" style="background:#990000;color:white;border-radius:50%;border:none;width:22px;height:22px;cursor:pointer">x</button></td>`;
+    d.appendChild(tr);
+  }); updateTotal();
+}
+window.random = function(){ clean(); for(let i=0;i<9;i++){ let ops=["L","E","V"]; let r=ops[Math.floor(Math.random()*3)]; let el=document.getElementById(r+(i+1)); if(el) selection(el); } }
+window.allowcombination = function(){ alert("Dobles y Triples - Usa + para agregar varias"); }
+window.send = function(){
+  if(quinielas.length===0){ alert("No hay quinielas"); return; }
+  let costo=quinielas.length*PRECIO;
+  let mf=document.getElementById("mensaje-final");
+  if(mf){
+    mf.style.display="block";
+    let listaFolios = quinielas.map(q=>`Folio #${q.id} - ${q.nombre} (${q.telefono})`).join("<br>");
+    mf.innerHTML=`✅ ¡Enviadas ${quinielas.length} quiniela(s)!<br><b>Tus folios:</b><br>${listaFolios}<br><br>Guarda tu folio.`;
+  }
+  quinielas.forEach(item=>{
+    let datos={id:item.id,nombre:item.nombre,telefono:item.telefono,pronosticos:item.q,costo:PRECIO,p1:item.q[0],p2:item.q[1],p3:item.q[2],p4:item.q[3],p5:item.q[4],p6:item.q[5],p7:item.q[6],p8:item.q[7],p9:item.q[8]};
+    fetch(URL_SHEET,{method:"POST",mode:"no-cors",body:JSON.stringify(datos)});
+  });
+  let txt=`*QUINIELA GOLAZO*%0A`; quinielas.forEach((it,i)=>{ txt+=`${i+1}. #${it.id} ${it.q.join(" ")} - ${it.nombre} - ${it.telefono}%0A`; }); txt+=`%0ACOSTO: $${costo}%0A`;
+  window.open("https://wa.me/524776482132?text="+txt,"_blank");
+}
+document.addEventListener("DOMContentLoaded",()=>{ renderLista(); });
