@@ -39,8 +39,10 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
 </div>
 
 <div id="adminScreen" class="hidden">
-  <div class="topbar"><b style="color:#ffee00">ADMIN - <span id="who"></span></b><button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:6px 12px;border-radius:8px">Salir</button></div>
-
+  <div class="topbar" style="display:flex;align-items:center;justify-content:space-between">
+  <img src="img/logo3.png" style="height:42px;width:auto;display:block">
+  <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-weight:bold">Salir</button>
+</div>
   <div class="card">
     <b style="color:#ffee00">USUARIOS (ADRIAN + 3)</b>
     <div id="listaUsuarios" style="margin-top:8px"></div>
