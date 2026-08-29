@@ -3,143 +3,157 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Golazo</title>
-<link rel="icon" href="img/logo.png">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
 <style>
 *{box-sizing:border-box;font-family:Arial} body{margin:0;background:#001a26;color:#fff}
-.topbar{background:#0a2a4a;padding:12px;text-align:center;border-bottom:3px solid #ffee00}
+
+/* LOGIN CON TUS COLORES DE LA FOTO */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:#000e14}
+.login-box{
+  background:#123f4a;
+  border:3px solid #ffcc00;
+  border-radius:20px;
+  padding:30px 20px;
+  max-width:380px;width:100%;
+  box-shadow:0 10px 30px #0008;text-align:center
+}
+.login-title{
+  color:#ffdd00;
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  margin:0 0 20px 0;
+  text-shadow:0 2px 4px #000;
+}
+.login-box input{
+  width:100%;padding:15px;
+  border:none;border-radius:12px;
+  margin:10px 0;font-size:18px;font-weight:900;
+  text-align:center;
+  background:#fff;color:#5a4a3a;
+}
+.login-box input::placeholder{color:#7a6a5a;font-weight:900}
+.btn-login{
+  width:100%;padding:15px;
+  border:none;border-radius:12px;
+  background:#ffdd00;color:#000;
+  font-size:22px;font-weight:900;
+  cursor:pointer;margin-top:6px
+}
+
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
+.btn-blue{background:#ffdd00;color:#000;font-size:16px}.hidden{display:none}
+.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
-input,select{width:100%;padding:8px;border-radius:6px;border:1px solid #ccc;text-align:center;font-weight:bold;text-transform:uppercase}
-.btn{width:100%;padding:12px;border:none;border-radius:10px;font-weight:900;cursor:pointer;margin-top:8px}
-.btn-g{background:#00ff66;color:#000}.btn-y{background:#ffee00;color:#000}.btn-r{background:#ff4444;color:#fff}
-table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:8px;overflow:hidden;font-size:12px}
-th{background:#002d3d;color:#ffee00;padding:6px} td{padding:4px;border:1px solid #ddd;text-align:center}
-.login{max-width:350px;margin:50px auto}
+.card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.card-header b{color:#ffee00}
+.toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
+table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
+th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
+td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
+.user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0}
+.btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
+.msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:13px}
+.msg-ok{background:#00ff66;color:#000}.msg-error{background:#ff0033;color:#fff}
+.btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block}
 </style>
 </head>
 <body>
-
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 </script>
 
-<div class="topbar">
-  <img src="img/logo3.png" style="height:40px"><br>
-  <b style="color:#ffee00">ADMIN GOLAZO - CUENTA NUEVA</b>
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box">
+    <h1 class="login-title">ENTRAR</h1>
+    <input id="user" placeholder="USUARIO" value="ADRIAN">
+    <input id="pass" type="password" placeholder="PASSWORD">
+    <button class="btn-login" onclick="login()">ENTRAR</button>
+    <p id="msg" style="color:#ff4444;text-align:center;font-size:12px;margin-top:10px;font-weight:bold"></p>
+  </div>
 </div>
 
-<!-- LOGIN -->
-<div id="loginDiv" class="card login">
-  <h3 style="text-align:center;color:#ffee00">ENTRAR</h3>
-  <input id="u" placeholder="USUARIO"><br><br>
-  <input id="p" type="password" placeholder="PASSWORD"><br>
-  <button class="btn btn-y" onclick="login()">ENTRAR</button>
-  <p id="loginMsg" style="text-align:center;color:#ff4444"></p>
-</div>
+<div id="adminScreen" class="hidden">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="img/logo3.png" style="height:38px;width:auto;display:block">
+      <span id="who" style="color:#ffee00;font-weight:900;font-size:12px"></span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <a href="index.html" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
+      <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button>
+    </div>
+  </div>
 
-<!-- PANEL -->
-<div id="panelDiv" style="display:none">
+  <div class="card">
+    <div class="card-header" onclick="toggleUsuarios()">
+      <b>USUARIOS (ADRIAN + 3)</b>
+      <button class="toggle-btn" id="btnToggle">▼ OCULTAR</button>
+    </div>
+    <div id="contenidoUsuarios" style="margin-top:10px">
+      <div id="listaUsuarios"></div>
+      <div style="display:flex;gap:6px;margin-top:10px"><input id="newUser" placeholder="Nuevo usuario"><input id="newPass" placeholder="Pass"><button id="btnAlta" onclick="agregarUsuario()" style="background:#00ff66;border:none;border-radius:8px;padding:0 14px;font-weight:900">+ ALTA</button></div>
+      <div id="msgUsuarios"></div>
+    </div>
+  </div>
 
   <div class="card" style="border-color:#00ff66;text-align:center">
-    <b style="color:#00ff66">🔍 CONSULTAR PARTIDOS</b>
+    <b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <a href="https://www.flashscore.com.mx/futbol/mexico/liga-mx/calendario/" target="_blank" style="flex:1;background:#00ff66;color:#000;padding:10px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px">FLASHSCORE</a>
-      <a href="https://www.ligamx.net/cancha/calendario" target="_blank" style="flex:1;background:#fff;color:#000;padding:10px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px">LIGA MX</a>
-      <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:10px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px">ESPN</a>
+      <a href="https://www.google.com/search?q=LIGA+MX&rlz=1C1FHFK_esMX1091MX1091&oq=LIGA+MX&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhiDARixAxiABDINCAIQABiDARixAxiABDINCAMQLhiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDIGCAYQRRg8MgYIBxBFGDzSAQgxOTE5ajBqN6gCCLACAfEFvwijJAe3UvzxBb8IoyQHt1L8&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX - GOOGLE</a>
+      <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN CALENDARIO</a>
     </div>
   </div>
 
   <div class="card">
-    <b style="color:#ffee00">NUEVA QUINIELA</b>
-    <button onclick="autoLlenar()" style="width:100%;background:#00ff66;color:#000;padding:12px;border:none;border-radius:10px;font-weight:900;margin:10px 0;cursor:pointer">⚡ LLENAR AUTOMATICAMENTE CON JORNADA ACTUAL</button>
-    <p id="autoStatus" style="text-align:center;font-size:12px;color:#ffee00"></p>
-    <div style="overflow:auto">
-      <table>
-        <thead><tr><th>#</th><th>LOCAL</th><th>VISITA</th><th>DIA</th><th>DIA#</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead>
-        <tbody id="quinielaBody"></tbody>
-      </table>
-    </div>
-    <button class="btn btn-g" onclick="guardar()">💾 GUARDAR QUINIELA</button>
-    <p id="saveMsg" style="text-align:center;color:#00ff66;font-weight:bold"></p>
-  </div>
-
-  <div class="card">
-    <b style="color:#ffee00">USUARIOS</b>
-    <div style="display:flex;gap:5px;margin:10px 0">
-      <input id="nu" placeholder="USUARIO NUEVO"><input id="np" placeholder="PASS"><button class="btn btn-y" style="width:120px;margin:0" onclick="alta()">+ ALTA</button>
-    </div>
-    <div id="listaUsers"></div>
+    <b style="color:#ffee00">NUEVA QUINIELA (Cargada desde tu SHEET ADMIN)</b>
+    <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DÍA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
+    <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
+    <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p>
   </div>
 </div>
 
 <script>
-let quinielaInputs=10;
-function crearTabla(){
-  let tb=document.getElementById("quinielaBody"); tb.innerHTML="";
-  for(let i=0;i<quinielaInputs;i++){
-    tb.innerHTML+=`<tr>
-      <td>${i+1}</td>
-      <td><input id="local${i}"></td>
-      <td><input id="visita${i}"></td>
-      <td><select id="diaLetra${i}"><option>VIE</option><option>SAB</option><option>DOM</option><option>LUN</option><option>MAR</option><option>MIE</option><option>JUE</option></select></td>
-      <td><input id="dia${i}" type="number"></td>
-      <td><input id="mes${i}"></td>
-      <td><input id="hora${i}" type="time"></td>
-      <td><input id="trans${i}"></td>
-    </tr>`;
-  }
+function toggleUsuarios(){let cont=document.getElementById("contenidoUsuarios");let btn=document.getElementById("btnToggle");if(cont.style.display==="none"){cont.style.display="block";btn.textContent="▼ OCULTAR";}else{cont.style.display="none";btn.textContent="► MOSTRAR";}}
+function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
+let usuariosLocal=JSON.parse(localStorage.getItem("usuarios_golazo")||'[{"u":"ADRIAN","p":"1234"}]');
+async function login(){let u=user.value.trim().toUpperCase(),p=pass.value.trim();try{let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"login",u,p})});let j=await r.json();if(j.ok){localStorage.setItem("sesion_golazo",JSON.stringify({u}));mostrarAdmin();return;}}catch(e){}let f=usuariosLocal.find(x=>x.u===u&&x.p===p);if(f){localStorage.setItem("sesion_golazo",JSON.stringify(f));mostrarAdmin();}else msg.textContent="Usuario o contraseña incorrectos";}
+function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;cargarUsuarios();renderTabla();}
+function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
+async function cargarUsuarios(){try{let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");let d=await r.json();if(d&&d.length>0){usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));}}catch(e){}renderUsuarios();}
+function renderUsuarios(){let c=document.getElementById("listaUsuarios");c.innerHTML="";usuariosLocal.forEach(us=>{let es=us.u==="ADRIAN";c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;});}
+async function agregarUsuario(){let btn=document.getElementById("btnAlta");let u=newUser.value.trim().toUpperCase(),p=newPass.value.trim();if(!u||!p){showMsg("msgUsuarios","Llena usuario y contraseña",false);return;}if(usuariosLocal.find(x=>x.u===u)){showMsg("msgUsuarios","❌ Ya existe "+u,false);return;}if(usuariosLocal.length>=4){showMsg("msgUsuarios","❌ Máximo 4",false);return;}btn.disabled=true;btn.textContent="...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"alta_usuario",u,p})});usuariosLocal.push({u,p});localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();newUser.value="";newPass.value="";showMsg("msgUsuarios","✅ Usuario "+u+" agregado",true);}catch(e){showMsg("msgUsuarios","Error",false);}btn.disabled=false;btn.textContent="+ ALTA";}
+async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","🗑️ Usuario "+n+" borrado",true);}catch(e){showMsg("msgUsuarios","Error al borrar",false);}}
+  async function login(){
+  let u=document.getElementById("user").value.trim().toUpperCase();
+  let p=document.getElementById("pass").value.trim();
+  if(!u ||!p){ document.getElementById("msg").textContent="Escribe usuario y pass"; return; }
+  localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));
+  mostrarAdmin();
 }
-crearTabla();
-
-async function login(){
-  let u=document.getElementById("u").value, p=document.getElementById("p").value;
-  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"login",u,p})});
-  let d=await r.json();
-  if(d.ok){ document.getElementById("loginDiv").style.display="none"; document.getElementById("panelDiv").style.display="block"; cargar(); listar(); }
-  else document.getElementById("loginMsg").textContent="Datos incorrectos";
-}
-async function cargar(){
+async function renderTabla(){
+  let tb=document.getElementById("tablaQuiniela");
+  tb.innerHTML="<tr><td colspan='9'>Cargando equipos de tu SHEET ADMIN...</td></tr>";
+  let data=null;
   try{
-    let r=await fetch(SCRIPT_URL+"?action=obtener_admin"); let data=await r.json();
-    data.forEach((q,i)=>{ if(i<quinielaInputs){ document.getElementById("local"+i).value=q.local; document.getElementById("visita"+i).value=q.visita; document.getElementById("diaLetra"+i).value=q.diaLetra; document.getElementById("dia"+i).value=q.dia; document.getElementById("mes"+i).value=q.mes; document.getElementById("hora"+i).value=q.hora; document.getElementById("trans"+i).value=q.trans; } });
-  }catch(e){}
-}
-async function guardar(){
-  let quiniela=[];
-  for(let i=0;i<quinielaInputs;i++){
-    let local=document.getElementById("local"+i).value; if(!local) continue;
-    quiniela.push({local:local, visita:document.getElementById("visita"+i).value, diaLetra:document.getElementById("diaLetra"+i).value, dia:document.getElementById("dia"+i).value, mes:document.getElementById("mes"+i).value, hora:document.getElementById("hora"+i).value, trans:document.getElementById("trans"+i).value});
-  }
-  document.getElementById("saveMsg").textContent="Guardando...";
-  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_admin",quiniela})});
-  let d=await r.json(); document.getElementById("saveMsg").textContent=d.ok?"¡Guardado en tu cuenta nueva!":"Error";
-}
-async function autoLlenar(){
-  document.getElementById("autoStatus").textContent="Jalando partidos de ESPN...";
-  try{
-    let r=await fetch(SCRIPT_URL+"?action=auto_espn"); let data=await r.json();
-    if(data.error) throw data.error;
-    for(let i=0;i<data.length && i<quinielaInputs;i++){
-      document.getElementById("local"+i).value=data[i].local.toUpperCase();
-      document.getElementById("visita"+i).value=data[i].visita.toUpperCase();
-      document.getElementById("diaLetra"+i).value=data[i].diaLetra;
-      document.getElementById("dia"+i).value=data[i].dia;
-      document.getElementById("mes"+i).value=data[i].mes;
-      document.getElementById("hora"+i).value=data[i].hora;
-      document.getElementById("trans"+i).value=data[i].trans;
+    let r=await fetch(SCRIPT_URL+"?action=obtener_admin");
+    let j=await r.json();
+    if(j && j.length > 0){
+      data=j;
+      localStorage.setItem("quiniela_nueva", JSON.stringify(data));
     }
-    document.getElementById("autoStatus").textContent="¡Listo! Se llenaron "+data.length+" partidos. Dale en GUARDAR.";
-  }catch(e){ document.getElementById("autoStatus").textContent="Error: "+e; }
+  }catch(e){ console.log("Error leyendo sheet", e); }
+  if(!data){
+    let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];
+    data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;
+  }
+  tb.innerHTML="";
+  data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});
 }
-async function listar(){
-  let r=await fetch(SCRIPT_URL+"?action=listar_usuarios"); let data=await r.json();
-  let div=document.getElementById("listaUsers"); div.innerHTML="";
-  data.forEach(u=>{ div.innerHTML+=`<div style="display:flex;justify-content:space-between;background:#fff;color:#000;padding:6px;margin:4px;border-radius:6px"><b>${u[0]}</b><button onclick="borrar('${u[0]}')" style="background:red;color:#fff;border:none;border-radius:4px;padding:4px 8px">X</button></div>` });
-}
-async function alta(){
-  let u=document.getElementById("nu").value, p=document.getElementById("np").value; if(!u||!p) return;
-  await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"alta_usuario",u,p})}); document.getElementById("nu").value=""; document.getElementById("np").value=""; listar();
-}
-async function borrar(u){ if(!confirm("Borrar "+u+"?")) return; await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"borrar_usuario",u})}); listar(); }
+function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
+async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})});document.getElementById("status").textContent="✅ Guardado en tu SHEET ADMIN";btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";}catch(e){document.getElementById("status").textContent="Error: "+e;}}
+if(localStorage.getItem("sesion_golazo"))mostrarAdmin();
 </script>
 </body>
 </html>
