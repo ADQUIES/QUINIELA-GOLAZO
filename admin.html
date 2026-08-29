@@ -14,6 +14,9 @@
 .btn-blue{background:#007bff;color:#fff;font-size:16px}.hidden{display:none}
 .topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
+.card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.card-header b{color:#ffee00}
+.toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
 table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
 th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
 td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
@@ -32,8 +35,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
   <div class="login-box">
     <img src="img/logo3.png" alt="Quiniela Golazo" style="width:100%;max-width:280px;margin:0 auto 12px;display:block">
     <p style="color:#666;font-size:13px;font-weight:bold;margin:5px 0 10px">ACCESO ADMINISTRADOR</p>
-    <input id="user" placeholder="Usuario" value="ADRIAN">
-    <input id="pass" type="password" placeholder="Contraseña">
+    <input id="user" placeholder="Usuario" value="ADRIAN"><input id="pass" type="password" placeholder="Contraseña">
     <button class="btn btn-blue" onclick="login()">Ingresar</button>
     <p id="msg" style="color:red;text-align:center;font-size:12px"></p>
   </div>
@@ -49,10 +51,15 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
   </div>
 
   <div class="card">
-    <b style="color:#ffee00">USUARIOS (ADRIAN + 3)</b>
-    <div id="listaUsuarios" style="margin-top:8px"></div>
-    <div style="display:flex;gap:6px;margin-top:10px"><input id="newUser" placeholder="Nuevo usuario"><input id="newPass" placeholder="Pass"><button id="btnAlta" onclick="agregarUsuario()" style="background:#00ff66;border:none;border-radius:8px;padding:0 14px;font-weight:900">+ ALTA</button></div>
-    <div id="msgUsuarios"></div>
+    <div class="card-header" onclick="toggleUsuarios()">
+      <b>USUARIOS (ADRIAN + 3)</b>
+      <button class="toggle-btn" id="btnToggle">▼ OCULTAR</button>
+    </div>
+    <div id="contenidoUsuarios" style="margin-top:10px">
+      <div id="listaUsuarios"></div>
+      <div style="display:flex;gap:6px;margin-top:10px"><input id="newUser" placeholder="Nuevo usuario"><input id="newPass" placeholder="Pass"><button id="btnAlta" onclick="agregarUsuario()" style="background:#00ff66;border:none;border-radius:8px;padding:0 14px;font-weight:900">+ ALTA</button></div>
+      <div id="msgUsuarios"></div>
+    </div>
   </div>
 
   <div class="card">
@@ -64,6 +71,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
 </div>
 
 <script>
+function toggleUsuarios(){let cont=document.getElementById("contenidoUsuarios");let btn=document.getElementById("btnToggle");if(cont.style.display==="none"){cont.style.display="block";btn.textContent="▼ OCULTAR";}else{cont.style.display="none";btn.textContent="► MOSTRAR";}}
 function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
 let usuariosLocal=JSON.parse(localStorage.getItem("usuarios_golazo")||'[{"u":"ADRIAN","p":"1234"}]');
 async function login(){let u=user.value.trim().toUpperCase(),p=pass.value.trim();try{let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"login",u,p})});let j=await r.json();if(j.ok){localStorage.setItem("sesion_golazo",JSON.stringify({u}));mostrarAdmin();return;}}catch(e){}let f=usuariosLocal.find(x=>x.u===u&&x.p===p);if(f){localStorage.setItem("sesion_golazo",JSON.stringify(f));mostrarAdmin();}else msg.textContent="Usuario o contraseña incorrectos";}
