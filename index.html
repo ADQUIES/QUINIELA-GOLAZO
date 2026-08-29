@@ -1,62 +1,249 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-mx">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Quiniela Golazo</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#001525;display:flex;justify-content:center;font-family:Arial Black}
-.contenedor{width:100%;max-width:480px;background:#001525;border:3px solid #d4ff00}
-.header{background:#fff;display:flex;align-items:center;gap:8px;padding:8px}
-.header img{width:48px;height:48px;border-radius:50%;border:2px solid #d4ff00}
-.header h1{font-size:20px;color:#b8a600;text-shadow:1px 1px 0 #000}
-.premio{background:#0a344a;color:#fff;text-align:center;padding:8px;font-family:Arial;font-weight:bold;font-size:12px;border-top:2px solid #d4ff00;border-bottom:2px solid #d4ff00}
-#lista-partidos{background:#fff;width:100%}
-.encabezado{display:flex;background:#0a344a;color:#d4ff00;font-family:Arial;font-size:10px;text-align:center;padding:4px 0}
-.encabezado div{flex:1}
-.encabezado div:nth-child(1){max-width:50px}
-.encabezado div:nth-child(3), .encabezado div:nth-child(4), .encabezado div:nth-child(5){max-width:38px}
-.encabezado div:nth-child(7){max-width:50px}
-.fila{display:flex;align-items:center;border-bottom:1px solid #000;min-height:46px;background:#fff;width:100%}
-.fila:nth-child(even){background:#d9e8f0}
-.fila .n{flex:1;font-size:8.5px;line-height:9px;padding:2px;overflow:hidden}
-.fila .e{max-width:50px;width:100%;height:46px;display:flex;align-items:center;justify-content:center;background:#fff;border-left:1px solid #ddd;border-right:1px solid #ddd}
-.fila .e img{width:26px;height:22px;object-fit:contain}
-.fila .b{max-width:38px;width:100%;display:flex;justify-content:center}
-.fila .b button{width:28px;height:26px;background:#fff;border:1.5px solid #000;border-radius:5px;font-size:11px;font-weight:bold}
-.fila .b button.active{background:#e50000;color:#fff}
-.formulario{padding:10px;background:#001525}
-.formulario input, .formulario textarea{width:100%;padding:12px;margin-bottom:8px;border-radius:8px;border:2px solid #000;font-family:Arial}
-.fila-form{display:flex;gap:6px}
-#numQuinielas{max-width:65px;text-align:center}
-.btn{flex:1;padding:12px;border-radius:8px;border:2px solid #000;font-family:Arial Black;font-weight:bold}
-.btn-g{background:#d4ff00}
-.btn-w{background:#25d366;color:#fff}
-.btn-s{background:#007bff;color:#fff}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descripcion" content="Registra tus quinielas-Liga mx">
+    <title>Quiniela Golazo</title>
+    <link rel="apple-touch-icon" href="img/logo.png">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="icon" href="img/logo.png">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="ccs/styles.css">
+    <script src="java/main.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>     
 </head>
+
+
 <body>
-<div class="contenedor">
-  <div class="header"><img src="img/logo.png"><h1>QUINIELA GOLAZO</h1></div>
-  <div class="premio">$700 PRIMER LUGAR | $15 POR QUINIELA</div>
-  <div id="lista-partidos"></div>
-  <div class="formulario">
-    <input id="nombre" placeholder="NOMBRE">
-    <input id="telefono" placeholder="WHATSAPP">
-    <div class="fila-form">
-      <input id="numQuinielas" type="number" value="1" min="1">
-      <button class="btn btn-g" onclick="generar()">GENERAR</button>
-    </div>
-    <textarea id="resultado" rows="5"></textarea>
-    <p id="infoCosto" style="color:#d4ff00;font-family:Arial;font-weight:bold"></p>
-    <div class="fila-form">
-      <button class="btn btn-w" onclick="enviarWhatsApp()">WHATSAPP</button>
-      <button class="btn btn-s" onclick="guardarEnBase()">GUARDAR</button>
-    </div>
-    <p id="statusBase" style="color:white;font-family:Arial;font-size:12px"></p>
+<header>
+</header>
+
+                    <div class="organizer-info">
+                        
+                        <div class="organizer-tags">
+                            <a href="https://www.facebook.com/GolazoJuega/" target="_self">
+
+
+                                <div class="tag facebook">
+                                    <img src="./img/facebook-icon.svg">
+                                    <span>Facebook</span>
+                                </div>
+                            </a>                                         
+                            
+                            <a href="combinaciones/combinaciones.html" target="_self">
+                                <div class="tag combinaciones">
+                                    <img src="./img/combinaciones.png">
+                                    <span>Combinaciones</span>
+                                </div>
+                            </a>
+                            <a href="pagos/Pagos.html" target="_self">
+                                <div class="tag pagar">
+                                    <img src="./img/BBVA.png">
+                                    <span>Pagar</span>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="organizer-infos">
+                        
+                        <div class="organizer-tagss">
+                            
+                            <a href="cjugar/cjugarinst.html" target="_self">
+                                <div class="tag instruciones">
+                                    <img src="./img/cjugarimg.png">
+                                    <span>Instrucciones</span>
+                                </div>
+                            </a>
+                            <a href="reglamento/reglamento.html" target="_self">
+                                <div class="tag reglamento">
+                                    <img src="./img/reglamento.png">
+                                    <span>Reglamento</span>
+                                </div>
+                            </a>
+                            
+                            <a href="horarios/horarios.html" target="_self">
+                                <div class="tag horarios">
+                                    <img src="./img/horarios.png">
+                                    <span>Horarios</span>
+                                </div>
+                            </a>
+                            
+                        </div>
+                    </div>
+<!-- <div class="promocionar" id="promoci">
+             <a id="j"href="cjugar/cjugarinst.html">Instrucciones</a>
+             <a id="r"href="reglamento/reglamento.html">Reglamento</a>
+             <a id="h"href="horarios/horarios.html">Horarios</a>
+             <a id="h"href="combinaciones/combinaciones.html">Combinaciones</a>
+            
+
+ </div> -->
+     
+   
+   <div class="quiniela" id="quiniela" style="height: 375px;;">
+     <div class="aux">
+         <h3 style="padding: 5px 7px;" onclick="clean()">x
+
+
+         </h3>
+         
+             
+     </div>
+     <div class="partido">
+        <span id="L1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E1" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V1" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E2" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V2" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E3" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V3" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E4" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V4" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E5" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V5" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E6" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V6" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E7" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V7" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E8" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V8" onclick="selection(this)"></span>
+
+     </div>
+     <div class="partido">
+        <span id="L9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="E9" onclick="selection(this)"></span>
+        <div id="_"></div>
+        <span id="V9" onclick="selection(this)"></span>
+
+     </div>
+     <h1 id="text" style="font-size: x-large; padding: 10px;">- - - - - - - - - 
+    </h1>
   </div>
+
+ <br>
+ 
+ <table>
+      <tbody>
+          <tr>
+              <td width="37%">
+                  <h2 class="botonenviar" onclick="send()">
+                    Enviar
+                    <span>0</span>
+                    <img src="whatsapp-logo-5.png" alt="" height="23px" style="position:inline-flex;">
+
+                  </h2>
+              </td>
+              <td width="14%">
+                  <h2 id="botonlisto" onclick="save()"><ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon></h2>
+
+              </td>
+              <td width="14%">
+                 
+                  
+             
+<h2 id="botonborrar" onclick="deleteall()" title="Se borrarÃ¡ todo, incluyendo las quinielas generadas">
+  <ion-icon name="trash-outline" id="trash"></ion-icon>
+</h2> 
+
+</td>         
+     <td width="35%">
+                <table id="nombrebox">
+                <tr style="height: 9px"><td id="nombretext"> &nbsp Nombre</td><td></td></tr>
+                <tr style="height: 20px"><td><input id="nombre" type="text" placeholder="" maxlength="20" spellcheck="false"></td><td><label id="borrarnombre" onclick="clearname()"><ion-icon name="backspace"></ion-icon></label></td></tr>
+            </table>
+                  
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+  <table style="margin-top: 3px; width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width: 36%;">
+                <label id="random" onclick="random()">la suerte</label>
+            </td>
+            <td style="width: 50%;">
+                <label id="checkcombinaciones" onclick="allowcombination()">Dobles y Triples</label>
+
+            </td>
+            <td style="width: 30%;"></td>
+        </tr>
+    </tbody>
+
+  </table>
+  
+  <div class="suma">
+            <h4 id="costo">Costo: $0</h4><h4 id="total">Total: $0</h4><br>
+            <h4 id="numquinielas">0 Quiniela(s)</h4>
+        </div>
+      
+  </div>
+  
+<div id="divaux" translate="no">
+  
+  <div class="titulo-quinielas">Lista De Quinielas</div>
+    <table id="display"></table>
+
 </div>
-<script src="java/main.js"></script>
+
+<!--<a id="f"href="https://www.facebook.com/GolazoJuega/">Facebook</a>-->
+<h5>
+        <span style="text-align: center;">Sitio desarrollado por Adhemo.com, Ocupas un sitio web?</span>
+        <span style="color: rgb(209, 209, 9);"></span>
+        <a id="contacto" href="https://wa.me/524776482132?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
+    </h5>   
+
+
 </body>
 </html>
+
