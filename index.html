@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="es-mx">
+<html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Quiniela Golazo</title>
 <link rel="icon" href="img/logo.png">
-<link rel="stylesheet" href="ccs/styles.css">
-<script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<script> const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec"; </script>
-<header><a href="admin.html" class="btn-admin">🔒 ADMIN</a></header>
-<div class="organizer-info"><div class="organizer-tags"><a href="https://www.facebook.com/GolazoJuega/"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a><a href="combinaciones/combinaciones.html"><div class="tag combinaciones"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a><a href="pagos/Pagos.html"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a></div></div>
-<div class="organizer-infos"><div class="organizer-tagss"><a href="cjugar/cjugarinst.html"><div class="tag instruciones"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a><a href="reglamento/reglamento.html"><div class="tag reglamento"><img src="./img/reglamento.png"><span>Reglamento</span></div></a><a href="horarios/horarios.html"><div class="tag horarios"><img src="./img/horarios.png"><span>Horarios</span></div></a></div></div>
-<div id="quiniela-dinamica"><div class="aux"><h3 onclick="clean()">X</h3></div><div id="lista-partidos">Cargando partidos...</div><h1 id="text">- - - - - - - - -</h1></div>
-<br>
-<table><tbody><tr><td width="37%"><h2 class="botonenviar" onclick="enviarFinal()">Enviar<span>0</span><img src="whatsapp-logo-5.png" height="23px"></h2></td><td width="14%"><h2 id="botonlisto" onclick="save()"><ion-icon name="add-outline"></ion-icon></h2></td><td width="14%"><h2 id="botonborrar" onclick="deleteall()"><ion-icon name="trash-outline"></ion-icon></h2></td><td width="35%"><table id="nombrebox"><tr><td id="nombretext">Nombre</td></tr><tr><td><input id="nombre" type="text" maxlength="20"></td></tr></table><table id="nombrebox" style="margin-top:5px"><tr><td id="nombretext">WhatsApp</td></tr><tr><td><input id="telefono" type="tel" placeholder="4771234567" maxlength="15"></td></tr></table></td></tr></tbody></table>
-<table style="margin-top:3px;width:100%"><tbody><tr><td style="width:36%"><label id="random" onclick="random()">la suerte</label></td><td style="width:50%"><label id="checkcombinaciones" onclick="allowcombination()">Dobles y Triples</label></td></tr></tbody></table>
-<div class="suma"><h4 id="costo">Costo: $0</h4><h4 id="total">Total: $0</h4><br><h4 id="numquinielas">0 Quiniela(s)</h4></div>
-<div id="divaux"><div class="titulo-quinielas">Lista De Quinielas</div><table id="display"></table></div>
-<h5><span>Sitio desarrollado por Adhemo.com</span><a id="contacto" href="https://wa.me/524776482132" style="color: yellow;">Da click aqui</a></h5>
+<script>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";</script>
+
+<header class="top-header">
+  <img src="img/logo3.png" class="logo">
+  <div class="premio">$700 PRIMER LUGAR</div>
+</header>
+
+<div class="container">
+  <div id="lista-partidos" class="partidos-box"><p style="text-align:center;padding:20px">Cargando partidos de Google Sheet ADMIN B3:K11...</p></div>
+
+  <div class="form-box">
+    <input id="nombre" placeholder="Tu nombre completo">
+    <input id="telefono" placeholder="Teléfono WhatsApp (10 dígitos)">
+    <input id="numQuinielas" type="number" min="1" value="1" placeholder="Cuántas quinielas?">
+    <button class="btn-generar" onclick="generar()">GENERAR QUINIELAS</button>
+  </div>
+
+  <div class="result-box">
+    <textarea id="resultado" rows="12" placeholder="Aquí aparecerán tus quinielas para copiar y pegar en WhatsApp..."></textarea>
+    <p id="infoCosto"></p>
+    <p id="infoIDs"></p>
+    <button class="btn-whatsapp" onclick="enviarWhatsApp()">📲 ENVIAR POR WHATSAPP</button>
+    <button class="btn-guardar" onclick="guardarEnBase()">💾 GUARDAR EN BASEDEDATOS</button>
+    <p id="statusBase" style="text-align:center;font-weight:bold;color:#00ff88"></p>
+  </div>
+</div>
+
 <script src="java/main.js"></script>
 </body>
 </html>
