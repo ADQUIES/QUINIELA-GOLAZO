@@ -6,44 +6,15 @@
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#001a26;color:#fff}
-
-/* LOGIN CON TUS COLORES DE LA FOTO */
+*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#000e14;color:#fff}
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:#000e14}
-.login-box{
-  background:#123f4a;
-  border:3px solid #ffcc00;
-  border-radius:20px;
-  padding:30px 20px;
-  max-width:380px;width:100%;
-  box-shadow:0 10px 30px #0008;text-align:center
-}
-.login-title{
-  color:#ffdd00;
-  font-size:42px;
-  font-weight:900;
-  letter-spacing:2px;
-  margin:0 0 20px 0;
-  text-shadow:0 2px 4px #000;
-}
-.login-box input{
-  width:100%;padding:15px;
-  border:none;border-radius:12px;
-  margin:10px 0;font-size:18px;font-weight:900;
-  text-align:center;
-  background:#fff;color:#5a4a3a;
-}
+.login-box{background:#123f4a;border:3px solid #ffcc00;border-radius:20px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 10px 30px #0008;text-align:center}
+.login-title{color:#ffdd00;font-size:42px;font-weight:900;letter-spacing:2px;margin:10px 0 15px 0;text-shadow:0 2px 4px #000}
+.login-box input{width:100%;padding:15px;border:none;border-radius:12px;margin:10px 0;font-size:18px;font-weight:900;text-align:center;background:#fff;color:#5a4a3a}
 .login-box input::placeholder{color:#7a6a5a;font-weight:900}
-.btn-login{
-  width:100%;padding:15px;
-  border:none;border-radius:12px;
-  background:#ffdd00;color:#000;
-  font-size:22px;font-weight:900;
-  cursor:pointer;margin-top:6px
-}
-
+.btn-login{width:100%;padding:15px;border:none;border-radius:12px;background:#ffdd00;color:#000;font-size:22px;font-weight:900;cursor:pointer;margin-top:6px}
 .btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
-.btn-blue{background:#ffdd00;color:#000;font-size:16px}.hidden{display:none}
+.hidden{display:none}
 .topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
 .card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
@@ -66,6 +37,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 
 <div id="loginScreen" class="login-wrap">
   <div class="login-box">
+    <img src="img/logo3.png" alt="Quiniela Golazo" style="width:100%;max-width:260px;margin:0 auto 10px;display:block">
     <h1 class="login-title">ENTRAR</h1>
     <input id="user" placeholder="USUARIO" value="ADRIAN">
     <input id="pass" type="password" placeholder="PASSWORD">
@@ -101,7 +73,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
   <div class="card" style="border-color:#00ff66;text-align:center">
     <b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <a href="https://www.google.com/search?q=LIGA+MX&rlz=1C1FHFK_esMX1091MX1091&oq=LIGA+MX&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhiDARixAxiABDINCAIQABiDARixAxiABDINCAMQLhiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDIGCAYQRRg8MgYIBxBFGDzSAQgxOTE5ajBqN6gCCLACAfEFvwijJAe3UvzxBb8IoyQHt1L8&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX - GOOGLE</a>
+      <a href="https://www.google.com/search?q=LIGA+MX&rlz=1C1FHFK_esMX1091MX1091&oq=LIGA+MX&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhiDARixAxiABDINCAIQABiDARixAxiABDINCAMQLhiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDINCAUQABiDARixAxiABDIGCAYQRRg8MgYIBxBFGDzSAQgxOTE5ajBqN6gCCLACAfEFvwijJAe3UvzxBb8IoyQHt1L8&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX - GOOGLE</a>
       <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN CALENDARIO</a>
     </div>
   </div>
@@ -118,38 +90,18 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 function toggleUsuarios(){let cont=document.getElementById("contenidoUsuarios");let btn=document.getElementById("btnToggle");if(cont.style.display==="none"){cont.style.display="block";btn.textContent="▼ OCULTAR";}else{cont.style.display="none";btn.textContent="► MOSTRAR";}}
 function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
 let usuariosLocal=JSON.parse(localStorage.getItem("usuarios_golazo")||'[{"u":"ADRIAN","p":"1234"}]');
-async function login(){let u=user.value.trim().toUpperCase(),p=pass.value.trim();try{let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"login",u,p})});let j=await r.json();if(j.ok){localStorage.setItem("sesion_golazo",JSON.stringify({u}));mostrarAdmin();return;}}catch(e){}let f=usuariosLocal.find(x=>x.u===u&&x.p===p);if(f){localStorage.setItem("sesion_golazo",JSON.stringify(f));mostrarAdmin();}else msg.textContent="Usuario o contraseña incorrectos";}
 function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;cargarUsuarios();renderTabla();}
 function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
 async function cargarUsuarios(){try{let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");let d=await r.json();if(d&&d.length>0){usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));}}catch(e){}renderUsuarios();}
 function renderUsuarios(){let c=document.getElementById("listaUsuarios");c.innerHTML="";usuariosLocal.forEach(us=>{let es=us.u==="ADRIAN";c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;});}
 async function agregarUsuario(){let btn=document.getElementById("btnAlta");let u=newUser.value.trim().toUpperCase(),p=newPass.value.trim();if(!u||!p){showMsg("msgUsuarios","Llena usuario y contraseña",false);return;}if(usuariosLocal.find(x=>x.u===u)){showMsg("msgUsuarios","❌ Ya existe "+u,false);return;}if(usuariosLocal.length>=4){showMsg("msgUsuarios","❌ Máximo 4",false);return;}btn.disabled=true;btn.textContent="...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"alta_usuario",u,p})});usuariosLocal.push({u,p});localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();newUser.value="";newPass.value="";showMsg("msgUsuarios","✅ Usuario "+u+" agregado",true);}catch(e){showMsg("msgUsuarios","Error",false);}btn.disabled=false;btn.textContent="+ ALTA";}
 async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","🗑️ Usuario "+n+" borrado",true);}catch(e){showMsg("msgUsuarios","Error al borrar",false);}}
-  async function login(){
-  let u=document.getElementById("user").value.trim().toUpperCase();
-  let p=document.getElementById("pass").value.trim();
-  if(!u ||!p){ document.getElementById("msg").textContent="Escribe usuario y pass"; return; }
-  localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));
-  mostrarAdmin();
-}
+async function login(){let u=document.getElementById("user").value.trim().toUpperCase();let p=document.getElementById("pass").value.trim();if(!u||!p){document.getElementById("msg").textContent="Escribe usuario y pass"; return;}localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));mostrarAdmin();}
 async function renderTabla(){
-  let tb=document.getElementById("tablaQuiniela");
-  tb.innerHTML="<tr><td colspan='9'>Cargando equipos de tu SHEET ADMIN...</td></tr>";
-  let data=null;
-  try{
-    let r=await fetch(SCRIPT_URL+"?action=obtener_admin");
-    let j=await r.json();
-    if(j && j.length > 0){
-      data=j;
-      localStorage.setItem("quiniela_nueva", JSON.stringify(data));
-    }
-  }catch(e){ console.log("Error leyendo sheet", e); }
-  if(!data){
-    let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];
-    data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;
-  }
-  tb.innerHTML="";
-  data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});
+  let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='9'>Cargando equipos de tu SHEET ADMIN...</td></tr>";let data=null;
+  try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j && j.length>0){data=j;localStorage.setItem("quiniela_nueva", JSON.stringify(data));}}catch(e){}
+  if(!data){let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;}
+  tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});
 }
 function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
 async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})});document.getElementById("status").textContent="✅ Guardado en tu SHEET ADMIN";btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";}catch(e){document.getElementById("status").textContent="Error: "+e;}}
