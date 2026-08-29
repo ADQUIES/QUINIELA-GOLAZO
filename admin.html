@@ -1,47 +1,94 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-mx">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin - Quiniela Golazo</title>
-<link rel="stylesheet" href="ccs/styles.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Golazo</title>
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
 <style>
-body{background:#001525;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:Arial;margin:0}
-.box{background:#fff;padding:20px;border-radius:12px;width:90%;max-width:380px;border:3px solid #d4ff00;text-align:center}
-.box h2{font-family:Arial Black;margin:0}
-.box input{width:100%;padding:12px;margin:10px 0;border:2px solid #000;border-radius:8px;box-sizing:border-box}
-.box button{width:100%;padding:12px;background:#000;color:#d4ff00;border:none;border-radius:8px;font-family:Arial Black;cursor:pointer}
-#panel{display:none;margin-top:15px;text-align:left}
-#panel a{display:block;padding:10px;background:#0a344a;color:#fff;margin:5px 0;border-radius:6px;text-decoration:none;text-align:center}
+*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#001a26;color:#fff}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:#001a26}
+.login-box{background:#fff;color:#000;border-radius:20px;padding:24px;max-width:380px;width:100%;box-shadow:0 10px 30px #0008;text-align:center}
+.login-box input{width:100%;padding:13px;border:2px solid #ddd;border-radius:12px;margin:8px 0;font-size:15px}
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
+.btn-blue{background:#007bff;color:#fff;font-size:16px}.hidden{display:none}
+.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
+.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
+.card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+.card-header b{color:#ffee00}
+.toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
+table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
+th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
+td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
+.user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0}
+.btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
+.msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:13px}
+.msg-ok{background:#00ff66;color:#000}.msg-error{background:#ff0033;color:#fff}
+.btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block}
 </style>
 </head>
 <body>
-<div class="box">
-  <h2>🔒 ADMIN</h2>
-  <p>Ingresa contraseña</p>
-  <input type="password" id="pass" placeholder="Contraseña">
-  <button onclick="entrar()">ENTRAR</button>
-  <p id="error" style="color:red;display:none">Contraseña incorrecta</p>
-  
-  <div id="panel">
-    <h3>Panel Quiniela</h3>
-    <a href="index.html">← Volver a Quiniela</a>
-    <a href="#" onclick="alert('Aquí irá tu editor de resultados')">📝 Editar Resultados</a>
-    <a href="#" onclick="alert('Aquí verás clientes y teléfonos')">📋 Ver Clientes</a>
-    <a href="#" onclick="alert('Aquí pagas premios')">💰 Premios</a>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";
+</script>
+
+<div id="loginScreen" class="login-wrap">
+  <div class="login-box">
+    <img src="img/logo3.png" alt="Quiniela Golazo" style="width:100%;max-width:280px;margin:0 auto 12px;display:block">
+    <p style="color:#666;font-size:13px;font-weight:bold;margin:5px 0 10px">ACCESO ADMINISTRADOR</p>
+    <input id="user" placeholder="Usuario" value="ADRIAN"><input id="pass" type="password" placeholder="Contraseña">
+    <button class="btn btn-blue" onclick="login()">Ingresar</button>
+    <p id="msg" style="color:red;text-align:center;font-size:12px"></p>
+  </div>
+</div>
+
+<div id="adminScreen" class="hidden">
+  <div class="topbar">
+    <div style="display:flex;align-items:center;gap:10px">
+      <img src="img/logo3.png" style="height:38px;width:auto;display:block">
+      <span id="who" style="color:#ffee00;font-weight:900;font-size:12px"></span>
+    </div>
+    <div style="display:flex;gap:6px;align-items:center">
+      <a href="index.html" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
+      <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" onclick="toggleUsuarios()">
+      <b>USUARIOS (ADRIAN + 3)</b>
+      <button class="toggle-btn" id="btnToggle">▼ OCULTAR</button>
+    </div>
+    <div id="contenidoUsuarios" style="margin-top:10px">
+      <div id="listaUsuarios"></div>
+      <div style="display:flex;gap:6px;margin-top:10px"><input id="newUser" placeholder="Nuevo usuario"><input id="newPass" placeholder="Pass"><button id="btnAlta" onclick="agregarUsuario()" style="background:#00ff66;border:none;border-radius:8px;padding:0 14px;font-weight:900">+ ALTA</button></div>
+      <div id="msgUsuarios"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <b style="color:#ffee00">NUEVA QUINIELA</b>
+    <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DÍA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
+    <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
+    <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p>
   </div>
 </div>
 
 <script>
-function entrar(){
-  let p = document.getElementById('pass').value;
-  if(p === "golazo123"){
-    document.getElementById('panel').style.display='block';
-    document.getElementById('error').style.display='none';
-  } else {
-    document.getElementById('error').style.display='block';
-  }
-}
+function toggleUsuarios(){let cont=document.getElementById("contenidoUsuarios");let btn=document.getElementById("btnToggle");if(cont.style.display==="none"){cont.style.display="block";btn.textContent="▼ OCULTAR";}else{cont.style.display="none";btn.textContent="► MOSTRAR";}}
+function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
+let usuariosLocal=JSON.parse(localStorage.getItem("usuarios_golazo")||'[{"u":"ADRIAN","p":"1234"}]');
+async function login(){let u=user.value.trim().toUpperCase(),p=pass.value.trim();try{let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"login",u,p})});let j=await r.json();if(j.ok){localStorage.setItem("sesion_golazo",JSON.stringify({u}));mostrarAdmin();return;}}catch(e){}let f=usuariosLocal.find(x=>x.u===u&&x.p===p);if(f){localStorage.setItem("sesion_golazo",JSON.stringify(f));mostrarAdmin();}else msg.textContent="Usuario o contraseña incorrectos";}
+function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;cargarUsuarios();renderTabla();}
+function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
+async function cargarUsuarios(){try{let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");let d=await r.json();if(d&&d.length>0){usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));}}catch(e){}renderUsuarios();}
+function renderUsuarios(){let c=document.getElementById("listaUsuarios");c.innerHTML="";usuariosLocal.forEach(us=>{let es=us.u==="ADRIAN";c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;});}
+async function agregarUsuario(){let btn=document.getElementById("btnAlta");let u=newUser.value.trim().toUpperCase(),p=newPass.value.trim();if(!u||!p){showMsg("msgUsuarios","Llena usuario y contraseña",false);return;}if(usuariosLocal.find(x=>x.u===u)){showMsg("msgUsuarios","❌ Ya existe "+u,false);return;}if(usuariosLocal.length>=4){showMsg("msgUsuarios","❌ Máximo 4",false);return;}btn.disabled=true;btn.textContent="...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"alta_usuario",u,p})});usuariosLocal.push({u,p});localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();newUser.value="";newPass.value="";showMsg("msgUsuarios","✅ Usuario "+u+" agregado",true);}catch(e){showMsg("msgUsuarios","Error",false);}btn.disabled=false;btn.textContent="+ ALTA";}
+async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","🗑️ Usuario "+n+" borrado",true);}catch(e){showMsg("msgUsuarios","Error al borrar",false);}}
+function renderTabla(){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="";let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];let data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});}
+function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
+async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})});document.getElementById("status").textContent="✅ Guardado en tu SHEET ADMIN";btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";}catch(e){document.getElementById("status").textContent="Error: "+e;}}
+if(localStorage.getItem("sesion_golazo"))mostrarAdmin();
 </script>
 </body>
 </html>
