@@ -181,7 +181,7 @@ function guardarLocal(){
 async function guardarEnSheet(){
   guardarLocal();
   let url=document.getElementById("sheetUrl").value.trim();
-  if(!url){ alert("Primero pega la URL de tu Apps Script. Te dejo el código abajo."); return; }
+  if(!url){ alert("https://script.google.com/macros/s/AKfycbyAaIA13gZprlLkuGehsX1uh0Fp-iel-misqU-PwDErl6-xJxJGfuf2o1kdiTD8eL3elA/exec"); return; }
   localStorage.setItem("apps_script_url", url);
   let data = JSON.parse(localStorage.getItem("quiniela_nueva"));
   document.getElementById("btnGuardar").textContent="Guardando...";
