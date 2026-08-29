@@ -14,24 +14,17 @@
     <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>     
 </head>
-
-
 <body>
 <header>
 </header>
-
                     <div class="organizer-info">
-                        
                         <div class="organizer-tags">
                             <a href="https://www.facebook.com/GolazoJuega/" target="_self">
-
-
                                 <div class="tag facebook">
                                     <img src="./img/facebook-icon.svg">
                                     <span>Facebook</span>
                                 </div>
                             </a>                                         
-                            
                             <a href="combinaciones/combinaciones.html" target="_self">
                                 <div class="tag combinaciones">
                                     <img src="./img/combinaciones.png">
@@ -44,14 +37,10 @@
                                     <span>Pagar</span>
                                 </div>
                             </a>
-
                         </div>
                     </div>
-
                     <div class="organizer-infos">
-                        
                         <div class="organizer-tagss">
-                            
                             <a href="cjugar/cjugarinst.html" target="_self">
                                 <div class="tag instruciones">
                                     <img src="./img/cjugarimg.png">
@@ -64,34 +53,18 @@
                                     <span>Reglamento</span>
                                 </div>
                             </a>
-                            
                             <a href="horarios/horarios.html" target="_self">
                                 <div class="tag horarios">
                                     <img src="./img/horarios.png">
                                     <span>Horarios</span>
                                 </div>
                             </a>
-                            
                         </div>
                     </div>
-<!-- <div class="promocionar" id="promoci">
-             <a id="j"href="cjugar/cjugarinst.html">Instrucciones</a>
-             <a id="r"href="reglamento/reglamento.html">Reglamento</a>
-             <a id="h"href="horarios/horarios.html">Horarios</a>
-             <a id="h"href="combinaciones/combinaciones.html">Combinaciones</a>
-            
-
- </div> -->
-     
-   
    <div class="quiniela" id="quiniela" style="height: 375px;;">
      <div class="aux">
          <h3 style="padding: 5px 7px;" onclick="clean()">x
-
-
          </h3>
-         
-             
      </div>
      <div class="partido">
         <span id="L1" onclick="selection(this)"></span>
@@ -99,7 +72,6 @@
         <span id="E1" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V1" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L2" onclick="selection(this)"></span>
@@ -107,7 +79,6 @@
         <span id="E2" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V2" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L3" onclick="selection(this)"></span>
@@ -115,7 +86,6 @@
         <span id="E3" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V3" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L4" onclick="selection(this)"></span>
@@ -123,7 +93,6 @@
         <span id="E4" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V4" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L5" onclick="selection(this)"></span>
@@ -131,7 +100,6 @@
         <span id="E5" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V5" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L6" onclick="selection(this)"></span>
@@ -139,7 +107,6 @@
         <span id="E6" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V6" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L7" onclick="selection(this)"></span>
@@ -147,7 +114,6 @@
         <span id="E7" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V7" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L8" onclick="selection(this)"></span>
@@ -155,7 +121,6 @@
         <span id="E8" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V8" onclick="selection(this)"></span>
-
      </div>
      <div class="partido">
         <span id="L9" onclick="selection(this)"></span>
@@ -163,14 +128,11 @@
         <span id="E9" onclick="selection(this)"></span>
         <div id="_"></div>
         <span id="V9" onclick="selection(this)"></span>
-
      </div>
      <h1 id="text" style="font-size: x-large; padding: 10px;">- - - - - - - - - 
     </h1>
   </div>
-
  <br>
- 
  <table>
       <tbody>
           <tr>
@@ -179,33 +141,29 @@
                     Enviar
                     <span>0</span>
                     <img src="whatsapp-logo-5.png" alt="" height="23px" style="position:inline-flex;">
-
                   </h2>
               </td>
               <td width="14%">
                   <h2 id="botonlisto" onclick="save()"><ion-icon name="add-outline" role="img" class="md hydrated" aria-label="add outline"></ion-icon></h2>
-
               </td>
               <td width="14%">
-                 
-                  
-             
 <h2 id="botonborrar" onclick="deleteall()" title="Se borrarÃ¡ todo, incluyendo las quinielas generadas">
   <ion-icon name="trash-outline" id="trash"></ion-icon>
 </h2> 
-
 </td>         
      <td width="35%">
                 <table id="nombrebox">
                 <tr style="height: 9px"><td id="nombretext"> &nbsp Nombre</td><td></td></tr>
                 <tr style="height: 20px"><td><input id="nombre" type="text" placeholder="" maxlength="20" spellcheck="false"></td><td><label id="borrarnombre" onclick="clearname()"><ion-icon name="backspace"></ion-icon></label></td></tr>
             </table>
-                  
+                <table id="telefonobox" style="margin-top:4px">
+                <tr style="height: 9px"><td id="telefonotext"> &nbsp Telefono</td><td></td></tr>
+                <tr style="height: 20px"><td><input id="telefono" type="tel" placeholder="" maxlength="10" inputmode="numeric" spellcheck="false"></td><td></td></tr>
+            </table>
               </td>
           </tr>
       </tbody>
   </table>
-
   <table style="margin-top: 3px; width: 100%;">
     <tbody>
         <tr>
@@ -214,36 +172,24 @@
             </td>
             <td style="width: 50%;">
                 <label id="checkcombinaciones" onclick="allowcombination()">Dobles y Triples</label>
-
             </td>
             <td style="width: 30%;"></td>
         </tr>
     </tbody>
-
   </table>
-  
   <div class="suma">
             <h4 id="costo">Costo: $0</h4><h4 id="total">Total: $0</h4><br>
             <h4 id="numquinielas">0 Quiniela(s)</h4>
         </div>
-      
   </div>
-  
 <div id="divaux" translate="no">
-  
   <div class="titulo-quinielas">Lista De Quinielas</div>
     <table id="display"></table>
-
 </div>
-
-<!--<a id="f"href="https://www.facebook.com/GolazoJuega/">Facebook</a>-->
 <h5>
         <span style="text-align: center;">Sitio desarrollado por Adhemo.com, Ocupas un sitio web?</span>
         <span style="color: rgb(209, 209, 9);"></span>
         <a id="contacto" href="https://wa.me/524776482132?text=Me interesa una pagina de quinielas"style="color: yellow;">Da click aqui</a>
     </h5>   
-
-
 </body>
 </html>
-
