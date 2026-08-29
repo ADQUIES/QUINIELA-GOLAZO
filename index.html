@@ -4,29 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quiniela Golazo</title>
-<link rel="icon" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial Black,Arial;margin:0;padding:0}
-body{background:#001e2f;color:#fff}
-.header{display:flex;align-items:center;gap:15px;background:#fff;padding:10px 15px;border-bottom:5px solid #ffeb00}
-.header img{width:80px;height:80px;border-radius:50%;border:4px solid #ffeb00}
-.header h1{color:#d4d400;font-size:38px;line-height:34px;text-shadow:2px 2px 0 #000}
-.premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial}
+body{background:#0f2f44}
+.header{display:flex;align-items:center;gap:10px;background:#fff;padding:8px;border-bottom:5px solid #ffeb00}
+.header img{width:70px;height:70px;border-radius:50%;border:3px solid #ffeb00}
+.header h1{color:#c8b600;font-size:28px;line-height:26px;text-shadow:2px 2px 0 #000}
+.premio{background:#0a2a40;color:#fff;padding:8px;text-align:center;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
 
-/* DISEÑO QUE ME PEDISTE: L | EQUIPO | E | EQUIPO | V todo alineado */
-#lista-partidos{max-width:900px;margin:10px auto;padding:0 8px}
-.card-partido{background:#1e4a5f;border:3px solid #ffeb00;border-radius:18px;margin-bottom:12px;padding:10px 6px;display:grid;grid-template-columns:50px 1fr 50px 1fr 50px;align-items:center;gap:4px}
-.num{display:none}
-.equipo{text-align:center;font-size:11px;line-height:11px;color:#fff}
-.equipo img{width:58px;height:58px;background:#fff;border-radius:12px;padding:4px;object-fit:contain;display:block;margin:0 auto 4px}
-.btn-letra{background:#fff;color:#000;border:2px solid #000;border-radius:10px;width:42px;height:42px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;cursor:pointer;box-shadow:2px 2px 0 #000;justify-self:center}
-.btn-letra.active{background:#ff1a1a;color:#fff;border-color:#fff;transform:scale(1.1)}
-.info-bar{grid-column:1/-1;background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:6px;border-radius:10px;margin-top:8px}
+/* TABLA TIPO QUINIELA DE PAPEL */
+#lista-partidos{max-width:800px;margin:10px auto;background:#fff;border:3px solid #000}
+.tabla-quiniela-header{display:grid;grid-template-columns:45px 1fr 60px 45px 60px 1fr 45px;background:#1e4a5f;color:#ffeb00;text-align:center;padding:6px 0;font-size:12px;border-bottom:2px solid #000}
+.fila-quiniela{display:grid;grid-template-columns:45px 1fr 60px 45px 60px 1fr 45px;align-items:center;text-align:center;border-bottom:2px solid #000;background:#e6eef3}
+.fila-quiniela:nth-child(even){background:#fff}
+.celda-nombre{font-size:11px;line-height:11px;color:#000;padding:2px;font-family:Arial Black}
+.celda-escudo img{width:42px;height:42px;object-fit:contain;background:#fff;border:1px solid #ccc;display:block;margin:4px auto}
+.celda-check{display:flex;justify-content:center;align-items:center;height:100%}
+.cuadro{width:36px;height:36px;border:2px solid #000;background:#fff;color:#000;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:16px;border-radius:4px}
+.cuadro.active{background:#ff1a1a;color:#fff}
+.fila-info{grid-column:1/-1;background:#ffeb00;color:#000;font-family:Arial;font-size:10px;font-weight:bold;text-align:center;padding:3px;border-top:1px solid #000}
 
-.form{max-width:900px;margin:0 auto;padding:10px;display:flex;gap:6px;flex-wrap:wrap}
-.form input{flex:1;min-width:140px;padding:12px;border:2px solid #000;border-radius:10px;font-family:Arial}
-#resultado{width:100%;height:160px;font-family:monospace;padding:10px;border-radius:10px;border:2px solid #000}
-.btn{padding:12px 14px;border:2px solid #000;border-radius:10px;font-weight:900;cursor:pointer}
+.form{max-width:800px;margin:10px auto;padding:10px;display:flex;gap:6px;flex-wrap:wrap}
+.form input{flex:1;padding:10px;border:2px solid #000;border-radius:8px;font-family:Arial}
+#resultado{width:100%;height:140px;font-family:monospace;padding:8px;border:2px solid #000}
+.btn{padding:10px;border:2px solid #000;border-radius:8px;font-weight:900;cursor:pointer}
 </style>
 </head>
 <body>
@@ -35,20 +36,19 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
 </script>
 <div class="header"><img src="img/logo.png"><h1>QUINIELA<br>GOLAZO</h1></div>
 <div class="premio">$700 PRIMER LUGAR | $15 POR QUINIELA</div>
-<div id="lista-partidos"><p style="text-align:center;padding:30px;color:#ffeb00">Cargando...</p></div>
+<div id="lista-partidos"></div>
 <div class="form">
   <input id="nombre" placeholder="NOMBRE">
   <input id="telefono" placeholder="WHATSAPP">
-  <input id="numQuinielas" type="number" value="1" min="1" style="max-width:80px">
+  <input id="numQuinielas" type="number" value="1" min="1" style="max-width:70px">
   <button class="btn" style="background:#ffeb00" onclick="generar()">GENERAR</button>
 </div>
 <div class="form">
   <textarea id="resultado"></textarea>
-  <div style="flex:1;min-width:200px">
-    <p id="infoCosto" style="color:#ffeb00;font-family:Arial;font-weight:bold"></p>
-    <p id="infoIDs" style="color:#00ff66;font-family:Arial;font-weight:bold"></p>
-    <button class="btn" style="background:#25d366;color:#fff;width:100%;margin-top:8px" onclick="enviarWhatsApp()">WHATSAPP</button>
-    <button class="btn" style="background:#007bff;color:#fff;width:100%;margin-top:8px" onclick="guardarEnBase()">GUARDAR</button>
+  <div style="flex:1">
+    <p id="infoCosto"></p><p id="infoIDs"></p>
+    <button class="btn" style="background:#25d366;color:#fff;width:100%;margin-top:6px" onclick="enviarWhatsApp()">WHATSAPP</button>
+    <button class="btn" style="background:#007bff;color:#fff;width:100%;margin-top:6px" onclick="guardarEnBase()">GUARDAR</button>
     <p id="statusBase"></p>
   </div>
 </div>
