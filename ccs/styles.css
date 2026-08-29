@@ -1,35 +1,42 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black, Arial}
-body{background:#001525;display:flex;justify-content:center;padding:0}
-.contenedor{width:100%;max-width:600px;background:#001525;border:4px solid #d4ff00;overflow:hidden}
+html,body{width:100%;overflow-x:hidden}
+body{background:#001525;display:flex;justify-content:center}
+.contenedor{width:100%;max-width:100vw;background:#001525;border:3px solid #d4ff00;overflow:hidden}
 
-.header{background:white;display:flex;align-items:center;gap:8px;padding:6px}
-.header img{width:50px;height:50px;border-radius:50%;border:2px solid #d4ff00;flex-shrink:0}
-.header h1{color:#b8a600;font-size:20px;line-height:20px;text-shadow:1px 1px 0 black;white-space:nowrap}
+.header{background:white;display:flex;align-items:center;gap:6px;padding:6px;width:100%}
+.header img{width:45px;height:45px;border-radius:50%;border:2px solid #d4ff00;flex-shrink:0}
+.header h1{color:#b8a600;font-size:18px;text-shadow:1px 1px 0 black;line-height:16px}
 
-.premio{background:#0a344a;color:white;text-align:center;padding:8px;font-family:Arial;font-weight:bold;font-size:12px;border-top:3px solid #d4ff00;border-bottom:3px solid #d4ff00}
+.premio{background:#0a344a;color:white;text-align:center;padding:7px;font-family:Arial;font-weight:bold;font-size:11px;border-top:2px solid #d4ff00;border-bottom:2px solid #d4ff00}
 
-#lista-partidos{width:100%;background:white}
+#lista-partidos{width:100%;background:white;display:block}
 
-.tabla-encabezado{display:grid;grid-template-columns:42px 1fr 44px 42px 44px 1fr 42px;background:#0a344a;color:#d4ff00;text-align:center;padding:5px 0;font-size:11px;font-family:Arial;border-bottom:2px solid #d4ff00}
-.tabla-encabezado div:nth-child(2), .tabla-encabezado div:nth-child(6){font-family:Arial Black}
-
-.fila-partido{display:grid;grid-template-columns:42px 1fr 44px 42px 44px 1fr 42px;align-items:center;background:white;border-bottom:1px solid black;min-height:46px;width:100%}
+.tabla-encabezado{display:grid;grid-template-columns:36px 1fr 34px 36px 34px 1fr 36px;background:#0a344a;color:#d4ff00;text-align:center;padding:4px 0;font-size:10px;font-family:Arial;width:100%}
+.fila-partido{display:grid;grid-template-columns:36px minmax(0,1fr) 34px 36px 34px minmax(0,1fr) 36px;align-items:center;background:white;border-bottom:1px solid #000;min-height:42px;width:100%}
 .fila-partido:nth-child(even){background:#d9e8f0}
 
-.col-nombre{font-size:10px;color:black;text-align:left;padding-left:4px;line-height:10px;word-break:break-word}
-.col-escudo{background:white;width:44px;height:46px;display:flex;align-items:center;justify-content:center;border-left:1px solid #ccc;border-right:1px solid #ccc;overflow:hidden}
-.col-escudo img{width:32px;height:28px;object-fit:contain;display:block}
+.col-nombre{font-size:9px;line-height:9px;color:#000;text-align:left;padding:2px 3px;overflow:hidden;white-space:normal;word-break:break-word}
+.col-escudo{background:#fff;width:100%;height:42px;display:flex;align-items:center;justify-content:center;border-left:1px solid #ddd;border-right:1px solid #ddd}
+.col-escudo img{width:28px;height:24px;object-fit:contain}
 
-.boton{width:36px;height:30px;background:white;border:2px solid black;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:black;margin:0 auto;flex-shrink:0}
-.boton.active{background:#e50000;color:white;border-color:white;box-shadow:0 0 4px black}
+.boton{width:30px;height:28px;background:#fff;border:1.5px solid #000;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:12px;color:#000;margin:0 auto}
+.boton.active{background:#e50000;color:#fff;border-color:#fff}
 
-.formulario{padding:8px;background:#001525}
-.formulario input{width:100%;padding:12px;margin-bottom:6px;border-radius:8px;border:2px solid black;font-family:Arial;font-size:14px}
+.formulario{padding:8px;background:#001525;width:100%}
+.formulario input{width:100%;padding:11px;margin-bottom:6px;border-radius:8px;border:2px solid #000;font-family:Arial;font-size:14px}
 .fila-form{display:flex;gap:6px;margin-bottom:6px}
-#numQuinielas{max-width:70px;text-align:center}
-.btn-generar{flex:1;background:#d4ff00;border:2px solid black;border-radius:8px;font-family:Arial Black;padding:12px;cursor:pointer;font-size:16px}
-.btn-whats{flex:1;background:#25d366;color:white;border:2px solid black;border-radius:8px;padding:10px;font-family:Arial Black;cursor:pointer}
-.btn-guardar{flex:1;background:#007bff;color:white;border:2px solid black;border-radius:8px;padding:10px;font-family:Arial Black;cursor:pointer}
-#resultado{width:100%;height:120px;border:2px solid black;border-radius:8px;padding:8px;font-family:monospace;font-size:12px}
-#infoCosto{color:#d4ff00;font-family:Arial;font-weight:bold;font-size:12px;margin-top:5px}
-#infoIDs{color:#00ff88;font-family:Arial;font-weight:bold;font-size:12px}
+#numQuinielas{max-width:60px;text-align:center}
+.btn-generar{flex:1;background:#d4ff00;border:2px solid #000;border-radius:8px;font-family:Arial Black;padding:11px;font-size:15px}
+.btn-whats{flex:1;background:#25d366;color:#fff;border:2px solid #000;border-radius:8px;padding:10px;font-family:Arial Black}
+.btn-guardar{flex:1;background:#007bff;color:#fff;border:2px solid #000;border-radius:8px;padding:10px;font-family:Arial Black}
+#resultado{width:100%;height:110px;border:2px solid #000;border-radius:8px;padding:6px;font-family:monospace;font-size:11px}
+#infoCosto{color:#d4ff00;font-family:Arial;font-weight:bold;font-size:11px}
+#infoIDs{color:#00ff88;font-family:Arial;font-weight:bold;font-size:11px}
+
+/* ESTO ES LO QUE ARREGLA ANDROID */
+@media (max-width:400px){
+  .fila-partido{grid-template-columns:32px minmax(0,1fr) 30px 32px 30px minmax(0,1fr) 32px}
+  .boton{width:26px;height:24px;font-size:11px}
+  .col-nombre{font-size:8px}
+  .col-escudo img{width:24px;height:20px}
+}
