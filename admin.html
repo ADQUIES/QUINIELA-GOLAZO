@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="es-mx">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin Golazo</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial} body{margin:0;background:#000e14;color:#fff}
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#000e14;color:#fff}
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:#000e14}
 .login-box{background:#123f4a;border:3px solid #ffcc00;border-radius:20px;padding:24px 20px;max-width:380px;width:100%;box-shadow:0 10px 30px #0008;text-align:center}
-.login-title{color:#ffdd00;font-size:42px;font-weight:900;letter-spacing:2px;margin:10px 0 15px 0;text-shadow:0 2px 4px #000}
+.login-title{color:#ffdd00;font-size:28px;font-weight:900;letter-spacing:4px;margin:5px 0 18px 0;text-shadow:0 2px 4px #000;opacity:0.9}
 .login-box input{width:100%;padding:15px;border:none;border-radius:12px;margin:10px 0;font-size:18px;font-weight:900;text-align:center;background:#fff;color:#5a4a3a}
 .login-box input::placeholder{color:#7a6a5a;font-weight:900}
 .btn-login{width:100%;padding:15px;border:none;border-radius:12px;background:#ffdd00;color:#000;font-size:22px;font-weight:900;cursor:pointer;margin-top:6px}
@@ -21,7 +23,8 @@
 .card-header b{color:#ffee00}
 .toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
 table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
+th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}
+td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
 td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0}
 .btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
@@ -37,7 +40,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 
 <div id="loginScreen" class="login-wrap">
   <div class="login-box">
-    <img src="img/logo3.png" alt="Quiniela Golazo" style="width:100%;max-width:260px;margin:0 auto 10px;display:block">
+    <img src="img/logo3.png" alt="Quiniela Golazo" style="width:100%;max-width:330px;margin:0 auto 8px;display:block;filter:drop-shadow(0 4px 8px #000)">
     <h1 class="login-title">ENTRAR</h1>
     <input id="user" placeholder="USUARIO" value="ADRIAN">
     <input id="pass" type="password" placeholder="PASSWORD">
@@ -73,7 +76,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
   <div class="card" style="border-color:#00ff66;text-align:center">
     <b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b>
     <div style="display:flex;gap:8px;margin-top:10px">
-      <a href="https://www.google.com/search?q=LIGA+MX&rlz=1C1FHFK_esMX1091MX1091&oq=LIGA+MX&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhiDARixAxiABDINCAIQABiDARixAxiABDINCAMQLhiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDINCAUQABiDARixAxiABDIGCAYQRRg8MgYIBxBFGDzSAQgxOTE5ajBqN6gCCLACAfEFvwijJAe3UvzxBb8IoyQHt1L8&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX - GOOGLE</a>
+      <a href="https://www.google.com/search?q=LIGA+MX&rlz=1C1FHFK_esMX1091MX1091&oq=LIGA+MX&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTINCAEQLhiDARixAxiABDINCAIQABiDARixAxiABDINCAMQLhiDARixAxiABDINCAQQABiDARixAxiABDINCAUQABiDARixAxiABDIGCAYQRRg8MgYIBxBFGDzSAQgxOTE5ajBqN6gCCLACAfEFvwijJAe3UvzxBb8IoyQHt1L8&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX - GOOGLE</a>
       <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN CALENDARIO</a>
     </div>
   </div>
