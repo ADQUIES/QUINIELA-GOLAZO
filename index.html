@@ -12,7 +12,16 @@
     <link rel="stylesheet" href="ccs/styles.css">
     <script src="java/main.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>     
+    <script type="module" src="https://unpkg.com/ionicons@5.1.2/dist/ionicons/ionicons.esm.js"></script>
+<style>
+/* FIX para que telefono sea identico a nombre y no se salga en PC */
+#nombrebox, #telefonobox { width: 100%; }
+#nombre, #telefono {
+  width: 100% !important;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+</style>
 </head>
 <body>
 <header>
@@ -156,9 +165,9 @@
                 <tr style="height: 9px"><td id="nombretext"> &nbsp Nombre</td><td></td></tr>
                 <tr style="height: 20px"><td><input id="nombre" type="text" placeholder="" maxlength="20" spellcheck="false"></td><td><label id="borrarnombre" onclick="clearname()"><ion-icon name="backspace"></ion-icon></label></td></tr>
             </table>
-                <table id="telefonobox" style="margin-top:4px">
+                <table id="telefonobox">
                 <tr style="height: 9px"><td id="telefonotext"> &nbsp Telefono</td><td></td></tr>
-                <tr style="height: 20px"><td><input id="telefono" type="tel" placeholder="" maxlength="10" inputmode="numeric" spellcheck="false"></td><td></td></tr>
+                <tr style="height: 20px"><td><input id="telefono" type="tel" placeholder="" maxlength="10" inputmode="numeric" spellcheck="false"></td><td><label id="borrartelefono" onclick="document.getElementById('telefono').value=''"><ion-icon name="backspace"></ion-icon></label></td></tr>
             </table>
               </td>
           </tr>
