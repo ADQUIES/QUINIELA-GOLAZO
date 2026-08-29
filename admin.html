@@ -87,6 +87,14 @@ async function agregarUsuario(){let btn=document.getElementById("btnAlta");let u
 async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","🗑️ Usuario "+n+" borrado",true);}catch(e){showMsg("msgUsuarios","Error al borrar",false);}}
 
 // === ESTA ES LA FUNCION NUEVA QUE CARGA DE TU HOJA ADMIN ===
+  async function login(){
+  let u=document.getElementById("user").value.trim().toUpperCase();
+  let p=document.getElementById("pass").value.trim();
+  if(!u || !p){ document.getElementById("msg").textContent="Escribe usuario y pass"; return; }
+  // ENTRADA FORZADA PARA PROBAR
+  localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));
+  mostrarAdmin();
+}
 async function renderTabla(){
   let tb=document.getElementById("tablaQuiniela");
   tb.innerHTML="<tr><td colspan='9'>Cargando equipos de tu SHEET ADMIN...</td></tr>";
