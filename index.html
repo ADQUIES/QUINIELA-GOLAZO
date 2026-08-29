@@ -2,18 +2,22 @@
 <html lang="es-mx">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiniela Golazo</title><link rel="icon" href="img/logo3.png">
+<title>Quiniela Golazo</title>
 <style>
-*{box-sizing:border-box;font-family:Arial}body{margin:0;background:radial-gradient(circle at top,#0a5a6a,#001820);color:#fff;min-height:100vh}
-.wrap{max-width:640px;margin:auto;padding:8px}
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a2f3e;color:#fff}
+.wrap{max-width:640px;margin:auto;padding:8px;width:100%;overflow:hidden}
 .top-white{background:#fff;border:3px solid #d4ff00;border-radius:14px;padding:6px 10px;display:flex;align-items:center;gap:10px}
-.top-white img{width:62px;height:62px;object-fit:contain}.top-white h1{margin:0;color:#c7a000;font-size:26px;font-weight:900;text-shadow:2px 2px 0 #000}
-.head{display:grid;grid-template-columns:52px 1fr 46px 46px 46px 1fr 52px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:13px}
-.match{display:grid;grid-template-columns:52px 1fr 46px 46px 46px 1fr 52px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:56px}
-.match:nth-child(even){background:#d7e8ef}.team{font-weight:900;font-size:11px;text-transform:uppercase;padding:2px}.logo{width:36px;height:36px;object-fit:contain;margin:auto;display:block}
-.btn-lev{width:38px;height:38px;border:2.5px solid #000;border-radius:9px;background:#fff;font-weight:900;font-size:17px;display:grid;place-items:center;cursor:pointer;margin:auto}
-.btn-lev.sel{background:#d4ff00;transform:scale(1.08)}.btn-lev.e{width:42px}
-.line{color:#eaff00;font-weight:900;letter-spacing:5px;text-align:center;font-size:26px;margin:12px 0;min-height:28px}
+.top-white img{width:62px;height:62px;object-fit:contain}
+.top-white h1{margin:0;color:#c7a000;font-size:26px;font-weight:900;text-shadow:2px 2px 0 #000}
+.head{display:grid;grid-template-columns:54px 1fr 44px 44px 44px 1fr 54px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:13px}
+.match{display:grid;grid-template-columns:54px minmax(0,1fr) 44px 44px 44px minmax(0,1fr) 54px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:58px;width:100%}
+.match:nth-child(even){background:#d7e8ef}
+.team{font-weight:900;font-size:11px;text-transform:uppercase;padding:0 4px;line-height:1;word-break:break-word;text-align:center}
+.team.left{text-align:left}.team.right{text-align:right}
+.logo{width:36px;height:36px;object-fit:contain;margin:auto;display:block}
+.btn-lev{width:40px;height:40px;border:2.5px solid #000;border-radius:9px;background:#fff;font-weight:900;font-size:16px;display:grid;place-items:center;cursor:pointer;margin:auto;flex-shrink:0}
+.btn-lev.sel{background:#d4ff00;transform:scale(1.08)}
+.line{color:#eaff00;font-weight:900;letter-spacing:5px;text-align:center;font-size:26px;margin:12px 0}
 .inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase}
 .row-btns{display:grid;grid-template-columns:1fr 62px 62px;gap:8px;margin-top:10px}
 .b-env{background:#2eff7a;border:none;border-radius:14px;padding:13px;font-weight:900;font-size:18px;cursor:pointer}
@@ -22,21 +26,20 @@
 .b-suerte{background:#eaff00;border:none;border-radius:10px;padding:12px;font-weight:900;cursor:pointer;margin-top:10px;width:100%}
 .caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px}
 .lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px}
-.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900;border-bottom:1px solid #333}
+.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900}
 .lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:12px}
 .q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px}
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px}
 .modal.show{display:grid}.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center}
 </style>
 </head>
 <body>
 <div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div>
 <div class="wrap">
-<div class="top-white"><img src="img/logo3.png" onerror="this.src='https://adquies.github.io/Q/img/logo.png'"><h1>QUINIELA GOLAZO</h1></div>
+<div class="top-white"><img src="img/logo3.png"><h1>QUINIELA GOLAZO</h1></div>
 <div class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
 <div id="partidos"></div><div class="line" id="linea">---------</div>
-<input class="inp" id="nombre" placeholder="NOMBRE COMPLETO">
-<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
+<input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"><input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
 <div style="display:grid;grid-template-columns:80px 1fr;gap:8px;margin-top:8px"><input class="inp" style="margin:0" id="cant" type="number" value="1" min="1"><button style="background:#d4ff00;border:none;border-radius:10px;font-weight:900" onclick="agregar()">AGREGAR +</button></div>
 <div class="row-btns"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-plus" onclick="suerte()">🎲</button><button class="b-trash" onclick="borrarTodo()">🗑️</button></div>
 <button class="b-suerte" onclick="suerte()">A la suerte</button>
@@ -47,12 +50,25 @@
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 const MI_WHATSAPP = "524498476015";
 const PARTIDOS=[["TOLUCA","PUEBLA"],["MAZATLAN","PUMAS"],["PACHUCA","CRUZ AZUL"],["TIGRES","LEON"],["ATLAS","SANTOS"],["JUAREZ","QUERETARO"],["MONTERREY","SAN LUIS"],["TIJUANA","NECAXA"],["GUADALAJARA","AMERICA"]];
-const LOGOS={"TOLUCA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F411.png","PUEBLA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F12321.png","MAZATLAN":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F17362.png","PUMAS":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F418.png","PACHUCA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F416.png","CRUZ AZUL":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F415.png","TIGRES":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1230.png","LEON":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F403.png","ATLAS":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1228.png","SANTOS":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1238.png","JUAREZ":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1786.png","QUERETARO":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1234.png","MONTERREY":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1237.png","SAN LUIS":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F12335.png","TIJUANA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F12389.png","NECAXA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1226.png","GUADALAJARA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1232.png","AMERICA":"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F1233.png"};
 let picks=Array(9).fill(""); let quinielas=JSON.parse(localStorage.getItem("qs")||"[]");
-function render(){let h="";PARTIDOS.forEach((p,i)=>{h+=`<div class="match"><button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button><div class="team">${p[0]}</div><img class="logo" src="${LOGOS[p[0]]}"><button class="btn-lev e ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button><img class="logo" src="${LOGOS[p[1]]}"><div class="team" style="text-align:right">${p[1]}</div><button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button></div>`});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join("");}
+
+function render(){
+ let h=""; PARTIDOS.forEach((p,i)=>{
+  h+=`<div class="match">
+  <button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button>
+  <div class="team left">${p[0]}</div>
+  <img class="logo" src="img/ESCUDOS/${p[0]}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${p[0]}.png';">
+  <button class="btn-lev ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button>
+  <img class="logo" src="img/ESCUDOS/${p[1]}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${p[1]}.png';">
+  <div class="team right">${p[1]}</div>
+  <button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button>
+  </div>`;
+ }); document.getElementById("partidos").innerHTML=h;
+ document.getElementById("linea").textContent=picks.map(v=>v||"-").join("");
+}
 function setP(i,v){picks[i]=v;render();}
 function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();}
-function agregar(){if(picks.includes("")){alert("Selecciona los 9 partidos");return}let nom=document.getElementById("nombre").value.trim().toUpperCase();let tel=document.getElementById("tel").value.trim();if(!nom||!tel){alert("Pon nombre y telefono");return}let cant=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<cant;k++) quinielas.push({nombre:nom,tel:tel,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();}
+function agregar(){if(picks.includes("")){alert("Selecciona los 9");return}let nom=document.getElementById("nombre").value.trim().toUpperCase();let tel=document.getElementById("tel").value.trim();if(!nom||!tel){alert("Pon nombre y telefono");return}let cant=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<cant;k++) quinielas.push({nombre:nom,tel:tel,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();}
 function renderLista(){document.getElementById("nEnv").textContent=quinielas.length;document.getElementById("nQ").textContent=quinielas.length;document.getElementById("costo").textContent=quinielas.length*20;document.getElementById("total").textContent=quinielas.length*20;document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>";}
 function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}}
 async function enviarTodo(){
@@ -61,24 +77,23 @@ async function enviarTodo(){
  try{
   let res=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});
   let j=await res.json();
-  document.getElementById("cardOk").innerHTML=`<h2 style="margin:0 0 10px">✅ ¡ENVIADAS!</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">🎫 IDs: ${j.ids.join(", ")}</div><p style="text-align:left">👤 ${quinielas[0].nombre}<br>📱 ${quinielas[0].tel}<br>📋 ${j.cantidad} quiniela(s)<br>💰 <b>Total a pagar: $${j.total}</b><br><br>${quinielas.map((q,i)=>`ID ${j.ids[i]}: ${q.comb}`).join("<br>")}</p><button onclick="enviarComprobanteCliente('${j.ids.join(",")}','${j.total}')" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;cursor:pointer">📲 Mandar comprobante a mi WhatsApp</button><button onclick="cerrarModal()" style="background:#eee;border:none;padding:10px;border-radius:10px;width:100%;margin-top:8px;cursor:pointer">Cerrar</button>`;
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ¡ENVIADAS!</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">🎫 IDs: ${j.ids.join(", ")}</div><p style="text-align:left">👤 ${quinielas[0].nombre}<br>💰 Total: $${j.total}<br><br>${quinielas.map((q,i)=>`ID ${j.ids[i]}: ${q.comb}`).join("<br>")}</p><button onclick="enviarComprobanteCliente('${j.ids.join(",")}','${j.total}')" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">📲 Comprobante a mi WhatsApp</button><button onclick="cerrarModal()" style="background:#eee;border:none;padding:10px;border-radius:10px;width:100%;margin-top:8px">Cerrar</button>`;
   document.getElementById("modalOk").classList.add("show");
-  let textoAdmin=`*NUEVA QUINIELA GOLAZO*%0A👤 Cliente: ${quinielas[0].nombre}%0A📱 Tel: ${quinielas[0].tel}%0A🎫 IDs: ${j.ids.join(", ")}%0A📋 Cantidad: ${j.cantidad}%0A💰 Total a cobrar: $${j.total}%0A%0A${quinielas.map((q,i)=>`ID ${j.ids[i]} - ${q.comb}`).join("%0A")}`;
+  let textoAdmin=`*NUEVA QUINIELA GOLAZO*%0A👤 ${quinielas[0].nombre}%0A📱 ${quinielas[0].tel}%0A🎫 IDs: ${j.ids.join(", ")}%0A💰 $${j.total}%0A%0A${quinielas.map((q,i)=>`ID ${j.ids[i]} - ${q.comb}`).join("%0A")}`;
   window.open(`https://wa.me/${MI_WHATSAPP}?text=${textoAdmin}`,"_blank");
  }catch(e){
   await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});
   let total=quinielas.length*20;
-  document.getElementById("cardOk").innerHTML=`<h2>✅ ¡ENVIADAS!</h2><p>📋 ${quinielas.length} quiniela(s)<br>💰 Total: $${total}</p><button onclick="enviarComprobanteCliente('POR ASIGNAR','${total}')" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">📲 Mandar comprobante a mi WhatsApp</button><button onclick="cerrarModal()" style="background:#eee;border:none;padding:10px;border-radius:10px;width:100%;margin-top:8px">Cerrar</button>`;
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ¡ENVIADAS!</h2><p>Total: $${total}</p><button onclick="enviarComprobanteCliente('POR ASIGNAR','${total}')" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">📲 Comprobante</button><button onclick="cerrarModal()" style="background:#eee;border:none;padding:10px;border-radius:10px;width:100%;margin-top:8px">Cerrar</button>`;
   document.getElementById("modalOk").classList.add("show");
-  let textoAdmin=`*NUEVA QUINIELA*%0A👤 ${quinielas[0].nombre}%0A📱 ${quinielas[0].tel}%0A💰 $${total}%0A${quinielas.map(q=>q.comb).join("%0A")}`;
-  window.open(`https://wa.me/${MI_WHATSAPP}?text=${textoAdmin}`,"_blank");
+  window.open(`https://wa.me/${MI_WHATSAPP}?text=*NUEVA QUINIELA*%0A👤 ${quinielas[0].nombre}%0A📱 ${quinielas[0].tel}%0A💰 $${total}`,"_blank");
  }
  btn.textContent=`Enviar ${0} 📲`; btn.disabled=false;
 }
 function enviarComprobanteCliente(ids,total){
  let tel=document.getElementById("tel").value.replace(/[^0-9]/g,""); if(tel.length==10) tel="52"+tel;
  let quinStr=quinielas.map((q,i)=>`${i+1}. ${q.comb}`).join("%0A");
- let texto=`*COMPROBANTE QUINIELA GOLAZO*%0A%0A✅ Tus quinielas se guardaron%0A🎫 IDs: ${ids}%0A👤 ${quinielas[0].nombre}%0A📋 ${quinielas.length} quiniela(s)%0A💰 Total a pagar: $${total}%0A%0A${quinStr}%0A%0AGuarda este mensaje para tu premio 🍀`;
+ let texto=`*COMPROBANTE QUINIELA GOLAZO*%0A🎫 IDs: ${ids}%0A👤 ${quinielas[0].nombre}%0A💰 Total: $${total}%0A%0A${quinStr}`;
  window.open(`https://wa.me/${tel}?text=${texto}`,"_blank");
  cerrarModal(); quinielas=[]; localStorage.setItem("qs","[]"); renderLista();
 }
