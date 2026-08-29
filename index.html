@@ -7,23 +7,26 @@
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a2f3e;color:#fff}
 .wrap{max-width:640px;margin:auto;padding:8px;width:100%;overflow:hidden}
-.top-banner{background:#fff;border:3px solid #d4ff00;border-radius:14px;overflow:hidden;cursor:pointer}
-.top-banner img{width:100%;height:auto;display:block;object-fit:contain;max-height:130px}
-.head{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:12px}
+/* FONDO TRANSPARENTE */
+.top-banner{background:transparent;border:none;border-radius:0;overflow:visible;cursor:pointer;text-align:center;padding:10px 0}
+.top-banner img{width:100%;height:auto;display:block;object-fit:contain;max-height:160px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
+.head{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:12px;border-radius:10px;margin-top:5px}
 .match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px;width:100%;gap:1px}
 .match:nth-child(even){background:#d7e8ef}
-.team{font-weight:900;font-size:9px;text-transform:uppercase;padding:0 2px;line-height:0.9;word-break:keep-all;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.match:first-child{border-top-left-radius:10px;border-top-right-radius:10px;overflow:hidden}
+.match:last-child{border-bottom-left-radius:10px;border-bottom-right-radius:10px}
+.team{font-weight:900;font-size:9.2px;text-transform:uppercase;padding:0 2px;line-height:0.95;white-space:nowrap;overflow:hidden;text-overflow:clip;text-align:center}
 .team.left{text-align:left}.team.right{text-align:right}
 .logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block}
 .btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;font-size:13px;display:grid;place-items:center;cursor:pointer;margin:auto}
 .btn-lev.sel{background:#d4ff00;transform:scale(1.08)}
-.line{color:#eaff00;font-weight:900;letter-spacing:5px;text-align:center;font-size:26px;margin:12px 0}
+.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0}
 .inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase}
-.row-btns{display:grid;grid-template-columns:1fr 62px 62px;gap:8px;margin-top:10px}
-.b-env{background:#2eff7a;border:none;border-radius:14px;padding:13px;font-weight:900;font-size:18px;cursor:pointer}
-.b-plus{background:#00e5ff;border:none;border-radius:16px;height:54px;font-size:30px;cursor:pointer}
-.b-trash{background:#ff0040;border:none;border-radius:16px;height:54px;font-size:24px;cursor:pointer}
-.b-suerte{background:#eaff00;border:none;border-radius:10px;padding:12px;font-weight:900;cursor:pointer;margin-top:10px;width:100%}
+.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer}
+.row-btns{display:grid;grid-template-columns:1fr 62px;gap:8px;margin-top:10px}
+.b-env{background:#2eff7a;border:none;border-radius:14px;padding:15px;font-weight:900;font-size:18px;cursor:pointer}
+.b-trash{background:#ff0040;border:none;border-radius:14px;height:100%;font-size:24px;cursor:pointer;min-height:54px}
+.b-suerte{background:#eaff00;border:none;border-radius:14px;padding:15px;font-weight:900;cursor:pointer;margin-top:10px;width:100%;font-size:18px}
 .caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px}
 .lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px}
 .lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900}
@@ -31,6 +34,15 @@
 .q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px}
 .modal.show{display:grid}.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center}
+/* FIX PARA PC */
+@media(min-width:700px){
+.wrap{max-width:600px}
+.head{grid-template-columns:46px 125px 42px 36px 42px 125px 46px;font-size:12px}
+.match{grid-template-columns:46px 125px 42px 36px 42px 125px 46px;min-height:54px}
+.team{font-size:10.5px;letter-spacing:-0.2px}
+.logo{width:36px;height:36px}
+.btn-lev{width:38px;height:38px}
+}
 </style>
 </head>
 <body>
@@ -40,9 +52,9 @@
 <div class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
 <div id="partidos"></div><div class="line" id="linea">---------</div>
 <input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"><input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
-<div style="display:grid;grid-template-columns:80px 1fr;gap:8px;margin-top:8px"><input class="inp" style="margin:0" id="cant" type="number" value="1" min="1"><button style="background:#d4ff00;border:none;border-radius:10px;font-weight:900" onclick="agregar()">AGREGAR +</button></div>
-<div class="row-btns"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-plus" onclick="suerte()">🎲</button><button class="b-trash" onclick="borrarTodo()">🗑️</button></div>
-<button class="b-suerte" onclick="suerte()">A la suerte</button>
+<div style="display:grid;grid-template-columns:80px 1fr;gap:8px;margin-top:8px"><input class="inp" style="margin:0" id="cant" type="number" value="1" min="1"><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div>
+<div class="row-btns"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-trash" onclick="borrarTodo()">🗑️</button></div>
+<button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button>
 <div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div>
 <div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div>
 </div>
@@ -62,9 +74,9 @@ function render(){
   h+=`<div class="match">
   <button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button>
   <div class="team left">${p[0]}</div>
-  <img class="logo" src="img/ESCUDOS/${p[0]}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${p[0]}.png';">
+  <img class="logo" src="img/ESCUDOS/${p[0]}.PNG" data-team="${p[0]}" data-idx="0" onerror="let e=['PNG','png','JPG','jpg','webp'];let n=parseInt(this.dataset.idx)+1;if(n<e.length){this.dataset.idx=n;this.src='img/ESCUDOS/'+this.dataset.team+'.'+e[n]}">
   <button class="btn-lev ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button>
-  <img class="logo" src="img/ESCUDOS/${p[1]}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${p[1]}.png';">
+  <img class="logo" src="img/ESCUDOS/${p[1]}.PNG" data-team="${p[1]}" data-idx="0" onerror="let e=['PNG','png','JPG','jpg','webp'];let n=parseInt(this.dataset.idx)+1;if(n<e.length){this.dataset.idx=n;this.src='img/ESCUDOS/'+this.dataset.team+'.'+e[n]}">
   <div class="team right">${p[1]}</div>
   <button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button>
   </div>`;
@@ -73,7 +85,7 @@ function render(){
 }
 function setP(i,v){picks[i]=v;render();}
 function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();}
-function agregar(){if(picks.includes("")){alert("Selecciona los 9");return}let nom=document.getElementById("nombre").value.trim().toUpperCase();let tel=document.getElementById("tel").value.trim();if(!nom||!tel){alert("Pon nombre y telefono");return}let cant=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<cant;k++) quinielas.push({nombre:nom,tel:tel,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();}
+function agregar(){if(picks.includes("")){alert("Selecciona los 9 partidos");return}let nom=document.getElementById("nombre").value.trim().toUpperCase();let tel=document.getElementById("tel").value.trim();if(!nom||!tel){alert("Pon nombre y telefono");return}let cant=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<cant;k++) quinielas.push({nombre:nom,tel:tel,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();}
 function renderLista(){document.getElementById("nEnv").textContent=quinielas.length;document.getElementById("nQ").textContent=quinielas.length;document.getElementById("costo").textContent=quinielas.length*20;document.getElementById("total").textContent=quinielas.length*20;document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>";}
 function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}}
 async function enviarTodo(){
@@ -84,7 +96,7 @@ async function enviarTodo(){
   let j=await res.json();
   document.getElementById("cardOk").innerHTML=`<h2>✅ ¡ENVIADAS!</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">🎫 IDs: ${j.ids.join(", ")}</div><p style="text-align:left">👤 ${quinielas[0].nombre}<br>💰 Total: $${j.total}<br><br>${quinielas.map((q,i)=>`ID ${j.ids[i]}: ${q.comb}`).join("<br>")}</p><button onclick="enviarComprobanteCliente('${j.ids.join(",")}','${j.total}')" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">📲 Comprobante a mi WhatsApp</button><button onclick="cerrarModal()" style="background:#eee;border:none;padding:10px;border-radius:10px;width:100%;margin-top:8px">Cerrar</button>`;
   document.getElementById("modalOk").classList.add("show");
-  window.open(`https://wa.me/${MI_WHATSAPP}?text=*NUEVA QUINIELA*%0A👤 ${quinielas[0].nombre}%0A📱 ${quinielas[0].tel}%0A🎫 IDs: ${j.ids.join(", ")}%0A💰 $${j.total}`,"_blank");
+  window.open(`https://wa.me/${MI_WHATSAPP}?text=*NUEVA QUINIELA GOLAZO*%0A👤 ${quinielas[0].nombre}%0A📱 ${quinielas[0].tel}%0A🎫 IDs: ${j.ids.join(", ")}%0A💰 $${j.total}`,"_blank");
  }catch(e){
   await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});
   let total=quinielas.length*20;
