@@ -16,7 +16,8 @@ async function cargarPartidos(){
 
 function renderPartidos(){
   let cont = document.getElementById("lista-partidos");
-  cont.innerHTML="";
+  cont.innerHTML=`<div class="tabla-quiniela-header"><div></div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div></div></div>`;
+
   partidosData.forEach((p,i)=>{
     let idx=i+1;
     combinaciones[idx]="";
@@ -26,26 +27,15 @@ function renderPartidos(){
     if(typeof horaTxt === 'string' && horaTxt.includes('T')){ horaTxt = horaTxt.substring(11,16); }
 
     cont.innerHTML+=`
-      <div class="card-partido">
-        <div class="num">${idx}</div>
-
-        <span id="L${idx}" class="btn-letra" onclick="toggleLetra(${idx},'L')">L</span>
-
-        <div class="equipo">
-          <img src="img/ESCUDOS/${localClean}.png" onerror="this.src='img/logo.png'">
-          <span>${p.local}</span>
-        </div>
-
-        <span id="E${idx}" class="btn-letra" onclick="toggleLetra(${idx},'E')">E</span>
-
-        <div class="equipo">
-          <img src="img/ESCUDOS/${visitaClean}.png" onerror="this.src='img/logo.png'">
-          <span>${p.visita}</span>
-        </div>
-
-        <span id="V${idx}" class="btn-letra" onclick="toggleLetra(${idx},'V')">V</span>
-
-        <div class="info-bar">${p.diaLetra} ${p.dia}/${p.mes} ${horaTxt} ${p.trans}</div>
+      <div class="fila-quiniela">
+        <div class="celda-check"><span id="L${idx}" class="cuadro" onclick="toggleLetra(${idx},'L')">L</span></div>
+        <div class="celda-nombre">${p.local}</div>
+        <div class="celda-escudo"><img src="img/ESCUDOS/${localClean}.png" onerror="this.src='img/logo.png'"></div>
+        <div class="celda-check"><span id="E${idx}" class="cuadro" onclick="toggleLetra(${idx},'E')">E</span></div>
+        <div class="celda-escudo"><img src="img/ESCUDOS/${visitaClean}.png" onerror="this.src='img/logo.png'"></div>
+        <div class="celda-nombre">${p.visita}</div>
+        <div class="celda-check"><span id="V${idx}" class="cuadro" onclick="toggleLetra(${idx},'V')">V</span></div>
+        <div class="fila-info">${p.diaLetra} ${p.dia}/${p.mes} ${horaTxt} - ${p.trans}</div>
       </div>`;
   });
 }
@@ -73,7 +63,6 @@ async function getNextId(){
     document.getElementById("infoIDs").textContent="Tu folio iniciará en: "+nextIdGlobal;
   }catch(e){ nextIdGlobal=101; }
 }
-
 function generar(){
   let nombre=document.getElementById("nombre").value.trim();
   let nQ = parseInt(document.getElementById("numQuinielas").value) || 1;
@@ -81,7 +70,6 @@ function generar(){
   for(let i=1;i<=partidosData.length;i++){ if(!combinaciones[i]){ alert("Te falta seleccionar partido "+i); return; } }
   let arrays = [];
   for(let i=1;i<=partidosData.length;i++){ arrays.push(combinaciones[i].split("")); }
-  let totalCombinaciones = arrays.reduce((a,b)=>a*b.length,1);
   let texto=""; let count=0;
   function backtrack(pos, actual){
     if(count>=nQ) return;
@@ -90,8 +78,7 @@ function generar(){
   }
   backtrack(1, []);
   document.getElementById("resultado").value=texto;
-  let costo = nQ*15;
-  document.getElementById("infoCosto").textContent=`Total: ${nQ} x $15 = $${costo} | Posibles: ${totalCombinaciones}`;
+  document.getElementById("infoCosto").textContent=`Total: ${nQ} x $15 = $${nQ*15}`;
   document.getElementById("infoIDs").textContent=`Folios: ${nextIdGlobal} al ${nextIdGlobal+nQ-1}`;
 }
 function enviarWhatsApp(){
@@ -105,10 +92,8 @@ async function guardarEnBase(){
   let txt=document.getElementById("resultado").value.trim();
   if(!nombre ||!tel ||!txt){ alert("Falta nombre, teléfono o generar"); return; }
   let lineas = txt.split("\n").filter(l=>l.trim()!="").length;
-  let costoTotal = lineas*15;
-  document.getElementById("statusBase").textContent="Guardando...";
   try{
-    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body: JSON.stringify({action:"guardar_basededatos",nombre:nombre.toUpperCase(),telefono:tel,quinielas:txt,id_inicio:nextIdGlobal,total:lineas,costo:costoTotal})});
+    await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body: JSON.stringify({action:"guardar_basededatos",nombre:nombre.toUpperCase(),telefono:tel,quinielas:txt,id_inicio:nextIdGlobal,total:lineas,costo:lineas*15})});
     document.getElementById("statusBase").textContent=`✅ Guardado! Folios ${nextIdGlobal} al ${nextIdGlobal+lineas-1}`;
     nextIdGlobal+=lineas;
   }catch(e){ document.getElementById("statusBase").textContent="Error al guardar"; }
