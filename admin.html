@@ -29,7 +29,7 @@ td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6
 </head>
 <body>
 <script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAKYz7agNn4Is2s8l07Snug1XtOfJS9NlWfd_C7OnVQHAR3qSlNQ/exec";
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxHiNIS9aIGsoAZ-z07jj1zfgRottaZsD9DRAM-irijbA9tbiJU6IkmyNrpDSgK2Bad/exec";
 </script>
 
 <div id="loginScreen" class="login-wrap">
@@ -67,7 +67,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
   </div>
 
   <div class="card">
-    <b style="color:#ffee00">NUEVA QUINIELA</b>
+    <b style="color:#ffee00">NUEVA QUINIELA (Cargada desde tu SHEET ADMIN)</b>
     <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DÍA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
     <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
     <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p>
@@ -85,7 +85,28 @@ async function cargarUsuarios(){try{let r=await fetch(SCRIPT_URL+"?action=listar
 function renderUsuarios(){let c=document.getElementById("listaUsuarios");c.innerHTML="";usuariosLocal.forEach(us=>{let es=us.u==="ADRIAN";c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;});}
 async function agregarUsuario(){let btn=document.getElementById("btnAlta");let u=newUser.value.trim().toUpperCase(),p=newPass.value.trim();if(!u||!p){showMsg("msgUsuarios","Llena usuario y contraseña",false);return;}if(usuariosLocal.find(x=>x.u===u)){showMsg("msgUsuarios","❌ Ya existe "+u,false);return;}if(usuariosLocal.length>=4){showMsg("msgUsuarios","❌ Máximo 4",false);return;}btn.disabled=true;btn.textContent="...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"alta_usuario",u,p})});usuariosLocal.push({u,p});localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();newUser.value="";newPass.value="";showMsg("msgUsuarios","✅ Usuario "+u+" agregado",true);}catch(e){showMsg("msgUsuarios","Error",false);}btn.disabled=false;btn.textContent="+ ALTA";}
 async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","🗑️ Usuario "+n+" borrado",true);}catch(e){showMsg("msgUsuarios","Error al borrar",false);}}
-function renderTabla(){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="";let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];let data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});}
+
+// === ESTA ES LA FUNCION NUEVA QUE CARGA DE TU HOJA ADMIN ===
+async function renderTabla(){
+  let tb=document.getElementById("tablaQuiniela");
+  tb.innerHTML="<tr><td colspan='9'>Cargando equipos de tu SHEET ADMIN...</td></tr>";
+  let data=null;
+  try{
+    let r=await fetch(SCRIPT_URL+"?action=obtener_admin");
+    let j=await r.json();
+    if(j && j.length > 0){
+      data=j;
+      localStorage.setItem("quiniela_nueva", JSON.stringify(data));
+    }
+  }catch(e){ console.log("Error leyendo sheet", e); }
+  if(!data){
+    let def=[{local:"PUEBLA",visita:"TOLUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"JUÁREZ",visita:"PACHUCA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"SAN LUIS",visita:"GUADALAJARA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"QUERÉTARO",visita:"MONTERREY",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"TIGRES",visita:"NECAXA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"TDN"},{local:"AMÉRICA",visita:"TIJUANA",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:05",trans:"C5"},{local:"ATLAS",visita:"ATLANTE",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"PUMAS",visita:"LEÓN",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"12:00",trans:"C2"},{local:"CRUZ AZUL",visita:"SANTOS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];
+    data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||def;
+  }
+  tb.innerHTML="";
+  data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});
+}
+
 function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
 async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando...";try{await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_admin",quiniela:data})});document.getElementById("status").textContent="✅ Guardado en tu SHEET ADMIN";btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";}catch(e){document.getElementById("status").textContent="Error: "+e;}}
 if(localStorage.getItem("sesion_golazo"))mostrarAdmin();
