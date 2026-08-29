@@ -1,62 +1,58 @@
-let partidosData = [];
-let combinaciones = {};
-let nextIdGlobal = 101;
+const partidos = [
+  {local:"TOLUCA", visita:"PUEBLA", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F219.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F222.png"},
+  {local:"GUADALAJARA", visita:"JUAREZ", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F205.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F12325.png"},
+  {local:"CRUZ AZUL", visita:"ATLAS", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F203.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F200.png"},
+  {local:"TIGRES", visita:"LEON", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F228.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F212.png"},
+  {local:"AMERICA", visita:"PACHUCA", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F201.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F221.png"},
+  {local:"MONTERREY", visita:"MAZATLAN", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F220.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F23373.png"},
+  {local:"NECAXA", visita:"SANTOS", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F218.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F227.png"},
+  {local:"PUMAS", visita:"QUERETARO", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F224.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F225.png"},
+  {local:"AT SAN LUIS", visita:"TIJUANA", escudoLocal:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F226.png", escudoVisita:"https://a3.espncdn.com/combiner/i?img=%2Fi%2Fteamlogos%2Fsoccer%2F500%2F229.png"}
+];
 
-async function cargarPartidos(){
-  try{
-    let r = await fetch(SCRIPT_URL+"?action=get_admin");
-    partidosData = await r.json();
-    renderTabla();
-    getNextId();
-  }catch(e){
-    document.getElementById("lista-partidos").innerHTML="<p style='color:red'>Error cargando</p>";
-  }
-}
+let selecciones = {};
 
-function renderTabla(){
-  let cont = document.getElementById("lista-partidos");
-  let html = `<div class="tabla-encabezado"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>`;
-
-  partidosData.forEach((p,i)=>{
-    let idx=i+1; combinaciones[idx]="";
-    let localClean = p.local.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
-    let visitaClean = p.visita.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
-    let hora = p.hora; if(typeof hora==='string' && hora.includes('T')) hora=hora.substring(11,16);
-
-    html+=`
-      <div class="fila-partido">
-        <div class="boton" id="L${idx}" onclick="toggleLetra(${idx},'L')">L</div>
-        <div class="col-nombre">${p.local.toUpperCase()}</div>
-        <div class="col-escudo"><img src="img/ESCUDOS/${localClean}.png" onerror="this.src='img/logo.png'"></div>
-        <div class="boton" id="E${idx}" onclick="toggleLetra(${idx},'E')">E</div>
-        <div class="col-escudo"><img src="img/ESCUDOS/${visitaClean}.png" onerror="this.src='img/logo.png'"></div>
-        <div class="col-nombre">${p.visita.toUpperCase()}</div>
-        <div class="boton" id="V${idx}" onclick="toggleLetra(${idx},'V')">V</div>
-      </div>`;
+function cargar() {
+  const cont = document.getElementById('lista-partidos');
+  let html = `<div class="encabezado"><div>LOCAL</div><div></div><div>L</div><div>E</div><div>V</div><div></div><div>VISITA</div></div>`;
+  partidos.forEach((p,i)=>{
+    html+=`<div class="fila">
+      <div class="n">${p.local}</div>
+      <div class="e"><img src="${p.escudoLocal}"></div>
+      <div class="b"><button id="l${i}" onclick="marcar(${i},'L')">L</button></div>
+      <div class="b"><button id="e${i}" onclick="marcar(${i},'E')">E</button></div>
+      <div class="b"><button id="v${i}" onclick="marcar(${i},'V')">V</button></div>
+      <div class="e"><img src="${p.escudoVisita}"></div>
+      <div class="n">${p.visita}</div>
+    </div>`;
   });
-  cont.innerHTML=html;
+  cont.innerHTML = html;
 }
-
-function toggleLetra(idx, letra){
-  let actual=combinaciones[idx]||"";
-  if(actual.includes(letra)) actual=actual.replace(letra,""); else actual+=letra;
-  actual=actual.split("").sort((a,b)=>["L","E","V"].indexOf(a)-["L","E","V"].indexOf(b)).join("");
-  combinaciones[idx]=actual;
-  ["L","E","V"].forEach(l=>{
-    let el=document.getElementById(l+idx);
-    if(actual.includes(l)) el.classList.add("active"); else el.classList.remove("active");
-  });
+function marcar(i, letra){
+  selecciones[i]=letra;
+  document.getElementById('l'+i).classList.remove('active');
+  document.getElementById('e'+i).classList.remove('active');
+  document.getElementById('v'+i).classList.remove('active');
+  document.getElementById(letra.toLowerCase()+i).classList.add('active');
 }
-
-async function getNextId(){ try{ let r=await fetch(SCRIPT_URL+"?action=get_next_id"); let j=await r.json(); nextIdGlobal=j.nextId; document.getElementById("infoIDs").textContent="Folio: "+nextIdGlobal; }catch(e){} }
 function generar(){
-  let nombre=document.getElementById("nombre").value.trim(); let nQ=parseInt(document.getElementById("numQuinielas").value)||1;
-  if(!nombre){ alert("Pon nombre"); return; }
-  let arrays=[]; for(let i=1;i<=partidosData.length;i++){ if(!combinaciones[i]){ alert("Falta partido "+i); return; } arrays.push(combinaciones[i].split("")); }
-  let texto=""; let c=0; function back(pos,act){ if(c>=nQ) return; if(pos>partidosData.length){ c++; texto+=act.join(" ")+" "+nombre.toUpperCase()+" *\n"; return; } for(let l of arrays[pos-1]){ act[pos-1]=l; back(pos+1,[...act]); } } back(1,[]);
-  document.getElementById("resultado").value=texto; document.getElementById("infoCosto").textContent=`Total: $${nQ*15} por ${nQ} quinielas`;
+  let nombre = document.getElementById('nombre').value || 'SIN NOMBRE';
+  let n = parseInt(document.getElementById('numQuinielas').value)||1;
+  let base = '';
+  for(let i=0;i<partidos.length;i++){ base+= selecciones[i] || 'L'; }
+  let txt = '';
+  for(let q=1;q<=n;q++){
+    let res = base.split('').sort(()=>0.5-Math.random()).join('').substring(0,partidos.length);
+    txt+= `${nombre} Q${q}: ${res}\n`;
+  }
+  document.getElementById('resultado').value = txt;
+  document.getElementById('infoCosto').innerText = `Total a pagar: $${n*15}`;
 }
-function enviarWhatsApp(){ let t=document.getElementById("resultado").value; if(!t){ alert("Genera primero"); return; } window.open("https://wa.me/?text="+encodeURIComponent(t)); }
-async function guardarEnBase(){ let nombre=document.getElementById("nombre").value.trim(); let tel=document.getElementById("telefono").value.trim(); let txt=document.getElementById("resultado").value.trim(); if(!nombre||!tel||!txt){ alert("Falta dato"); return; } let lineas=txt.split("\n").filter(l=>l.trim()!="").length; document.getElementById("statusBase").textContent="Guardando..."; try{ await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_basededatos",nombre:nombre.toUpperCase(),telefono:tel,quinielas:txt,id_inicio:nextIdGlobal,total:lineas,costo:lineas*15})}); document.getElementById("statusBase").textContent=`Guardado ${nextIdGlobal} al ${nextIdGlobal+lineas-1}`; nextIdGlobal+=lineas; }catch(e){ document.getElementById("statusBase").textContent="Error"; } }
-
-cargarPartidos();
+function enviarWhatsApp(){
+  let txt = encodeURIComponent(document.getElementById('resultado').value);
+  window.open(`https://wa.me/?text=${txt}`);
+}
+function guardarEnBase(){
+  document.getElementById('statusBase').innerText = 'Guardado (demo local)';
+}
+cargar();
