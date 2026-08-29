@@ -5,7 +5,16 @@ body{margin:0;background:#001e2f;color:#fff}
 .header h1{color:#e6f200;font-size:42px;margin:0;line-height:38px;text-shadow:2px 2px 0 #000}
 .premio{background:#0a2a40;padding:8px 15px;font-family:Arial;font-weight:bold;border-bottom:3px solid #ffeb00}
 #lista-partidos{max-width:900px;margin:10px auto}
-.card-partido{background:#18465c;border:3px solid #ffeb00;border-radius:18px;overflow:hidden;margin-bottom:10px;padding:8px 5px;display:grid;grid-template-columns:25px 1fr 80px 1fr;align-items:center;text-align:center}
+.card-partido{background:#18465c;border:3px solid #ffeb00;border-radius:18px;overflow:hidden;margin-bottom:12px;padding:8px 5px;display:grid;grid-template-columns:25px 1fr 80px 1fr;align-items:center;text-align:center}
+.num{color:#fff;font-size:16px}
+.col{display:flex;flex-direction:column;align-items:center;gap:6px}
+.col.center{justify-content:center}
+.equipo{font-size:11px;line-height:12px;text-align:center}
+.equipo img{width:52px;height:52px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;display:block;margin:0 auto 4px}
+.btn-letra{background:#fff;color:#000;border:2px solid #000;border-radius:10px;width:38px;height:38px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-weight:900;font-size:18px;box-shadow:2px 2px 0 #000}
+.btn-letra.active{background:#00ff66;transform:scale(1.1)}
+.vs{font-size:13px;color:#ffeb00;margin-bottom:4px}
+.info-bar{background:#ffeb00;color:#000;text-align:center;font-family:Arial;font-weight:bold;font-size:12px;padding:4px;grid-column:1/-1;border-radius:10px;margin-top:8px}
 .num{color:#fff;font-size:16px}
 .equipo{font-size:11px;line-height:12px}
 .equipo img{width:52px;height:52px;object-fit:contain;background:#fff;border-radius:12px;padding:4px;display:block;margin:0 auto 4px}
