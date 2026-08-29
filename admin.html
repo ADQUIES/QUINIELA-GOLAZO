@@ -24,6 +24,7 @@ td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6
 .btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
 .msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:13px}
 .msg-ok{background:#00ff66;color:#000}.msg-error{background:#ff0033;color:#fff}
+.btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block}
 </style>
 </head>
 <body>
@@ -47,7 +48,10 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyMuTFVnhxc_5BG-LHAK
       <img src="img/logo3.png" style="height:38px;width:auto;display:block">
       <span id="who" style="color:#ffee00;font-weight:900;font-size:12px"></span>
     </div>
-    <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 14px;border-radius:8px;font-weight:bold">Salir</button>
+    <div style="display:flex;gap:6px;align-items:center">
+      <a href="index.html" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
+      <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button>
+    </div>
   </div>
 
   <div class="card">
