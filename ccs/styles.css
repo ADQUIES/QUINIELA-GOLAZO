@@ -1,42 +1,35 @@
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black, Arial}
-body{background:#001525;display:flex;justify-content:center;padding:10px}
+body{background:#001525;display:flex;justify-content:center;padding:0}
+.contenedor{width:100%;max-width:600px;background:#001525;border:4px solid #d4ff00;overflow:hidden}
 
-.contenedor{width:100%;max-width:750px;background:#001525;border:4px solid #d4ff00}
+.header{background:white;display:flex;align-items:center;gap:8px;padding:6px}
+.header img{width:50px;height:50px;border-radius:50%;border:2px solid #d4ff00;flex-shrink:0}
+.header h1{color:#b8a600;font-size:20px;line-height:20px;text-shadow:1px 1px 0 black;white-space:nowrap}
 
-.header{background:white;display:flex;align-items:center;gap:10px;padding:8px;border-bottom:4px solid #d4ff00}
-.header img{width:60px;height:60px;border-radius:50%;border:3px solid #d4ff00}
-.header h1{color:#b8a600;font-size:26px;line-height:24px;text-shadow:2px 2px 0 black}
+.premio{background:#0a344a;color:white;text-align:center;padding:8px;font-family:Arial;font-weight:bold;font-size:12px;border-top:3px solid #d4ff00;border-bottom:3px solid #d4ff00}
 
-.premio{background:#0a344a;color:white;text-align:center;padding:8px;font-family:Arial;font-weight:bold;border-bottom:3px solid #d4ff00}
+#lista-partidos{width:100%;background:white}
 
-.cargando{text-align:center;color:#d4ff00;padding:20px}
+.tabla-encabezado{display:grid;grid-template-columns:42px 1fr 44px 42px 44px 1fr 42px;background:#0a344a;color:#d4ff00;text-align:center;padding:5px 0;font-size:11px;font-family:Arial;border-bottom:2px solid #d4ff00}
+.tabla-encabezado div:nth-child(2), .tabla-encabezado div:nth-child(6){font-family:Arial Black}
 
-/* ESTA ES LA TABLA QUE REEMPLAZA TU IMAGEN */
-#lista-partidos{padding:5px}
+.fila-partido{display:grid;grid-template-columns:42px 1fr 44px 42px 44px 1fr 42px;align-items:center;background:white;border-bottom:1px solid black;min-height:46px;width:100%}
+.fila-partido:nth-child(even){background:#d9e8f0}
 
-.tabla-encabezado{display:grid;grid-template-columns:50px 1fr 55px 50px 55px 1fr 50px;background:#001525;color:#d4ff00;text-align:center;padding:6px 0;font-size:11px;border-bottom:2px solid #d4ff00}
+.col-nombre{font-size:10px;color:black;text-align:left;padding-left:4px;line-height:10px;word-break:break-word}
+.col-escudo{background:white;width:44px;height:46px;display:flex;align-items:center;justify-content:center;border-left:1px solid #ccc;border-right:1px solid #ccc;overflow:hidden}
+.col-escudo img{width:32px;height:28px;object-fit:contain;display:block}
 
-.fila-partido{position:relative;display:grid;grid-template-columns:50px 1fr 55px 50px 55px 1fr 50px;align-items:center;background:#d9e8f0;border:1px solid black;margin-bottom:2px;height:48px}
+.boton{width:36px;height:30px;background:white;border:2px solid black;border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;color:black;margin:0 auto;flex-shrink:0}
+.boton.active{background:#e50000;color:white;border-color:white;box-shadow:0 0 4px black}
 
-.fila-partido:nth-child(even){background:white}
-
-.col-nombre{font-size:11px;color:black;text-align:center;line-height:11px;padding:2px;font-family:Arial Black}
-.col-escudo{background:white;width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-left:1px solid black;border-right:1px solid black}
-.col-escudo img{width:40px;height:30px;object-fit:contain}
-
-.boton{width:42px;height:32px;background:white;border:2px solid black;border-radius:5px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;color:black;margin:0 auto}
-.boton.active{background:#e50000;color:white;border-color:white;box-shadow:0 0 5px black}
-
-.info-partido{grid-column:1/-1;background:#d4ff00;color:black;font-family:Arial;font-size:9px;font-weight:bold;text-align:center;padding:2px;border-top:1px solid black}
-
-/* FORMULARIO */
-.formulario{padding:10px}
-.formulario input{width:100%;padding:10px;margin-bottom:6px;border-radius:6px;border:2px solid black;font-family:Arial}
-.fila-form{display:flex;gap:6px}
-#numQuinielas{max-width:70px}
-.btn-generar{flex:1;background:#d4ff00;border:2px solid black;border-radius:6px;font-family:Arial Black;cursor:pointer}
-.btn-whats{flex:1;background:#25d366;color:white;border:2px solid black;border-radius:6px;padding:10px;font-family:Arial Black;cursor:pointer}
-.btn-guardar{flex:1;background:#007bff;color:white;border:2px solid black;border-radius:6px;padding:10px;font-family:Arial Black;cursor:pointer}
-#resultado{width:100%;height:120px;border:2px solid black;border-radius:6px;padding:8px;font-family:monospace;margin-top:6px}
-#infoCosto{color:#d4ff00;font-family:Arial;font-weight:bold}
-#infoIDs{color:#00ff88;font-family:Arial;font-weight:bold}
+.formulario{padding:8px;background:#001525}
+.formulario input{width:100%;padding:12px;margin-bottom:6px;border-radius:8px;border:2px solid black;font-family:Arial;font-size:14px}
+.fila-form{display:flex;gap:6px;margin-bottom:6px}
+#numQuinielas{max-width:70px;text-align:center}
+.btn-generar{flex:1;background:#d4ff00;border:2px solid black;border-radius:8px;font-family:Arial Black;padding:12px;cursor:pointer;font-size:16px}
+.btn-whats{flex:1;background:#25d366;color:white;border:2px solid black;border-radius:8px;padding:10px;font-family:Arial Black;cursor:pointer}
+.btn-guardar{flex:1;background:#007bff;color:white;border:2px solid black;border-radius:8px;padding:10px;font-family:Arial Black;cursor:pointer}
+#resultado{width:100%;height:120px;border:2px solid black;border-radius:8px;padding:8px;font-family:monospace;font-size:12px}
+#infoCosto{color:#d4ff00;font-family:Arial;font-weight:bold;font-size:12px;margin-top:5px}
+#infoIDs{color:#00ff88;font-family:Arial;font-weight:bold;font-size:12px}
