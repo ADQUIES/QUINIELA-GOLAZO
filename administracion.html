@@ -31,7 +31,7 @@ body{margin:0;background:#000e14;color:#fff}
     <h1 class="login-title">ENTRAR</h1>
     <input id="user" placeholder="USUARIO" value="ADRIAN">
     <input id="pass" type="password" placeholder="PASSWORD">
-    <button class="btn-login" onclick="login()">ENTRAR</button>
+    <button class="btn-login" id="btnEntrar" onclick="login()">ENTRAR</button>
     <p id="msg" style="color:#ff4444;text-align:center;font-size:12px;margin-top:10px;font-weight:bold"></p>
   </div>
 </div>
@@ -42,33 +42,68 @@ body{margin:0;background:#000e14;color:#fff}
       <img src="img/logo3.png" style="width:100%;max-width:280px;margin:0 auto 10px;display:block">
       <h2 style="color:#ffee00;font-weight:900;letter-spacing:2px;margin:0 0 15px">PANEL CENTRAL</h2>
       <p id="who" style="color:#fff;font-weight:900;margin-bottom:18px"></p>
-
       <a href="admin.html" class="btn-menu btn-admin">⚙️ IR A ADMIN<br><span style="font-size:12px;font-weight:400">Crear quiniela / Usuarios</span></a>
-      <a href="resultadospartidos.html" class="btn-menu btn-resultados">📊 RESULTADOS<br><span style="font-size:12px;font-weight:400">Ingresar Resultados</span></a>
+      <a href="resultadospartidos.html" class="btn-menu btn-resultados">📊 RESULTADOS<br><span style="font-size:12px;font-weight:400">Cargar C18:D26 en ADMIN</span></a>
       <a href="index.html" class="btn-menu btn-index">🎲 IR A QUINIELA<br><span style="font-size:12px;font-weight:400">Ver página de clientes</span></a>
-
       <button onclick="logout()" class="btn-salir">Salir</button>
     </div>
   </div>
 </div>
 
 <script>
-function mostrar(){ 
-  let s=JSON.parse(localStorage.getItem("sesion_golazo")); 
-  if(!s) return;
+// ===== URL DE TU SCRIPT =====
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
+
+function mostrar(usuario){
   document.getElementById("loginScreen").classList.add("hidden");
   document.getElementById("menuScreen").classList.remove("hidden");
-  document.getElementById("who").textContent="Hola "+s.u+" 👋";
+  document.getElementById("who").textContent="Hola "+usuario+" 👋";
 }
+
 function logout(){ localStorage.removeItem("sesion_golazo"); location.reload(); }
-function login(){
-  let u=document.getElementById("user").value.trim().toUpperCase();
+
+// ===== LOGIN CON VALIDACION REAL A HOJA USUARIOS =====
+async function login(){
+  let u=document.getElementById("user").value.trim();
   let p=document.getElementById("pass").value.trim();
-  if(!u||!p){ document.getElementById("msg").textContent="Escribe usuario y pass"; return; }
-  localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));
-  mostrar();
+  let msg=document.getElementById("msg");
+  let btn=document.getElementById("btnEntrar");
+
+  if(!u||!p){ msg.textContent="Escribe usuario y pass"; return; }
+
+  btn.textContent="Verificando...";
+  msg.textContent="";
+  msg.style.color="#ffea00";
+
+  try{
+    let r=await fetch(SCRIPT_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body:JSON.stringify({action:"validar_login", usuario:u, pass:p})
+    });
+    let d=await r.json();
+    if(d.ok){
+      localStorage.setItem("sesion_golazo",JSON.stringify({u:d.usuario}));
+      mostrar(d.usuario);
+    }else{
+      msg.textContent=d.msg;
+      msg.style.color="#ff4444";
+      btn.textContent="ENTRAR";
+    }
+  }catch(e){
+    msg.textContent="❌ Error de conexion: "+e.message;
+    msg.style.color="#ff4444";
+    btn.textContent="ENTRAR";
+  }
 }
-if(localStorage.getItem("sesion_golazo")) mostrar();
+
+// ===== ENTER = ENTRAR =====
+document.getElementById("user").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+document.getElementById("pass").addEventListener("keydown", e=>{ if(e.key==="Enter") login(); });
+
+// ===== SI YA ESTABA LOGUEADO =====
+let sesion = localStorage.getItem("sesion_golazo");
+if(sesion){ try{ mostrar(JSON.parse(sesion).u); }catch(e){} }
 </script>
 </body>
 </html>
