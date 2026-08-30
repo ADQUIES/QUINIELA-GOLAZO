@@ -7,23 +7,22 @@
 <link rel="icon" href="img/logo.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
-body{background:#0d3a4d;color:white;min-height:100vh} /* AZUL DE LA FOTO */
+body{background:#0d3a4d;color:white;min-height:100vh}
 .banner{background:transparent;padding:12px;text-align:center}
 .banner img{max-width:360px;width:90%;filter:drop-shadow(0 3px 6px #000)}
 .contenedor{max-width:1000px;margin:0 auto;padding:15px 10px;display:flex;gap:12px}
-.partidos{flex:1;background:#0e4a5f;border:2px solid #ffdd00;border-radius:16px;padding:14px 10px} /* PANEL CENTRAL */
+.partidos{flex:1;background:#0e4a5f;border:2px solid #ffdd00;border-radius:16px;padding:14px 10px}
 .fila{display:flex;align-items:center;gap:4px;margin-bottom:10px}
 .escudo{width:42px;height:42px;background:transparent;object-fit:contain;border:none}
 .nombre{width:138px;font-size:14px;font-weight:900;text-transform:uppercase;color:#fff;pointer-events:none;user-select:none;text-shadow:1px 1px 2px #000}
 .nombre.der{text-align:right;width:125px}
 .goles{width:36px;height:36px;background:#fff;border-radius:6px;border:2px solid #000;text-align:center;font-size:18px;font-weight:900;color:#000}
-.num-btn{width:32px;height:32px;background:#ffea00;border:2px solid #000;border-radius:8px;font-size:16px;font-weight:900;cursor:pointer;color:#000;box-shadow:0 2px 0 #000} /* AMARILLO COMO IR A ADMIN */
+.num-btn{width:32px;height:32px;background:#ffea00;border:2px solid #000;border-radius:8px;font-size:16px;font-weight:900;cursor:pointer;color:#000;box-shadow:0 2px 0 #000}
 .num-btn:active{transform:translateY(2px);box-shadow:none}
 .num-btn.guardando{background:#00ff66}
 .lateral{width:200px;display:flex;flex-direction:column;gap:14px;padding-top:5px;flex-shrink:0}
-.btn-lat{background:#1ec5e8;color:#000;border:2px solid #000;border-radius:14px;padding:14px 8px;font-size:12px;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:block;box-shadow:0 3px 0 #000;text-transform:uppercase;line-height:1.2} /* AZUL COMO RESULTADOS DE LA FOTO */
+.btn-lat{background:#1ec5e8;color:#ffea00;border:2px solid #ffea00;border-radius:14px;padding:16px 8px;font-size:13px;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:block;box-shadow:0 3px 0 #000;text-transform:uppercase;text-shadow:1px 1px 2px #000} /* LETRAS AMARILLAS */
 .btn-lat:active{transform:translateY(3px);box-shadow:none}
-.btn-lat span{font-size:9px;font-weight:700;display:block;margin-top:2px;text-transform:none}
 #status{text-align:center;margin-top:8px;font-size:11px;font-weight:bold;min-height:20px;color:#ffea00}
 @media(max-width:850px){
 .contenedor{flex-direction:column;align-items:center}
@@ -35,7 +34,7 @@ body{background:#0d3a4d;color:white;min-height:100vh} /* AZUL DE LA FOTO */
 .goles{width:28px;height:28px;font-size:14px}
 .num-btn{width:24px;height:24px;font-size:12px}
 .lateral{width:100%;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px}
-.btn-lat{width:145px;font-size:10px;padding:10px 6px}
+.btn-lat{width:145px;font-size:11px;padding:12px 6px}
 }
 </style>
 </head>
@@ -44,12 +43,12 @@ body{background:#0d3a4d;color:white;min-height:100vh} /* AZUL DE LA FOTO */
 <div class="contenedor">
   <div class="partidos" id="listaPartidos"><p style="text-align:center;margin-top:40px;font-size:12px;color:#ffea00">Cargando ADMIN B18:B26 y E18:E26...</p></div>
   <div class="lateral">
-    <a href="https://adquies.github.io/QUINIELA-GOLAZO/administracion.html" class="btn-lat">ADMINISTRACIÓN<span>Panel central</span></a>
-    <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit?gid=2086585510#gid=2086585510" target="_blank" class="btn-lat">B. DATOS<span>BASEDEDATOS</span></a>
-    <a href="https://www.flashscore.com.mx/" target="_blank" class="btn-lat">MARCADOR<span>Flashscore</span></a>
-    <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX<span>Tabla</span></a>
-    <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN<span>Calendario</span></a>
-    <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS<span>Noticias</span></a>
+    <a href="https://adquies.github.io/QUINIELA-GOLAZO/administracion.html" class="btn-lat">ADMINISTRACIÓN</a>
+    <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit?gid=2086585510#gid=2086585510" target="_blank" class="btn-lat">B. DATOS</a>
+    <a href="https://www.flashscore.com.mx/" target="_blank" class="btn-lat">FLASHSCORE</a>
+    <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX</a>
+    <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN</a>
+    <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS</a>
     <p id="status"></p>
   </div>
 </div>
