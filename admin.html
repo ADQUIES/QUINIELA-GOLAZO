@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="es-mx">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Admin Golazo</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Golazo - Usuarios</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#000e14;color:#fff}
@@ -12,16 +11,12 @@
 .login-title{color:#ffdd00;font-size:28px;font-weight:900;letter-spacing:4px;margin:5px 0 18px}
 .login-box input{width:100%;padding:15px;border:none;border-radius:12px;margin:10px 0;font-size:18px;font-weight:900;text-align:center}
 .btn-login{width:100%;padding:15px;border:none;border-radius:12px;background:#ffdd00;color:#000;font-size:22px;font-weight:900;cursor:pointer;margin-top:6px}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
 .hidden{display:none}
 .topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
 .card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
 .card-header b{color:#ffee00}
 .toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
-table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
-td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0}
 .btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
 .msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:13px}
@@ -30,9 +25,7 @@ td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6
 </style>
 </head>
 <body>
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
-</script>
+<script>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";</script>
 <div id="loginScreen" class="login-wrap"><div class="login-box">
 <img src="img/logo3.png" style="width:100%;max-width:330px;margin:0 auto 8px;display:block">
 <h1 class="login-title">ENTRAR</h1>
@@ -42,45 +35,21 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 <div id="adminScreen" class="hidden">
 <div class="topbar"><div style="display:flex;align-items:center;gap:10px"><img src="img/logo3.png" style="height:38px"><span id="who" style="color:#ffee00;font-weight:900;font-size:12px"></span></div><div style="display:flex;gap:6px">
 <a href="index.html" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
-<a href="https://adquies.github.io/QUINIELA-GOLAZO/panelcentral.html" target="_blank" class="btn-top" style="background:#00ff66;color:#000">PANEL</a>
+<a href="panelcentral.html" class="btn-top" style="background:#00ff66;color:#000">PANEL</a>
 <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button></div></div>
 <div class="card"><div class="card-header" onclick="toggleUsuarios()"><b>USUARIOS (ADRIAN + 3)</b><button class="toggle-btn" id="btnToggle">▼ OCULTAR</button></div><div id="contenidoUsuarios" style="margin-top:10px"><div id="listaUsuarios"></div><div style="display:flex;gap:6px;margin-top:10px"><input id="newUser" placeholder="Nuevo usuario"><input id="newPass" placeholder="Pass"><button id="btnAlta" onclick="agregarUsuario()" style="background:#00ff66;border:none;border-radius:8px;padding:0 14px;font-weight:900">+ ALTA</button></div><div id="msgUsuarios"></div></div></div>
-<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b><div style="display:flex;gap:8px;margin-top:10px"><a href="https://www.google.com/search?q=LIGA+MX" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX</a><a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN</a></div></div>
-<div class="card"><b style="color:#ffee00">NUEVA QUINIELA (Cargada desde tu SHEET ADMIN)</b><div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div><button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button><p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
 </div>
 <script>
 function toggleUsuarios(){let c=document.getElementById("contenidoUsuarios");let b=document.getElementById("btnToggle");if(c.style.display==="none"){c.style.display="block";b.textContent="▼ OCULTAR";}else{c.style.display="none";b.textContent="► MOSTRAR";}}
 function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
 let usuariosLocal=JSON.parse(localStorage.getItem("usuarios_golazo")||'[{"u":"ADRIAN","p":"1234"}]');
-function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;cargarUsuarios();renderTabla();}
+function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;cargarUsuarios();}
 function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
 async function cargarUsuarios(){try{let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");let d=await r.json();if(d&&d.length>0){usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));}}catch(e){}renderUsuarios();}
 function renderUsuarios(){let c=document.getElementById("listaUsuarios");c.innerHTML="";usuariosLocal.forEach(us=>{let es=us.u==="ADRIAN";c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;});}
 async function agregarUsuario(){let u=newUser.value.trim().toUpperCase(),p=newPass.value.trim();if(!u||!p){showMsg("msgUsuarios","Llena datos",false);return;}let btn=document.getElementById("btnAlta");btn.disabled=true;try{await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"alta_usuario",u,p})});usuariosLocal.push({u,p});localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();showMsg("msgUsuarios","✅ "+u+" agregado",true);newUser.value="";newPass.value="";}catch(e){showMsg("msgUsuarios","Error",false);}btn.disabled=false;}
 async function borrarUsuario(n){if(!confirm("¿Borrar "+n+"?"))return;try{await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"borrar_usuario",u:n})});usuariosLocal=usuariosLocal.filter(x=>x.u!==n);localStorage.setItem("usuarios_golazo",JSON.stringify(usuariosLocal));renderUsuarios();}catch(e){}}
 function login(){let u=document.getElementById("user").value.trim().toUpperCase();let p=document.getElementById("pass").value.trim();if(!u||!p){document.getElementById("msg").textContent="Escribe usuario y pass";return;}localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));mostrarAdmin();}
-async function renderTabla(){
-let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='9'>Cargando...</td></tr>";let data=null;
-try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j && j.length>0){data=j;}}catch(e){}
-if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"TOLUCA",visita:"PUEBLA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"MAZATLAN",visita:"PUMAS",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"PACHUCA",visita:"CRUZ AZUL",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"TIGRES",visita:"LEON",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"VIX"},{local:"ATLAS",visita:"SANTOS",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"JUAREZ",visita:"QUERETARO",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"MONTERREY",visita:"SAN LUIS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"17:00",trans:"C2"},{local:"TIJUANA",visita:"NECAXA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"19:05",trans:"C5"},{local:"GUADALAJARA",visita:"AMERICA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];}
-tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});
-}
-function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
-async function guardarEnSheet(){
-let data=guardarLocal();
-let btn=document.getElementById("btnGuardar");let st=document.getElementById("status");
-btn.textContent="Guardando...";btn.disabled=true;st.textContent="";
-try{
- let res = await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});
- let txt = await res.text();
- st.textContent="✅ Guardado: "+txt.substring(0,100);
- st.style.color="#00ff66";
-}catch(e){
- st.textContent="❌ Error: "+e.message+" - Revisa tu Apps Script";
- st.style.color="#ff4444";
-}
-btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";btn.disabled=false;
-}
 if(localStorage.getItem("sesion_golazo"))mostrarAdmin();
 </script>
 </body>
