@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NUEVA PAGINA GOLAZO</title>
+
+<!-- ===== FAVICON ===== - Icono de pestaña del navegador -->
+<link rel="icon" type="image/png" href="img/logo.png">
+
+<style>
+/* ===== RESET GENERAL ===== */
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
+
+/* ===== FONDO DE TODA LA PAGINA ===== - Igual que administracion y resultadospartidos #000e14 */
+body{background:#000e14;color:white;min-height:100vh}
+
+/* ===== BANNER SUPERIOR ===== - Donde va el logo3.png */
+.banner{text-align:center;padding:15px}
+.banner img{max-width:360px;width:90%;filter:drop-shadow(0 4px 8px #000)}
+
+/* ===== TITULO DEBAJO DEL LOGO ===== */
+.banner h1{color:#ffdd00;font-size:22px;letter-spacing:3px;margin-top:8px}
+
+/* ===== CONTENEDOR PRINCIPAL ===== - Centrado */
+.contenedor{max-width:1000px;margin:0 auto;padding:15px 10px;display:flex;gap:12px}
+
+/* ===== CAJA PRINCIPAL ===== - Fondo #123f4a con borde amarillo, igual que las otras paginas */
+.caja{flex:1;background:#123f4a;border:3px solid #ffdd00;border-radius:20px;padding:20px;min-height:400px}
+
+/* ===== CAJA LATERAL DE BOTONES (OPCIONAL) ===== */
+.lateral{width:200px;display:flex;flex-direction:column;gap:14px}
+
+/* ===== BOTONES LATERALES AZULES ===== - #00bfff con texto negro */
+.btn-lat{background:#00bfff;color:#000;border:2px solid #000;border-radius:14px;padding:16px 8px;font-size:13px;font-weight:900;text-align:center;text-decoration:none;display:block;box-shadow:0 3px 0 #000;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<!-- ===== ENCABEZADO CON LOGO ===== -->
+<div class="banner">
+  <!-- Logo de la carpeta img/ -->
+  <img src="img/logo3.png" alt="Logo Golazo">
+  <!-- Cambia este texto por el titulo que quieras -->
+  <h1>NUEVA PAGINA</h1>
+</div>
+
+<!-- ===== CONTENIDO ===== -->
+<div class="contenedor">
+  
+  <!-- ===== CAJA GRANDE DONDE VA TU CONTENIDO ===== -->
+  <div class="caja">
+    <p style="color:#ffdd00;text-align:center">AQUÍ VA TU CONTENIDO</p>
+    <p style="text-align:center;margin-top:20px;font-family:Arial">Escribe aquí lo que quieras...</p>
+  </div>
+
+  <!-- ===== MENU LATERAL (PUEDES BORRARLO SI NO LO QUIERES) ===== -->
+  <div class="lateral">
+    <a href="administracion.html" class="btn-lat">ADMINISTRACIÓN</a>
+    <a href="resultadospartidos.html" class="btn-lat">RESULTADOS</a>
+    <a href="index.html" class="btn-lat">QUINIELA</a>
+  </div>
+
+</div>
+
+</body>
+</html>
