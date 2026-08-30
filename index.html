@@ -67,7 +67,7 @@ let clicksLogo=0; let timerLogo;
 document.getElementById("bannerLogo").addEventListener("click",()=>{
  clicksLogo++; clearTimeout(timerLogo);
  timerLogo=setTimeout(()=>{clicksLogo=0},2000);
- if(clicksLogo>=5){clicksLogo=0; window.location.href="admin.html";}
+ if(clicksLogo>=5){clicksLogo=0; window.location.href="panelcentral.html";}
 });
 function render(){
  let h=""; PARTIDOS.forEach((p,i)=>{
