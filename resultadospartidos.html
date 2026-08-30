@@ -12,7 +12,7 @@ body{background:#000e14;color:white;min-height:100vh}
 .contenedor{max-width:1000px;margin:0 auto;padding:15px 10px;display:flex;gap:12px}
 .partidos{flex:1;background:#123f4a;border:3px solid #ffdd00;border-radius:20px;padding:14px 10px}
 .fila{display:flex;align-items:center;gap:4px;margin-bottom:10px}
-.escudo{width:42px;height:42px;object-fit:contain}
+.escudo{width:42px;height:42px;object-fit:contain;background:transparent}
 .nombre{width:138px;font-size:14px;font-weight:900;text-transform:uppercase}
 .nombre.der{text-align:right;width:125px}
 .goles{width:36px;height:36px;background:#fff;border-radius:6px;border:2px solid #000;text-align:center;font-size:18px;font-weight:900;color:#000}
@@ -23,7 +23,7 @@ body{background:#000e14;color:white;min-height:100vh}
 </style>
 </head>
 <body>
-<div class="banner"><img src="img/logo3.png"><p style="color:#ffea00">PRUEBA: ORDENA FILA 15 HACIA ABAJO POR COL L</p></div>
+<div class="banner"><img src="img/logo3.png"><p style="color:#ffea00">ORDENA F15-F150 POR COL L + CARGA C18:D26</p></div>
 <div class="contenedor">
   <div class="partidos" id="listaPartidos"><p style="text-align:center;color:#ffea00">Cargando...</p></div>
   <div class="lateral">
@@ -40,19 +40,54 @@ body{background:#000e14;color:white;min-height:100vh}
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 let partidosActuales = [];
 function normaliza(n){let x=n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");const d={"JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES","MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS","QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS","CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS","AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS","PUEBLA":"PUEBLA","NECAXA":"NECAXA"};return d[x]||x;}
-async function cargarEquipos(){try{let r=await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");let data=await r.json();if(data&&data.length>=9)partidosActuales=data;else throw "vacio";}catch(e){partidosActuales=[{local:"PUEBLA",visita:"JUÁREZ"},{local:"NECAXA",visita:"MAZATLÁN"},{local:"TIJUANA",visita:"TIGRES"},{local:"MONTERREY",visita:"SAN LUIS"},{local:"QUERÉTARO",visita:"TOLUCA"},{local:"LEÓN",visita:"ATLAS"},{local:"CRUZ AZUL",visita:"PACHUCA"},{local:"SANTOS",visita:"AMÉRICA"},{local:"CHIVAS",visita:"PUMAS"}];}renderPartidos();}
-function renderPartidos(){const c=document.getElementById('listaPartidos');c.innerHTML="";partidosActuales.forEach((p,i)=>{let n=i+1;let eL=normaliza(p.local);let eV=normaliza(p.visita);c.innerHTML+=`<div class="fila"><img src="img/ESCUDOS/${eL}.png" class="escudo" onerror="this.src='img/logo.png'"><div class="nombre">${p.local}</div><input type="number" min="0" class="goles" id="l${n}"><button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button><input type="number" min="0" class="goles" id="v${n}"><div class="nombre der">${p.visita}</div><img src="img/ESCUDOS/${eV}.png" class="escudo" onerror="this.src='img/logo.png'"></div>`;});}
+
+async function cargarEquipos(){
+  try{
+    let r=await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");
+    let data=await r.json();
+    if(data&&data.length>=9)partidosActuales=data;else throw "vacio";
+  }catch(e){
+    partidosActuales=[
+      {local:"PUEBLA",visita:"JUÁREZ",golLocal:"",golVisita:""},
+      {local:"NECAXA",visita:"MAZATLÁN",golLocal:"",golVisita:""},
+      {local:"TIJUANA",visita:"TIGRES",golLocal:"",golVisita:""},
+      {local:"MONTERREY",visita:"SAN LUIS",golLocal:"",golVisita:""},
+      {local:"QUERÉTARO",visita:"TOLUCA",golLocal:"",golVisita:""},
+      {local:"LEÓN",visita:"ATLAS",golLocal:"",golVisita:""},
+      {local:"CRUZ AZUL",visita:"PACHUCA",golLocal:"",golVisita:""},
+      {local:"SANTOS",visita:"AMÉRICA",golLocal:"",golVisita:""},
+      {local:"CHIVAS",visita:"PUMAS",golLocal:"",golVisita:""}
+    ];
+  }
+  renderPartidos();
+}
+
+function renderPartidos(){
+  const c=document.getElementById('listaPartidos');
+  c.innerHTML="";
+  partidosActuales.forEach((p,i)=>{
+    let n=i+1;
+    let eL=normaliza(p.local);
+    let eV=normaliza(p.visita);
+    // AQUÍ REGRESA LO GUARDADO EN C18:C26 Y D18:D26
+    let gl = (p.golLocal!=="" && p.golLocal!=null)? p.golLocal : "";
+    let gv = (p.golVisita!=="" && p.golVisita!=null)? p.golVisita : "";
+    c.innerHTML+=`<div class="fila"><img src="img/ESCUDOS/${eL}.png" class="escudo" onerror="this.src='img/logo.png'"><div class="nombre">${p.local}</div><input type="number" min="0" class="goles" id="l${n}" value="${gl}"><button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button><input type="number" min="0" class="goles" id="v${n}" value="${gv}"><div class="nombre der">${p.visita}</div><img src="img/ESCUDOS/${eV}.png" class="escudo" onerror="this.src='img/logo.png'"></div>`;
+  });
+  document.getElementById('status').textContent="✅ Cargado de ADMIN C18:C26 y D18:D26";
+}
+
 async function guardarResultado(n){
   let rl=document.getElementById('l'+n).value,rv=document.getElementById('v'+n).value,btn=document.getElementById('btn'+n),st=document.getElementById('status');
   if(rl==="" || rv===""){
-    st.textContent=`⚠️ PARTIDO ${n}: DEBES COLOCAR UN RESULTADO\nNo puedes enviar vacío. Pon goles Local y Visita.`;
+    st.textContent=`⚠️ PARTIDO ${n}: DEBES COLOCAR UN RESULTADO`;
     st.style.color="#ff4444"; return;
   }
-  btn.textContent="..."; st.textContent=`⏳ Guardando partido ${n} y ordenando ranking L15...`; st.style.color="#ffea00";
+  btn.textContent="..."; st.textContent=`⏳ Guardando partido ${n} y ordenando F15-F150 por L...`; st.style.color="#ffea00";
   try{
     let r=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_resultados_admin",partido:n,res_local:rl,res_visita:rv})});
     let d=await r.json();
-    if(d.ok){st.textContent=`✅ PARTIDO ${n} = ${rl}-${rv}\nBASEDEDATOS ordenada de mayor a menor por L desde fila 15`;st.style.color="#00ff66";btn.textContent="✓";setTimeout(()=>btn.textContent=n,2000);}else{st.textContent=d.msg;st.style.color="#ff4444";btn.textContent=n;}
+    if(d.ok){st.textContent=`✅ PARTIDO ${n} = ${rl}-${rv} guardado\nRanking F15-F150 ordenado por aciertos (L)`;st.style.color="#00ff66";btn.textContent="✓";setTimeout(()=>btn.textContent=n,2000);}else{st.textContent=d.msg;st.style.color="#ff4444";btn.textContent=n;}
   }catch(e){st.textContent="❌ "+e.message;st.style.color="#ff4444";btn.textContent=n;}
 }
 cargarEquipos();
