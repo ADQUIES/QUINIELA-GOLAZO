@@ -23,7 +23,7 @@ body{background:#000e14;color:white;min-height:100vh}
 </style>
 </head>
 <body>
-<div class="banner"><img src="img/logo3.png"><p style="color:#ffea00">RESULTADOS</p></div>
+<div class="banner"><img src="img/logo3.png"><p style="color:#ffea00">ORDENA F15-F150 POR COL L + CARGA C18:D26</p></div>
 <div class="contenedor">
   <div class="partidos" id="listaPartidos"><p style="text-align:center;color:#ffea00">Cargando...</p></div>
   <div class="lateral">
@@ -88,8 +88,21 @@ async function guardarResultado(n){
   try{
     let r=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_resultados_admin",partido:n,res_local:rl,res_visita:rv})});
     let d=await r.json();
-    if(d.ok){st.textContent=`✅ PARTIDO ${n} = ${rl}-${rv} guardado\nRanking F15-F150 ordenado por aciertos (L)`;st.style.color="#00ff66";btn.textContent="✓";setTimeout(()=>btn.textContent=n,2000);}else{st.textContent=d.msg;st.style.color="#ff4444";btn.textContent=n;}
-  }catch(e){st.textContent="❌ "+e.message;st.style.color="#ff4444";btn.textContent=n;}
+    if(d.ok){
+      st.textContent=`✅ PARTIDO ${n} = ${rl}-${rv} guardado`;
+      st.style.color="#00ff66";
+      btn.textContent="✓";
+      setTimeout(()=>btn.textContent=n,2000);
+    }else{
+      st.textContent=d.msg;
+      st.style.color="#ff4444";
+      btn.textContent=n;
+    }
+  }catch(e){
+    st.textContent="❌ "+e.message;
+    st.style.color="#ff4444";
+    btn.textContent=n;
+  }
 }
 cargarEquipos();
 </script>
