@@ -98,7 +98,7 @@ async function irUsuarios(){
     return;
   }
   // 2. Pide clave maestra
-  let pass = prompt("🔐 Ingresa CLAVE MAESTRA para USUARIOS:\n(Guardada en tu Sheet USUARIOS celda Z1)");
+  let pass = prompt("🔐 Ingresa CLAVE MAESTRA para ADMINISTRADOR:\n(Solo el Administrador tiene la clave)");
   if(!pass) return;
 
   let btn = document.querySelector(".btn-usuarios");
@@ -117,7 +117,7 @@ async function irUsuarios(){
       // Abre en misma pestaña como pediste
       window.location.href="usuarios.html";
     }else{
-      alert("❌ Clave incorrecta.\nVe a tu Google Sheet hoja USUARIOS celda Z1, debe decir GOLAZO2026");
+      alert("❌ Clave incorrecta.\nSolo el Administrador tiene la clave");
       btn.textContent = textoOriginal;
     }
   }catch(e){
