@@ -7,71 +7,67 @@
 <link rel="icon" href="img/logo.png">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
-body{background:#0b5d5e;color:white;min-height:100vh}
-.banner{background:transparent;padding:10px;text-align:center} /* TRANSPARENTE */
-.banner img{max-width:380px;width:90%;filter:drop-shadow(0 2px 4px #000)}
-.contenedor{max-width:1150px;margin:0 auto;padding:15px 10px;display:flex;gap:15px}
-.partidos{flex:1}
-.fila{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.escudo{width:48px;height:48px;background:white;object-fit:contain;padding:2px;border:1px solid #000}
-.nombre{width:155px;font-size:17px;font-weight:900;text-transform:uppercase;color:#d9f0f0;pointer-events:none;user-select:none}
-.nombre.der{text-align:right;width:135px}
-.goles{width:44px;height:44px;background:#e8efe8;border:2px inset #ccc;text-align:center;font-size:22px;font-weight:900;color:#000}
-.num-btn{width:42px;height:42px;background:#e8efe8;border:2px outset #aaa;font-size:20px;font-weight:900;cursor:pointer;color:#000}
+body{background:#0d3a4d;color:white;min-height:100vh} /* AZUL DE LA FOTO */
+.banner{background:transparent;padding:12px;text-align:center}
+.banner img{max-width:360px;width:90%;filter:drop-shadow(0 3px 6px #000)}
+.contenedor{max-width:1000px;margin:0 auto;padding:15px 10px;display:flex;gap:12px}
+.partidos{flex:1;background:#0e4a5f;border:2px solid #ffdd00;border-radius:16px;padding:14px 10px} /* PANEL CENTRAL */
+.fila{display:flex;align-items:center;gap:4px;margin-bottom:10px}
+.escudo{width:42px;height:42px;background:transparent;object-fit:contain;border:none}
+.nombre{width:138px;font-size:14px;font-weight:900;text-transform:uppercase;color:#fff;pointer-events:none;user-select:none;text-shadow:1px 1px 2px #000}
+.nombre.der{text-align:right;width:125px}
+.goles{width:36px;height:36px;background:#fff;border-radius:6px;border:2px solid #000;text-align:center;font-size:18px;font-weight:900;color:#000}
+.num-btn{width:32px;height:32px;background:#ffea00;border:2px solid #000;border-radius:8px;font-size:16px;font-weight:900;cursor:pointer;color:#000;box-shadow:0 2px 0 #000} /* AMARILLO COMO IR A ADMIN */
+.num-btn:active{transform:translateY(2px);box-shadow:none}
 .num-btn.guardando{background:#00ff66}
-.lateral{width:175px;display:flex;flex-direction:column;gap:26px;padding-top:10px}
-.btn-lat{background:#e8efe8;color:#000;border:2px outset #bbb;padding:8px 10px;font-size:12px;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:block}
-#status{text-align:center;margin-top:10px;font-size:13px;font-weight:bold;min-height:20px}
+.lateral{width:200px;display:flex;flex-direction:column;gap:14px;padding-top:5px;flex-shrink:0}
+.btn-lat{background:#1ec5e8;color:#000;border:2px solid #000;border-radius:14px;padding:14px 8px;font-size:12px;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:block;box-shadow:0 3px 0 #000;text-transform:uppercase;line-height:1.2} /* AZUL COMO RESULTADOS DE LA FOTO */
+.btn-lat:active{transform:translateY(3px);box-shadow:none}
+.btn-lat span{font-size:9px;font-weight:700;display:block;margin-top:2px;text-transform:none}
+#status{text-align:center;margin-top:8px;font-size:11px;font-weight:bold;min-height:20px;color:#ffea00}
+@media(max-width:850px){
+.contenedor{flex-direction:column;align-items:center}
+.partidos{width:100%}
+.fila{gap:2px;justify-content:center}
+.nombre{font-size:10px;width:82px}
+.nombre.der{width:72px}
+.escudo{width:26px;height:26px}
+.goles{width:28px;height:28px;font-size:14px}
+.num-btn{width:24px;height:24px;font-size:12px}
+.lateral{width:100%;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px}
+.btn-lat{width:145px;font-size:10px;padding:10px 6px}
+}
 </style>
 </head>
 <body>
 <div class="banner"><img src="img/logo3.png"></div>
 <div class="contenedor">
-  <div class="partidos" id="listaPartidos"><p style="text-align:center;margin-top:50px">Cargando ADMIN B18:B26 y E18:E26...</p></div>
+  <div class="partidos" id="listaPartidos"><p style="text-align:center;margin-top:40px;font-size:12px;color:#ffea00">Cargando ADMIN B18:B26 y E18:E26...</p></div>
   <div class="lateral">
-    <a href="administracion.html" class="btn-lat">INICIO</a>
-    <div style="height:15px"></div>
-    <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit?gid=2086585510#gid=2086585510" target="_blank" class="btn-lat">B. DATOS</a>
-    <div style="height:15px"></div>
-    <a href="https://www.flashscore.com.mx/" target="_blank" class="btn-lat">MARCADOR</a>
-    <div style="height:15px"></div>
-    <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX</a>
-    <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN</a>
-    <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS</a>
+    <a href="https://adquies.github.io/QUINIELA-GOLAZO/administracion.html" class="btn-lat">ADMINISTRACIÓN<span>Panel central</span></a>
+    <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit?gid=2086585510#gid=2086585510" target="_blank" class="btn-lat">B. DATOS<span>BASEDEDATOS</span></a>
+    <a href="https://www.flashscore.com.mx/" target="_blank" class="btn-lat">MARCADOR<span>Flashscore</span></a>
+    <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX<span>Tabla</span></a>
+    <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN<span>Calendario</span></a>
+    <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS<span>Noticias</span></a>
     <p id="status"></p>
   </div>
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 let partidosActuales = [];
-
-// ESTOS SON LOS NOMBRES EXACTOS DE TU CARPETA img/ESCUDOS
 function normaliza(nombre){
   let n = nombre.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
-  const dic = {
-    "JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES",
-    "MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS",
-    "QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS",
-    "CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS",
-    "AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS",
-    "PUEBLA":"PUEBLA","NECAXA":"NECAXA","XOLOS":"TIJUANA","UANL":"TIGRES"
-  };
+  const dic = {"JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES","MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS","QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS","CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS","AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS","PUEBLA":"PUEBLA","NECAXA":"NECAXA"};
   return dic[n] || n;
 }
-
 async function cargarEquipos(){
   try{
     let r = await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");
     let data = await r.json();
     if(data && data.length>=9){ partidosActuales=data; } else { throw "vacio"; }
   }catch(e){
-    partidosActuales = [
-      {local:"PUEBLA", visita:"JUÁREZ"}, {local:"NECAXA", visita:"MAZATLÁN"},
-      {local:"TIJUANA", visita:"TIGRES"}, {local:"MONTERREY", visita:"SAN LUIS"},
-      {local:"QUERÉTARO", visita:"TOLUCA"}, {local:"LEÓN", visita:"ATLAS"},
-      {local:"CRUZ AZUL", visita:"PACHUCA"}, {local:"SANTOS", visita:"AMÉRICA"},
-      {local:"CHIVAS", visita:"PUMAS"},
-    ];
+    partidosActuales = [{local:"PUEBLA", visita:"JUÁREZ"}, {local:"NECAXA", visita:"MAZATLÁN"},{local:"TIJUANA", visita:"TIGRES"}, {local:"MONTERREY", visita:"SAN LUIS"},{local:"QUERÉTARO", visita:"TOLUCA"}, {local:"LEÓN", visita:"ATLAS"},{local:"CRUZ AZUL", visita:"PACHUCA"}, {local:"SANTOS", visita:"AMÉRICA"},{local:"CHIVAS", visita:"PUMAS"},];
   }
   renderPartidos();
 }
@@ -82,24 +78,24 @@ function renderPartidos(){
     let escLoc = normaliza(p.local);
     let escVis = normaliza(p.visita);
     cont.innerHTML+=`<div class="fila">
-      <img src="img/ESCUDOS/${escLoc}.png" class="escudo" onerror="this.onerror=null; this.src='img/ESCUDOS/${escLoc.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
+      <img src="img/ESCUDOS/${escLoc}.png" class="escudo" onerror="this.src='img/ESCUDOS/${escLoc.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
       <div class="nombre">${p.local}</div>
       <input type="number" min="0" class="goles" id="l${n}">
       <button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button>
       <input type="number" min="0" class="goles" id="v${n}">
       <div class="nombre der">${p.visita}</div>
-      <img src="img/ESCUDOS/${escVis}.png" class="escudo" onerror="this.onerror=null; this.src='img/ESCUDOS/${escVis.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
+      <img src="img/ESCUDOS/${escVis}.png" class="escudo" onerror="this.src='img/ESCUDOS/${escVis.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
     </div>`;
   });
 }
 async function guardarResultado(n){
   let rl=document.getElementById('l'+n).value, rv=document.getElementById('v'+n).value;
   let btn=document.getElementById('btn'+n), st=document.getElementById('status');
-  if(rl===""||rv===""){st.textContent="⚠️ Escribe goles partido "+n; st.style.color="#ffdd00"; return;}
-  btn.classList.add('guardando'); btn.textContent="..."; st.textContent=`Guardando en ADMIN C${17+n} y D${17+n}...`;
+  if(rl===""||rv===""){st.textContent="⚠️ Escribe goles partido "+n; st.style.color="#ffea00"; return;}
+  btn.classList.add('guardando'); btn.textContent="..."; st.textContent=`Guardando C${17+n} y D${17+n}...`;
   try{
     await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_resultados_admin",partido:n,res_local:rl,res_visita:rv})});
-    st.textContent=`✅ Partido ${n} guardado C${17+n}=${rl} D${17+n}=${rv}`; st.style.color="#00ff66"; btn.textContent="✓"; setTimeout(()=>btn.textContent=n,2000);
+    st.textContent=`✅ ${n} guardado C${17+n}=${rl} D${17+n}=${rv}`; st.style.color="#00ff66"; btn.textContent="✓"; setTimeout(()=>btn.textContent=n,2000);
   }catch(e){st.textContent="❌ "+e.message; st.style.color="#ff4444"; btn.textContent=n;}
   btn.classList.remove('guardando');
 }
