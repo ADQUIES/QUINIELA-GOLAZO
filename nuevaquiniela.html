@@ -27,15 +27,7 @@ const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M
 let PARTIDOS = [];
 function normaliza(n){let x=n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");const d={"JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES","MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS","QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS","CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS","AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS","PUEBLA":"PUEBLA","NECAXA":"NECAXA"};return d[x]||x;}
 function getFechaJuega(){let hoy=new Date();let dia=hoy.getDay();let viernes=new Date(hoy);viernes.setDate(hoy.getDate()+(5-dia+7)%7);let domingo=new Date(viernes);domingo.setDate(viernes.getDate()+2);let meses=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];return `JUEGA DEL VIERNES ${viernes.getDate()} DE ${meses[viernes.getMonth()]} AL DOMINGO ${domingo.getDate()} DE ${meses[domingo.getMonth()]}`;}
-
-// ===== CORREGIDO: CALCULA DIA CON AÑO ACTUAL 2026 =====
-function calcularDiaLetra(dia,mes){
-  if(!dia||!mes) return "SABADO";
-  let year = new Date().getFullYear(); // 2026 - siempre año en curso
-  let fecha = new Date(year, parseInt(mes)-1, parseInt(dia));
-  let dias = ["DOMINGO","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO"];
-  return dias[fecha.getDay()]; // 0=DOMINGO, 5=VIERNES, 6=SABADO
-}
+function calcularDiaLetra(dia,mes){if(!dia||!mes)return"SABADO";let year=new Date().getFullYear();let fecha=new Date(year,parseInt(mes)-1,parseInt(dia));let dias=["DOMINGO","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO"];return dias[fecha.getDay()];}
 </script>
 
 <div class="topbar">
@@ -49,11 +41,21 @@ function calcularDiaLetra(dia,mes){
   </div>
 </div>
 
+<!-- CONSULTAR AHORA ARRIBA, ENTRE TOPBAR Y TABLA -->
+<div class="card" style="border-color:#00ff66;text-align:center">
+<b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b>
+<div style="display:flex;gap:8px;margin-top:10px">
+<a href="https://www.google.com/search?q=LIGA+MX+calendario" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX</a>
+<a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN</a>
+</div>
+</div>
+
 <div class="card"><b style="color:#ffee00">NUEVA QUINIELA</b>
 <div style="display:flex;gap:6px;margin-top:8px">
 <input id="costo" value="$20 PESOS."><input id="cierre" value="VIERNES 3 PM"><input id="jornada" type="number" placeholder="Jornada"><input id="tel" value="524776482132">
 </div>
-<div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
+<!-- TABLA SIN COLUMNA # -->
+<div style="overflow:auto;margin-top:8px"><table><thead><tr><th>LOCAL</th><th>VS</th><th>VISITA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
 <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN SHEET + IMAGEN</button>
 <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
 
@@ -63,50 +65,37 @@ function calcularDiaLetra(dia,mes){
 let ses=JSON.parse(localStorage.getItem("sesion_golazo")||"{}");if(ses.u)document.getElementById("who").textContent=ses.u;
 async function renderTabla(){
   let tb=document.getElementById("tablaQuiniela");
-  tb.innerHTML="<tr><td colspan='8'>Cargando...</td></tr>";
+  tb.innerHTML="<tr><td colspan='7'>Cargando...</td></tr>";
   let data=null;
   try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j&&j.length>0){data=j;}}catch(e){}
   if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"PUEBLA",visita:"LEON",dia:"4",mes:"9",hora:"19:00",trans:"TUDN"},{local:"PACHUCA",visita:"AMERICA",dia:"4",mes:"9",hora:"21:00",trans:"TUDN"},{local:"QUERETARO",visita:"PUEBLA",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"ATLAS",visita:"SAN LUIS",dia:"5",mes:"9",hora:"19:00",trans:"TUDN"},{local:"AMERICA",visita:"QUERETARO",dia:"5",mes:"9",hora:"21:00",trans:"TUDN"},{local:"SAN LUIS",visita:"TIGRES",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"PUMAS",visita:"MONTERREY",dia:"6",mes:"9",hora:"17:00",trans:"TUDN"},{local:"JUAREZ",visita:"PUMAS",dia:"6",mes:"9",hora:"19:00",trans:"TUDN"},{local:"TIGRES",visita:"ATLAS",dia:"6",mes:"9",hora:"21:00",trans:"TUDN"}];}
   tb.innerHTML="";
   data.forEach((d,i)=>{
     let idx=i+1;
-    // YA NO HAY <small> DE LUNES MARTES
-    tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><input id="dia${idx}" type="number" value="${d.dia}"></td><td><input id="mes${idx}" type="number" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;
+    tb.innerHTML+=`<tr><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><input id="dia${idx}" type="number" value="${d.dia}"></td><td><input id="mes${idx}" type="number" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;
   });
 }
-
 function guardarLocal(){
   let arr=[];
   for(let i=1;i<=9;i++){
     let dia=document.getElementById("dia"+i).value;
     let mes=document.getElementById("mes"+i).value;
-    arr.push({
-      local:document.getElementById("local"+i).value.toUpperCase(),
-      visita:document.getElementById("visita"+i).value.toUpperCase(),
-      diaLetra:calcularDiaLetra(dia,mes), // SE CALCULA OCULTO, NO SE MUESTRA EN WEB
-      dia:dia,mes:mes,
-      hora:document.getElementById("hora"+i).value,
-      trans:document.getElementById("trans"+i).value.toUpperCase()
-    });
+    arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:calcularDiaLetra(dia,mes),dia:dia,mes:mes,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});
   }
-  localStorage.setItem("quiniela_nueva",JSON.stringify(arr));
-  PARTIDOS=arr;
-  return arr;
+  localStorage.setItem("quiniela_nueva",JSON.stringify(arr));PARTIDOS=arr;return arr;
 }
 async function guardarEnSheet(){
   let data=guardarLocal();
-  let btn=document.getElementById("btnGuardar");
-  let st=document.getElementById("status");
+  let btn=document.getElementById("btnGuardar");let st=document.getElementById("status");
   btn.textContent="Guardando...";btn.disabled=true;st.textContent="";
-  let juegaTexto=getFechaJuega();
-  let cierraTexto=`CIERRA ${document.getElementById('cierre').value}`;
+  let juegaTexto=getFechaJuega();let cierraTexto=`CIERRA ${document.getElementById('cierre').value}`;
   let jornadaNum=parseInt(document.getElementById('jornada').value||localStorage.getItem("jornada_golazo")||11);
   try{let r2=await fetch(SCRIPT_URL+"?action=obtener_jornada_actual");let j=await r2.json();jornadaNum=parseInt(j.jornada||jornadaNum)+1;}catch(e){jornadaNum=jornadaNum+1;}
   document.getElementById('jornada').value=jornadaNum;localStorage.setItem("jornada_golazo",jornadaNum);
   try{
     await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});
     await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_datos_quiniela",datos:{jornada:jornadaNum,cierra:cierraTexto,juega:juegaTexto}})});
-    st.textContent=`✅ Guardado en A2:G10 - C=${data[0].diaLetra} oculto + H2=${jornadaNum}`;
+    st.textContent=`✅ Guardado A2:G10 C=${data[0].diaLetra} oculto`;
     generar();
   }catch(e){st.textContent="❌ Error: "+e.message;}
   btn.textContent="💾 GUARDAR EN SHEET + IMAGEN";btn.disabled=false;
