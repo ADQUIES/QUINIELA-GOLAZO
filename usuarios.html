@@ -50,7 +50,7 @@ if(!localStorage.getItem("sesion_golazo")){
 <!-- ===== CARD USUARIOS ===== - Sin login propio -->
 <div class="card">
   <div class="card-header" onclick="toggleUsuarios()">
-    <b>USUARIOS (ADRIAN + AYUDANTES)</b>
+    <b>USUARIOS (ADRIAN + 3 USUARIOS)</b>
     <button class="toggle-btn" id="btnToggle">▼ OCULTAR</button>
   </div>
   <div id="contenidoUsuarios" style="margin-top:10px">
@@ -120,20 +120,20 @@ async function agregarUsuario(){
   if(!u||!p){showMsg("msgUsuarios","Llena usuario y pass",false);return;}
 
   // PIDE TU CONTRASEÑA NORMAL DE ADRIAN (la de A2/B2) no la de Z1
-  let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN\n(La que está en tu hoja USUARIOS en A2/B2):");
+  let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN:");
   if(!passAdrian) return;
 
   let btn=document.getElementById("btnAlta");
   btn.disabled=true;
   btn.textContent="Verificando...";
-  showMsg("msgUsuarios","Verificando tu pass de ADRIAN en A2/B2...",true);
+  showMsg("msgUsuarios","Verificando tu pass de ADRIAN",true);
 
   try{
     // 1. Valida que passAdrian sea realmente la de ADRIAN en A2/B2
     let v=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"validar_login", usuario: "ADRIAN", pass: passAdrian})});
     let vd=await v.json();
     if(!vd.ok){ // Si no es tu pass de ADRIAN
-      showMsg("msgUsuarios","❌ No es tu contraseña de ADRIAN (A2/B2)",false);
+      showMsg("msgUsuarios","❌ No es tu contraseña de ADRIAN",false);
       btn.disabled=false; btn.textContent="+ ALTA"; return;
     }
 
@@ -162,7 +162,7 @@ async function borrarUsuario(n){
   if(n==="ADRIAN"){alert("No puedes borrar a ADRIAN");return;}
   if(!confirm("¿Borrar "+n+"?"))return;
 
-  let passAdrian = prompt("🔐 Para borrar a "+n+", ingresa TU CONTRASEÑA DE ADRIAN (A2/B2):");
+  let passAdrian = prompt("🔐 Para borrar a "+n+", ingresa TU CONTRASEÑA DE ADRIAN:");
   if(!passAdrian) return;
 
   try{
