@@ -2,72 +2,75 @@
 <html lang="es-mx">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- ===== TITULO PESTAÑA ===== -->
 <title>Nueva Quiniela - Golazo</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
-*{box-sizing:border-box;font-family:Arial} 
-/* ===== FONDO PAGINA ===== - Color #0a2a4a igual que TOPBAR donde esta logo3 */
-body{margin:0;background:#0a2a4a;color:#fff}
-/* ===== BARRA SUPERIOR TOPBAR ===== - Azul #0a2a4a con borde amarillo */
-.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
-.topbar-left{display:flex;gap:6px;align-items:center}
-.topbar-center{flex:1;display:flex;justify-content:center;align-items:center}
-.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
-table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}
-td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
-td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
-.btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block}
+*{box-sizing:border-box;font-family:Arial}
+body{margin:0;background:#0a2a4a;color:#fff} /* Fondo azul igual que topbar */
+.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10} /* Barra superior */
+.topbar-left{display:flex;gap:6px;align-items:center} /* Botones izquierda */
+.topbar-center{flex:1;display:flex;justify-content:center;align-items:center} /* Logo centro */
+.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px} /* Tarjeta */
+.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer} /* Botón */
+table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden} /* Tabla blanca */
+th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px} /* Encabezado tabla */
+td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center} /* Celdas */
+td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px} /* Inputs tabla */
+.btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block} /* Botones top */
+#lienzo{width:100%;max-width:1080px;border:4px solid #00ff00;border-radius:8px;margin-top:10px;background:#000} /* Canvas imagen FB */
 </style>
 </head>
 <body>
 <script>
-// ===== PROTECCION POR PANEL ===== - Si no hay sesion de panelcentral, regresa al panel
-// Asi tus 2 ayudantes no pueden abrir esta pagina directo
-if(!localStorage.getItem("sesion_golazo")){
-  window.location.href="panelcentral.html";
-}
-// ===== SCRIPT_URL APPS SCRIPT ===== - Mismo de siempre
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
+if(!localStorage.getItem("sesion_golazo")){ window.location.href="panelcentral.html"; } // Protección: si no hay sesión, regresa a panel
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec"; // Tu Apps Script
+let PARTIDOS = []; // Guarda 9 partidos para imagen
+function normaliza(n){let x=n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");const d={"JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES","MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS","QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS","CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS","AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS","PUEBLA":"PUEBLA","NECAXA":"NECAXA"};return d[x]||x;} // Limpia nombre para buscar escudo
+function getFechaJuega(){let hoy=new Date();let dia=hoy.getDay();let viernes=new Date(hoy);viernes.setDate(hoy.getDate()+(5-dia+7)%7);let domingo=new Date(viernes);domingo.setDate(viernes.getDate()+2);let meses=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];return `JUEGA DEL VIERNES ${viernes.getDate()} DE ${meses[viernes.getMonth()]} AL DOMINGO ${domingo.getDate()} DE ${meses[domingo.getMonth()]}`;} // Genera texto JUEGA... para J2
 </script>
 
-<!-- ===== TOPBAR ENCABEZADO ===== - Logo al centro, botones a la izquierda -->
-<div class="topbar">
+<div class="topbar"> <!-- Barra superior -->
   <div class="topbar-left">
-    <!-- VER QUINIELA - Nueva pestaña -->
-    <a href="index.html" target="_blank" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
-    <!-- PANEL - Misma pestaña -->
-    <a href="panelcentral.html" class="btn-top" style="background:#00ff66;color:#000">PANEL</a>
+    <a href="index.html" target="_blank" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a> <!-- Botón ver quiniela -->
+    <a href="panelcentral.html" class="btn-top" style="background:#00ff66;color:#000">PANEL</a> <!-- Botón panel -->
   </div>
   <div class="topbar-center">
-    <!-- LOGO3 CENTRADO -->
-    <img src="img/logo3.png" style="height:38px">
-    <span id="who" style="color:#ffee00;font-weight:900;font-size:12px;margin-left:8px"></span>
+    <img src="img/logo3.png" style="height:38px"> <!-- Logo3 centro -->
+    <span id="who" style="color:#ffee00;font-weight:900;font-size:12px;margin-left:8px"></span> <!-- Usuario que entró -->
   </div>
 </div>
 
-<!-- ===== CARD TABLA NUEVA QUINIELA - ENTRE TOPBAR Y CONSULTAR ===== -->
-<div class="card"><b style="color:#ffee00">NUEVA QUINIELA </b>
+<div class="card"><b style="color:#ffee00">NUEVA QUINIELA</b> <!-- Título tabla -->
+<!-- Inputs extras que van a H2, I2, J2 -->
+<div style="display:flex;gap:6px;margin-top:8px">
+<input id="costo" value="$20 PESOS." placeholder="Costo"> <!-- Input costo, parte de COSTO $20 -->
+<input id="cierre" value="VIERNES 3 PM" placeholder="Cierra"> <!-- Input cierre, va a I2 -->
+<input id="jornada" type="number" placeholder="Jornada #"> <!-- Input jornada, va a H2 -->
+<input id="tel" value="524776482132" placeholder="WhatsApp"> <!-- Input WhatsApp -->
+</div>
 <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
-<button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
+<button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN + GENERAR IMAGEN</button> <!-- Botón guardar todo -->
 <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
 
-<!-- ===== CARD CONSULTAR - ABAJO DE LA TABLA ===== -->
-<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b><div style="display:flex;gap:8px;margin-top:10px">
+<!-- CARD IMAGEN FB GENERADA AUTOMATICO -->
+<div class="card" style="border-color:#00ff66;text-align:center">
+<b style="color:#00ff66">📸 IMAGEN FACEBOOK 1080x1350 - AUTOMÁTICA</b>
+<canvas id="lienzo" width="1080" height="1350"></canvas> <!-- Canvas donde se pinta igual a tu foto -->
+<button class="btn" style="background:#ffea00;color:#000;margin-top:8px" onclick="descargar()">⬇️ DESCARGAR IMAGEN PARA FACEBOOK</button>
+</div>
+
+<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">🔍 CONSULTAR PARTIDOS</b><div style="display:flex;gap:8px;margin-top:10px">
 <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX</a>
 <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN</a></div></div>
 
 <script>
-// ===== MOSTRAR USUARIO ===== - Pone nombre del que entro en panelcentral
-let ses=JSON.parse(localStorage.getItem("sesion_golazo")||"{}");
-if(ses.u) document.getElementById("who").textContent=ses.u;
-
-async function renderTabla(){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='9'>Cargando...</td></tr>";let data=null;try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j && j.length>0){data=j;}}catch(e){}if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"TOLUCA",visita:"PUEBLA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"MAZATLAN",visita:"PUMAS",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"PACHUCA",visita:"CRUZ AZUL",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"TIGRES",visita:"LEON",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"VIX"},{local:"ATLAS",visita:"SANTOS",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"JUAREZ",visita:"QUERETARO",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"MONTERREY",visita:"SAN LUIS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"17:00",trans:"C2"},{local:"TIJUANA",visita:"NECAXA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"19:05",trans:"C5"},{local:"GUADALAJARA",visita:"AMERICA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];}tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});}
-function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
-async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");let st=document.getElementById("status");btn.textContent="Guardando...";btn.disabled=true;st.textContent="";try{let res = await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});let txt = await res.text();st.textContent="✅ Guardado: "+txt.substring(0,100);st.style.color="#00ff66";}catch(e){st.textContent="❌ Error: "+e.message;st.style.color="#ff4444";}btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";btn.disabled=false;}
-renderTabla();
+let ses=JSON.parse(localStorage.getItem("sesion_golazo")||"{}"); if(ses.u) document.getElementById("who").textContent=ses.u; // Muestra usuario
+async function renderTabla(){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='9'>Cargando...</td></tr>";let data=null;try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j && j.length>0){data=j;}}catch(e){}if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"TOLUCA",visita:"PUEBLA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"MAZATLAN",visita:"PUMAS",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"PACHUCA",visita:"CRUZ AZUL",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"TIGRES",visita:"LEON",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"VIX"},{local:"ATLAS",visita:"SANTOS",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"JUAREZ",visita:"QUERETARO",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"MONTERREY",visita:"SAN LUIS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"17:00",trans:"C2"},{local:"TIJUANA",visita:"NECAXA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"19:05",trans:"C5"},{local:"GUADALAJARA",visita:"AMERICA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];}tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});} // Dibuja tabla 9 filas
+function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));PARTIDOS=arr;return arr;} // Guarda local y para imagen
+async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");let st=document.getElementById("status");btn.textContent="Guardando...";btn.disabled=true;st.textContent="";let juegaTexto=getFechaJuega();let cierraTexto=`CIERRA ${document.getElementById('cierre').value}`;let jornadaNum=parseInt(document.getElementById('jornada').value||localStorage.getItem("jornada_golazo")||11);try{let r2=await fetch(SCRIPT_URL+"?action=obtener_jornada_actual");let j=await r2.json();jornadaNum=parseInt(j.jornada||jornadaNum)+1;}catch(e){jornadaNum=jornadaNum+1;}document.getElementById('jornada').value=jornadaNum;localStorage.setItem("jornada_golazo",jornadaNum);try{let res = await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});await res.text();await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_datos_quiniela",datos:{jornada:jornadaNum,cierra:cierraTexto,juega:juegaTexto}})});st.textContent=`✅ Guardado ADMIN B2:H10 + H2=${jornadaNum} I2=${cierraTexto} J2=${juegaTexto} - Generando imagen...`;st.style.color="#00ff66";generar();}catch(e){st.textContent="❌ Error: "+e.message;st.style.color="#ff4444";}btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN + GENERAR IMAGEN";btn.disabled=false;} // Guarda todo y genera imagen
+async function generar(){let W=1080,H=1350;let canvas=document.getElementById('lienzo');let ctx=canvas.getContext('2d');ctx.fillStyle="#00c600";ctx.fillRect(0,0,W,H);ctx.fillStyle="#0e2a6e";ctx.fillRect(8,8,W-16,H-16);let logo=new Image();logo.src="img/logo.png";await new Promise(res=>{logo.onload=res;logo.onerror=res;});ctx.save();ctx.beginPath();ctx.arc(W/2,740,410,0,Math.PI*2);ctx.fillStyle="#0a5a1a";ctx.fill();ctx.lineWidth=14;ctx.strokeStyle="#ffea00";ctx.stroke();ctx.beginPath();ctx.arc(W/2,740,380,0,Math.PI*2);ctx.clip();ctx.globalAlpha=0.95;ctx.drawImage(logo,W/2-380,740-380,760,760);ctx.restore();ctx.textAlign="center";ctx.fillStyle="#ffea00";ctx.font="900 58px Arial Black";ctx.fillText("QUINIELA GOLAZO",W/2,62);ctx.fillStyle="#ff1a1a";ctx.font="900 34px Arial";ctx.fillText(`COSTO ${document.getElementById('costo').value}`,W/2,102);ctx.fillStyle="#fff";ctx.font="900 23px Arial";ctx.fillText(getFechaJuega(),W/2,134);ctx.fillStyle="#ffea00";ctx.font="900 28px Arial";ctx.fillText(`CIERRA ${document.getElementById('cierre').value}`,W/2,166);ctx.fillStyle="#fff";ctx.font="900 34px Arial";ctx.fillText(`JORNADA ${document.getElementById('jornada').value}`,W/2,206);let y0=275,gap=108;PARTIDOS.forEach((p,i)=>{let y=y0+i*gap;ctx.textAlign="left";ctx.fillStyle="#ffea00";ctx.font="900 46px Arial";ctx.fillText((i+1),32,y+10);ctx.textAlign="center";ctx.fillStyle="#fff";ctx.font="900 30px Arial";ctx.fillText(p.local.toUpperCase(),230,y+10);ctx.fillText(p.visita.toUpperCase(),850,y+10);let eL=new Image();eL.src=`img/ESCUDOS/${normaliza(p.local)}.png`;let eV=new Image();eV.src=`img/ESCUDOS/${normaliza(p.visita)}.png`;eL.onload=()=>ctx.drawImage(eL,420,y-28,68,68);eV.onload=()=>ctx.drawImage(eV,592,y-28,68,68);});ctx.textAlign="center";ctx.fillStyle="#fff";ctx.font="900 17px Arial";ctx.fillText("* LA BOLSA AUMENTA DE ACUERDO AL NÚMERO DE PARTICIPANTES *",W/2,1255);ctx.fillStyle="#ffea00";ctx.font="900 36px Arial";ctx.fillText("📱 "+document.getElementById('tel').value,W/2+100,1310);setTimeout(generar,800);} // Genera imagen igual a tu foto
+function descargar(){let a=document.createElement('a');a.download=`GOLAZO-J${document.getElementById('jornada').value}.png`;a.href=document.getElementById('lienzo').toDataURL('image/png');a.click();} // Descarga PNG
+renderTabla(); // Carga tabla al iniciar
 </script>
 </body>
 </html>
