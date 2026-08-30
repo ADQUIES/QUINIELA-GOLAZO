@@ -3,45 +3,45 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- ===== TITULO PESTAÑA ===== -->
+<!-- ===== TITULO PESTAÑA NAVEGADOR ===== -->
 <title>Panel Central Golazo</title>
+<!-- ===== FAVICON ===== - Icono de pestaña img/logo.png -->
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
-/* ===== RESET ===== - Quita margenes */
+/* ===== RESET GENERAL ===== - Quita margenes y pone Arial */
 *{box-sizing:border-box;font-family:Arial}
 body{margin:0;background:#000e14;color:#fff}
-
-/* ===== LOGIN CONTENEDOR ===== - Centra login */
+/* ===== CONTENEDOR LOGIN ===== - Centra el cuadro login en pantalla */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:#000e14}
-/* ===== LOGIN CAJA ===== - Cuadro azul con borde amarillo */
+/* ===== CAJA LOGIN ===== - Azul #123f4a con borde amarillo #ffcc00 */
 .login-box{background:#123f4a;border:3px solid #ffcc00;border-radius:20px;padding:24px 20px;max-width:380px;width:100%;text-align:center}
 .login-title{color:#ffdd00;font-size:28px;font-weight:900;letter-spacing:4px;margin:5px 0 18px 0}
 .login-box input{width:100%;padding:15px;border:none;border-radius:12px;margin:10px 0;font-size:18px;font-weight:900;text-align:center;background:#fff;color:#5a4a3a}
 .btn-login{width:100%;padding:15px;border:none;border-radius:12px;background:#ffdd00;color:#000;font-size:22px;font-weight:900;cursor:pointer;margin-top:6px}
 .hidden{display:none}
-
-/* ===== PANEL CENTRAL CONTENEDOR ===== */
+/* ===== PANEL CENTRAL CONTENEDOR ===== - Centra menu */
 .menu-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;flex-direction:column}
-/* ===== PANEL CENTRAL CAJA ===== */
+/* ===== PANEL CENTRAL CAJA ===== - Caja #0e3a4e con borde #ffee00 */
 .menu-box{background:#0e3a4e;border:3px solid #ffee00;border-radius:20px;padding:25px 20px;max-width:420px;width:100%;text-align:center}
-
-/* ===== BASE DE TODOS LOS BOTONES ===== */
-.btn-menu{display:block;width:100%;padding:18px;border-radius:14px;font-weight:900;font-size:18px;text-decoration:none;margin:12px 0;border:none}
-
-/* ===== BOTON 1 AMARILLO - IR A ADMIN ===== - Lleva a admin.html */
+/* ===== BASE BOTONES ===== - Estilo para todos los botones del menu */
+.btn-menu{display:block;width:100%;padding:18px;border-radius:14px;font-weight:900;font-size:18px;text-decoration:none;margin:12px 0;border:none;cursor:pointer}
+/* ===== BOTON 1 AMARILLO - ADMIN ===== */
 .btn-admin{background:#ffee00;color:#000}
-/* ===== BOTON 2 AZUL - RESULTADOS ===== - Lleva a resultadospartidos.html */
+/* ===== BOTON 2 AZUL - RESULTADOS ===== */
 .btn-resultados{background:#00bfff;color:#000}
-/* ===== BOTON 3 VERDE - QUINIELA ===== - Lleva a index.html */
+/* ===== BOTON 3 VERDE - QUINIELA CLIENTE ===== */
 .btn-index{background:#00ff66;color:#000}
-/* ===== BOTON 4 MORADO - NUEVA QUINIELA ===== - Lleva a nuevaquiniela.html, combina con los 3 anteriores */
+/* ===== BOTON 4 MORADO - NUEVA QUINIELA ===== */
 .btn-nueva{background:#c084fc;color:#000}
+/* ===== BOTON 5 NARANJA - USUARIOS ===== - Solo Admin, abre en misma pestaña */
+.btn-usuarios{background:#ff9f1c;color:#000;border:2px dashed #000}
 /* ===== BOTON ROJO SALIR ===== */
 .btn-salir{background:#ff0033;color:#fff;padding:10px 20px;border-radius:10px;font-weight:900;border:none;cursor:pointer;margin-top:15px}
 </style>
 </head>
 <body>
 
+<!-- ===== PANTALLA LOGIN ===== - Primera pantalla que ven tus ayudantes -->
 <div id="loginScreen" class="login-wrap">
   <div class="login-box">
     <img src="img/logo3.png" style="width:100%;max-width:330px;margin:0 auto 8px;display:block">
@@ -53,10 +53,10 @@ body{margin:0;background:#000e14;color:#fff}
   </div>
 </div>
 
+<!-- ===== PANTALLA MENU ===== - Aparece despues del login -->
 <div id="menuScreen" class="hidden">
   <div class="menu-wrap">
     <div class="menu-box">
-      <!-- ===== LOGO SUPERIOR ===== - logo3.png de img/ -->
       <img src="img/logo3.png" style="width:100%;max-width:280px;margin:0 auto 10px;display:block">
       <h2 style="color:#ffee00;font-weight:900;letter-spacing:2px;margin:0 0 15px">PANEL CENTRAL</h2>
       <p id="who" style="color:#fff;font-weight:900;margin-bottom:18px"></p>
@@ -64,8 +64,9 @@ body{margin:0;background:#000e14;color:#fff}
       <a href="admin.html" class="btn-menu btn-admin">⚙️ IR A ADMIN</a>
       <a href="resultadospartidos.html" class="btn-menu btn-resultados">📊 RESULTADOS</a>
       <a href="index.html" class="btn-menu btn-index">🎲 QUINIELA CLIENTE</a>
-      <!-- Este funciona en tu compu y en GitHub sin cambiar nada -->
       <a href="nuevaquiniela.html" class="btn-menu btn-nueva">🆕 NUEVA QUINIELA</a>
+      <!-- BOTON 5 USUARIOS - Misma pestaña, con candado Y1 y Z1 de Sheet USUARIOS -->
+      <button onclick="irUsuarios()" class="btn-menu btn-usuarios">👥 USUARIOS (Solo Admin)</button>
 
       <button onclick="logout()" class="btn-salir">Salir</button>
     </div>
@@ -73,13 +74,59 @@ body{margin:0;background:#000e14;color:#fff}
 </div>
 
 <script>
+// ===== SCRIPT_URL ===== - Mismo Apps Script de siempre
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
+
+// ===== USUARIO QUE PUEDE ABRIR USUARIOS.HTML ===== - Lee de tu celda Y1, pero aqui dejamos respaldo ADRIAN
+const USUARIO_MAESTRO = "ADRIAN"; 
+
+// ===== MOSTRAR MENU =====
 function mostrar(usuario){
   document.getElementById("loginScreen").classList.add("hidden");
   document.getElementById("menuScreen").classList.remove("hidden");
   document.getElementById("who").textContent="Hola "+usuario+" 👋";
 }
+// ===== LOGOUT =====
 function logout(){ localStorage.removeItem("sesion_golazo"); location.reload(); }
+
+// ===== IR A USUARIOS.HTML - VALIDANDO CONTRA CELDA Z1 = GOLAZO2026 =====
+async function irUsuarios(){
+  let sesion = JSON.parse(localStorage.getItem("sesion_golazo")||"{}");
+  // 1. Solo ADRIAN (celda Y1) puede intentar
+  if(sesion.u !== USUARIO_MAESTRO){
+    alert("⛔ ACCESO DENEGADO: Solo "+USUARIO_MAESTRO+" puede administrar usuarios.\nTus ayudantes no tienen permiso.");
+    return;
+  }
+  // 2. Pide clave maestra
+  let pass = prompt("🔐 Ingresa CLAVE MAESTRA para USUARIOS:\n(Guardada en tu Sheet USUARIOS celda Z1)");
+  if(!pass) return;
+
+  let btn = document.querySelector(".btn-usuarios");
+  let textoOriginal = btn.textContent;
+  btn.textContent = "Verificando en Sheet...";
+
+  try{
+    // Valida contra tu Google Sheet hoja USUARIOS celdas Y1 y Z1
+    let r = await fetch(SCRIPT_URL,{
+      method:"POST",
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify({action:"validar_maestro", pass: pass})
+    });
+    let d = await r.json();
+    if(d.ok){
+      // Abre en misma pestaña como pediste
+      window.location.href="usuarios.html";
+    }else{
+      alert("❌ Clave incorrecta.\nVe a tu Google Sheet hoja USUARIOS celda Z1, debe decir GOLAZO2026");
+      btn.textContent = textoOriginal;
+    }
+  }catch(e){
+    alert("❌ Error conectando a Sheet: "+e.message);
+    btn.textContent = textoOriginal;
+  }
+}
+
+// ===== LOGIN NORMAL - Valida contra hoja USUARIOS =====
 async function login(){
   let u=document.getElementById("user").value.trim();
   let p=document.getElementById("pass").value.trim();
