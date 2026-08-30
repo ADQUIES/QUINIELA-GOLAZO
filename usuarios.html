@@ -5,11 +5,31 @@
 <title>Usuarios - Golazo</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
-/* ===== RESET Y FONDO ===== - Evita scroll horizontal en celular */
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#000e14;color:#fff;overflow-x:hidden}
-/* ===== TOPBAR SOLO LOGO CENTRADO ===== - Sin botones, para que no se salga en celular */
-.topbar{background:#0a2a4a;padding:12px;display:flex;justify-content:center;align-items:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
-/* ===== CARD USUARIOS ===== - 100% ancho en celular, max 420px en PC */
+/* ===== TOPBAR AJUSTADO - LOGO3.PNG CENTRADO Y RESPONSIVE ===== */
+.topbar{
+  background:#0a2a4a; /* Fondo azul */
+  padding:8px 10px; /* Padding mas pequeño para celular */
+  display:flex; /* Flex para centrar */
+  justify-content:center; /* Centrado horizontal */
+  align-items:center; /* Centrado vertical */
+  flex-direction:column; /* Logo arriba, nombre abajo en celular */
+  gap:4px; /* Espacio entre logo y nombre */
+  border-bottom:3px solid #ffee00; /* Borde amarillo */
+  position:sticky; /* Se queda arriba al scrollear */
+  top:0; /* Pegado arriba */
+  z-index:10;
+}
+.topbar img{
+  height:34px; /* Altura logo ajustada para celular - mas pequeña */
+  width:auto; /* Ancho automatico */
+  max-width:80%; /* No se sale en celular */
+  object-fit:contain; /* No se deforma */
+}
+@media(min-width:400px){ /* En pantalla mas grande que 400px */
+ .topbar{flex-direction:row; padding:10px 12px} /* Logo y nombre en fila */
+ .topbar img{height:38px} /* Logo un poco mas grande en PC */
+}
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px auto;max-width:420px;width:calc(100% - 20px)}
 .card-title{color:#ffee00;font-weight:900;font-size:15px;margin-bottom:10px;text-align:center}
 .user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0;font-size:14px}
@@ -17,98 +37,72 @@
 .msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:12px}
 .msg-ok{background:#00ff66;color:#000}.msg-error{background:#ff0033;color:#fff}
 input{padding:12px;border-radius:8px;border:none;font-weight:900;text-align:center;width:100%;font-size:14px}
-/* ===== INPUTS EN FILA QUE NO SE SALGA EN CELULAR ===== */
 .inputs-row{display:flex;gap:6px;margin-top:10px}
-.inputs-row input{flex:1;min-width:0} /* min-width:0 evita que se salga en flex */
-/* ===== BARRA ABAJO CON 3 BOTONES CENTRADOS EN HORIZONTAL ===== - Fuera del div usuarios */
+.inputs-row input{flex:1;min-width:0}
 .bottom-bar{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;padding:14px 10px;margin:10px auto;max-width:420px;width:calc(100% - 20px);background:#0a2a4a;border:2px solid #ffee00;border-radius:12px}
 .btn-bottom{flex:1;min-width:90px;max-width:120px;padding:14px 6px;border-radius:10px;font-weight:900;font-size:12px;border:none;cursor:pointer;text-decoration:none;text-align:center}
 </style>
 </head>
 <body>
 <script>
-// ===== SCRIPT_URL ===== - Tu Apps Script
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
-// ===== PROTECCION PANEL ===== - Solo entra si viene del panelcentral.html
 if(!localStorage.getItem("sesion_golazo")){
   window.location.href="panelcentral.html";
 }
 </script>
 
-<!-- ===== TOPBAR SOLO LOGO CENTRADO - Ya no hay botones aqui para que no se salga ===== -->
+<!-- ===== TOPBAR AJUSTADO: LOGO3.PNG CENTRADO Y RESPONSIVE - YA NO SE SALE EN CELULAR ===== -->
 <div class="topbar">
-  <img src="img/logo3.png" style="height:38px"> <!-- Logo3.png centrado -->
-  <span id="who" style="color:#ffee00;font-weight:900;font-size:12px;margin-left:8px"></span>
+  <img src="img/logo3.png" alt="Golazo"> <!-- Logo3.png centrado, 34px en celular, 38px en PC -->
+  <span id="who" style="color:#ffee00;font-weight:900;font-size:11px"></span> <!-- Nombre abajo del logo en celular -->
 </div>
 
-<!-- ===== CARD USUARIOS - SOLO LISTA E INPUTS, SIN BOTONES ===== -->
 <div class="card">
   <div class="card-title">👥 USUARIOS (ADRIAN + AYUDANTES)</div>
-  <div id="listaUsuarios"></div> <!-- Lista usuarios -->
-  <!-- Inputs usuario y pass - Ya sin boton ALTA aqui para que no se salga -->
+  <div id="listaUsuarios"></div>
   <div class="inputs-row">
-    <input id="newUser" placeholder="Nuevo usuario"> <!-- Input usuario -->
-    <input id="newPass" placeholder="Pass"> <!-- Input pass -->
+    <input id="newUser" placeholder="Nuevo usuario">
+    <input id="newPass" placeholder="Pass">
   </div>
   <div id="msgUsuarios"></div>
 </div>
 
-<!-- ===== BOTONES ABAJO FUERA DEL DIV - CENTRADOS HORIZONTAL - NO SE SALE EN CELULAR ===== -->
 <div class="bottom-bar">
-  <a href="index.html" class="btn-bottom" style="background:#ffee00;color:#000">VER QUINIELA</a> <!-- Boton izquierda -->
-  <a href="panelcentral.html" class="btn-bottom" style="background:#00bfff;color:#000">PANEL</a> <!-- Boton centro -->
-  <button id="btnAlta" onclick="agregarUsuario()" class="btn-bottom" style="background:#00ff66;color:#000">+ ALTA</button> <!-- Boton derecha - Ahora abajo -->
+  <a href="index.html" class="btn-bottom" style="background:#ffee00;color:#000">VER QUINIELA</a>
+  <a href="panelcentral.html" class="btn-bottom" style="background:#00bfff;color:#000">PANEL</a>
+  <button id="btnAlta" onclick="agregarUsuario()" class="btn-bottom" style="background:#00ff66;color:#000">+ ALTA</button>
 </div>
 
 <script>
-// ===== QUIEN ENTRO =====
 let ses = JSON.parse(localStorage.getItem("sesion_golazo")||"{}");
 if(ses.u) document.getElementById("who").textContent = ses.u;
-
-// ===== MENSAJE =====
-function showMsg(id,t,ok=true){
-  let el=document.getElementById(id);
-  el.textContent=t;
-  el.className="msg "+(ok?"msg-ok":"msg-error");
-  setTimeout(()=>{el.textContent="";el.className="";},4000);
-}
-
+function showMsg(id,t,ok=true){let el=document.getElementById(id);el.textContent=t;el.className="msg "+(ok?"msg-ok":"msg-error");setTimeout(()=>{el.textContent="";el.className="";},4000);}
 let usuariosLocal=[];
-
-// ===== CARGAR USUARIOS =====
 async function cargarUsuarios(){
   try{
     let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");
     let d=await r.json();
     if(d && d.length>0){
-      if(Array.isArray(d[0])){
-        usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));
-      }else{
-        usuariosLocal=d.map(x=>({u:x.usuario||x[0],p:"****"}));
-      }
+      if(Array.isArray(d[0])){usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));}
+      else{usuariosLocal=d.map(x=>({u:x.usuario||x[0],p:"****"}));}
     }
   }catch(e){}
   renderUsuarios();
 }
-
 function renderUsuarios(){
-  let c=document.getElementById("listaUsuarios");
-  c.innerHTML="";
+  let c=document.getElementById("listaUsuarios");c.innerHTML="";
   usuariosLocal.forEach(us=>{
     let es=us.u==="ADRIAN";
     c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;
   });
 }
-
-// ===== ALTA - PIDE TU PASS DE ADRIAN A2/B2 =====
 async function agregarUsuario(){
   let u=document.getElementById("newUser").value.trim().toUpperCase();
   let p=document.getElementById("newPass").value.trim();
   if(!u||!p){showMsg("msgUsuarios","Llena usuario y pass",false);return;}
   let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN (A2/B2):");
   if(!passAdrian) return;
-  let btn=document.getElementById("btnAlta");
-  btn.disabled=true; btn.textContent="Verificando...";
+  let btn=document.getElementById("btnAlta");btn.disabled=true;btn.textContent="Verificando...";
   showMsg("msgUsuarios","Verificando tu pass de ADRIAN",true);
   try{
     let v=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"validar_login", usuario: "ADRIAN", pass: passAdrian})});
@@ -122,8 +116,6 @@ async function agregarUsuario(){
   }catch(e){showMsg("msgUsuarios","Error: "+e.message,false);}
   btn.disabled=false;btn.textContent="+ ALTA";
 }
-
-// ===== BORRAR =====
 async function borrarUsuario(n){
   if(n==="ADRIAN"){alert("No puedes borrar a ADRIAN");return;}
   if(!confirm("¿Borrar "+n+"?"))return;
