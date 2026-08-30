@@ -11,12 +11,9 @@
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#000e14;color:#fff}
 /* ===== TOPBAR ===== - Barra azul #0a2a4a con borde amarillo */
 .topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
-/* ===== CARD ===== - Caja #0e3a4e borde #ffee00 */
+/* ===== CARD ===== - Caja #0e3a4e borde #ffee00 - Siempre visible, ya sin toggle */
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
-/* ===== CARD HEADER ===== - Titulo + boton ocultar */
-.card-header{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
-.card-header b{color:#ffee00}
-.toggle-btn{background:#002d3d;color:#ffee00;border:1px solid #ffee00;padding:4px 10px;border-radius:6px;font-weight:900;cursor:pointer}
+.card-title{color:#ffee00;font-weight:900;font-size:16px;margin-bottom:10px;text-align:center} /* Titulo fijo */
 .user-item{display:flex;justify-content:space-between;align-items:center;background:#002d3d;padding:10px;border-radius:8px;margin:5px 0}
 .btn-del{background:#ff0033;color:#fff;border:none;padding:5px 10px;border-radius:6px;font-weight:bold;cursor:pointer}
 .msg{padding:8px;border-radius:8px;margin-top:8px;text-align:center;font-weight:bold;font-size:13px}
@@ -47,12 +44,11 @@ if(!localStorage.getItem("sesion_golazo")){
   </div>
 </div>
 
-<!-- ===== CARD USUARIOS ===== - Sin login propio -->
+<!-- ===== CARD USUARIOS - SIEMPRE VISIBLE, YA SIN BOTON OCULTAR ===== -->
 <div class="card">
-  <div class="card-header" onclick="toggleUsuarios()">
-    <b>USUARIOS (ADRIAN + 3 USUARIOS)</b>
-    <button class="toggle-btn" id="btnToggle">▼ OCULTAR</button>
-  </div>
+  <!-- Titulo fijo, ya sin card-header clickeable ni boton toggle -->
+  <div class="card-title">👥 USUARIOS (ADRIAN + AYUDANTES)</div>
+
   <div id="contenidoUsuarios" style="margin-top:10px">
     <div id="listaUsuarios"></div> <!-- Lista de usuarios -->
     <div style="display:flex;gap:6px;margin-top:10px">
@@ -69,14 +65,6 @@ if(!localStorage.getItem("sesion_golazo")){
 let ses = JSON.parse(localStorage.getItem("sesion_golazo")||"{}");
 if(ses.u) document.getElementById("who").textContent = ses.u;
 
-// ===== TOGGLE ===== - Ocultar/mostrar lista
-function toggleUsuarios(){
-  let c=document.getElementById("contenidoUsuarios");
-  let b=document.getElementById("btnToggle");
-  if(c.style.display==="none"){c.style.display="block";b.textContent="▼ OCULTAR";}
-  else{c.style.display="none";b.textContent="► MOSTRAR";}
-}
-
 // ===== MENSAJE ===== - Ok verde / error rojo 4 seg
 function showMsg(id,t,ok=true){
   let el=document.getElementById(id);
@@ -90,12 +78,12 @@ let usuariosLocal=[]; // Array local usuarios
 // ===== CARGAR USUARIOS DESDE HOJA USUARIOS A2:B =====
 async function cargarUsuarios(){
   try{
-    let r=await fetch(SCRIPT_URL+"?action=listar_usuarios"); // Llama a doGet listar_usuarios
+    let r=await fetch(SCRIPT_URL+"?action=listar_usuarios");
     let d=await r.json();
     if(d && d.length>0){
-      if(Array.isArray(d[0])){ // Si viene como matriz [A,B] = [usuario,pass]
+      if(Array.isArray(d[0])){
         usuariosLocal=d.map(x=>({u:x[0],p:x[1]}));
-      }else{ // Si viene como objeto {usuario:}
+      }else{
         usuariosLocal=d.map(x=>({u:x.usuario||x[0],p:"****"}));
       }
     }
@@ -108,18 +96,17 @@ function renderUsuarios(){
   let c=document.getElementById("listaUsuarios");
   c.innerHTML="";
   usuariosLocal.forEach(us=>{
-    let es=us.u==="ADRIAN"; // ADRIAN no se borra
+    let es=us.u==="ADRIAN";
     c.innerHTML+=`<div class="user-item"><span>👤 ${us.u}</span> ${!es?`<button class="btn-del" onclick="borrarUsuario('${us.u}')">X Borrar</button>`:''}</div>`;
   });
 }
 
-// ===== AGREGAR USUARIO - PIDE TU PASS DE A2/B2 DE ADRIAN - CORREGIDO UNDEFINED =====
+// ===== AGREGAR USUARIO - PIDE TU PASS DE ADRIAN A2/B2 =====
 async function agregarUsuario(){
-  let u=document.getElementById("newUser").value.trim().toUpperCase(); // Nuevo usuario mayusculas
-  let p=document.getElementById("newPass").value.trim(); // Nuevo pass
+  let u=document.getElementById("newUser").value.trim().toUpperCase();
+  let p=document.getElementById("newPass").value.trim();
   if(!u||!p){showMsg("msgUsuarios","Llena usuario y pass",false);return;}
 
-  // PIDE TU CONTRASEÑA NORMAL DE ADRIAN (la de A2/B2) no la de Z1
   let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN:");
   if(!passAdrian) return;
 
@@ -129,17 +116,14 @@ async function agregarUsuario(){
   showMsg("msgUsuarios","Verificando tu pass de ADRIAN",true);
 
   try{
-    // 1. Valida que passAdrian sea realmente la de ADRIAN en A2/B2
     let v=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"validar_login", usuario: "ADRIAN", pass: passAdrian})});
     let vd=await v.json();
-    if(!vd.ok){ // Si no es tu pass de ADRIAN
+    if(!vd.ok){
       showMsg("msgUsuarios","❌ No es tu contraseña de ADRIAN",false);
       btn.disabled=false; btn.textContent="+ ALTA"; return;
     }
 
-    // 2. Si tu pass de ADRIAN es correcta, da de alta al nuevo usuario - FIX UNDEFINED
     btn.textContent="Guardando...";
-    // IMPORTANTE: Mandamos usuario: y pass: que es como lo lee tu Apps Script en doPost
     let r=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"alta_usuario", usuario: u, pass: p})});
     let d=await r.json();
     if(d.ok){
@@ -157,7 +141,7 @@ async function agregarUsuario(){
   btn.textContent="+ ALTA";
 }
 
-// ===== BORRAR USUARIO - TAMBIEN PIDE TU PASS DE ADRIAN A2/B2 =====
+// ===== BORRAR USUARIO - PIDE TU PASS DE ADRIAN A2/B2 =====
 async function borrarUsuario(n){
   if(n==="ADRIAN"){alert("No puedes borrar a ADRIAN");return;}
   if(!confirm("¿Borrar "+n+"?"))return;
@@ -166,18 +150,16 @@ async function borrarUsuario(n){
   if(!passAdrian) return;
 
   try{
-    // Valida tu pass de ADRIAN
     let v=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"validar_login", usuario: "ADRIAN", pass: passAdrian})});
     let vd=await v.json();
     if(!vd.ok){alert("❌ No es tu contraseña de ADRIAN");return;}
 
-    // Borra con nombres correctos usuario:
     await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"borrar_usuario", usuario: n})});
     cargarUsuarios();
   }catch(e){alert("Error: "+e.message);}
 }
 
-cargarUsuarios(); // Carga al iniciar
+cargarUsuarios();
 </script>
 </body>
 </html>
