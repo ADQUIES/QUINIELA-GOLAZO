@@ -33,7 +33,7 @@ body{margin:0;background:#000e14;color:#fff}
 .btn-index{background:#00ff66;color:#000}
 /* ===== BOTON 4 MORADO - NUEVA QUINIELA ===== */
 .btn-nueva{background:#c084fc;color:#000}
-/* ===== BOTON 5 NARANJA - USUARIOS ===== - Solo Admin, abre en misma pestaña */
+/* ===== BOTON 5 NARANJA - USUARIOS ===== - Ahora sin login, abre directo en misma pestaña */
 .btn-usuarios{background:#ff9f1c;color:#000;border:2px dashed #000}
 /* ===== BOTON ROJO SALIR ===== */
 .btn-salir{background:#ff0033;color:#fff;padding:10px 20px;border-radius:10px;font-weight:900;border:none;cursor:pointer;margin-top:15px}
@@ -65,8 +65,8 @@ body{margin:0;background:#000e14;color:#fff}
       <a href="resultadospartidos.html" class="btn-menu btn-resultados">📊 RESULTADOS</a>
       <a href="index.html" class="btn-menu btn-index">🎲 QUINIELA CLIENTE</a>
       <a href="nuevaquiniela.html" class="btn-menu btn-nueva">🆕 NUEVA QUINIELA</a>
-      <!-- BOTON 5 USUARIOS - Misma pestaña, con candado Y1 y Z1 de Sheet USUARIOS -->
-      <button onclick="irUsuarios()" class="btn-menu btn-usuarios">👥 USUARIOS (Solo Admin)</button>
+      <!-- ===== BOTON 5 USUARIOS - SIN LOGIN - Abre directo en misma pestaña ===== -->
+      <a href="usuarios.html" class="btn-menu btn-usuarios">👥 USUARIOS</a>
 
       <button onclick="logout()" class="btn-salir">Salir</button>
     </div>
@@ -77,56 +77,16 @@ body{margin:0;background:#000e14;color:#fff}
 // ===== SCRIPT_URL ===== - Mismo Apps Script de siempre
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 
-// ===== USUARIO QUE PUEDE ABRIR USUARIOS.HTML ===== - Lee de tu celda Y1, pero aqui dejamos respaldo ADRIAN
-const USUARIO_MAESTRO = "ADRIAN"; 
-
-// ===== MOSTRAR MENU =====
+// ===== MOSTRAR MENU ===== - Oculta login y muestra menu
 function mostrar(usuario){
   document.getElementById("loginScreen").classList.add("hidden");
   document.getElementById("menuScreen").classList.remove("hidden");
   document.getElementById("who").textContent="Hola "+usuario+" 👋";
 }
-// ===== LOGOUT =====
+// ===== LOGOUT ===== - Borra sesion y recarga
 function logout(){ localStorage.removeItem("sesion_golazo"); location.reload(); }
 
-// ===== IR A USUARIOS.HTML - VALIDANDO CONTRA CELDA Z1 = GOLAZO2026 =====
-async function irUsuarios(){
-  let sesion = JSON.parse(localStorage.getItem("sesion_golazo")||"{}");
-  // 1. Solo ADRIAN (celda Y1) puede intentar
-  if(sesion.u !== USUARIO_MAESTRO){
-    alert("⛔ ACCESO DENEGADO: Solo "+USUARIO_MAESTRO+" puede administrar usuarios.\nTus ayudantes no tienen permiso.");
-    return;
-  }
-  // 2. Pide clave maestra
-  let pass = prompt("🔐 Ingresa CLAVE MAESTRA para ADMINISTRADOR:\n(Solo el Administrador tiene la clave)");
-  if(!pass) return;
-
-  let btn = document.querySelector(".btn-usuarios");
-  let textoOriginal = btn.textContent;
-  btn.textContent = "Verificando en Sheet...";
-
-  try{
-    // Valida contra tu Google Sheet hoja USUARIOS celdas Y1 y Z1
-    let r = await fetch(SCRIPT_URL,{
-      method:"POST",
-      headers:{"Content-Type":"text/plain;charset=utf-8"},
-      body: JSON.stringify({action:"validar_maestro", pass: pass})
-    });
-    let d = await r.json();
-    if(d.ok){
-      // Abre en misma pestaña como pediste
-      window.location.href="usuarios.html";
-    }else{
-      alert("❌ Clave incorrecta.\nSolo el Administrador tiene la clave");
-      btn.textContent = textoOriginal;
-    }
-  }catch(e){
-    alert("❌ Error conectando a Sheet: "+e.message);
-    btn.textContent = textoOriginal;
-  }
-}
-
-// ===== LOGIN NORMAL - Valida contra hoja USUARIOS =====
+// ===== LOGIN NORMAL - Valida contra hoja USUARIOS A2/B2 =====
 async function login(){
   let u=document.getElementById("user").value.trim();
   let p=document.getElementById("pass").value.trim();
