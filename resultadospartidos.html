@@ -69,12 +69,11 @@ function renderPartidos(){
     let n=i+1;
     let eL=normaliza(p.local);
     let eV=normaliza(p.visita);
-    // AQUÍ REGRESA LO GUARDADO EN C18:C26 Y D18:D26
     let gl = (p.golLocal!=="" && p.golLocal!=null)? p.golLocal : "";
     let gv = (p.golVisita!=="" && p.golVisita!=null)? p.golVisita : "";
     c.innerHTML+=`<div class="fila"><img src="img/ESCUDOS/${eL}.png" class="escudo" onerror="this.src='img/logo.png'"><div class="nombre">${p.local}</div><input type="number" min="0" class="goles" id="l${n}" value="${gl}"><button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button><input type="number" min="0" class="goles" id="v${n}" value="${gv}"><div class="nombre der">${p.visita}</div><img src="img/ESCUDOS/${eV}.png" class="escudo" onerror="this.src='img/logo.png'"></div>`;
   });
-  document.getElementById('status').textContent="✅ Cargado de ADMIN C18:C26 y D18:D26";
+  document.getElementById('status').textContent="✅ Cargando resultados";
 }
 
 async function guardarResultado(n){
@@ -83,7 +82,9 @@ async function guardarResultado(n){
     st.textContent=`⚠️ PARTIDO ${n}: DEBES COLOCAR UN RESULTADO`;
     st.style.color="#ff4444"; return;
   }
-  btn.textContent="..."; st.textContent=`⏳ Guardando partido ${n} y ordenando F15-F150 por L...`; st.style.color="#ffea00";
+  btn.textContent="...";
+  st.textContent=`Guardando resultado y creando ranking`;
+  st.style.color="#ffea00";
   try{
     let r=await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_resultados_admin",partido:n,res_local:rl,res_visita:rv})});
     let d=await r.json();
