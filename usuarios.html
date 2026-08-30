@@ -58,7 +58,7 @@ if(!localStorage.getItem("sesion_golazo")){
 </div>
 
 <div class="card">
-  <div class="card-title">👥 USUARIOS (ADRIAN + AYUDANTES)</div>
+  <div class="card-title">👥 USUARIOS (ADRIAN + 3 USUARIOS)</div>
   <div id="listaUsuarios"></div>
   <div class="inputs-row">
     <input id="newUser" placeholder="Nuevo usuario">
@@ -100,7 +100,7 @@ async function agregarUsuario(){
   let u=document.getElementById("newUser").value.trim().toUpperCase();
   let p=document.getElementById("newPass").value.trim();
   if(!u||!p){showMsg("msgUsuarios","Llena usuario y pass",false);return;}
-  let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN (A2/B2):");
+  let passAdrian = prompt("🔐 Para dar de alta a "+u+", ingresa TU CONTRASEÑA DE ADRIAN:");
   if(!passAdrian) return;
   let btn=document.getElementById("btnAlta");btn.disabled=true;btn.textContent="Verificando...";
   showMsg("msgUsuarios","Verificando tu pass de ADRIAN",true);
