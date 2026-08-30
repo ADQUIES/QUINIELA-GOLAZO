@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RESULTADOS GOLAZO</title>
+<link rel="icon" href="img/logo.png">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
+body{background:#0b5d5e;color:white;min-height:100vh}
+.banner{background:#000e14;border-bottom:4px solid #ffdd00;padding:10px;text-align:center}
+.banner img{max-width:380px;width:90%}
+.contenedor{max-width:1150px;margin:0 auto;padding:15px 10px;display:flex;gap:15px}
+.partidos{flex:1}
+.fila{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.escudo{width:48px;height:48px;background:white;object-fit:contain;padding:2px;border:1px solid #000}
+.nombre{width:155px;font-size:17px;font-weight:900;text-transform:uppercase;color:#d9f0f0;pointer-events:none;user-select:none}
+.nombre.der{text-align:right;width:135px}
+.goles{width:44px;height:44px;background:#e8efe8;border:2px inset #ccc;text-align:center;font-size:22px;font-weight:900;color:#000}
+.num-btn{width:42px;height:42px;background:#e8efe8;border:2px outset #aaa;font-size:20px;font-weight:900;cursor:pointer;color:#000}
+.num-btn.guardando{background:#00ff66}
+.lateral{width:175px;display:flex;flex-direction:column;gap:26px;padding-top:10px}
+.btn-lat{background:#e8efe8;color:#000;border:2px outset #bbb;padding:8px 10px;font-size:12px;font-weight:900;cursor:pointer;text-align:center;text-decoration:none;display:block}
+#status{text-align:center;margin-top:10px;font-size:13px;font-weight:bold;min-height:20px}
+</style>
+</head>
+<body>
+<div class="banner"><img src="img/logo3.png"></div>
+<div class="contenedor">
+  <div class="partidos" id="listaPartidos"><p style="text-align:center;margin-top:50px">Cargando ADMIN B18:B26 y E18:E26...</p></div>
+  <div class="lateral">
+    <a href="administracion.html" class="btn-lat">INICIO</a>
+    <div style="height:15px"></div>
+    <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit?gid=2086585510#gid=2086585510" target="_blank" class="btn-lat">B. DATOS</a>
+    <div style="height:15px"></div>
+    <a href="https://www.flashscore.com.mx/" target="_blank" class="btn-lat">MARCADOR</a>
+    <div style="height:15px"></div>
+    <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX</a>
+    <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN</a>
+    <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS</a>
+    <div style="height:15px"></div>
+    <a href="index.html" class="btn-lat">IR A TV</a>
+    <p id="status"></p>
+  </div>
+</div>
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
+let partidosActuales = [];
+async function cargarEquipos(){
+  try{
+    let r = await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");
+    let data = await r.json();
+    if(data && data.length>=9){ partidosActuales=data; } else { throw "vacio"; }
+  }catch(e){
+    partidosActuales = [
+      {local:"PUEBLA", visita:"JUÁREZ"}, {local:"NECAXA", visita:"MAZATLÁN"},
+      {local:"TIJUANA", visita:"TIGRES"}, {local:"MONTERREY", visita:"SAN LUIS"},
+      {local:"QUERÉTARO", visita:"TOLUCA"}, {local:"LEÓN", visita:"ATLAS"},
+      {local:"CRUZ AZUL", visita:"PACHUCA"}, {local:"SANTOS", visita:"AMÉRICA"},
+      {local:"CHIVAS", visita:"PUMAS"},
+    ];
+  }
+  renderPartidos();
+}
+function renderPartidos(){
+  const cont = document.getElementById('listaPartidos'); cont.innerHTML="";
+  partidosActuales.forEach((p,i)=>{
+    let n=i+1;
+    let escLoc = p.local.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+    let escVis = p.visita.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+    cont.innerHTML+=`<div class="fila">
+      <img src="img/ESCUDOS/${escLoc}.png" class="escudo" onerror="this.src='img/logo.png'">
+      <div class="nombre">${p.local}</div>
+      <input type="number" min="0" class="goles" id="l${n}">
+      <button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button>
+      <input type="number" min="0" class="goles" id="v${n}">
+      <div class="nombre der">${p.visita}</div>
+      <img src="img/ESCUDOS/${escVis}.png" class="escudo" onerror="this.src='img/logo.png'">
+    </div>`;
+  });
+}
+async function guardarResultado(n){
+  let rl=document.getElementById('l'+n).value, rv=document.getElementById('v'+n).value;
+  let btn=document.getElementById('btn'+n), st=document.getElementById('status');
+  if(rl===""||rv===""){st.textContent="⚠️ Escribe goles partido "+n; st.style.color="#ffdd00"; return;}
+  btn.classList.add('guardando'); btn.textContent="..."; st.textContent=`Guardando en ADMIN C${17+n} y D${17+n}...`;
+  try{
+    await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_resultados_admin",partido:n,res_local:rl,res_visita:rv})});
+    st.textContent=`✅ Partido ${n} guardado C${17+n}=${rl} D${17+n}=${rv}`; st.style.color="#00ff66"; btn.textContent="✓"; setTimeout(()=>btn.textContent=n,2000);
+  }catch(e){st.textContent="❌ "+e.message; st.style.color="#ff4444"; btn.textContent=n;}
+  btn.classList.remove('guardando');
+}
+cargarEquipos();
+</script>
+</body>
+</html>
