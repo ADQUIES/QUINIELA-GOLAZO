@@ -8,8 +8,8 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
 body{background:#0b5d5e;color:white;min-height:100vh}
-.banner{background:#000e14;border-bottom:4px solid #ffdd00;padding:10px;text-align:center}
-.banner img{max-width:380px;width:90%}
+.banner{background:transparent;padding:10px;text-align:center} /* TRANSPARENTE */
+.banner img{max-width:380px;width:90%;filter:drop-shadow(0 2px 4px #000)}
 .contenedor{max-width:1150px;margin:0 auto;padding:15px 10px;display:flex;gap:15px}
 .partidos{flex:1}
 .fila{display:flex;align-items:center;gap:8px;margin-bottom:12px}
@@ -38,14 +38,27 @@ body{background:#0b5d5e;color:white;min-height:100vh}
     <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" class="btn-lat">LIGA MX</a>
     <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" class="btn-lat">ESPN</a>
     <a href="https://www.foxsports.com.mx/" target="_blank" class="btn-lat">FOX SPORTS</a>
-    <div style="height:15px"></div>
-    <a href="index.html" class="btn-lat">IR A TV</a>
     <p id="status"></p>
   </div>
 </div>
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 let partidosActuales = [];
+
+// ESTOS SON LOS NOMBRES EXACTOS DE TU CARPETA img/ESCUDOS
+function normaliza(nombre){
+  let n = nombre.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+  const dic = {
+    "JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES",
+    "MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS",
+    "QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS",
+    "CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS",
+    "AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS",
+    "PUEBLA":"PUEBLA","NECAXA":"NECAXA","XOLOS":"TIJUANA","UANL":"TIGRES"
+  };
+  return dic[n] || n;
+}
+
 async function cargarEquipos(){
   try{
     let r = await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");
@@ -66,16 +79,16 @@ function renderPartidos(){
   const cont = document.getElementById('listaPartidos'); cont.innerHTML="";
   partidosActuales.forEach((p,i)=>{
     let n=i+1;
-    let escLoc = p.local.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
-    let escVis = p.visita.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+    let escLoc = normaliza(p.local);
+    let escVis = normaliza(p.visita);
     cont.innerHTML+=`<div class="fila">
-      <img src="img/ESCUDOS/${escLoc}.png" class="escudo" onerror="this.src='img/logo.png'">
+      <img src="img/ESCUDOS/${escLoc}.png" class="escudo" onerror="this.onerror=null; this.src='img/ESCUDOS/${escLoc.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
       <div class="nombre">${p.local}</div>
       <input type="number" min="0" class="goles" id="l${n}">
       <button class="num-btn" id="btn${n}" onclick="guardarResultado(${n})">${n}</button>
       <input type="number" min="0" class="goles" id="v${n}">
       <div class="nombre der">${p.visita}</div>
-      <img src="img/ESCUDOS/${escVis}.png" class="escudo" onerror="this.src='img/logo.png'">
+      <img src="img/ESCUDOS/${escVis}.png" class="escudo" onerror="this.onerror=null; this.src='img/ESCUDOS/${escVis.toLowerCase()}.png'; this.onerror=function(){this.src='img/logo.png'}">
     </div>`;
   });
 }
