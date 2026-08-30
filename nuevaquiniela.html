@@ -2,69 +2,113 @@
 <html lang="es-mx">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- ===== TITULO PESTAÑA ===== -->
+<!-- ===== TITULO PESTAÑA NAVEGADOR ===== -->
 <title>Nueva Quiniela - Golazo</title>
+<!-- ===== FAVICON ===== - Icono chiquito de la pestaña, archivo en img/logo.png -->
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
-/* ===== RESET GENERAL ===== */
-*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#000e14;color:#fff}
-/* ===== LOGIN ===== */
+/* ===== RESET GENERAL ===== - Quita margenes, fuente Arial para todo */
+*{box-sizing:border-box;font-family:Arial} 
+/* ===== FONDO PAGINA ===== - Color de fondo oscuro #000e14 y texto blanco */
+body{margin:0;background:#000e14;color:#fff}
+/* ===== CONTENEDOR LOGIN ===== - Centra el cuadro de login en toda la pantalla */
 .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px}
+/* ===== CAJA LOGIN ===== - Cuadro azul #123f4a con borde amarillo #ffcc00 */
 .login-box{background:#123f4a;border:3px solid #ffcc00;border-radius:20px;padding:24px 20px;max-width:380px;width:100%;text-align:center}
+/* ===== TITULO ENTRAR ===== - Texto amarillo #ffdd00 grande con letras separadas */
 .login-title{color:#ffdd00;font-size:28px;font-weight:900;letter-spacing:4px;margin:5px 0 18px}
+/* ===== INPUTS LOGIN ===== - Cajas blancas para escribir usuario y password */
 .login-box input{width:100%;padding:15px;border:none;border-radius:12px;margin:10px 0;font-size:18px;font-weight:900;text-align:center}
+/* ===== BOTON ENTRAR AMARILLO ===== - Boton amarillo #ffdd00 que valida login */
 .btn-login{width:100%;padding:15px;border:none;border-radius:12px;background:#ffdd00;color:#000;font-size:22px;font-weight:900;cursor:pointer;margin-top:6px}
+/* ===== OCULTO ===== - Clase para esconder pantallas (login o admin) */
 .hidden{display:none}
-/* ===== BARRA SUPERIOR ===== */
-.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
+/* ===== BARRA SUPERIOR TOPBAR ===== - Barra azul oscuro #0a2a4a pegada arriba con borde amarillo #ffee00 */
+.topbar{background:#0a2a4a;padding:10px 12px;display:flex;align-items:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
+/* ===== TOPBAR IZQUIERDA ===== - Contenedor de botones VER QUINIELA y PANEL, lado izquierdo */
+.topbar-left{display:flex;gap:6px;align-items:center}
+/* ===== TOPBAR CENTRO ===== - Donde va el logo3.png centrado */
+.topbar-center{flex:1;display:flex;justify-content:center;align-items:center}
+/* ===== TOPBAR DERECHA ===== - Donde va boton Salir */
+.topbar-right{display:flex;gap:6px;align-items:center}
+/* ===== CARD TARJETA ===== - Caja azul #0e3a4e con borde amarillo #ffee00 para cada seccion */
 .card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
+/* ===== BOTON VERDE GUARDAR ===== - Boton ancho verde #00ff66 */
 .btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
+/* ===== TABLA BLANCA ===== - Tabla con fondo blanco, texto negro, bordes redondeados */
 table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
+/* ===== CABECERA TABLA ===== - Encabezados azul oscuro #002d3d con texto amarillo #ffee00 */
+th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}
+/* ===== CELDA TABLA ===== - Cada cuadrito de la tabla con borde gris */
+td{padding:4px;border:1px solid #ddd;font-size:12px;text-align:center}
+/* ===== INPUTS DENTRO DE TABLA ===== - Cajas para escribir LOCAL, VISITA, DIA, HORA, TV */
 td input,td select{width:100%;padding:10px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:14px}
+/* ===== BOTON CHICO TOPBAR ===== - Botones chicos de la barra superior, VER QUINIELA y PANEL */
 .btn-top{padding:7px 12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:11px;display:inline-block}
 </style>
 </head>
 <body>
 <script>
-// ===== APP SCRIPT ===== - MISMO QUE ADMIN, NO CAMBIA
+// ===== SCRIPT_URL APPS SCRIPT ===== - Mismo script que admin.html, maneja obtener_admin y guardar_admin
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 </script>
+
+<!-- ===== PANTALLA LOGIN ===== -->
 <div id="loginScreen" class="login-wrap"><div class="login-box">
+<!-- LOGO LOGIN - img/logo3.png -->
 <img src="img/logo3.png" style="width:100%;max-width:330px;margin:0 auto 8px;display:block">
 <h1 class="login-title">ENTRAR</h1>
 <input id="user" placeholder="USUARIO" value="ADRIAN"><input id="pass" type="password" placeholder="PASSWORD">
 <button class="btn-login" onclick="login()">ENTRAR</button>
 <p id="msg" style="color:#ff4444;text-align:center;font-size:12px;margin-top:10px;font-weight:bold"></p></div></div>
-<div id="adminScreen" class="hidden">
-<div class="topbar"><div style="display:flex;align-items:center;gap:10px"><img src="img/logo3.png" style="height:38px"><span id="who" style="color:#ffee00;font-weight:900;font-size:12px"></span></div><div style="display:flex;gap:6px">
-<!-- ===== BOTON 1 AMARILLO VER QUINIELA ===== - Identico a admin.html, lleva a index.html -->
-<a href="index.html" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
-<!-- ===== BOTON 2 VERDE PANEL ===== - Identico a admin.html, lleva a panelcentral.html -->
-<a href="panelcentral.html" class="btn-top" style="background:#00ff66;color:#000">PANEL</a>
-<button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button></div></div>
 
-<!-- ===== CUADRO CONSULTAR PARTIDOS - IDENTICO MISMO COLOR, FORMATO Y POSICION QUE TENIAS EN ADMIN ===== -->
-<!-- Borde verde #00ff66, fondo #0e3a4e, 2 botones: amarillo LIGA MX y azul ESPN -->
+<!-- ===== PANTALLA NUEVA QUINIELA ===== -->
+<div id="adminScreen" class="hidden">
+<div class="topbar">
+  <div class="topbar-left">
+    <!-- BOTON AMARILLO VER QUINIELA - Abre en NUEVA PESTAÑA target=_blank hacia index.html -->
+    <a href="index.html" target="_blank" class="btn-top" style="background:#ffee00;color:#000">VER QUINIELA</a>
+    <!-- BOTON VERDE PANEL - Abre en MISMA PESTAÑA hacia panelcentral.html -->
+    <a href="panelcentral.html" class="btn-top" style="background:#00ff66;color:#000">PANEL</a>
+  </div>
+  <div class="topbar-center">
+    <!-- LOGO3 CENTRADO - img/logo3.png en el centro de la barra -->
+    <img src="img/logo3.png" style="height:38px">
+    <span id="who" style="color:#ffee00;font-weight:900;font-size:12px;margin-left:8px"></span>
+  </div>
+  <div class="topbar-right">
+    <!-- BOTON ROJO SALIR - Cierra sesion -->
+    <button onclick="logout()" style="background:#ff0033;color:#fff;border:none;padding:7px 12px;border-radius:8px;font-weight:bold;font-size:11px">Salir</button>
+  </div>
+</div>
+
+<!-- ===== CARD CONSULTAR PARTIDOS ===== - Borde verde #00ff66 -->
 <div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">🔍 CONSULTAR PARTIDOS Y HORARIOS</b><div style="display:flex;gap:8px;margin-top:10px">
-<!-- BOTON AMARILLO LIGA MX -->
+<!-- BOTON AMARILLO LIGA MX - Va a Google buscando LIGA MX -->
 <a href="https://www.google.com/search?q=LIGA+MX" target="_blank" style="flex:1;background:#ffee00;color:#000;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📅 LIGA MX</a>
-<!-- BOTON AZUL ESPN -->
+<!-- BOTON AZUL ESPN - Va a ESPN calendario Liga MX -->
 <a href="https://www.espn.com.mx/futbol/calendario/_/liga/MEX.1" target="_blank" style="flex:1;background:#007bff;color:#fff;padding:12px;border-radius:8px;font-weight:900;text-decoration:none;font-size:12px">📺 ESPN</a></div></div>
 
-<!-- ===== SECCION NUEVA QUINIELA CORTADA DE ADMIN ===== - Desde aqui hasta guardar -->
+<!-- ===== CARD TABLA NUEVA QUINIELA ===== -->
 <div class="card"><b style="color:#ffee00">NUEVA QUINIELA (Cargada desde tu SHEET ADMIN)</b>
 <div style="overflow:auto;margin-top:8px"><table><thead><tr><th>#</th><th>LOCAL</th><th>VS</th><th>VISITANTE</th><th>DÍA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
-<!-- BOTON VERDE GUARDAR EN SHEET -->
+<!-- BOTON GUARDAR VERDE -->
 <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR EN GOOGLE SHEET ADMIN</button>
 <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
 </div>
+
 <script>
+// ===== MOSTRAR ADMIN ===== - Esconde login y muestra tabla
 function mostrarAdmin(){let s=JSON.parse(localStorage.getItem("sesion_golazo"));if(!s)return;loginScreen.classList.add("hidden");adminScreen.classList.remove("hidden");document.getElementById("who").textContent=s.u;renderTabla();}
+// ===== LOGOUT ===== - Borra sesion
 function logout(){localStorage.removeItem("sesion_golazo");location.reload();}
+// ===== LOGIN SIMPLE ===== - Guarda usuario en localStorage
 function login(){let u=document.getElementById("user").value.trim().toUpperCase();let p=document.getElementById("pass").value.trim();if(!u||!p){document.getElementById("msg").textContent="Escribe usuario y pass";return;}localStorage.setItem("sesion_golazo",JSON.stringify({u:u}));mostrarAdmin();}
+// ===== RENDER TABLA ===== - Carga con action obtener_admin desde SHEET
 async function renderTabla(){let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='9'>Cargando...</td></tr>";let data=null;try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j && j.length>0){data=j;}}catch(e){}if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"TOLUCA",visita:"PUEBLA",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"19:00",trans:"TDN"},{local:"MAZATLAN",visita:"PUMAS",diaLetra:"VIERNES",dia:"4",mes:"9",hora:"21:00",trans:"C5"},{local:"PACHUCA",visita:"CRUZ AZUL",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"TDN"},{local:"TIGRES",visita:"LEON",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"19:00",trans:"VIX"},{local:"ATLAS",visita:"SANTOS",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"21:00",trans:"TDN"},{local:"JUAREZ",visita:"QUERETARO",diaLetra:"SÁBADO",dia:"5",mes:"9",hora:"17:00",trans:"VIX"},{local:"MONTERREY",visita:"SAN LUIS",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"17:00",trans:"C2"},{local:"TIJUANA",visita:"NECAXA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"19:05",trans:"C5"},{local:"GUADALAJARA",visita:"AMERICA",diaLetra:"DOMINGO",dia:"6",mes:"9",hora:"20:00",trans:"C7"}];}tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td>${idx}</td><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><select id="diaLetra${idx}"><option ${d.diaLetra==="VIERNES"?"selected":""}>VIERNES</option><option ${d.diaLetra==="SÁBADO"?"selected":""}>SÁBADO</option><option ${d.diaLetra==="DOMINGO"?"selected":""}>DOMINGO</option></select></td><td><input id="dia${idx}" value="${d.dia}"></td><td><input id="mes${idx}" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora}"></td><td><input id="trans${idx}" value="${d.trans}"></td></tr>`;});}
+// ===== GUARDAR LOCAL ===== - Guarda en navegador antes de enviar a SHEET
 function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:document.getElementById("diaLetra"+i).value,dia:document.getElementById("dia"+i).value,mes:document.getElementById("mes"+i).value,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));return arr;}
+// ===== GUARDAR EN SHEET ===== - Envia con action guardar_admin
 async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");let st=document.getElementById("status");btn.textContent="Guardando...";btn.disabled=true;st.textContent="";try{let res = await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});let txt = await res.text();st.textContent="✅ Guardado: "+txt.substring(0,100);st.style.color="#00ff66";}catch(e){st.textContent="❌ Error: "+e.message+" - Revisa tu Apps Script";st.style.color="#ff4444";}btn.textContent="💾 GUARDAR EN GOOGLE SHEET ADMIN";btn.disabled=false;}
 if(localStorage.getItem("sesion_golazo"))mostrarAdmin();
 </script>
