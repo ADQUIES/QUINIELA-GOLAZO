@@ -4,28 +4,64 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>RESULTADOS GOLAZO</title>
+
+<!-- ========= FAVICON ========= -->
+<!-- Icono que sale en la pestaña del navegador -->
+<link rel="icon" type="image/png" href="img/logo.png">
+
 <style>
+/* ===== RESET GENERAL ===== - Quita margenes de fabrica */
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial Black,Arial,sans-serif}
+
+/* ===== FONDO DE TODA LA PAGINA ===== - Igual que administracion.html */
 body{background:#000e14;color:white;min-height:100vh}
+
+/* ===== BANNER SUPERIOR ===== - Donde va el logo3.png */
 .banner{text-align:center;padding:12px}
 .banner img{max-width:360px;width:90%}
+
+/* ===== CONTENEDOR PRINCIPAL ===== - Divide izquierda (partidos) y derecha (botones) */
 .contenedor{max-width:1000px;margin:0 auto;padding:15px 10px;display:flex;gap:12px}
+
+/* ===== CAJA DE PARTIDOS ===== - Fondo donde estan los equipos, igual que menu-box de administracion */
 .partidos{flex:1;background:#123f4a;border:3px solid #ffdd00;border-radius:20px;padding:14px 10px}
+
+/* ===== FILA DE CADA PARTIDO ===== - Escudo + nombre + goles + boton numero */
 .fila{display:flex;align-items:center;gap:4px;margin-bottom:10px}
+
+/* ===== ESCUDOS ===== */
 .escudo{width:42px;height:42px;object-fit:contain;background:transparent}
+
+/* ===== NOMBRE DEL EQUIPO ===== */
 .nombre{width:138px;font-size:14px;font-weight:900;text-transform:uppercase}
 .nombre.der{text-align:right;width:125px}
+
+/* ===== INPUT DE GOLES ===== - Cajita blanca donde escribes el gol */
 .goles{width:36px;height:36px;background:#fff;border-radius:6px;border:2px solid #000;text-align:center;font-size:18px;font-weight:900;color:#000}
+
+/* ===== BOTON NUMERO 1 AL 9 ===== - Amarillo, no se toca */
 .num-btn{width:32px;height:32px;background:#ffea00;border:2px solid #000;border-radius:8px;font-size:16px;font-weight:900;cursor:pointer;color:#000;box-shadow:0 2px 0 #000}
+
+/* ===== COLUMNA DERECHA DE BOTONES ===== */
 .lateral{width:200px;display:flex;flex-direction:column;gap:14px}
+
+/* ===== BOTONES AZULES LATERALES ===== - ADMINISTRACION, B.DATOS, FLASHSCORE, etc. */
 .btn-lat{background:#00bfff;color:#000;border:2px solid #000;border-radius:14px;padding:16px 8px;font-size:13px;font-weight:900;text-align:center;text-decoration:none;display:block;box-shadow:0 3px 0 #000;text-transform:uppercase}
+
+/* ===== MENSAJES DE ESTADO ===== - Donde dice Cargando resultados / Guardando... */
 #status{text-align:center;margin-top:10px;font-size:12px;font-weight:bold;color:#ffea00;white-space:pre-wrap}
 </style>
 </head>
 <body>
+
+<!-- ===== LOGO Y TITULO ===== -->
 <div class="banner"><img src="img/logo3.png"><p style="color:#ffea00">RESULTADOS</p></div>
+
 <div class="contenedor">
+  <!-- ===== LISTA DE LOS 9 PARTIDOS ===== -->
   <div class="partidos" id="listaPartidos"><p style="text-align:center;color:#ffea00">Cargando...</p></div>
+
+  <!-- ===== MENU LATERAL DE BOTONES ===== -->
   <div class="lateral">
     <a href="https://adquies.github.io/QUINIELA-GOLAZO/administracion.html" class="btn-lat">ADMINISTRACIÓN</a>
     <a href="https://docs.google.com/spreadsheets/d/1HWH-Uts9lbOIpWfndaexblsBnhf7GaxliuR928RtUlw/edit" target="_blank" class="btn-lat">B. DATOS</a>
@@ -36,10 +72,16 @@ body{background:#000e14;color:white;min-height:100vh}
     <p id="status"></p>
   </div>
 </div>
+
 <script>
+// ===== URL DE TU APPS SCRIPT =====
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
 let partidosActuales = [];
+
+// ===== NORMALIZA NOMBRE PARA BUSCAR ESCUDO =====
 function normaliza(n){let x=n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");const d={"JUAREZ":"JUAREZ","MAZATLAN":"MAZATLAN","TIJUANA":"TIJUANA","TIGRES":"TIGRES","MONTERREY":"MONTERREY","SANLUIS":"SANLUIS","ATLETICOSANLUIS":"SANLUIS","QUERETARO":"QUERETARO","TOLUCA":"TOLUCA","LEON":"LEON","ATLAS":"ATLAS","CRUZAZUL":"CRUZAZUL","PACHUCA":"PACHUCA","SANTOS":"SANTOS","SANTOSLAGUNA":"SANTOS","AMERICA":"AMERICA","CHIVAS":"CHIVAS","GUADALAJARA":"CHIVAS","PUMAS":"PUMAS","PUEBLA":"PUEBLA","NECAXA":"NECAXA"};return d[x]||x;}
+
+// ===== CARGA PARTIDOS DESDE ADMIN B18:B26 + E18:E26 + RESULTADOS C18:D26 =====
 async function cargarEquipos(){
   try{
     let r=await fetch(SCRIPT_URL+"?action=obtener_partidos_admin");
@@ -60,6 +102,8 @@ async function cargarEquipos(){
   }
   renderPartidos();
 }
+
+// ===== DIBUJA LAS 9 FILAS EN PANTALLA =====
 function renderPartidos(){
   const c=document.getElementById('listaPartidos');
   c.innerHTML="";
@@ -73,6 +117,8 @@ function renderPartidos(){
   });
   document.getElementById('status').textContent="✅ Cargando resultados";
 }
+
+// ===== GUARDA RESULTADO EN ADMIN C y D + CREA RANKING F15-F150 COL L =====
 async function guardarResultado(n){
   let rl=document.getElementById('l'+n).value,rv=document.getElementById('v'+n).value,btn=document.getElementById('btn'+n),st=document.getElementById('status');
   if(rl==="" || rv===""){
