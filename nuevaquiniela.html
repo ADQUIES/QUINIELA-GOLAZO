@@ -6,12 +6,7 @@
 <title>Nueva Quiniela - Golazo</title>
 <link rel="icon" type="image/png" href="img/logo.png">
 <style>
-@font-face{
-  font-family:'NameSmile';
-  src: url('img/NameSmile.otf') format('opentype'),
-       url('img/NameSmile.ttf') format('truetype');
-  font-display:swap;
-}
+@font-face{font-family:'NameSmile';src:url('img/NameSmile.otf') format('opentype'),url('img/NameSmile.ttf') format('truetype');font-display:swap}
 *{box-sizing:border-box;font-family:Arial}
 body{margin:0;background:#0a2a4a;color:#fff}
 .topbar{background:#0a2a4a;padding:18px 12px;text-align:center;border-bottom:3px solid #ffee00;position:sticky;top:0;z-index:10}
@@ -49,7 +44,7 @@ function calcularDiaLetra(dia,mes){if(!dia||!mes)return"SABADO";let y=new Date()
 <button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR</button>
 <p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
 
-<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">📸 IMAGEN EXACTA A TU REFERENCIA Imagen1.png</b><canvas id="lienzo" width="1080" height="1350"></canvas><button class="btn" style="background:#ffea00;color:#000;margin-top:8px" onclick="descargar()">⬇️ DESCARGAR</button></div>
+<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">📸 IMAGEN CON LOGO3 Y ESCUDOS PEQUEÑOS</b><canvas id="lienzo" width="1080" height="1350"></canvas><button class="btn" style="background:#ffea00;color:#000;margin-top:8px" onclick="descargar()">⬇️ DESCARGAR</button></div>
 
 <script>
 async function renderTabla(){
@@ -64,32 +59,29 @@ async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElem
 
 async function generar(){
 let W=1080,H=1350,canvas=document.getElementById('lienzo'),ctx=canvas.getContext('2d');
-let imgRef=new Image();imgRef.src="img/Imagen1.png";
 let imgAzul=new Image();imgAzul.src="img/azul.png";
 let imgLogo=new Image();imgLogo.src="img/logo.png";
+let imgLogo3=new Image();imgLogo3.src="img/logo3.png";
 let imgWA=new Image();imgWA.src="img/whatsapplogoo.png";
 let imgBBVA=new Image();imgBBVA.src="img/BBVA.png";
 let imgSPIN=new Image();imgSPIN.src="img/SPIN.png";
 await document.fonts.ready;
-await Promise.all([new Promise(r=>{imgAzul.onload=r;imgAzul.onerror=r;}),new Promise(r=>{imgLogo.onload=r;imgLogo.onerror=r;}),new Promise(r=>{imgWA.onload=r;imgWA.onerror=r;}),new Promise(r=>{imgBBVA.onload=r;imgBBVA.onerror=r;}),new Promise(r=>{imgSPIN.onload=r;imgSPIN.onerror=r;}),new Promise(r=>{imgRef.onload=r;imgRef.onerror=r;})]);
+await Promise.all([new Promise(r=>{imgAzul.onload=r;imgAzul.onerror=r;}),new Promise(r=>{imgLogo.onload=r;imgLogo.onerror=r;}),new Promise(r=>{imgLogo3.onload=r;imgLogo3.onerror=r;}),new Promise(r=>{imgWA.onload=r;imgWA.onerror=r;}),new Promise(r=>{imgBBVA.onload=r;imgBBVA.onerror=r;}),new Promise(r=>{imgSPIN.onload=r;imgSPIN.onerror=r;})]);
 
-// FONDO EXACTO - azul.png como me pediste
 ctx.fillStyle="#ffee00";ctx.fillRect(0,0,W,H);
 if(imgAzul.complete&&imgAzul.naturalWidth>0){ctx.drawImage(imgAzul,12,12,W-24,H-24);}else{ctx.fillStyle="#0a2247";ctx.fillRect(12,12,W-24,H-24);}
 
-// Si quieres calcar exacto tu Imagen1.png, descomenta la siguiente linea:
-// ctx.globalAlpha=0.15; ctx.drawImage(imgRef,12,12,W-24,H-24); ctx.globalAlpha=1;
+// LOGO3.PNG EN LUGAR DE LETRAS QUINIELA GOLAZO
+if(imgLogo3.complete&&imgLogo3.naturalWidth>0){
+let logoW=680, logoH=110;
+ctx.drawImage(imgLogo3, W/2-logoW/2, 20, logoW, logoH);
+}
 
-// ENCABEZADO IGUAL QUE TU REFERENCIA - NAME SMILE
-ctx.textAlign="center";ctx.fillStyle="#ffee00";ctx.font="900 74px 'NameSmile', cursive";
-ctx.fillText("QUINIELA GOLAZO",W/2,92);
-
-ctx.fillStyle="#ff0d0d";ctx.font="900 38px Arial Black";ctx.fillText(`COSTO $${document.getElementById('costo').value}`,W/2,162);
+ctx.fillStyle="#ff0d0d";ctx.font="900 38px Arial Black";ctx.textAlign="center";ctx.fillText(`COSTO $${document.getElementById('costo').value}`,W/2,162);
 ctx.fillStyle="#ffffff";ctx.font="900 23px Arial";ctx.fillText(getFechaJuega(),W/2,192);
 ctx.fillStyle="#ffee00";ctx.font="900 30px Arial Black";ctx.fillText(`CIERRA ${document.getElementById('cierre').value}`,W/2,224);
 ctx.fillStyle="#ffffff";ctx.font="900 34px Arial Black";ctx.fillText(`JORNADA ${document.getElementById('jornada').value||14}`,W/2,260);
 
-// LOGO CENTRAL GIGANTE - DESDE A DE AMERICA HASTA O DE QUERETARO - OPACO
 let cx=W/2,cy=715;let r=550;
 ctx.save();ctx.globalAlpha=0.30;
 if(imgLogo.complete&&imgLogo.naturalWidth>0){ctx.drawImage(imgLogo,cx-r,cy-r,r*2,r*2);}
@@ -105,18 +97,15 @@ let y=y0+i*gap;
 ctx.textAlign="left";ctx.fillStyle="#ffee00";ctx.font="900 52px Arial Black";ctx.fillText((i+1),28,y);
 ctx.textAlign="left";ctx.fillStyle="#ffffff";ctx.font="900 42px Arial Black";ctx.fillText(p.local.toUpperCase(),132,y);
 ctx.textAlign="right";ctx.fillText(p.visita.toUpperCase(),W-28,y);
+// ESCUDOS MAS PEQUEÑOS COMO PEDISTE - 52px antes eran 86px
 let eL=escudos[normaliza(p.local)],eR=escudos[normaliza(p.visita)];
-if(eL&&eL.complete&&eL.naturalWidth>0){try{ctx.drawImage(eL,cx-94,y-44,86,86);}catch(e){}}
-if(eR&&eR.complete&&eR.naturalWidth>0){try{ctx.drawImage(eR,cx+14,y-44,86,86);}catch(e){}}
+if(eL&&eL.complete&&eL.naturalWidth>0){try{ctx.drawImage(eL,cx-62,y-26,52,52);}catch(e){}}
+if(eR&&eR.complete&&eR.naturalWidth>0){try{ctx.drawImage(eR,cx+14,y-26,52,52);}catch(e){}}
 });
 
 ctx.textAlign="center";ctx.fillStyle="#ffffff";ctx.font="900 22px Arial Black";ctx.fillText("* LA BOLSA AUMENTA DE ACUERDO AL NÚMERO DE PARTICIPANTES *",W/2,1250);
-
-// TUS LOGOS REALES DE BANCOS
 if(imgBBVA.complete&&imgBBVA.naturalWidth>0){ctx.drawImage(imgBBVA,32,1272,92,68);}
 if(imgSPIN.complete&&imgSPIN.naturalWidth>0){ctx.drawImage(imgSPIN,134,1272,92,68);}
-
-// TU LOGO REAL DE WHATSAPP - BAJADO PARA QUE NO TAPE
 let wx=W-420, wy=1302, wsize=74;
 if(imgWA.complete&&imgWA.naturalWidth>0){ctx.drawImage(imgWA, wx, wy-30, wsize, wsize);}
 ctx.fillStyle="#ffee00";ctx.font="900 40px Arial";ctx.textAlign="left";ctx.fillText(document.getElementById('tel').value||"524776482132",wx+84,wy+26);
