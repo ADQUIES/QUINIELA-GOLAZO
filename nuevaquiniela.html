@@ -1,58 +1,4 @@
-<!DOCTYPE html>
-<html lang="es-mx">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nueva Quiniela - Golazo</title>
-<link rel="icon" type="image/png" href="img/logo.png">
-<style>
-*{box-sizing:border-box;font-family:Arial}
-body{margin:0;background:#0a2a4a;color:#fff}
-.card{background:#0e3a4e;border:2px solid #ffee00;border-radius:12px;padding:12px;margin:10px}
-.btn{width:100%;padding:13px;border:none;border-radius:12px;font-weight:900;cursor:pointer}
-.grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
-.grid-2col input{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;font-weight:700}
-table{width:100%;border-collapse:collapse;background:#fff;color:#000;border-radius:10px;overflow:hidden}
-th{background:#002d3d;color:#ffee00;padding:6px;font-size:9px}
-td{padding:3px;border:1px solid #ddd;text-align:center}
-td input{width:100%;padding:9px;border:1px solid #ccc;border-radius:6px;text-transform:uppercase;font-size:13px;text-align:center}
-#lienzo{width:100%;max-width:1080px;border:4px solid #ffee00;border-radius:8px;margin-top:10px;background:#0a2f63}
-</style>
-</head>
-<body>
 <script>
-if(!localStorage.getItem("sesion_golazo")){window.location.href="panelcentral.html";}
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
-let PARTIDOS = [];
-function normaliza(n){let x=n.toUpperCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");return x;}
-function getFechaJuega(){let hoy=new Date();let d=hoy.getDay();let v=new Date(hoy);v.setDate(hoy.getDate()+(5-d+7)%7);let dom=new Date(v);dom.setDate(v.getDate()+2);let m=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO","JULIO","AGOSTO","SEPTIEMBRE","OCTUBRE","NOVIEMBRE","DICIEMBRE"];return `JUEGA DEL VIERNES ${v.getDate()} DE ${m[v.getMonth()]} AL DOMINGO ${dom.getDate()} DE ${m[dom.getMonth()]}`;}
-function calcularDiaLetra(dia,mes){if(!dia||!mes)return"SABADO";let y=new Date().getFullYear();let f=new Date(y,parseInt(mes)-1,parseInt(dia));let ds=["DOMINGO","LUNES","MARTES","MIERCOLES","JUEVES","VIERNES","SABADO"];return ds[f.getDay()];}
-</script>
-
-<div class="card"><b style="color:#ffee00">NUEVA QUINIELA</b>
-<div class="grid-2col">
-<input id="costo" value="$20 PESOS.">
-<input id="cierre" value="VIERNES 3 PM">
-<input id="jornada" type="number" placeholder="14">
-<input id="tel" value="524776482132">
-</div>
-<div style="overflow:auto;margin-top:10px"><table><thead><tr><th>LOCAL</th><th>VS</th><th>VISITA</th><th>DIA</th><th>MES</th><th>HORA</th><th>TV</th></tr></thead><tbody id="tablaQuiniela"></tbody></table></div>
-<button class="btn" style="margin-top:14px;background:#00ff66;color:#000" onclick="guardarEnSheet()" id="btnGuardar">💾 GUARDAR</button>
-<p id="status" style="text-align:center;font-size:13px;margin-top:10px;color:#00ff66;font-weight:bold"></p></div>
-
-<div class="card" style="border-color:#00ff66;text-align:center"><b style="color:#00ff66">📸 IMAGEN FINAL AZUL</b><canvas id="lienzo" width="1080" height="1350"></canvas><button class="btn" style="background:#ffea00;color:#000;margin-top:8px" onclick="descargar()">⬇️ DESCARGAR</button></div>
-
-<script>
-async function renderTabla(){
-let tb=document.getElementById("tablaQuiniela");tb.innerHTML="<tr><td colspan='7'>Cargando...</td></tr>";
-let data=null;try{let r=await fetch(SCRIPT_URL+"?action=obtener_admin");let j=await r.json();if(j&&j.length>0){data=j;}}catch(e){}
-if(!data){data=JSON.parse(localStorage.getItem("quiniela_nueva")||"null")||[{local:"PUEBLA",visita:"LEON",dia:"4",mes:"9"},{local:"PACHUCA",visita:"AMERICA",dia:"4",mes:"9"},{local:"QUERETARO",visita:"PUEBLA",dia:"4",mes:"9"},{local:"ATLAS",visita:"PUEBLA",dia:"4",mes:"9"},{local:"AMERICA",visita:"QUERETARO",dia:"4",mes:"9"},{local:"GUADALAJARA",visita:"TIGRES",dia:"4",mes:"9"},{local:"PUMAS",visita:"MONTERREY",dia:"4",mes:"9"},{local:"JUAREZ",visita:"PUMAS",dia:"4",mes:"9"},{local:"TIGRES",visita:"ATLAS",dia:"4",mes:"9"}];}
-tb.innerHTML="";data.forEach((d,i)=>{let idx=i+1;tb.innerHTML+=`<tr><td><input id="local${idx}" value="${d.local}"></td><td>VS</td><td><input id="visita${idx}" value="${d.visita}"></td><td><input id="dia${idx}" type="number" value="${d.dia}"></td><td><input id="mes${idx}" type="number" value="${d.mes}"></td><td><input id="hora${idx}" type="time" value="${d.hora||'19:00'}"></td><td><input id="trans${idx}" value="${d.trans||'TUDN'}"></td></tr>`;});
-PARTIDOS=data;generar();
-}
-function guardarLocal(){let arr=[];for(let i=1;i<=9;i++){let dia=document.getElementById("dia"+i).value;let mes=document.getElementById("mes"+i).value;arr.push({local:document.getElementById("local"+i).value.toUpperCase(),visita:document.getElementById("visita"+i).value.toUpperCase(),diaLetra:calcularDiaLetra(dia,mes),dia:dia,mes:mes,hora:document.getElementById("hora"+i).value,trans:document.getElementById("trans"+i).value.toUpperCase()});}localStorage.setItem("quiniela_nueva",JSON.stringify(arr));PARTIDOS=arr;return arr;}
-async function guardarEnSheet(){let data=guardarLocal();let btn=document.getElementById("btnGuardar");btn.textContent="Guardando...";btn.disabled=true;try{await fetch(SCRIPT_URL,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify({action:"guardar_admin",quiniela:data})});document.getElementById("status").textContent="✅ Guardado";generar();}catch(e){}btn.textContent="💾 GUARDAR";btn.disabled=false;}
-
 async function generar(){
 let W=1080,H=1350,canvas=document.getElementById('lienzo'),ctx=canvas.getContext('2d');
 let imgAzul=new Image();imgAzul.src="img/azul.png";
@@ -63,25 +9,22 @@ let imgBBVA=new Image();imgBBVA.src="img/BBVA.png";
 let imgSPIN=new Image();imgSPIN.src="img/SPIN.png";
 await Promise.all([new Promise(r=>{imgAzul.onload=r;imgAzul.onerror=r;}),new Promise(r=>{imgLogo.onload=r;imgLogo.onerror=r;}),new Promise(r=>{imgLogo3.onload=r;imgLogo3.onerror=r;}),new Promise(r=>{imgWA.onload=r;imgWA.onerror=r;}),new Promise(r=>{imgBBVA.onload=r;imgBBVA.onerror=r;}),new Promise(r=>{imgSPIN.onload=r;imgSPIN.onerror=r;})]);
 
-// FONDO AZUL ORIGINAL COMO TENIAMOS
-ctx.fillStyle="#0a2a4a";ctx.fillRect(0,0,W,H);
+// BORDE AMARILLO
+ctx.fillStyle="#ffee00";ctx.fillRect(0,0,W,H);
 if(imgAzul.complete&&imgAzul.naturalWidth>0){
-ctx.drawImage(imgAzul,0,0,W,H);
+ctx.drawImage(imgAzul,12,12,W-24,H-24);
 }else{
-ctx.fillStyle="#0a2f63";ctx.fillRect(0,0,W,H);
+ctx.fillStyle="#0a2f63";ctx.fillRect(12,12,W-24,H-24);
 }
 
-// LOGO3 ARRIBA
 if(imgLogo3.complete&&imgLogo3.naturalWidth>0){
 ctx.drawImage(imgLogo3, W/2-320, 15, 640, 105);
 }
-
 ctx.fillStyle="#ff0d0d";ctx.font="900 36px Arial Black";ctx.textAlign="center";ctx.fillText(`COSTO $${document.getElementById('costo').value}`,W/2,158);
 ctx.fillStyle="#ffffff";ctx.font="900 22px Arial";ctx.fillText(getFechaJuega(),W/2,188);
 ctx.fillStyle="#ffee00";ctx.font="900 28px Arial Black";ctx.fillText(`CIERRA ${document.getElementById('cierre').value}`,W/2,220);
 ctx.fillStyle="#ffffff";ctx.font="900 32px Arial Black";ctx.fillText(`JORNADA ${document.getElementById('jornada').value||14}`,W/2,254);
 
-// LOGO CENTRAL GIGANTE OPACO - COMO LO TENIAMOS
 let cx=W/2,cy=715,r=550;
 ctx.save();ctx.globalAlpha=0.22;
 if(imgLogo.complete&&imgLogo.naturalWidth>0){ctx.drawImage(imgLogo,cx-r,cy-r,r*2,r*2);}
@@ -91,7 +34,6 @@ let escudos={};
 for(let p of PARTIDOS){for(let n of [p.local,p.visita]){let k=normaliza(n);if(!escudos[k]){let im=new Image();im.src=`img/ESCUDOS/${k}.png`;escudos[k]=im;}}}
 await new Promise(r=>setTimeout(r,500));
 
-// FILAS ALINEADAS - TODO HORIZONTAL - TAMAÑO PERFECTO QUE TE GUSTO
 let y0=325,gap=108;
 ctx.textBaseline="middle";
 PARTIDOS.forEach((p,i)=>{
@@ -105,19 +47,14 @@ if(eR&&eR.complete&&eR.naturalWidth>0){try{ctx.drawImage(eR,cx+10,y-escSize/2,es
 ctx.textAlign="right";ctx.fillText(p.visita.toUpperCase(),W-28,y);
 });
 
-// BOLSA ABAJO
+// SUBIDO UN POQUITO COMO PEDISTE
 ctx.textBaseline="alphabetic";
-ctx.textAlign="center";ctx.fillStyle="#ffffff";ctx.font="900 20px Arial Black";ctx.fillText("* LA BOLSA AUMENTA DE ACUERDO AL NÚMERO DE PARTICIPANTES *",W/2,1275);
+ctx.textAlign="center";ctx.fillStyle="#ffffff";ctx.font="900 20px Arial Black";ctx.fillText("* LA BOLSA AUMENTA DE ACUERDO AL NÚMERO DE PARTICIPANTES *",W/2,1245);
 
-// LOGOS ABAJO PEQUEÑOS
-if(imgBBVA.complete&&imgBBVA.naturalWidth>0){ctx.drawImage(imgBBVA,28,1290,76,54);}
-if(imgSPIN.complete&&imgSPIN.naturalWidth>0){ctx.drawImage(imgSPIN,114,1290,76,54);}
-let wx=W-380, wy=1318, wsize=52;
+if(imgBBVA.complete&&imgBBVA.naturalWidth>0){ctx.drawImage(imgBBVA,28,1260,76,54);}
+if(imgSPIN.complete&&imgSPIN.naturalWidth>0){ctx.drawImage(imgSPIN,114,1260,76,54);}
+let wx=W-380, wy=1288, wsize=52;
 if(imgWA.complete&&imgWA.naturalWidth>0){ctx.drawImage(imgWA, wx, wy-22, wsize, wsize);}
 ctx.fillStyle="#ffee00";ctx.font="900 34px Arial";ctx.textAlign="left";ctx.fillText(document.getElementById('tel').value||"524776482132",wx+60,wy+16);
 }
-function descargar(){let a=document.createElement('a');a.download=`GOLAZO-J${document.getElementById('jornada').value||14}.png`;a.href=document.getElementById('lienzo').toDataURL('image/png');a.click();}
-renderTabla();
 </script>
-</body>
-</html>
