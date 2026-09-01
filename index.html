@@ -14,7 +14,19 @@ body{margin:0;background:#0a2a4a;color:#fff} /* FONDO PRINCIPAL #0a2a4a azul osc
 .barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:1px solid #ffee00;color:#ffee00;font-weight:900;text-align:center;padding:4px 6px 2px 6px;font-size:10px;text-transform:uppercase;line-height:1.1;text-shadow:0 0 3px #ffee00} /* BARRA JUEGA - fondo #0066cc / letra #ffee00 / borde #ffee00 */
 .barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:1px solid #ffee00;color:#fff;font-weight:900;text-align:center;padding:2px 40px 6px 6px;font-size:14px;position:relative;line-height:1.1} /* BARRA JORNADA - fondo #0066cc / letra #fff / borde #ffee00 */
 .match{display:grid;grid-template-columns:42px 88px 38px 40px 38px 88px 46px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - 42 L / 88 equipo local / 38 escudo local / 40 E / 38 escudo visita / 88 equipo visita / 46 V */
-.match:nth-child(even){background:#d7e8ef} /* FILA PAR - fondo #d7e8ef celeste */
+.match:nth-child(even){background:#d7e8ef}/* FILA PAR - fondo #d7e8ef celeste */
+#partidos{position:relative}
+.match{position:relative;overflow:hidden} /* NECESARIO para que la marca de agua quede dentro de cada renglón */
+.match::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:url('img/logo.png') center center / 220px auto no-repeat;
+  opacity:0.08; /* 0.08 = 8% traslucido - si lo quieres mas visible sube a 0.12 */
+  pointer-events:none;
+  z-index:1;
+}
+.team,.logo,.btn-lev{position:relative;z-index:2} /* Esto asegura que nombres, escudos y L E V queden arriba de la marca de agua */
 .team{font-weight:900;font-size:12px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* NOMBRE EQUIPO - CORREGIDO: font-weight:900 bien negrita / 12px tamaño */
 .logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block;background:#fff;border-radius:50%} /* ESCUDO - fondo #fff */
 .btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* BOTON L E V - fondo #fff / borde #000 */
