@@ -7,7 +7,6 @@
 <style>
 *{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0a2a4a;color:#fff}
 .wrap{max-width:640px;margin:auto;padding:8px;width:100%;overflow:hidden}
-/* FONDO TRANSPARENTE */
 .top-banner{background:transparent;border:none;border-radius:0;overflow:visible;cursor:pointer;text-align:center;padding:10px 0}
 .top-banner img{width:100%;height:auto;display:block;object-fit:contain;max-height:160px;filter:drop-shadow(0 2px 10px rgba(0,0,0,.5))}
 .head{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;background:#001e2b;border:2px solid #d4ff00;color:#d4ff00;font-weight:900;text-align:center;padding:6px 0;font-size:12px;border-radius:10px;margin-top:5px}
@@ -34,7 +33,16 @@
 .q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px}
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px}
 .modal.show{display:grid}.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center}
-/* FIX PARA PC */
+.organizer-info,.organizer-infos{margin:8px 0}
+.organizer-tags,.organizer-tagss{display:flex;gap:6px}
+.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none}
+.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tag img{width:28px;height:28px;object-fit:contain}
+.tag.facebook{background:#1877F2;border-color:#fff}
+.tag.pagar{background:#fff;color:#000}
+/* BOTON X COMO EL DE TU IMAGEN */
+.boton-x-actual{width:42px;height:42px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:18px;color:#000;display:grid;place-items:center;cursor:pointer;margin-bottom:6px}
+.boton-x-actual:active{transform:scale(0.95)}
 @media(min-width:700px){
 .wrap{max-width:600px}
 .head{grid-template-columns:46px 125px 42px 36px 42px 125px 46px;font-size:12px}
@@ -43,23 +51,6 @@
 .logo{width:36px;height:36px}
 .btn-lev{width:38px;height:38px}
 }
-
-/* --- INICIO ESTILOS SOLO PARA LOS BOTONES QUE AGREGASTE --- */
-.organizer-info{margin:10px 0} /* Contenedor fila 1 */
-.organizer-infos{margin:10px 0} /* Contenedor fila 2 */
-.organizer-tags{display:flex;gap:8px;justify-content:space-between} /* Fila 1 en 3 columnas */
-.organizer-tagss{display:flex;gap:8px;justify-content:space-between} /* Fila 2 en 3 columnas */
-.organizer-tags a{flex:1;text-decoration:none} /* Cada link ocupa 1/3 */
-.organizer-tagss a{flex:1;text-decoration:none} /* Cada link ocupa 1/3 */
-.tag{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:12px;border:2px solid #ffee00;background:#0e3a4e;color:#fff;font-weight:900;font-size:11px;text-align:center;min-height:78px;cursor:pointer} /* Estilo base boton */
-.tag img{width:32px;height:32px;object-fit:contain} /* Tamaño iconos */
-.tag.facebook{background:#1877F2;border-color:#fff} /* Facebook azul */
-.tag.pagar{background:#fff;color:#000} /* Pagar blanco */
-.tag.combinaciones{background:#ff6d00} /* Combinaciones naranja */
-.tag.instruciones{background:#0a4a7a} /* Instrucciones azul oscuro */
-.tag.reglamento{background:#222} /* Reglamento negro */
-.tag.horarios{background:#0066cc} /* Horarios azul */
-/* --- FIN ESTILOS BOTONES --- */
 </style>
 </head>
 <body>
@@ -67,24 +58,27 @@
 <div class="wrap">
 <div class="top-banner" id="bannerLogo"><img src="img/logo3.png" alt="Quiniela Golazo"></div>
 
-<!-- BOTONES AGREGADOS COMO PEDISTE -->
-<div class="organizer-info"> <!-- Fila 1 contenedor -->
-  <div class="organizer-tags"> <!-- Fila 1 grid -->
-    <a href="https://www.facebook.com/GolazoJuega/" target="_self"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a> <!-- Boton FB -->
-    <a href="combinaciones/combinaciones.html" target="_self"><div class="tag combinaciones"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a> <!-- Boton Combinaciones -->
-    <a href="pagos/Pagos.html" target="_self"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a> <!-- Boton Pagar -->
+<div class="organizer-info">
+  <div class="organizer-tags">
+    <a href="https://www.facebook.com/GolazoJuega/" target="_self"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a>
+    <a href="combinaciones/combinaciones.html" target="_self"><div class="tag combinaciones"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a>
+    <a href="pagos/Pagos.html" target="_self"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a>
   </div>
 </div>
-<div class="organizer-infos"> <!-- Fila 2 contenedor -->
-  <div class="organizer-tagss"> <!-- Fila 2 grid -->
-    <a href="cjugar/cjugarinst.html" target="_self"><div class="tag instruciones"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a> <!-- Boton Instrucciones -->
-    <a href="reglamento/reglamento.html" target="_self"><div class="tag reglamento"><img src="./img/reglamento.png"><span>Reglamento</span></div></a> <!-- Boton Reglamento -->
-    <a href="horarios/horarios.html" target="_self"><div class="tag horarios"><img src="./img/horarios.png"><span>Horarios</span></div></a> <!-- Boton Horarios -->
+<div class="organizer-infos">
+  <div class="organizer-tagss">
+    <a href="cjugar/cjugarinst.html" target="_self"><div class="tag instruciones"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a>
+    <a href="reglamento/reglamento.html" target="_self"><div class="tag reglamento"><img src="./img/reglamento.png"><span>Reglamento</span></div></a>
+    <a href="horarios/horarios.html" target="_self"><div class="tag horarios"><img src="./img/horarios.png"><span>Horarios</span></div></a>
   </div>
 </div>
-<!-- FIN BOTONES -->
 
-<div class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
+<!-- AQUI EL BOTON X QUE LIMPIA SOLO LA ACTUAL -->
+<div style="display:flex;align-items:center;gap:8px;margin-top:8px">
+  <button class="boton-x-actual" onclick="limpiarActual()">X</button>
+  <div style="flex:1" class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
+</div>
+
 <div id="partidos"></div><div class="line" id="linea">---------</div>
 <input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"><input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
 <div style="display:grid;grid-template-columns:80px 1fr;gap:8px;margin-top:8px"><input class="inp" style="margin:0" id="cant" type="number" value="1" min="1"><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div>
@@ -119,6 +113,8 @@ function render(){
  document.getElementById("linea").textContent=picks.map(v=>v||"-").join("");
 }
 function setP(i,v){picks[i]=v;render();}
+// NUEVA FUNCION - SOLO LIMPIA LA ACTUAL, NO BORRA NOMBRE, TELEFONO NI LISTA
+function limpiarActual(){picks=Array(9).fill("");render();}
 function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();}
 function agregar(){if(picks.includes("")){alert("Selecciona los 9 partidos");return}let nom=document.getElementById("nombre").value.trim().toUpperCase();let tel=document.getElementById("tel").value.trim();if(!nom||!tel){alert("Pon nombre y telefono");return}let cant=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<cant;k++) quinielas.push({nombre:nom,tel:tel,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();}
 function renderLista(){document.getElementById("nEnv").textContent=quinielas.length;document.getElementById("nQ").textContent=quinielas.length;document.getElementById("costo").textContent=quinielas.length*20;document.getElementById("total").textContent=quinielas.length*20;document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>";}
