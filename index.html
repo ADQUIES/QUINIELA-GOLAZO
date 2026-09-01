@@ -13,40 +13,40 @@ body{margin:0;background:#0a2a4a;color:#fff} /* FONDO PRINCIPAL #0a2a4a azul osc
 .top-banner img{width:100%;max-height:160px;object-fit:contain} /* Imagen logo */
 .barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:1px solid #ffee00;color:#ffee00;font-weight:900;text-align:center;padding:4px 6px 2px 6px;font-size:10px;text-transform:uppercase;line-height:1.1;text-shadow:0 0 3px #ffee00} /* BARRA JUEGA - fondo #0066cc / letra #ffee00 / borde #ffee00 */
 .barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:1px solid #ffee00;color:#fff;font-weight:900;text-align:center;padding:2px 40px 6px 6px;font-size:14px;position:relative;line-height:1.1} /* BARRA JORNADA - fondo #0066cc / letra #fff / borde #ffee00 */
-.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - fondo #fff / letra #000 / borde #000 */
+.match{display:grid;grid-template-columns:42px 88px 38px 40px 38px 88px 46px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - CORREGIDO: movi E y todo a la derecha 10px para que no tape QUERETARO - 42 L / 88 equipo local / 38 escudo local / 40 E / 38 escudo visita / 88 equipo visita / 46 V */
 .match:nth-child(even){background:#d7e8ef} /* FILA PAR - fondo #d7e8ef celeste */
-.match .btn-lev:last-child{margin-left:4px} /* COLUMNA V 0.5MM A LA DERECHA - mueve solo boton V 4px a la derecha */
 .team{font-weight:900;font-size:12px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* NOMBRE EQUIPO - tamaño 12px */
 .logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block;background:#fff;border-radius:50%} /* ESCUDO - fondo #fff */
 .btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* BOTON L E V - fondo #fff / borde #000 */
 .btn-lev.sel{background:#d4ff00} /* BOTON SELECCIONADO - fondo #d4ff00 amarillo limon */
-.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:18px} /* BARRA COSTO CIERRA - CAMBIO AQUI: font-size 15px -> 18px para que COSTO $30 se vea a 18px / fondo #0066cc / borde #ffee00 */
-.costo-fijo{color:#fff} /* COSTO fijo - color #fff blanco - si quieres todo amarillo pon #ffee00 */
-.costo-valor{color:#ffee00;margin-left:6px;font-size:18px} /* VALOR $30 - color #ffee00 amarillo / CAMBIO AQUI: font-size 18px */
-.cierre{color:#ffee00} /* CIERRA - CAMBIO AQUI: antes #fff blanco ahora #ffee00 amarillo para que se vea amarillo */
+.btn-lev.sel{background:#d4ff00} /* BOTON SELECCIONADO - fondo #d4ff00 amarillo limon */
+.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:18px} /* BARRA COSTO CIERRA - CAMBIO AQUI: font-size 15px -> 18px para que COSTO $30 se vea a 18px / fondo #0066cc / borde #ffee00 */CIERRA - fondo #0066cc / borde #ffee00 */
+.costo-fijo{color:#fff} /* COSTO fijo - color #fff blanco */
+.costo-valor{color:#ffee00;margin-left:6px} /* VALOR $20 - color #ffee00 amarillo */
+.cierre{color:#fff} /* CIERRA - color #fff blanco */
 .line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* LINEA --------- - color #eaff00 amarillo */
-.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* INPUT NOMBRE TEL */
+.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* INPUT NOMBRE TEL - fondo #fff */
 .fila-agregar{display:grid;grid-template-columns:62px 1fr;gap:8px;margin-top:8px} /* FILA BORRAR + AGREGAR */
 .b-trash{background:#ff0040;border:none;border-radius:10px;font-size:24px;cursor:pointer;min-height:48px} /* BOTON BASURA - fondo #ff0040 rojo */
 .b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer;width:100%;font-size:16px} /* BOTON AGREGAR - fondo #d4ff00 */
 .fila-enviar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px} /* FILA ENVIAR + SUERTE */
 .b-env{background:#2eff7a;border:none;border-radius:10px;padding:14px;font-weight:900;font-size:16px;cursor:pointer} /* BOTON ENVIAR - fondo #2eff7a verde */
 .b-suerte{background:#eaff00;border:none;border-radius:10px;padding:14px;font-weight:900;cursor:pointer;font-size:16px} /* BOTON SUERTE - fondo #eaff00 amarillo */
-.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* CAJA COSTO TOTAL */
-.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* CAJA LISTA */
-.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* TITULO LISTA */
-.lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:22px} /* CONTENIDO LISTA */
-.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* ITEM QUINIELA */
+.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* CAJA COSTO TOTAL - fondo #000 negro / letra #00e5ff celeste / borde #fff */
+.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* CAJA LISTA - fondo #000 / borde #fff */
+.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* TITULO LISTA - fondo #000 / letra #00e5ff */
+.lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:22px} /* CONTENIDO LISTA - fondo #0e0e0e gris oscuro */
+.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* ITEM QUINIELA - borde #222 */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px} /* MODAL FONDO */
 .modal.show{display:grid} /* MODAL VISIBLE */
-.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* TARJETA MODAL */
+.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* TARJETA MODAL - fondo #fff / letra #000 */
 .organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* CONTENEDOR TAGS */
 .organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* LINKS TAGS */
-.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* TAG */
+.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* TAG - fondo #0e3a4e / borde #ffee00 / letra #fff */
 .tag img{width:28px;height:28px} /* ICONO TAG */
-.tag.facebook{background:#1877F2;border-color:#fff} /* TAG FACEBOOK */
-.tag.pagar{background:#fff;color:#000} /* TAG PAGAR */
-.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:16px;color:#000;display:grid;place-items:center;cursor:pointer;z-index:5} /* BOTON X */
+.tag.facebook{background:#1877F2;border-color:#fff} /* TAG FACEBOOK - fondo #1877F2 / borde #fff */
+.tag.pagar{background:#fff;color:#000} /* TAG PAGAR - fondo #fff / letra #000 */
+.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:16px;color:#000;display:grid;place-items:center;cursor:pointer;z-index:5} /* BOTON X - fondo #b0b0b0 gris / borde #000 / letra #000 */
 </style> <!-- Fin CSS -->
 </head>
 <body>
