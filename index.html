@@ -1,5 +1,5 @@
-<!DOCTYPE html> <!-- Tipo HTML5 -->
-<html lang="es-mx"> <!-- Idioma -->
+<!DOCTYPE html> <!-- HTML5 -->
+<html lang="es-mx"> <!-- Español MX -->
 <head>
 <meta charset="UTF-8"> <!-- Acentos -->
 <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Movil -->
@@ -8,108 +8,155 @@
 <style>
 *{box-sizing:border-box;font-family:Arial} /* Reset */
 body{margin:0;background:#0a2a4a;color:#fff} /* Fondo app */
-.wrap{max-width:640px;margin:auto;padding:8px} /* Contenedor */
-.top-banner{text-align:center;padding:10px 0;cursor:pointer} /* Logo */
-.top-banner img{width:100%;max-height:160px;object-fit:contain} /* Logo img */
-/* BARRA J2 - JUEGA DEL VIERNES - AHORA FONDO AZUL CORREGIDO */
-.barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:none;color:#ffee00;font-weight:900;text-align:center;padding:6px 40px 6px 6px;font-size:12px;text-transform:uppercase;position:relative} /* Fondo azul como pediste, antes estaba negro */
-/* BARRA H4 - JORNADA 20 - FONDO AZUL */
-.barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:none;color:#fff;font-weight:900;text-align:center;padding:8px;font-size:18px} /* Fondo azul H4 */
-.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* Partido */
-.match:nth-child(even){background:#d7e8ef} /* Par */
-.team{font-weight:900;font-size:9.2px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* Equipo */
+.wrap{max-width:640px;margin:auto;padding:8px} /* Contenedor central */
+.top-banner{text-align:center;padding:10px 0;cursor:pointer} /* Banner logo */
+.top-banner img{width:100%;max-height:160px;object-fit:contain} /* Imagen logo */
+.barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:none;color:#ffee00;font-weight:900;text-align:center;padding:6px 40px 6px 6px;font-size:12px;text-transform:uppercase;position:relative} /* J2 JUEGA fondo azul */
+.barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:none;color:#fff;font-weight:900;text-align:center;padding:8px;font-size:18px} /* H4 JORNADA 20 fondo azul */
+.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* Partido fila */
+.match:nth-child(even){background:#d7e8ef} /* Fila par */
+.team{font-weight:900;font-size:9.2px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* Nombre equipo */
 .logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block} /* Escudo */
-.btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* L E V */
-.btn-lev.sel{background:#d4ff00} /* Seleccionado */
-/* BARRA ABAJO AZUL - COSTO + CIERRA */
-.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:15px} /* Fondo azul como pediste */
+.btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* Boton L E V */
+.btn-lev.sel{background:#d4ff00} /* Seleccionado amarillo */
+.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:15px} /* Barra COSTO CIERRA fondo azul */
 .costo-fijo{color:#fff} /* Palabra COSTO fija */
-.costo-valor{color:#ffee00;margin-left:6px} /* Valor O2 $20 */
+.costo-valor{color:#ffee00;margin-left:6px} /* $20 de O2 */
 .cierre{color:#fff} /* CIERRA */
-.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* Linea L E V */
-.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* Input */
-.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer} /* Agregar */
-.row-btns{display:grid;grid-template-columns:1fr 62px;gap:8px;margin-top:10px} /* Botones */
-.b-env{background:#2eff7a;border:none;border-radius:14px;padding:15px;font-weight:900;font-size:18px;cursor:pointer} /* Enviar */
-.b-trash{background:#ff0040;border:none;border-radius:14px;font-size:24px;cursor:pointer} /* Basura */
-.b-suerte{background:#eaff00;border:none;border-radius:14px;padding:15px;font-weight:900;width:100%;margin-top:10px;font-size:18px;cursor:pointer} /* Suerte */
-.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* Costo total */
-.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* Lista */
+.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* Linea LEV */
+.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* Inputs nombre tel */
+.fila-agregar{display:grid;grid-template-columns:62px 1fr;gap:8px;margin-top:8px} /* FILA 1: borrar izq + agregar der */
+.b-trash{background:#ff0040;border:none;border-radius:10px;font-size:24px;cursor:pointer;min-height:48px} /* Borrar izq */
+.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer;width:100%;font-size:16px} /* Agregar der */
+.fila-enviar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px} /* FILA 2: enviar izq + suerte der */
+.b-env{background:#2eff7a;border:none;border-radius:10px;padding:14px;font-weight:900;font-size:16px;cursor:pointer} /* Enviar */
+.b-suerte{background:#eaff00;border:none;border-radius:10px;padding:14px;font-weight:900;cursor:pointer;font-size:16px} /* Suerte der */
+.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* Caja costo total */
+.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* Lista quinielas */
 .lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* Head lista */
 .lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:12px} /* Content lista */
-.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* Item */
+.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* Item lista */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px} /* Modal */
 .modal.show{display:grid} /* Mostrar modal */
-.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* Card */
-.organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* Tags */
-.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* Links */
-.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* Tag */
+.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* Card modal */
+.organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* Contenedor tags */
+.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* Links tags */
+.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* Tag boton */
 .tag img{width:28px;height:28px} /* Icono tag */
-.tag.facebook{background:#1877F2;border-color:#fff} /* FB */
-.tag.pagar{background:#fff;color:#000} /* Pagar */
-.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;cursor:pointer;display:grid;place-items:center} /* Boton X */
+.tag.facebook{background:#1877F2;border-color:#fff} /* FB azul */
+.tag.pagar{background:#fff;color:#000} /* Pagar blanco */
+.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;cursor:pointer;display:grid;place-items:center} /* Boton X limpia picks */
 </style>
 </head>
 <body>
-<div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div> <!-- Modal -->
-<div class="wrap"> <!-- Wrap -->
-<div class="top-banner" id="bannerLogo"><img src="img/logo3.png"></div> <!-- Logo 5 clicks -->
+<div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div> <!-- Modal envios -->
+<div class="wrap"> <!-- Wrap principal -->
+<div class="top-banner" id="bannerLogo"><img src="img/logo3.png" alt="Quiniela Golazo"></div> <!-- Logo 5 clicks abre panelcentral -->
 
-<div class="organizer-tags"> <!-- Botones 1 -->
-<a href="https://www.facebook.com/GolazoJuega/"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a>
-<a href="combinaciones/combinaciones.html"><div class="tag"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a>
-<a href="pagos/Pagos.html"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a>
+<div class="organizer-tags"> <!-- Fila botones 1 -->
+<a href="https://www.facebook.com/GolazoJuega/" target="_self"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a>
+<a href="combinaciones/combinaciones.html" target="_self"><div class="tag"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a>
+<a href="pagos/Pagos.html" target="_self"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a>
 </div>
-<div class="organizer-tagss"> <!-- Botones 2 -->
-<a href="cjugar/cjugarinst.html"><div class="tag"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a>
-<a href="reglamento/reglamento.html"><div class="tag"><img src="./img/reglamento.png"><span>Reglamento</span></div></a>
-<a href="horarios/horarios.html"><div class="tag"><img src="./img/horarios.png"><span>Horarios</span></div></a>
+<div class="organizer-tagss"> <!-- Fila botones 2 -->
+<a href="cjugar/cjugarinst.html" target="_self"><div class="tag"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a>
+<a href="reglamento/reglamento.html" target="_self"><div class="tag"><img src="./img/reglamento.png"><span>Reglamento</span></div></a>
+<a href="horarios/horarios.html" target="_self"><div class="tag"><img src="./img/horarios.png"><span>Horarios</span></div></a>
 </div>
 
-<div class="barra-k2" id="barraK2"><button class="boton-x-actual" onclick="limpiarActual()">X</button><span id="txtK2">JUEGA DEL VIERNES...</span></div> <!-- J2 fondo azul -->
-<div class="barra-h4" id="txtH4">JORNADA 20</div> <!-- H4 fondo azul -->
-<div id="partidos"></div> <!-- Partidos -->
+<div class="barra-k2" id="barraK2"><button class="boton-x-actual" onclick="limpiarActual()">X</button><span id="txtK2">JUEGA DEL VIERNES...</span></div> <!-- J2 JUEGA fondo azul viene de hoja ADMIN -->
+<div class="barra-h4" id="txtH4">JORNADA 20</div> <!-- H4 JORNADA 20 fondo azul viene de hoja ADMIN -->
+<div id="partidos"></div> <!-- Partidos se pintan aqui -->
+
 <div class="barra-abajo"><div><span class="costo-fijo">COSTO</span><span class="costo-valor" id="txtO2"> $20</span></div><div class="cierre" id="txtI2">CIERRA VIERNES 3 PM</div></div> <!-- COSTO fijo + O2 + I2 fondo azul -->
-<div class="line" id="linea">---------</div> <!-- Linea -->
+
+<div class="line" id="linea">---------</div> <!-- Linea L E V -->
 <input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"> <!-- Nombre -->
-<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP"> <!-- Tel -->
-<div style="display:grid;grid-template-columns:80px 1fr;gap:8px;margin-top:8px"><input class="inp" style="margin:0" id="cant" type="number" value="1" min="1"><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div>
-<div class="row-btns"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-trash" onclick="borrarTodo()">🗑️</button></div>
-<button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button>
-<div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div>
-<div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div>
+<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP"> <!-- Telefono -->
+
+<!-- FILA 1 COMPACTA PARA AHORRAR ESPACIO -->
+<div class="fila-agregar">
+  <button class="b-trash" onclick="borrarTodo()">🗑️</button> <!-- Borrar ahora a la izq de Agregar -->
+  <button class="b-agregar" onclick="agregar()">AGREGAR +</button> <!-- Agregar solo 1 siempre -->
 </div>
+
+<!-- FILA 2 COMPACTA PARA AHORRAR ESPACIO -->
+<div class="fila-enviar">
+  <button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button> <!-- Enviar -->
+  <button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button> <!-- Suerte ahora a la der de Enviar -->
+</div>
+
+<div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div> <!-- Caja total -->
+<div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div> <!-- Lista -->
+</div>
+
 <script>
 const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec"; // URL Apps Script
 const MI_WHATSAPP = "524498476015"; // Tu WhatsApp
-let PARTIDOS=[["MÉXICO","BOLIVIA"],["COSTA RICA","URUGUAY"],["INGLATERRA","BOSNIA"],["ALEMANIA","UCRANIA"],["SUIZA","ESTONIA"],["IRLANDA","HUNGRÍA"],["ITALIA","TURQUÍA"],["DINAMARCA","SUECIA"],["MÉXICO","URUGUAY"]]; // Default
-let picks=Array(9).fill(""); let quinielas=JSON.parse(localStorage.getItem("qs")||"[]"); // Picks y guardadas
-let clicksLogo=0; let timerLogo; // Contador logo
-document.getElementById("bannerLogo").addEventListener("click",()=>{clicksLogo++;clearTimeout(timerLogo);timerLogo=setTimeout(()=>{clicksLogo=0},2000);if(clicksLogo>=5){clicksLogo=0;window.open("panelcentral.html","_blank");}}); // 5 clicks panel
-async function cargarAdmin(){ // Carga datos ADMIN - CORREGIDA
+let PARTIDOS=[["MÉXICO","BOLIVIA"],["COSTA RICA","URUGUAY"],["INGLATERRA","BOSNIA"],["ALEMANIA","UCRANIA"],["SUIZA","ESTONIA"],["IRLANDA","HUNGRÍA"],["ITALIA","TURQUÍA"],["DINAMARCA","SUECIA"],["MÉXICO","URUGUAY"]]; // Partidos default
+let picks=Array(9).fill(""); // Picks L E V actuales
+let quinielas=JSON.parse(localStorage.getItem("qs")||"[]"); // Quinielas guardadas
+let clicksLogo=0; let timerLogo; // Contador clicks logo
+document.getElementById("bannerLogo").addEventListener("click",()=>{clicksLogo++;clearTimeout(timerLogo);timerLogo=setTimeout(()=>{clicksLogo=0},2000);if(clicksLogo>=5){clicksLogo=0;window.open("panelcentral.html","_blank");}}); // 5 clicks abre panel
+
+async function cargarAdmin(){ // Carga datos de ADMIN H4 J2 O2 I2
  try{
-  let r=await fetch(SCRIPT_URL+"?action=obtener_admin&t="+Date.now()); // Fetch con anti-cache
+  let r=await fetch(SCRIPT_URL+"?action=obtener_admin&t="+Date.now()); // Fetch anti-cache
   let j=await r.json(); // Convierte JSON
-  console.log("ADMIN recibido:",j); // Muestra en consola para verificar H4 y J2
-  if(j.partidos && j.partidos.length>0) PARTIDOS=j.partidos.map(p=>[p.local,p.visita]); // Usa partidos de hoja
+  if(j.partidos && j.partidos.length>0) PARTIDOS=j.partidos.map(p=>[p.local,p.visita]); // Partidos de hoja
   if(j.j2) document.getElementById("txtK2").textContent=j.j2.toUpperCase(); // J2 JUEGA
-  else if(j.k2) document.getElementById("txtK2").textContent=j.k2.toUpperCase(); // K2 compatibilidad
-  if(j.h4) document.getElementById("txtH4").textContent=j.h4.toUpperCase(); // H4 JORNADA 20 - CORREGIDO muestra texto completo
-  else if(j.h2) document.getElementById("txtH4").textContent=j.h2.toUpperCase(); // H2 compatibilidad
-  if(j.o2) document.getElementById("txtO2").textContent=j.o2.toString().toUpperCase().replace("COSTO","").trim(); // O2 solo $20
+  else if(j.k2) document.getElementById("txtK2").textContent=j.k2.toUpperCase(); // Compatibilidad K2
+  if(j.h4) document.getElementById("txtH4").textContent=j.h4.toUpperCase(); // H4 JORNADA 20
+  else if(j.h2) document.getElementById("txtH4").textContent=j.h2.toUpperCase(); // Compatibilidad
+  if(j.o2) document.getElementById("txtO2").textContent=j.o2.toString().toUpperCase().replace("COSTO","").trim(); // O2 $20
   if(j.i2) document.getElementById("txtI2").textContent=j.i2.toUpperCase(); // I2 CIERRA
- }catch(e){console.log("Error admin",e);} // Error
- render(); // Pinta
+ }catch(e){} // Si falla no hace nada
+ render(); // Pinta partidos
 }
-function render(){let h="";PARTIDOS.forEach((p,i)=>{h+=`<div class="match"><button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button><div class="team">${p[0]}</div><img class="logo" src="img/ESCUDOS/${p[0]}.PNG" onerror="this.style.visibility='hidden'"><button class="btn-lev ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button><img class="logo" src="img/ESCUDOS/${p[1]}.PNG" onerror="this.style.visibility='hidden'"><div class="team">${p[1]}</div><button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button></div>`;});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join("");} // Pinta partidos
-function setP(i,v){picks[i]=v;render();} // Marca L/E/V
-function limpiarActual(){picks=Array(9).fill("");render();} // X limpia actual
-function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();} // Suerte
-function agregar(){if(picks.includes("")){alert("Selecciona los 9");return}let n=document.getElementById("nombre").value.trim().toUpperCase();let t=document.getElementById("tel").value.trim();if(!n||!t){alert("Nombre y tel");return}let c=parseInt(document.getElementById("cant").value)||1;for(let k=0;k<c;k++)quinielas.push({nombre:n,tel:t,comb:picks.join("")});localStorage.setItem("qs",JSON.stringify(quinielas));renderLista();picks=Array(9).fill("");render();} // Agregar
-function renderLista(){document.getElementById("nEnv").textContent=quinielas.length;document.getElementById("nQ").textContent=quinielas.length;document.getElementById("costo").textContent=quinielas.length*20;document.getElementById("total").textContent=quinielas.length*20;document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>";} // Lista
-function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}} // Borrar todas
-async function enviarTodo(){if(quinielas.length==0){alert("Agrega");return}let b=document.querySelector(".b-env");b.textContent="Enviando...";b.disabled=true;try{let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});let j=await r.json();document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">IDs: ${j.ids.join(", ")}</div><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;margin-top:10px">Cerrar</button>`;document.getElementById("modalOk").classList.add("show");}catch(e){await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});}b.textContent="Enviar";b.disabled=false;} // Enviar
-function cerrarModal(){document.getElementById("modalOk").classList.remove("show");} // Cerrar modal
+
+function render(){ // Pinta los 9 partidos
+ let h="";PARTIDOS.forEach((p,i)=>{h+=`<div class="match"><button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button><div class="team">${p[0]}</div><img class="logo" src="img/ESCUDOS/${p[0]}.PNG" onerror="this.style.visibility='hidden'"><button class="btn-lev ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button><img class="logo" src="img/ESCUDOS/${p[1]}.PNG" onerror="this.style.visibility='hidden'"><div class="team">${p[1]}</div><button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button></div>`;});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join(""); // Actualiza linea
+}
+function setP(i,v){picks[i]=v;render();} // Selecciona L E V
+function limpiarActual(){picks=Array(9).fill("");render();} // X limpia picks actuales
+function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();} // Suerte aleatoria
+
+function agregar(){ // Agrega siempre 1 sola quiniela
+ if(picks.includes("")){alert("Selecciona los 9 partidos");return} // Valida 9 seleccionados
+ let n=document.getElementById("nombre").value.trim().toUpperCase(); // Lee nombre
+ let t=document.getElementById("tel").value.trim(); // Lee tel
+ if(!n||!t){alert("Pon nombre y telefono");return} // Valida datos
+ quinielas.push({nombre:n,tel:t,comb:picks.join("")}); // Agrega 1
+ localStorage.setItem("qs",JSON.stringify(quinielas)); // Guarda local
+ renderLista(); // Actualiza lista
+ picks=Array(9).fill("");render(); // Limpia picks
+}
+
+function renderLista(){ // Actualiza lista y totales
+ document.getElementById("nEnv").textContent=quinielas.length; // Num enviar
+ document.getElementById("nQ").textContent=quinielas.length; // Num quinielas
+ document.getElementById("costo").textContent=quinielas.length*20; // Costo
+ document.getElementById("total").textContent=quinielas.length*20; // Total
+ document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>"; // Pinta lista
+}
+function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}} // Borra todas
+
+async function enviarTodo(){ // Envia a Sheets
+ if(quinielas.length==0){alert("Agrega quinielas");return} // Valida
+ let b=document.querySelector(".b-env");b.textContent="Enviando...";b.disabled=true; // Boton enviando
+ try{
+  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // POST
+  let j=await r.json(); // Respuesta con IDs
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">IDs: ${j.ids.join(", ")}</div><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;margin-top:10px">Cerrar</button>`; // Modal ok
+  document.getElementById("modalOk").classList.add("show"); // Muestra modal
+  window.open(`https://wa.me/${MI_WHATSAPP}?text=*NUEVA QUINIELA*%0A${quinielas[0].nombre}%0AIDs:${j.ids.join(",")}%0ATotal:$${j.total}`,"_blank"); // WhatsApp a ti
+ }catch(e){
+  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // Fallback
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">Cerrar</button>`;document.getElementById("modalOk").classList.add("show");
+ }
+ b.textContent="Enviar";b.disabled=false; // Restaura
+}
+function cerrarModal(){document.getElementById("modalOk").classList.remove("show");} // Cierra modal
 cargarAdmin();renderLista(); // Inicia
 </script>
 </body>
