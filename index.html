@@ -1,121 +1,116 @@
 <!DOCTYPE html> <!-- HTML5 -->
 <html lang="es-mx"> <!-- Idioma español México -->
 <head> <!-- Cabecera -->
-<meta charset="UTF-8"> <!-- Acentos y ñ -->
-<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Para móvil -->
-<title>Quiniela Golazo</title> <!-- Título pestaña -->
-<link rel="icon" href="img/logo.png"> <!-- Icono pestaña -->
+<meta charset="UTF-8"> <!-- Acentos -->
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Movil -->
+<title>Quiniela Golazo</title> <!-- Titulo pestaña -->
+<link rel="icon" href="img/logo.png"> <!-- Icono -->
 <style> /* Inicio CSS */
-*{box-sizing:border-box;font-family:Arial} /* Reset general - fuente Arial */
-body{margin:0;background:#0a2a4a;color:#fff} /* COLOR FONDO PRINCIPAL #0a2a4a azul oscuro - cambia aquí fondo */
-.wrap{max-width:640px;margin:auto;padding:8px} /* Contenedor central max 640px */
-.top-banner{text-align:center;padding:10px 0;cursor:pointer} /* Banner logo centrado */
-.top-banner img{width:100%;max-height:160px;object-fit:contain} /* Imagen logo grande */
-.barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:1px solid #ffee00;color:#ffee00;font-weight:900;text-align:center;padding:4px 6px 2px 6px;font-size:10px;text-transform:uppercase;line-height:1.1;text-shadow:0 0 3px #ffee00} /* BARRA JUEGA VIERNES - fondo #0066cc azul / letra #ffee00 amarillo / borde #ffee00 amarillo */
-.barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:1px solid #ffee00;color:#fff;font-weight:900;text-align:center;padding:2px 40px 6px 6px;font-size:14px;position:relative;line-height:1.1} /* BARRA JORNADA 30 - fondo #0066cc azul / letra #fff blanca / borde #ffee00 */
-.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - fondo #fff blanco / letra #000 negro / borde #000 negro */
-.match:nth-child(even){background:#d7e8ef} /* FILA PARTIDO PAR - fondo #d7e8ef celeste claro */
-.team{font-weight:900;font-size:12px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* NOMBRE EQUIPO - AQUI AUMENTE LETRA de 9.2px a 12px / cambia 12px a 13px o 11px si quieres más grande o chico */
-.logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block;background:#fff;border-radius:50%} /* ESCUDO - tamaño 32px / fondo #fff blanco */
-.btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* BOTON L E V - fondo #fff blanco / borde #000 negro */
-.btn-lev.sel{background:#d4ff00} /* BOTON L E V SELECCIONADO - fondo #d4ff00 amarillo limón */
-.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:15px} /* BARRA COSTO CIERRA - fondo #0066cc azul / borde #ffee00 amarillo */
-.costo-fijo{color:#fff} /* PALABRA COSTO - color #fff blanco */
+*{box-sizing:border-box;font-family:Arial} /* Reset general */
+body{margin:0;background:#0a2a4a;color:#fff} /* FONDO PRINCIPAL #0a2a4a azul oscuro */
+.wrap{max-width:640px;margin:auto;padding:8px} /* Contenedor central */
+.top-banner{text-align:center;padding:10px 0;cursor:pointer} /* Banner logo */
+.top-banner img{width:100%;max-height:160px;object-fit:contain} /* Imagen logo */
+.barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:1px solid #ffee00;color:#ffee00;font-weight:900;text-align:center;padding:4px 6px 2px 6px;font-size:10px;text-transform:uppercase;line-height:1.1;text-shadow:0 0 3px #ffee00} /* BARRA JUEGA - fondo #0066cc / letra #ffee00 / borde #ffee00 */
+.barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:1px solid #ffee00;color:#fff;font-weight:900;text-align:center;padding:2px 40px 6px 6px;font-size:14px;position:relative;line-height:1.1} /* BARRA JORNADA - fondo #0066cc / letra #fff / borde #ffee00 */
+.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - fondo #fff / letra #000 / borde #000 */
+.match:nth-child(even){background:#d7e8ef} /* FILA PAR - fondo #d7e8ef celeste */
+.match .btn-lev:last-child{margin-left:2px} /* COLUMNA V 0.5MM A LA DERECHA - mueve solo boton V 2px a la derecha */
+.team{font-weight:900;font-size:12px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* NOMBRE EQUIPO - tamaño 12px - cambia aquí 12px por más grande */
+.logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block;background:#fff;border-radius:50%} /* ESCUDO - fondo #fff */
+.btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* BOTON L E V - fondo #fff / borde #000 */
+.btn-lev.sel{background:#d4ff00} /* BOTON SELECCIONADO - fondo #d4ff00 amarillo limon */
+.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:15px} /* BARRA COSTO CIERRA - fondo #0066cc / borde #ffee00 */
+.costo-fijo{color:#fff} /* COSTO fijo - color #fff blanco */
 .costo-valor{color:#ffee00;margin-left:6px} /* VALOR $20 - color #ffee00 amarillo */
-.cierre{color:#fff} /* PALABRA CIERRA - color #fff blanco */
-.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* LINEA L-E-V --------- - color #eaff00 amarillo claro */
-.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* INPUT NOMBRE TEL - fondo #fff blanco */
+.cierre{color:#fff} /* CIERRA - color #fff blanco */
+.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* LINEA --------- - color #eaff00 amarillo */
+.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* INPUT NOMBRE TEL - fondo #fff */
 .fila-agregar{display:grid;grid-template-columns:62px 1fr;gap:8px;margin-top:8px} /* FILA BORRAR + AGREGAR */
 .b-trash{background:#ff0040;border:none;border-radius:10px;font-size:24px;cursor:pointer;min-height:48px} /* BOTON BASURA - fondo #ff0040 rojo */
-.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer;width:100%;font-size:16px} /* BOTON AGREGAR - fondo #d4ff00 amarillo limón */
+.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer;width:100%;font-size:16px} /* BOTON AGREGAR - fondo #d4ff00 */
 .fila-enviar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px} /* FILA ENVIAR + SUERTE */
-.b-env{background:#2eff7a;border:none;border-radius:10px;padding:14px;font-weight:900;font-size:16px;cursor:pointer} /* BOTON ENVIAR - fondo #2eff7a verde claro */
+.b-env{background:#2eff7a;border:none;border-radius:10px;padding:14px;font-weight:900;font-size:16px;cursor:pointer} /* BOTON ENVIAR - fondo #2eff7a verde */
 .b-suerte{background:#eaff00;border:none;border-radius:10px;padding:14px;font-weight:900;cursor:pointer;font-size:16px} /* BOTON SUERTE - fondo #eaff00 amarillo */
-.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* CAJA COSTO TOTAL - fondo #000 negro / letra #00e5ff celeste / borde #fff blanco */
-.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* CAJA LISTA QUINIELAS - fondo #000 negro / borde #fff blanco */
-.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* TITULO LISTA - fondo #000 negro / letra #00e5ff celeste */
+.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* CAJA COSTO TOTAL - fondo #000 negro / letra #00e5ff celeste / borde #fff */
+.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* CAJA LISTA - fondo #000 / borde #fff */
+.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* TITULO LISTA - fondo #000 / letra #00e5ff */
 .lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:22px} /* CONTENIDO LISTA - fondo #0e0e0e gris oscuro */
-.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* ITEM QUINIELA - borde #222 gris */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px} /* MODAL FONDO - fondo rgba(0,0,0,.85) negro transparente */
+.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* ITEM QUINIELA - borde #222 */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px} /* MODAL FONDO */
 .modal.show{display:grid} /* MODAL VISIBLE */
-.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* TARJETA MODAL - fondo #fff blanco / letra #000 negro */
-.organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* CONTENEDOR BOTONES FACEBOOK ETC */
-.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* LINKS BOTONES */
-.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* TAG BOTON - fondo #0e3a4e azul petróleo / borde #ffee00 amarillo / letra #fff blanca */
+.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* TARJETA MODAL - fondo #fff / letra #000 */
+.organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* CONTENEDOR TAGS */
+.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* LINKS TAGS */
+.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* TAG - fondo #0e3a4e / borde #ffee00 / letra #fff */
 .tag img{width:28px;height:28px} /* ICONO TAG */
-.tag.facebook{background:#1877F2;border-color:#fff} /* TAG FACEBOOK - fondo #1877F2 azul FB / borde #fff blanco */
-.tag.pagar{background:#fff;color:#000} /* TAG PAGAR - fondo #fff blanco / letra #000 negro */
-.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:16px;color:#000;display:grid;place-items:center;cursor:pointer;z-index:5} /* BOTON X ALINEADO JORNADA 30 - fondo #b0b0b0 gris / borde #000 negro / letra #000 negro */
+.tag.facebook{background:#1877F2;border-color:#fff} /* TAG FACEBOOK - fondo #1877F2 / borde #fff */
+.tag.pagar{background:#fff;color:#000} /* TAG PAGAR - fondo #fff / letra #000 */
+.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:16px;color:#000;display:grid;place-items:center;cursor:pointer;z-index:5} /* BOTON X - fondo #b0b0b0 gris / borde #000 / letra #000 */
 </style> <!-- Fin CSS -->
-</head> <!-- Fin cabecera -->
-<body> <!-- Inicio cuerpo -->
-<div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div> <!-- Modal envíos -->
-<div class="wrap"> <!-- Contenedor principal -->
-<div class="top-banner" id="bannerLogo"><img src="img/logo3.png"></div> <!-- Logo 5 clicks abre panel -->
-<div class="organizer-tags"> <!-- Fila 1 botones -->
-<a href="https://www.facebook.com/GolazoJuega/"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a> <!-- Botón Facebook -->
-<a href="combinaciones/combinaciones.html"><div class="tag"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a> <!-- Botón Combinaciones -->
-<a href="pagos/Pagos.html"><div class="tag pagar"><img src="./img/SPIN.png"><span>Pagar</span></div></a> <!-- Botón Pagar -->
-</div> <!-- Fin fila 1 -->
-<div class="organizer-tagss"> <!-- Fila 2 botones -->
-<a href="cjugar/cjugarinst.html"><div class="tag"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a> <!-- Botón Instrucciones -->
-<a href="reglamento/reglamento.html"><div class="tag"><img src="./img/reglamento.png"><span>Reglamento</span></div></a> <!-- Botón Reglamento -->
-<a href="horarios/horarios.html"><div class="tag"><img src="./img/horarios.png"><span>Horarios</span></div></a> <!-- Botón Horarios -->
-</div> <!-- Fin fila 2 -->
+</head>
+<body>
+<div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div>
+<div class="wrap">
+<div class="top-banner" id="bannerLogo"><img src="img/logo3.png"></div>
+<div class="organizer-tags">
+<a href="https://www.facebook.com/GolazoJuega/"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a>
+<a href="combinaciones/combinaciones.html"><div class="tag"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a>
+<a href="pagos/Pagos.html"><div class="tag pagar"><img src="./img/SPIN.png"><span>Pagar</span></div></a>
+</div>
+<div class="organizer-tagss">
+<a href="cjugar/cjugarinst.html"><div class="tag"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a>
+<a href="reglamento/reglamento.html"><div class="tag"><img src="./img/reglamento.png"><span>Reglamento</span></div></a>
+<a href="horarios/horarios.html"><div class="tag"><img src="./img/horarios.png"><span>Horarios</span></div></a>
+</div>
+<div class="barra-k2" id="barraK2"><span id="txtK2">JUEGA DEL VIERNES 4 DE SEPTIEMBRE AL DOMINGO 7 DE SEPTIEMBRE</span></div>
+<div class="barra-h4"><button class="boton-x-actual" onclick="limpiarActual()">X</button><span id="txtH4">JORNADA 30</span></div>
+<div id="partidos"></div>
+<div class="barra-abajo"><div><span class="costo-fijo">COSTO</span><span class="costo-valor" id="txtO2"> $20</span></div><div class="cierre" id="txtI2">CIERRA VIERNES 3 PM</div></div>
+<div class="line" id="linea">---------</div>
+<input class="inp" id="nombre" placeholder="NOMBRE COMPLETO">
+<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
+<div class="fila-agregar"><button class="b-trash" onclick="borrarTodo()">🗑️</button><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div>
+<div class="fila-enviar"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button></div>
+<div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div>
+<div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div>
+</div>
 
-<div class="barra-k2" id="barraK2"><span id="txtK2">JUEGA DEL VIERNES 4 DE SEPTIEMBRE AL DOMINGO 7 DE SEPTIEMBRE</span></div> <!-- Barra JUEGA -->
-<div class="barra-h4"><button class="boton-x-actual" onclick="limpiarActual()">X</button><span id="txtH4">JORNADA 30</span></div> <!-- Barra JORNADA 30 con X alineada -->
-
-<div id="partidos"></div> <!-- Partidos se pintan aquí por JS -->
-<div class="barra-abajo"><div><span class="costo-fijo">COSTO</span><span class="costo-valor" id="txtO2"> $20</span></div><div class="cierre" id="txtI2">CIERRA VIERNES 3 PM</div></div> <!-- Barra COSTO CIERRA -->
-<div class="line" id="linea">---------</div> <!-- Línea L E V -->
-<input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"> <!-- Input nombre -->
-<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP"> <!-- Input teléfono -->
-<div class="fila-agregar"><button class="b-trash" onclick="borrarTodo()">🗑️</button><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div> <!-- Fila borrar + agregar -->
-<div class="fila-enviar"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button></div> <!-- Fila enviar + suerte -->
-<div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div> <!-- Caja costo total -->
-<div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div> <!-- Lista quinielas -->
-</div> <!-- Fin wrap -->
-
-<script> // Inicio JS
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec"; // URL Apps Script
-const MI_WHATSAPP = "524498476015"; // Tu WhatsApp
-let PARTIDOS=[["MÉXICO","BOLIVIA"],["COSTA RICA","URUGUAY"],["INGLATERRA","BOSNIA"],["ALEMANIA","UCRANIA"],["SUIZA","ESTONIA"],["IRLANDA","HUNGRÍA"],["ITALIA","TURQUÍA"],["DINAMARCA","SUECIA"],["MÉXICO","URUGUAY"]]; // Partidos default
-let picks=Array(9).fill(""); // Picks L E V actuales
-let quinielas=JSON.parse(localStorage.getItem("qs")||"[]"); // Quinielas guardadas local
-let clicksLogo=0; let timerLogo; // Contador clicks logo
-document.getElementById("bannerLogo").addEventListener("click",()=>{clicksLogo++;clearTimeout(timerLogo);timerLogo=setTimeout(()=>{clicksLogo=0},2000);if(clicksLogo>=5){clicksLogo=0;window.open("panelcentral.html","_blank");}}); // 5 clicks abre panelcentral
-
-function getCosto(){ // Función lee costo de txtO2
-  let txt = document.getElementById("txtO2").textContent || "$20"; // Lee texto $20
-  let num = parseInt(txt.replace(/[^0-9]/g,"")) || 20; // Extrae número 20
-  return num; // Regresa número
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec";
+const MI_WHATSAPP = "524498476015";
+let PARTIDOS=[["MÉXICO","BOLIVIA"],["COSTA RICA","URUGUAY"],["INGLATERRA","BOSNIA"],["ALEMANIA","UCRANIA"],["SUIZA","ESTONIA"],["IRLANDA","HUNGRÍA"],["ITALIA","TURQUÍA"],["DINAMARCA","SUECIA"],["MÉXICO","URUGUAY"]];
+let picks=Array(9).fill("");
+let quinielas=JSON.parse(localStorage.getItem("qs")||"[]");
+let clicksLogo=0; let timerLogo;
+document.getElementById("bannerLogo").addEventListener("click",()=>{clicksLogo++;clearTimeout(timerLogo);timerLogo=setTimeout(()=>{clicksLogo=0},2000);if(clicksLogo>=5){clicksLogo=0;window.open("panelcentral.html","_blank");}});
+function getCosto(){
+  let txt = document.getElementById("txtO2").textContent || "$20";
+  let num = parseInt(txt.replace(/[^0-9]/g,"")) || 20;
+  return num;
 }
-
-function limpiarNombre(nombre){ // Función limpia acentos
-  return nombre.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim(); // Quita acentos MÉXICO -> MEXICO
+function limpiarNombre(nombre){
+  return nombre.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim();
 }
-
-async function cargarAdmin(){ // Carga datos ADMIN de Sheet
+async function cargarAdmin(){
  try{
-  let r=await fetch(SCRIPT_URL+"?action=obtener_admin&t="+Date.now()); // Fetch sin caché
-  let j=await r.json(); // Convierte JSON
-  if(j.partidos && j.partidos.length>0) PARTIDOS=j.partidos.map(p=>[p.local,p.visita]); // Partidos de hoja
-  if(j.j2) document.getElementById("txtK2").textContent=j.j2.toUpperCase(); // J2 JUEGA
-  else if(j.k2) document.getElementById("txtK2").textContent=j.k2.toUpperCase(); // Compatibilidad K2
-  if(j.h4) document.getElementById("txtH4").textContent=j.h4.toUpperCase(); // H4 JORNADA
-  else if(j.h2) document.getElementById("txtH4").textContent=j.h2.toUpperCase(); // Compatibilidad
-  if(j.o2){document.getElementById("txtO2").textContent=j.o2.toString().toUpperCase().replace("COSTO","").trim();renderLista();} // O2 COSTO $20
-  if(j.i2) document.getElementById("txtI2").textContent=j.i2.toUpperCase(); // I2 CIERRA
- }catch(e){} // Si falla no hace nada
- render(); // Pinta partidos
+  let r=await fetch(SCRIPT_URL+"?action=obtener_admin&t="+Date.now());
+  let j=await r.json();
+  if(j.partidos && j.partidos.length>0) PARTIDOS=j.partidos.map(p=>[p.local,p.visita]);
+  if(j.j2) document.getElementById("txtK2").textContent=j.j2.toUpperCase();
+  else if(j.k2) document.getElementById("txtK2").textContent=j.k2.toUpperCase();
+  if(j.h4) document.getElementById("txtH4").textContent=j.h4.toUpperCase();
+  else if(j.h2) document.getElementById("txtH4").textContent=j.h2.toUpperCase();
+  if(j.o2){document.getElementById("txtO2").textContent=j.o2.toString().toUpperCase().replace("COSTO","").trim();renderLista();}
+  if(j.i2) document.getElementById("txtI2").textContent=j.i2.toUpperCase();
+ }catch(e){}
+ render();
 }
-
-function render(){ // Función pinta partidos
- let h="";PARTIDOS.forEach((p,i)=>{ // Recorre partidos
-  let local = limpiarNombre(p[0]); // Limpia local
-  let visita = limpiarNombre(p[1]); // Limpia visita
-  h+=`<div class="match"> 
+function render(){
+ let h="";PARTIDOS.forEach((p,i)=>{
+  let local = limpiarNombre(p[0]);
+  let visita = limpiarNombre(p[1]);
+  h+=`<div class="match">
    <button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button>
    <div class="team">${p[0]}</div>
    <img class="logo" src="img/ESCUDOS/${local}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${local}.png'; this.onerror=function(){this.src='img/ESCUDOS/${p[0]}.PNG'; this.onerror=function(){this.style.visibility='hidden'}}">
@@ -123,219 +118,49 @@ function render(){ // Función pinta partidos
    <img class="logo" src="img/ESCUDOS/${visita}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${visita}.png'; this.onerror=function(){this.src='img/ESCUDOS/${p[1]}.PNG'; this.onerror=function(){this.style.visibility='hidden'}}">
    <div class="team">${p[1]}</div>
    <button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button>
-   </div>`;});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join(""); // Pinta HTML y línea
+   </div>`;});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join("");
 }
-function setP(i,v){picks[i]=v;render();} // Función marca L E V
-function limpiarActual(){picks=Array(9).fill("");render();} // Función limpia picks actuales con X
-function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();} // Función suerte aleatoria
-function agregar(){ // Función agrega 1 quiniela
- if(picks.includes("")){alert("Selecciona los 9 partidos");return} // Valida 9
- let n=document.getElementById("nombre").value.trim().toUpperCase(); // Lee nombre
- let t=document.getElementById("tel").value.trim(); // Lee tel
- if(!n||!t){alert("Pon nombre y telefono");return} // Valida nombre tel
- quinielas.push({nombre:n,tel:t,comb:picks.join("")}); // Agrega 1
- localStorage.setItem("qs",JSON.stringify(quinielas)); // Guarda local
- renderLista(); // Actualiza lista
- picks=Array(9).fill("");render(); // Limpia picks
+function setP(i,v){picks[i]=v;render();}
+function limpiarActual(){picks=Array(9).fill("");render();}
+function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();}
+function agregar(){
+ if(picks.includes("")){alert("Selecciona los 9 partidos");return}
+ let n=document.getElementById("nombre").value.trim().toUpperCase();
+ let t=document.getElementById("tel").value.trim();
+ if(!n||!t){alert("Pon nombre y telefono");return}
+ quinielas.push({nombre:n,tel:t,comb:picks.join("")});
+ localStorage.setItem("qs",JSON.stringify(quinielas));
+ renderLista();
+ picks=Array(9).fill("");render();
 }
-function renderLista(){ // Función pinta lista y totales
- let costoU = getCosto(); // Lee costo de O2
- let total = quinielas.length * costoU; // Multiplica cantidad * O2
- document.getElementById("nEnv").textContent=quinielas.length; // Número enviar
- document.getElementById("nQ").textContent=quinielas.length; // Número quinielas
- document.getElementById("costo").textContent=costoU; // Costo unitario O2
- document.getElementById("total").textContent=total; // Total
- document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>"; // Pinta lista
+function renderLista(){
+ let costoU = getCosto();
+ let total = quinielas.length * costoU;
+ document.getElementById("nEnv").textContent=quinielas.length;
+ document.getElementById("nQ").textContent=quinielas.length;
+ document.getElementById("costo").textContent=costoU;
+ document.getElementById("total").textContent=total;
+ document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>";
 }
-function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}} // Función borra todas
-async function enviarTodo(){ // Función envía a Sheets
- if(quinielas.length==0){alert("Agrega quinielas");return} // Valida
- let b=document.querySelector(".b-env");b.textContent="Enviando...";b.disabled=true; // Botón enviando
+function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}}
+async function enviarTodo(){
+ if(quinielas.length==0){alert("Agrega quinielas");return}
+ let b=document.querySelector(".b-env");b.textContent="Enviando...";b.disabled=true;
  try{
-  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // POST
-  let j=await r.json(); // Respuesta IDs
-  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">IDs: ${j.ids.join(", ")}<br>Total: $${j.total}</div><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;margin-top:10px">Cerrar</button>`; // Modal ok
-  document.getElementById("modalOk").classList.add("show"); // Muestra modal
+  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});
+  let j=await r.json();
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">IDs: ${j.ids.join(", ")}<br>Total: $${j.total}</div><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;margin-top:10px">Cerrar</button>`;
+  document.getElementById("modalOk").classList.add("show");
  }catch(e){
-  let costoU = getCosto(); // Costo O2 fallback
-  let total = quinielas.length * costoU; // Total O2 fallback
-  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // Fallback no-cors
-  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><p>Total: $${total}</p><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">Cerrar</button>`;document.getElementById("modalOk").classList.add("show"); // Modal fallback
+  let costoU = getCosto();
+  let total = quinielas.length * costoU;
+  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})});
+  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><p>Total: $${total}</p><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">Cerrar</button>`;document.getElementById("modalOk").classList.add("show");
  }
- b.textContent="Enviar";b.disabled=false; // Restaura botón
+ b.textContent="Enviar";b.disabled=false;
 }
-function cerrarModal(){document.getElementById("modalOk").classList.remove("show");} // Función cierra modal
-cargarAdmin();renderLista(); // Inicia carga ADMIN y lista
-</script> <!-- Fin JS -->
-</body> <!-- Fin cuerpo -->
-</html> <!-- Fin HTML --><!DOCTYPE html> <!-- HTML5 -->
-<html lang="es-mx"> <!-- Idioma español México -->
-<head> <!-- Cabecera -->
-<meta charset="UTF-8"> <!-- Acentos y ñ -->
-<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Para móvil -->
-<title>Quiniela Golazo</title> <!-- Título pestaña -->
-<link rel="icon" href="img/logo.png"> <!-- Icono pestaña -->
-<style> /* Inicio CSS */
-*{box-sizing:border-box;font-family:Arial} /* Reset general - fuente Arial */
-body{margin:0;background:#0a2a4a;color:#fff} /* COLOR FONDO PRINCIPAL #0a2a4a azul oscuro - cambia aquí fondo */
-.wrap{max-width:640px;margin:auto;padding:8px} /* Contenedor central max 640px */
-.top-banner{text-align:center;padding:10px 0;cursor:pointer} /* Banner logo centrado */
-.top-banner img{width:100%;max-height:160px;object-fit:contain} /* Imagen logo grande */
-.barra-k2{background:#0066cc;border:2px solid #ffee00;border-bottom:1px solid #ffee00;color:#ffee00;font-weight:900;text-align:center;padding:4px 6px 2px 6px;font-size:10px;text-transform:uppercase;line-height:1.1;text-shadow:0 0 3px #ffee00} /* BARRA JUEGA VIERNES - fondo #0066cc azul / letra #ffee00 amarillo / borde #ffee00 amarillo */
-.barra-h4{background:#0066cc;border:2px solid #ffee00;border-top:1px solid #ffee00;color:#fff;font-weight:900;text-align:center;padding:2px 40px 6px 6px;font-size:14px;position:relative;line-height:1.1} /* BARRA JORNADA 30 - fondo #0066cc azul / letra #fff blanca / borde #ffee00 */
-.match{display:grid;grid-template-columns:42px 78px 36px 34px 36px 78px 42px;align-items:center;background:#fff;color:#000;border-bottom:2px solid #000;min-height:50px} /* FILA PARTIDO - fondo #fff blanco / letra #000 negro / borde #000 negro */
-.match:nth-child(even){background:#d7e8ef} /* FILA PARTIDO PAR - fondo #d7e8ef celeste claro */
-.team{font-weight:900;font-size:12px;text-transform:uppercase;text-align:center;white-space:nowrap;overflow:hidden} /* NOMBRE EQUIPO - AQUI AUMENTE LETRA de 9.2px a 12px / cambia 12px a 13px o 11px si quieres más grande o chico */
-.logo{width:32px;height:32px;object-fit:contain;margin:auto;display:block;background:#fff;border-radius:50%} /* ESCUDO - tamaño 32px / fondo #fff blanco */
-.btn-lev{width:34px;height:34px;border:2.2px solid #000;border-radius:8px;background:#fff;font-weight:900;cursor:pointer;margin:auto;display:grid;place-items:center} /* BOTON L E V - fondo #fff blanco / borde #000 negro */
-.btn-lev.sel{background:#d4ff00} /* BOTON L E V SELECCIONADO - fondo #d4ff00 amarillo limón */
-.barra-abajo{background:#0066cc;border:2px solid #ffee00;border-top:none;display:flex;justify-content:space-between;padding:8px 10px;font-weight:900;font-size:15px} /* BARRA COSTO CIERRA - fondo #0066cc azul / borde #ffee00 amarillo */
-.costo-fijo{color:#fff} /* PALABRA COSTO - color #fff blanco */
-.costo-valor{color:#ffee00;margin-left:6px} /* VALOR $20 - color #ffee00 amarillo */
-.cierre{color:#fff} /* PALABRA CIERRA - color #fff blanco */
-.line{color:#eaff00;font-weight:900;letter-spacing:6px;text-align:center;font-size:28px;margin:14px 0} /* LINEA L-E-V --------- - color #eaff00 amarillo claro */
-.inp{width:100%;padding:14px;border:none;border-radius:10px;font-weight:800;margin-top:8px;text-transform:uppercase} /* INPUT NOMBRE TEL - fondo #fff blanco */
-.fila-agregar{display:grid;grid-template-columns:62px 1fr;gap:8px;margin-top:8px} /* FILA BORRAR + AGREGAR */
-.b-trash{background:#ff0040;border:none;border-radius:10px;font-size:24px;cursor:pointer;min-height:48px} /* BOTON BASURA - fondo #ff0040 rojo */
-.b-agregar{background:#d4ff00;border:none;border-radius:10px;font-weight:900;padding:14px;cursor:pointer;width:100%;font-size:16px} /* BOTON AGREGAR - fondo #d4ff00 amarillo limón */
-.fila-enviar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px} /* FILA ENVIAR + SUERTE */
-.b-env{background:#2eff7a;border:none;border-radius:10px;padding:14px;font-weight:900;font-size:16px;cursor:pointer} /* BOTON ENVIAR - fondo #2eff7a verde claro */
-.b-suerte{background:#eaff00;border:none;border-radius:10px;padding:14px;font-weight:900;cursor:pointer;font-size:16px} /* BOTON SUERTE - fondo #eaff00 amarillo */
-.caja-negra{background:#000;border:2px solid #fff;border-radius:12px;padding:10px;display:flex;justify-content:space-between;color:#00e5ff;font-weight:900;margin-top:10px} /* CAJA COSTO TOTAL - fondo #000 negro / letra #00e5ff celeste / borde #fff blanco */
-.lista-box{background:#000;border:2px solid #fff;border-radius:12px;overflow:hidden;margin-top:10px} /* CAJA LISTA QUINIELAS - fondo #000 negro / borde #fff blanco */
-.lista-head{background:#000;color:#00e5ff;text-align:center;padding:8px;font-weight:900} /* TITULO LISTA - fondo #000 negro / letra #00e5ff celeste */
-.lista-content{background:#0e0e0e;max-height:300px;overflow:auto;padding:6px;font-size:22px} /* CONTENIDO LISTA - fondo #0e0e0e gris oscuro */
-.q-item{display:flex;justify-content:space-between;border-bottom:1px solid #222;padding:5px} /* ITEM QUINIELA - borde #222 gris */
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;z-index:999;padding:15px} /* MODAL FONDO - fondo rgba(0,0,0,.85) negro transparente */
-.modal.show{display:grid} /* MODAL VISIBLE */
-.card-ok{background:#fff;color:#000;border-radius:16px;padding:18px;max-width:380px;width:100%;text-align:center} /* TARJETA MODAL - fondo #fff blanco / letra #000 negro */
-.organizer-tags,.organizer-tagss{display:flex;gap:6px;margin:8px 0} /* CONTENEDOR BOTONES FACEBOOK ETC */
-.organizer-tags a,.organizer-tagss a{flex:1;text-decoration:none} /* LINKS BOTONES */
-.tag{border:2px solid #ffee00;background:#0e3a4e;border-radius:12px;padding:8px;text-align:center;font-weight:900;font-size:10px;color:#fff;display:flex;flex-direction:column;align-items:center;gap:4px} /* TAG BOTON - fondo #0e3a4e azul petróleo / borde #ffee00 amarillo / letra #fff blanca */
-.tag img{width:28px;height:28px} /* ICONO TAG */
-.tag.facebook{background:#1877F2;border-color:#fff} /* TAG FACEBOOK - fondo #1877F2 azul FB / borde #fff blanco */
-.tag.pagar{background:#fff;color:#000} /* TAG PAGAR - fondo #fff blanco / letra #000 negro */
-.boton-x-actual{position:absolute;left:6px;top:50%;transform:translateY(-50%);width:36px;height:32px;background:#b0b0b0;border:2px solid #000;border-radius:6px;font-weight:900;font-size:16px;color:#000;display:grid;place-items:center;cursor:pointer;z-index:5} /* BOTON X ALINEADO JORNADA 30 - fondo #b0b0b0 gris / borde #000 negro / letra #000 negro */
-</style> <!-- Fin CSS -->
-</head> <!-- Fin cabecera -->
-<body> <!-- Inicio cuerpo -->
-<div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div> <!-- Modal envíos -->
-<div class="wrap"> <!-- Contenedor principal -->
-<div class="top-banner" id="bannerLogo"><img src="img/logo3.png"></div> <!-- Logo 5 clicks abre panel -->
-<div class="organizer-tags"> <!-- Fila 1 botones -->
-<a href="https://www.facebook.com/GolazoJuega/"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a> <!-- Botón Facebook -->
-<a href="combinaciones/combinaciones.html"><div class="tag"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a> <!-- Botón Combinaciones -->
-<a href="pagos/Pagos.html"><div class="tag pagar"><img src="./img/SPIN.png"><span>Pagar</span></div></a> <!-- Botón Pagar -->
-</div> <!-- Fin fila 1 -->
-<div class="organizer-tagss"> <!-- Fila 2 botones -->
-<a href="cjugar/cjugarinst.html"><div class="tag"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a> <!-- Botón Instrucciones -->
-<a href="reglamento/reglamento.html"><div class="tag"><img src="./img/reglamento.png"><span>Reglamento</span></div></a> <!-- Botón Reglamento -->
-<a href="horarios/horarios.html"><div class="tag"><img src="./img/horarios.png"><span>Horarios</span></div></a> <!-- Botón Horarios -->
-</div> <!-- Fin fila 2 -->
-
-<div class="barra-k2" id="barraK2"><span id="txtK2">JUEGA DEL VIERNES 4 DE SEPTIEMBRE AL DOMINGO 7 DE SEPTIEMBRE</span></div> <!-- Barra JUEGA -->
-<div class="barra-h4"><button class="boton-x-actual" onclick="limpiarActual()">X</button><span id="txtH4">JORNADA 30</span></div> <!-- Barra JORNADA 30 con X alineada -->
-
-<div id="partidos"></div> <!-- Partidos se pintan aquí por JS -->
-<div class="barra-abajo"><div><span class="costo-fijo">COSTO</span><span class="costo-valor" id="txtO2"> $20</span></div><div class="cierre" id="txtI2">CIERRA VIERNES 3 PM</div></div> <!-- Barra COSTO CIERRA -->
-<div class="line" id="linea">---------</div> <!-- Línea L E V -->
-<input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"> <!-- Input nombre -->
-<input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP"> <!-- Input teléfono -->
-<div class="fila-agregar"><button class="b-trash" onclick="borrarTodo()">🗑️</button><button class="b-agregar" onclick="agregar()">AGREGAR +</button></div> <!-- Fila borrar + agregar -->
-<div class="fila-enviar"><button class="b-env" onclick="enviarTodo()">Enviar <span id="nEnv">0</span> 📲</button><button class="b-suerte" onclick="suerte()">🎲 A LA SUERTE</button></div> <!-- Fila enviar + suerte -->
-<div class="caja-negra"><div>Costo: $<span id="costo">0</span><br><span id="nQ">0</span> Quiniela(s)</div><div>Total: $<span id="total">0</span></div></div> <!-- Caja costo total -->
-<div class="lista-box"><div class="lista-head">Lista De Quinielas</div><div class="lista-content" id="lista"></div></div> <!-- Lista quinielas -->
-</div> <!-- Fin wrap -->
-
-<script> // Inicio JS
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw2MV9K-yXbOEfYTTT8M8OdsCVQuAe7iISrqm6Aw6BipcZxq5PYpVNy9vKmfi-3Gjd1/exec"; // URL Apps Script
-const MI_WHATSAPP = "524498476015"; // Tu WhatsApp
-let PARTIDOS=[["MÉXICO","BOLIVIA"],["COSTA RICA","URUGUAY"],["INGLATERRA","BOSNIA"],["ALEMANIA","UCRANIA"],["SUIZA","ESTONIA"],["IRLANDA","HUNGRÍA"],["ITALIA","TURQUÍA"],["DINAMARCA","SUECIA"],["MÉXICO","URUGUAY"]]; // Partidos default
-let picks=Array(9).fill(""); // Picks L E V actuales
-let quinielas=JSON.parse(localStorage.getItem("qs")||"[]"); // Quinielas guardadas local
-let clicksLogo=0; let timerLogo; // Contador clicks logo
-document.getElementById("bannerLogo").addEventListener("click",()=>{clicksLogo++;clearTimeout(timerLogo);timerLogo=setTimeout(()=>{clicksLogo=0},2000);if(clicksLogo>=5){clicksLogo=0;window.open("panelcentral.html","_blank");}}); // 5 clicks abre panelcentral
-
-function getCosto(){ // Función lee costo de txtO2
-  let txt = document.getElementById("txtO2").textContent || "$20"; // Lee texto $20
-  let num = parseInt(txt.replace(/[^0-9]/g,"")) || 20; // Extrae número 20
-  return num; // Regresa número
-}
-
-function limpiarNombre(nombre){ // Función limpia acentos
-  return nombre.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toUpperCase().trim(); // Quita acentos MÉXICO -> MEXICO
-}
-
-async function cargarAdmin(){ // Carga datos ADMIN de Sheet
- try{
-  let r=await fetch(SCRIPT_URL+"?action=obtener_admin&t="+Date.now()); // Fetch sin caché
-  let j=await r.json(); // Convierte JSON
-  if(j.partidos && j.partidos.length>0) PARTIDOS=j.partidos.map(p=>[p.local,p.visita]); // Partidos de hoja
-  if(j.j2) document.getElementById("txtK2").textContent=j.j2.toUpperCase(); // J2 JUEGA
-  else if(j.k2) document.getElementById("txtK2").textContent=j.k2.toUpperCase(); // Compatibilidad K2
-  if(j.h4) document.getElementById("txtH4").textContent=j.h4.toUpperCase(); // H4 JORNADA
-  else if(j.h2) document.getElementById("txtH4").textContent=j.h2.toUpperCase(); // Compatibilidad
-  if(j.o2){document.getElementById("txtO2").textContent=j.o2.toString().toUpperCase().replace("COSTO","").trim();renderLista();} // O2 COSTO $20
-  if(j.i2) document.getElementById("txtI2").textContent=j.i2.toUpperCase(); // I2 CIERRA
- }catch(e){} // Si falla no hace nada
- render(); // Pinta partidos
-}
-
-function render(){ // Función pinta partidos
- let h="";PARTIDOS.forEach((p,i)=>{ // Recorre partidos
-  let local = limpiarNombre(p[0]); // Limpia local
-  let visita = limpiarNombre(p[1]); // Limpia visita
-  h+=`<div class="match"> 
-   <button class="btn-lev ${picks[i]=='L'?'sel':''}" onclick="setP(${i},'L')">L</button>
-   <div class="team">${p[0]}</div>
-   <img class="logo" src="img/ESCUDOS/${local}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${local}.png'; this.onerror=function(){this.src='img/ESCUDOS/${p[0]}.PNG'; this.onerror=function(){this.style.visibility='hidden'}}">
-   <button class="btn-lev ${picks[i]=='E'?'sel':''}" onclick="setP(${i},'E')">E</button>
-   <img class="logo" src="img/ESCUDOS/${visita}.PNG" onerror="this.onerror=null; this.src='img/ESCUDOS/${visita}.png'; this.onerror=function(){this.src='img/ESCUDOS/${p[1]}.PNG'; this.onerror=function(){this.style.visibility='hidden'}}">
-   <div class="team">${p[1]}</div>
-   <button class="btn-lev ${picks[i]=='V'?'sel':''}" onclick="setP(${i},'V')">V</button>
-   </div>`;});document.getElementById("partidos").innerHTML=h;document.getElementById("linea").textContent=picks.map(v=>v||"-").join(""); // Pinta HTML y línea
-}
-function setP(i,v){picks[i]=v;render();} // Función marca L E V
-function limpiarActual(){picks=Array(9).fill("");render();} // Función limpia picks actuales con X
-function suerte(){picks=picks.map(()=>["L","E","V"][Math.floor(Math.random()*3)]);render();} // Función suerte aleatoria
-function agregar(){ // Función agrega 1 quiniela
- if(picks.includes("")){alert("Selecciona los 9 partidos");return} // Valida 9
- let n=document.getElementById("nombre").value.trim().toUpperCase(); // Lee nombre
- let t=document.getElementById("tel").value.trim(); // Lee tel
- if(!n||!t){alert("Pon nombre y telefono");return} // Valida nombre tel
- quinielas.push({nombre:n,tel:t,comb:picks.join("")}); // Agrega 1
- localStorage.setItem("qs",JSON.stringify(quinielas)); // Guarda local
- renderLista(); // Actualiza lista
- picks=Array(9).fill("");render(); // Limpia picks
-}
-function renderLista(){ // Función pinta lista y totales
- let costoU = getCosto(); // Lee costo de O2
- let total = quinielas.length * costoU; // Multiplica cantidad * O2
- document.getElementById("nEnv").textContent=quinielas.length; // Número enviar
- document.getElementById("nQ").textContent=quinielas.length; // Número quinielas
- document.getElementById("costo").textContent=costoU; // Costo unitario O2
- document.getElementById("total").textContent=total; // Total
- document.getElementById("lista").innerHTML=quinielas.map((q,i)=>`<div class="q-item"><span>${i+1}. ${q.nombre} - ${q.comb}</span><span onclick="quinielas.splice(${i},1);localStorage.setItem('qs',JSON.stringify(quinielas));renderLista()" style="color:#ff0040;font-weight:900;cursor:pointer">X</span></div>`).join("")||"<center style='color:#666'>Sin quinielas</center>"; // Pinta lista
-}
-function borrarTodo(){if(confirm("¿Borrar todas?")){quinielas=[];localStorage.setItem("qs","[]");renderLista();}} // Función borra todas
-async function enviarTodo(){ // Función envía a Sheets
- if(quinielas.length==0){alert("Agrega quinielas");return} // Valida
- let b=document.querySelector(".b-env");b.textContent="Enviando...";b.disabled=true; // Botón enviando
- try{
-  let r=await fetch(SCRIPT_URL,{method:"POST",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // POST
-  let j=await r.json(); // Respuesta IDs
-  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><div style="background:#eaff00;border-radius:10px;padding:10px;font-weight:900">IDs: ${j.ids.join(", ")}<br>Total: $${j.total}</div><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%;margin-top:10px">Cerrar</button>`; // Modal ok
-  document.getElementById("modalOk").classList.add("show"); // Muestra modal
- }catch(e){
-  let costoU = getCosto(); // Costo O2 fallback
-  let total = quinielas.length * costoU; // Total O2 fallback
-  await fetch(SCRIPT_URL,{method:"POST",mode:"no-cors",body:JSON.stringify({action:"guardar_quiniela",quinielas:quinielas})}); // Fallback no-cors
-  document.getElementById("cardOk").innerHTML=`<h2>✅ ENVIADAS</h2><p>Total: $${total}</p><button onclick="cerrarModal()" style="background:#25D366;color:#fff;border:none;padding:14px;border-radius:12px;font-weight:900;width:100%">Cerrar</button>`;document.getElementById("modalOk").classList.add("show"); // Modal fallback
- }
- b.textContent="Enviar";b.disabled=false; // Restaura botón
-}
-function cerrarModal(){document.getElementById("modalOk").classList.remove("show");} // Función cierra modal
-cargarAdmin();renderLista(); // Inicia carga ADMIN y lista
-</script> <!-- Fin JS -->
-</body> <!-- Fin cuerpo -->
-</html> <!-- Fin HTML -->
+function cerrarModal(){document.getElementById("modalOk").classList.remove("show");}
+cargarAdmin();renderLista();
+</script>
+</body>
+</html>
