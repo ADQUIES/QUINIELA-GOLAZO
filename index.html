@@ -43,28 +43,47 @@
 .logo{width:36px;height:36px}
 .btn-lev{width:38px;height:38px}
 }
+
+/* --- INICIO ESTILOS SOLO PARA LOS BOTONES QUE AGREGASTE --- */
+.organizer-info{margin:10px 0} /* Contenedor fila 1 */
+.organizer-infos{margin:10px 0} /* Contenedor fila 2 */
+.organizer-tags{display:flex;gap:8px;justify-content:space-between} /* Fila 1 en 3 columnas */
+.organizer-tagss{display:flex;gap:8px;justify-content:space-between} /* Fila 2 en 3 columnas */
+.organizer-tags a{flex:1;text-decoration:none} /* Cada link ocupa 1/3 */
+.organizer-tagss a{flex:1;text-decoration:none} /* Cada link ocupa 1/3 */
+.tag{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 6px;border-radius:12px;border:2px solid #ffee00;background:#0e3a4e;color:#fff;font-weight:900;font-size:11px;text-align:center;min-height:78px;cursor:pointer} /* Estilo base boton */
+.tag img{width:32px;height:32px;object-fit:contain} /* Tamaño iconos */
+.tag.facebook{background:#1877F2;border-color:#fff} /* Facebook azul */
+.tag.pagar{background:#fff;color:#000} /* Pagar blanco */
+.tag.combinaciones{background:#ff6d00} /* Combinaciones naranja */
+.tag.instruciones{background:#0a4a7a} /* Instrucciones azul oscuro */
+.tag.reglamento{background:#222} /* Reglamento negro */
+.tag.horarios{background:#0066cc} /* Horarios azul */
+/* --- FIN ESTILOS BOTONES --- */
 </style>
 </head>
 <body>
-  <!-- BOTONES AGREGADOS COMO PEDISTE -->
-<div class="organizer-info">
-  <div class="organizer-tags">
-    <a href="https://www.facebook.com/GolazoJuega/" target="_self"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a>
-    <a href="combinaciones/combinaciones.html" target="_self"><div class="tag combinaciones"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a>
-    <a href="pagos/Pagos.html" target="_self"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a>
-  </div>
-</div>
-<div class="organizer-infos">
-  <div class="organizer-tagss">
-    <a href="cjugar/cjugarinst.html" target="_self"><div class="tag instruciones"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a>
-    <a href="reglamento/reglamento.html" target="_self"><div class="tag reglamento"><img src="./img/reglamento.png"><span>Reglamento</span></div></a>
-    <a href="horarios/horarios.html" target="_self"><div class="tag horarios"><img src="./img/horarios.png"><span>Horarios</span></div></a>
-  </div>
-</div>
-<!-- FIN BOTONES -->
 <div id="modalOk" class="modal"><div id="cardOk" class="card-ok"></div></div>
 <div class="wrap">
 <div class="top-banner" id="bannerLogo"><img src="img/logo3.png" alt="Quiniela Golazo"></div>
+
+<!-- BOTONES AGREGADOS COMO PEDISTE -->
+<div class="organizer-info"> <!-- Fila 1 contenedor -->
+  <div class="organizer-tags"> <!-- Fila 1 grid -->
+    <a href="https://www.facebook.com/GolazoJuega/" target="_self"><div class="tag facebook"><img src="./img/facebook-icon.svg"><span>Facebook</span></div></a> <!-- Boton FB -->
+    <a href="combinaciones/combinaciones.html" target="_self"><div class="tag combinaciones"><img src="./img/combinaciones.png"><span>Combinaciones</span></div></a> <!-- Boton Combinaciones -->
+    <a href="pagos/Pagos.html" target="_self"><div class="tag pagar"><img src="./img/BBVA.png"><span>Pagar</span></div></a> <!-- Boton Pagar -->
+  </div>
+</div>
+<div class="organizer-infos"> <!-- Fila 2 contenedor -->
+  <div class="organizer-tagss"> <!-- Fila 2 grid -->
+    <a href="cjugar/cjugarinst.html" target="_self"><div class="tag instruciones"><img src="./img/cjugarimg.png"><span>Instrucciones</span></div></a> <!-- Boton Instrucciones -->
+    <a href="reglamento/reglamento.html" target="_self"><div class="tag reglamento"><img src="./img/reglamento.png"><span>Reglamento</span></div></a> <!-- Boton Reglamento -->
+    <a href="horarios/horarios.html" target="_self"><div class="tag horarios"><img src="./img/horarios.png"><span>Horarios</span></div></a> <!-- Boton Horarios -->
+  </div>
+</div>
+<!-- FIN BOTONES -->
+
 <div class="head"><div>L</div><div>LOCAL</div><div></div><div>E</div><div></div><div>VISITA</div><div>V</div></div>
 <div id="partidos"></div><div class="line" id="linea">---------</div>
 <input class="inp" id="nombre" placeholder="NOMBRE COMPLETO"><input class="inp" id="tel" placeholder="TELEFONO / WHATSAPP">
